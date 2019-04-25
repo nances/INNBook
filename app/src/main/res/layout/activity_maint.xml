@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/sliding_tabs"
+        android:layout_alignParentTop="true" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_above="@+id/sliding_tabs"
+        android:background="@drawable/bottom_divider_bg" />
+
+
+    <com.flyco.tablayout.CommonTabLayout
+        android:id="@+id/sliding_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wh48.0dimens48.0dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/common_bg"
+        tl:tl_iconHeight="20dp"
+        tl:tl_iconWidth="20dp"
+        tl:tl_indicator_color="@color/gray"
+        tl:tl_indicator_height="0dp"
+        tl:tl_textSelectColor="@color/gray"
+        tl:tl_textUnselectColor="@color/black"
+        tl:tl_textsize="13sp"
+        tl:tl_underline_height="0dp" />
+
+</RelativeLayout>

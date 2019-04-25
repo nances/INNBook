@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.kaqi.reader.view.DisInterceptNestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    app:layout_collapseMode="parallax">
+
+    <LinearLayout
+        android:id="@+id/user_head_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/yellow_30"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="@dimen/wh48.0dimens48.0dp"
+            android:layout_height="@dimen/wh48.0dimens48.0dp"
+            app:layout_collapseMode="pin">
+
+            <ImageView
+                android:id="@+id/tv_back_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:padding="8dp"
+                android:src="@drawable/ab_back" />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/wh6.5dimens6.5dp"
+            android:padding="15dp">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/ivBookCoverCardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/wh16.0dimens16.0dp"
+                card_view:cardCornerRadius="4dp"
+                card_view:cardElevation="4dp">
+
+                <ImageView
+                    android:id="@+id/ivBookCover"
+                    android:layout_width="@dimen/wh112.0dimens112.0dp"
+                    android:layout_height="@dimen/wh148.0dimens148.0dp"
+                    android:layout_alignParentLeft="true"
+                    android:contentDescription="@null"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/cover_default" />
+            </android.support.v7.widget.CardView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/ivBookCoverCardView">
+
+                <TextView
+                    android:id="@+id/tvBookListTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginBottom="@dimen/wh16.0dimens16.0dp"
+                    android:ellipsize="end"
+                    android:lineSpacingExtra="1dp"
+                    android:lineSpacingMultiplier="1.1"
+                    android:singleLine="true"
+                    android:text="武侠世界自由行"
+                    android:textColor="@color/common_bg"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvBookListAuthor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvBookListTitle"
+                    android:ellipsize="end"
+                    android:lineSpacingExtra="1dp"
+                    android:lineSpacingMultiplier="1.1"
+                    android:singleLine="true"
+                    android:text="w风雪 | "
+                    android:textColor="@color/orange"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvCatgory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvBookListTitle"
+                    android:layout_marginStart="0dp"
+                    android:layout_toEndOf="@+id/tvBookListAuthor"
+                    android:layout_toRightOf="@id/tvBookListAuthor"
+                    android:ellipsize="end"
+                    android:lineSpacingExtra="1dp"
+                    android:lineSpacingMultiplier="1.1"
+                    android:singleLine="true"
+                    android:text="仙侠 | "
+                    android:textColor="@color/alpha_35_black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvWordCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvBookListTitle"
+                    android:layout_toRightOf="@id/tvCatgory"
+                    android:ellipsize="end"
+                    android:lineSpacingExtra="1dp"
+                    android:lineSpacingMultiplier="1.1"
+                    android:singleLine="true"
+                    android:text="594万字"
+                    android:textColor="@color/alpha_35_black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvLatelyUpdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvBookListAuthor"
+                    android:layout_marginTop="@dimen/wh16.0dimens16.0dp"
+                    android:ellipsize="end"
+                    android:lineSpacingExtra="1dp"
+                    android:lineSpacingMultiplier="1.1"
+                    android:singleLine="true"
+                    android:text="4月前"
+                    android:textColor="@color/alpha_35_black"
+                    android:textSize="14sp" />
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvLatelyUpdate"
+                    android:layout_marginTop="@dimen/wh14.0dimens14.0dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:lineSpacingExtra="1dp"
+                            android:lineSpacingMultiplier="1.1"
+                            android:singleLine="true"
+                            android:text="读书人气"
+                            android:textColor="@color/alpha_35_black"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/tvLatelyFollower"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:ellipsize="end"
+                            android:lineSpacingExtra="1dp"
+                            android:lineSpacingMultiplier="1.1"
+                            android:singleLine="true"
+                            android:text="82"
+                            android:textColor="@color/alpha_35_black"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/wh20.0dimens20.0dp"
+                        android:gravity="center"
+                        android:lineSpacingExtra="1dp"
+                        android:lineSpacingMultiplier="1.1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:lineSpacingExtra="1dp"
+                            android:lineSpacingMultiplier="1.1"
+                            android:singleLine="true"
+                            android:text="读者活跃"
+                            android:textColor="@color/alpha_35_black"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/tvRetentionRatio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:ellipsize="end"
+                            android:lineSpacingExtra="1dp"
+                            android:lineSpacingMultiplier="1.1"
+                            android:singleLine="true"
+                            android:text="20.29%"
+                            android:textColor="@color/alpha_35_black"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:lineSpacingExtra="1dp"
+                            android:lineSpacingMultiplier="1.1"
+                            android:singleLine="true"
+                            android:text="日更新字数"
+                            android:textColor="@color/common_h2"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/tvSerializeWordCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:text="4614"
+                            android:textColor="@color/common_h1"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</com.kaqi.reader.view.DisInterceptNestedScrollView>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2016 JustWayward Team
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stv="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/common_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+
+    <com.kaqi.reader.view.ReboundScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tvBottom"
+        android:layout_below="@+id/common_toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/common_toolbar"
+                android:padding="@dimen/activity_vertical_margin"
+                android:text="设置"
+                android:textColor="@color/common_h3"
+                android:textSize="@dimen/book_read_bottom_text" />
+
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/bookshelfSort"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/wh50.0dimens50.0dp"
+                android:layout_below="@+id/tv_setting"
+                stv:sLeftTextSize="14sp"
+                stv:sLeftTextString="书架排序"
+                stv:sRightIconRes="@drawable/arrow_right_red"
+                stv:sRightTextColor="@color/common_h2"
+                stv:sRightTextSize="12dp"
+                stv:sRightTextString="按最近阅读" />
+
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/provincialTraffic"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/wh50.0dimens50.0dp"
+                android:layout_below="@+id/bookshelfSort"
+                stv:sLeftTextSize="14sp"
+                stv:sLeftTextString="省流量模式（无头像）"
+                stv:sRightIconRes="@drawable/arrow_right_red"
+                stv:sRightTextColor="@color/common_h2"
+                stv:sRightTextSize="13dp"
+                stv:sRightTextString="关闭" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/nightMode"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/wh50.0dimens50.0dp"
+                android:layout_below="@+id/provincialTraffic"
+                stv:sLeftTextString="夜间模式"
+                stv:sRightViewType="switchBtn"
+                stv:sSwitchIsChecked="false"
+                stv:sSwitchMinWidth="@dimen/wh40.0dimens40.0dp"
+                stv:sThumbResource="@drawable/thumb"
+                stv:sTrackResource="@drawable/track" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/rlFlipStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/wh50.0dimens50.0dp"
+                android:layout_below="@+id/nightMode"
+                stv:sLeftTextSize="14sp"
+                stv:sLeftTextString="阅读页翻页效果"
+                stv:sRightIconRes="@drawable/arrow_right_red"
+                stv:sRightTextColor="@color/common_h2"
+                stv:sRightTextSize="12dp"
+                stv:sRightTextString="翻书效果" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/action_synchronization_book"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/wh50.0dimens50.0dp"
+                android:layout_marginTop="20dp"
+                stv:sDividerLineType="both"
+                stv:sLeftTextString="同步书架" />
+
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/scan_local_book"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/wh50.0dimens50.0dp"
+                stv:sLeftTextString="扫描本地书籍" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/wifi_book"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/wh50.0dimens50.0dp"
+                stv:sDividerLineType="both"
+                stv:sLeftTextString="WIFI传书" />
+
+            <TextView
+                android:id="@+id/tv_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlFlipStyle"
+                android:padding="@dimen/activity_vertical_margin"
+                android:text="更多"
+                android:textColor="@color/common_h3"
+                android:textSize="@dimen/book_read_bottom_text" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/disclaimer"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/wh50.0dimens50.0dp"
+                android:layout_below="@+id/tv_more"
+                stv:sLeftTextSize="14sp"
+                stv:sLeftTextString="免责声明"
+                stv:sRightIconRes="@drawable/arrow_right_red"
+                stv:sRightTextColor="@color/common_h2"
+                stv:sRightTextSize="12dp" />
+
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/cleanCache"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/wh50.0dimens50.0dp"
+                android:layout_below="@+id/disclaimer"
+                stv:sLeftTextSize="14sp"
+                stv:sLeftTextString="清除缓存"
+                stv:sRightIconRes="@drawable/arrow_right_red"
+                stv:sRightTextColor="@color/common_h2"
+                stv:sRightTextSize="12dp"
+                stv:sRightTextString="0.00M" />
+
+
+        </LinearLayout>
+    </com.kaqi.reader.view.ReboundScrollView>
+
+    <TextView
+        android:id="@+id/tvBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:text="© 2016 JustWayward All Rights Reserved"
+        android:textColor="@color/common_h3"
+        android:textSize="@dimen/book_read_bottom_text" />
+</LinearLayout>

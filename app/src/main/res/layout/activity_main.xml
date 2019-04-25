@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2016 JustWayward Team
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:rvp="http://schemas.android.com/apk/res-auto"
+    xmlns:tl="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_bg"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <!--<include layout="@layout/common_toolbar" />-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.flyco.tablayout.SlidingTabLayout
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wh48.0dimens48.0dp"
+            android:layout_toLeftOf="@+id/search_rl"
+            android:background="@color/common_bg"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingLeft="@dimen/wh10.0dimens10.0dp"
+            android:paddingRight="@dimen/wh10.0dimens10.0dp"
+            app:tl_divider_color="@color/yellow_30"
+            app:tl_indicator_corner_radius="@dimen/wh1.0dimens1.0dp"
+            app:tl_indicator_height="2dp"
+            app:tl_tab_padding="@dimen/wh16.0dimens16.0dp"
+            app:tl_textBold="BOTH"
+            app:tl_textSelectColor="@color/yellow_30"
+            app:tl_textUnselectColor="@color/black"
+            app:tl_textsize="14sp" />
+
+        <RelativeLayout
+            android:id="@+id/search_rl"
+            android:layout_width="@dimen/wh48.0dimens48.0dp"
+            android:layout_height="@dimen/wh48.0dimens48.0dp"
+            android:layout_alignParentRight="true">
+
+            <ImageView
+                android:id="@+id/search_ic"
+                android:layout_width="@dimen/wh18.0dimens18.0dp"
+                android:layout_height="@dimen/wh18.0dimens18.0dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/main_search" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_above="@+id/sliding_tabs"
+        android:background="@drawable/bottom_divider_bg" />
+
+</LinearLayout>
