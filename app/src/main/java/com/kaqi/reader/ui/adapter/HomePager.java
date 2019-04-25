@@ -20,7 +20,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.kaqi.reader.ui.fragment.FindFragment;
 import com.kaqi.reader.ui.fragment.RecommendFragment;
 
 /**
@@ -47,7 +46,7 @@ public class HomePager extends FragmentPagerAdapter {
                     fragments[position] = RecommendFragment.newInstance(); // 推荐
                     break;
                 case 1:
-                    fragments[position] = FindFragment.newInstance();
+//                    fragments[position] = FindFragment.newInstance();
                     break;
                 case 2:
                     break;
