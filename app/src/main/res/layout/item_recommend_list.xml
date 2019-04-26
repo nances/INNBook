@@ -23,8 +23,8 @@
 
     <android.support.v7.widget.CardView
         android:id="@+id/ivBookCoverCardView"
-        android:layout_width="@dimen/wh54.0dimens54.0dp"
-        android:layout_height="@dimen/wh68.0dimens68.0dp"
+        android:layout_width="@dimen/wh64.0dimens64.0dp"
+        android:layout_height="@dimen/wh88.0dimens88.0dp"
         card_view:cardCornerRadius="4dp"
         card_view:cardElevation="4dp">
 
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:scaleType="centerInside"
+            android:scaleType="centerCrop"
             android:src="@drawable/cover_default" />
     </android.support.v7.widget.CardView>
 
@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvRecommendTitle"
-            android:layout_marginTop="4dp"
+            android:paddingTop="@dimen/wh16.0dimens16.0dp"
             android:textColor="@color/common_h2"
             android:textSize="12sp"
             tools:text="17小时前:" />

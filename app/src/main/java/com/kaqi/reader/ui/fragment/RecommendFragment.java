@@ -25,6 +25,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -458,6 +459,10 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
         gone(llBatchManagement);
         visible(recommendRL);
         List<Recommend.RecommendBooks> data = CollectionsManager.getInstance().getCollectionListBySort();
+        for (int i = 0; i <data.size() ; i++) {
+            Log.v("Nancy","pic url " + data.get(i).cover);
+        }
+
         mAdapter.clear();
         mAdapter.addAll(data);
         //不加下面这句代码会导致，添加本地书籍的时候，部分书籍添加后直接崩溃
