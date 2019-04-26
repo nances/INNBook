@@ -46,7 +46,7 @@ public class CommunityFragment extends BaseFragment implements OnRvItemClickList
 
     @Override
     public int getLayoutResId() {
-        return R.layout.fragment_find;
+        return R.layout.fragment_community;
     }
 
     public static CommunityFragment newInstance() {
