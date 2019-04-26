@@ -19,18 +19,27 @@ import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseRVFragment;
 import com.kaqi.reader.bean.BookMixAToc;
+import com.kaqi.reader.bean.NavItemEntity;
 import com.kaqi.reader.bean.Recommend;
 import com.kaqi.reader.bean.support.DownloadMessage;
 import com.kaqi.reader.bean.support.DownloadProgress;
@@ -43,11 +52,16 @@ import com.kaqi.reader.manager.CollectionsManager;
 import com.kaqi.reader.manager.EventManager;
 import com.kaqi.reader.service.DownloadBookService;
 import com.kaqi.reader.ui.activity.BookDetailActivity;
+import com.kaqi.reader.ui.activity.MainActivity;
 import com.kaqi.reader.ui.activity.ReadActivity;
+import com.kaqi.reader.ui.activity.SearchActivity;
+import com.kaqi.reader.ui.activity.WifiBookActivity;
 import com.kaqi.reader.ui.contract.RecommendContract;
 import com.kaqi.reader.ui.easyadapter.RecommendAdapter;
 import com.kaqi.reader.ui.presenter.RecommendPresenter;
 import com.kaqi.reader.view.recyclerview.adapter.RecyclerArrayAdapter;
+import com.mylhyl.circledialog.CircleDialog;
+import com.mylhyl.circledialog.params.PopupParams;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -57,6 +71,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recommend.RecommendBooks> implements RecommendContract.View, RecyclerArrayAdapter.OnItemLongClickListener {
@@ -67,9 +82,17 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
     TextView tvSelectAll;
     @Bind(R.id.tvDelete)
     TextView tvDelete;
+    @Bind(R.id.search_rl)
+    RelativeLayout searchRl;
+    @Bind(R.id.book_admin)
+    ImageView bookAdmin;
+    @Bind(R.id.recomend_title)
+    TextView recomend_title;
 
     private boolean isSelectAll = false;
-
+    private Typeface impact_tf;
+    List<NavItemEntity> list = new ArrayList<>();
+    DialogInterface dialogAdmin;
     private List<BookMixAToc.mixToc.Chapters> chaptersList = new ArrayList<>();
 
     public static RecommendFragment newInstance() {
@@ -83,11 +106,39 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
 
     @Override
     public void initDatas() {
+        AssetManager mgr = getActivity().getAssets();
+        impact_tf = Typeface.createFromAsset(mgr, "fonts/ImpactMTStd.otf");
+        recomend_title.setTypeface(impact_tf);
         EventBus.getDefault().register(this);
+        list.add(new NavItemEntity("书架管理", R.drawable.ic_popup_abnormal));
+        list.add(new NavItemEntity("WIFI传书", R.drawable.ic_popup_note));
+        list.add(new NavItemEntity("申请延迟", R.drawable.ic_popup_delay));
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (dialogAdmin == null) {
+                    return;
+                }
+                dialogAdmin.dismiss();
+                if (position == 0) {
+                    showBatchManagementLayout();
+                } else if (position == 1) {
+                    WifiBookActivity.startActivity(getActivity());
+                }
+            }
+        });
+
+        builder.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                dialogAdmin = dialog;
+            }
+        });
     }
 
     @Override
     public void configViews() {
+
         initAdapter(RecommendAdapter.class, true, false);
         mAdapter.setOnItemLongClickListener(this);
         mAdapter.addFooter(new RecyclerArrayAdapter.ItemView() {
@@ -102,7 +153,7 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
                 headerView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        ((HomeFragment) activity).setCurrentItem(2);
+                        ((MainActivity) activity).setCurrentItem(1);
                     }
                 });
             }
@@ -110,7 +161,7 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
         mRecyclerView.getEmptyView().findViewById(R.id.btnToAdd).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ((HomeFragment) activity).setCurrentItem(2);
+                ((MainActivity) activity).setCurrentItem(1);
             }
         });
         onRefresh();
@@ -392,7 +443,6 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
         }
 
         if (!hasRefBookShelfInCallStack && isMRefresh) {
-//            Log.v("Nancy", "=======");
             pullSyncBookShelf();
             return;
         }
@@ -464,6 +514,7 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
     public void onDestroyView() {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
+        ButterKnife.unbind(this);
     }
 
     private boolean isForeground() {
@@ -478,5 +529,49 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
 
         return false;
     }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @OnClick({R.id.search_rl, R.id.book_admin})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.search_rl:
+                SearchActivity.startActivity(getActivity(), "");
+                break;
+            case R.id.book_admin:
+                //批量管理提示
+                ShowBatchBookManagement();
+                break;
+        }
+    }
+
+
+    CircleDialog.Builder builder = new CircleDialog.Builder();
+
+    /**
+     * 批量管理
+     */
+    boolean isTrue = false;
+
+    public void ShowBatchBookManagement() {
+        builder.setPopupItems(adapter, new LinearLayoutManager(getActivity()));
+        builder.setPopup(bookAdmin, PopupParams.TRIANGLE_TOP_RIGHT)
+                .show(getChildFragmentManager());
+    }
+
+    BaseQuickAdapter<NavItemEntity, BaseViewHolder> adapter
+            = new BaseQuickAdapter<NavItemEntity, BaseViewHolder>(R.layout.item_rv_icon, list) {
+        @Override
+        protected void convert(BaseViewHolder helper, NavItemEntity item) {
+            helper.setImageResource(R.id.imageView, item.getTextResId())
+                    .setText(R.id.textView, item.getName());
+        }
+    };
 
 }

@@ -14,8 +14,8 @@ import com.kaqi.reader.bean.TabEntity;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.ui.fragment.CommunityFragment;
 import com.kaqi.reader.ui.fragment.FindFragment;
-import com.kaqi.reader.ui.fragment.HomeFragment;
 import com.kaqi.reader.ui.fragment.MineFragment;
+import com.kaqi.reader.ui.fragment.RecommendFragment;
 import com.kaqi.reader.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -38,7 +38,8 @@ public class MainActivity extends BaseActivity {
 
     private MineFragment mineFragment;
     private CommunityFragment circleMainFragment;
-    private HomeFragment homeFragment;
+    //    private HomeFragment homeFragment;
+    private RecommendFragment homeFragment;
     private FindFragment findFragment;
 
 
@@ -116,19 +117,19 @@ public class MainActivity extends BaseActivity {
         int currentTabPosition = 0;
         if (savedInstanceState != null) {
             mineFragment = (MineFragment) getSupportFragmentManager().findFragmentByTag("mineFragment");
-            homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag("homeFragment");
+            homeFragment = (RecommendFragment) getSupportFragmentManager().findFragmentByTag("homeFragment");
             findFragment = (FindFragment) getSupportFragmentManager().findFragmentByTag("findFragment");
             circleMainFragment = (CommunityFragment) getSupportFragmentManager().findFragmentByTag("circleMainFragment");
             currentTabPosition = savedInstanceState.getInt("HOME_CURRENT_TAB_POSITION");
         } else {
             mineFragment = new MineFragment();
-            homeFragment = new HomeFragment();
+            homeFragment = new RecommendFragment();
             circleMainFragment = new CommunityFragment();
             findFragment = new FindFragment();
 
             transaction.add(R.id.container, mineFragment, "mineFragment");
             transaction.add(R.id.container, homeFragment, "homeFragment");
-            transaction.add(R.id.container, findFragment, "homeFragment");
+            transaction.add(R.id.container, findFragment, "findFragment");
             transaction.add(R.id.container, circleMainFragment, "circleMainFragment");
         }
         transaction.commit();
@@ -175,6 +176,17 @@ public class MainActivity extends BaseActivity {
             default:
                 break;
         }
+    }
+
+    /**
+     * 切换底部位置
+     *
+     * @param position
+     */
+    public void setCurrentItem(int position) {
+        SwitchTo(position);
+        slidingTabLayout.setCurrentTab(position);
+
     }
 
 

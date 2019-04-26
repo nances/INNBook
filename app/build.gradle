@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "com.kaqi.reader"
         minSdkVersion 19
-        targetSdkVersion 22
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
@@ -68,6 +68,11 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-compiler:2.9'
     provided 'org.glassfish:javax.annotation:10.0-b28'
     compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
+
+
+    compile 'com.mylhyl:circleDialog:3.0.10'
+
     // Rx
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'io.reactivex:rxjava:1.1.5'
