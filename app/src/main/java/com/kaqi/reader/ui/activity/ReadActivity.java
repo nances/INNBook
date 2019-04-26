@@ -486,7 +486,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         if (!startRead) {
             startRead = true;
             currentChapter = chapter;
-            Log.v("Nancy", "-------------- 1 1 --------------- " + currentChapter);
             if (!mPageWidget.isPrepared) {
                 mPageWidget.init(curTheme);
             } else {
@@ -935,7 +934,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         @Override
         public void onChapterChanged(int chapter) {
             LogUtils.i("onChapterChanged:" + chapter);
-            Log.v("Nancy", "--------------  22  --------------- " + currentChapter);
             currentChapter = chapter;
             mTocListAdapter.setCurrentChapter(currentChapter);
             // 加载前一节 与 后三节
