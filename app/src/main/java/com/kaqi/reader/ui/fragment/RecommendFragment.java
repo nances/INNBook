@@ -30,7 +30,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -77,7 +76,7 @@ import butterknife.OnClick;
 public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recommend.RecommendBooks> implements RecommendContract.View, RecyclerArrayAdapter.OnItemLongClickListener {
 
     @Bind(R.id.llBatchManagement)
-    LinearLayout llBatchManagement;
+    RelativeLayout llBatchManagement;
     @Bind(R.id.tvSelectAll)
     TextView tvSelectAll;
     @Bind(R.id.tvDelete)
@@ -88,6 +87,8 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
     ImageView bookAdmin;
     @Bind(R.id.recomend_title)
     TextView recomend_title;
+    @Bind(R.id.recommendRL)
+    RelativeLayout recommendRL;
 
     private boolean isSelectAll = false;
     private Typeface impact_tf;
@@ -382,6 +383,7 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
     public void goneBatchManagementAndRefreshUI() {
         if (mAdapter == null) return;
         gone(llBatchManagement);
+        visible(recommendRL);
         for (Recommend.RecommendBooks bean :
                 mAdapter.getAllData()) {
             bean.showCheckBox = false;
@@ -394,6 +396,7 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
      */
     private void showBatchManagementLayout() {
         visible(llBatchManagement);
+        gone(recommendRL);
         for (Recommend.RecommendBooks bean : mAdapter.getAllData()) {
             bean.showCheckBox = true;
         }
@@ -418,7 +421,11 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
             if (bean.isSeleted) removeList.add(bean);
         }
         if (removeList.isEmpty()) {
-            mRecyclerView.showTipViewAndDelayClose(activity.getString(R.string.has_not_selected_delete_book));
+            //没有书籍点击完成可以关闭当前视图
+//            mRecyclerView.showTipViewAndDelayClose(activity.getString(R.string.has_not_selected_delete_book));
+//            visible(recommendRL);
+//            gone(llBatchManagement);
+            goneBatchManagementAndRefreshUI();
         } else {
             showDeleteCacheDialog(removeList);
         }
@@ -449,6 +456,7 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
 
 
         gone(llBatchManagement);
+        visible(recommendRL);
         List<Recommend.RecommendBooks> data = CollectionsManager.getInstance().getCollectionListBySort();
         mAdapter.clear();
         mAdapter.addAll(data);

@@ -106,9 +106,9 @@ public class SubjectBookListActivity extends BaseActivity implements SubjectBook
         mDatas = Arrays.asList(getResources().getStringArray(R.array.subject_tabs));
 
         mTabContents = new ArrayList<>();
-        mTabContents.add(SubjectFragment.newInstance("", 0));
-        mTabContents.add(SubjectFragment.newInstance("", 1));
-        mTabContents.add(SubjectFragment.newInstance("", 2));
+        mTabContents.add(SubjectFragment.newInstance("1", 0));
+        mTabContents.add(SubjectFragment.newInstance("2", 1));
+        mTabContents.add(SubjectFragment.newInstance("3", 2));
 
         mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
