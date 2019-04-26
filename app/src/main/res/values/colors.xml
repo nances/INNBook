@@ -57,7 +57,8 @@
     <color name="common_divider_narrow">#E3E3E3</color>
     <!--通用分割线粗-->
     <color name="common_divider_wide">@color/light_white</color>
-
+    <color name="common_pressed">#20000000</color>  <!--白色背景按下去的颜色-->
+    <color name="line">#e8e8e8</color>
     <color name="reader_menu_bg_color">#191919</color>
     <color name="read_theme_white">#ffffff</color>
     <color name="read_theme_green">#bed0cf</color>

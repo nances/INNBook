@@ -22,12 +22,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.allen.library.SuperTextView;
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseFragment;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.ui.activity.AboutActivity;
 import com.kaqi.reader.ui.activity.SettingActivity;
+import com.kaqi.reader.view.textview.SuperTextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

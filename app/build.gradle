@@ -62,7 +62,7 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
     compile 'com.squareup.retrofit2:converter-scalars:2.0.0-beta4'
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
-    compile 'com.github.lygttpod:SuperTextView:2.2.2'
+//    compile 'com.github.lygttpod:SuperTextView:2.2.2'
     // Annotation
     implementation 'com.google.dagger:dagger:2.9'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.9'

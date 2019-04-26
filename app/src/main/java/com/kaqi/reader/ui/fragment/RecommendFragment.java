@@ -25,7 +25,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -459,9 +458,6 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
         gone(llBatchManagement);
         visible(recommendRL);
         List<Recommend.RecommendBooks> data = CollectionsManager.getInstance().getCollectionListBySort();
-        for (int i = 0; i <data.size() ; i++) {
-            Log.v("Nancy","pic url " + data.get(i).cover);
-        }
 
         mAdapter.clear();
         mAdapter.addAll(data);
