@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016 JustWayward Team
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,21 +13,62 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/common_bg">
 
+    <RelativeLayout
+        android:id="@+id/recommendRL"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wh54.0dimens54.0dp">
+
+        <TextView
+            android:id="@+id/recomend_title"
+            style="@style/text_style_Spacing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/wh8.5dimens8.5dp"
+            android:text="@string/app_name"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/search_rl"
+            android:layout_width="@dimen/wh54.0dimens54.0dp"
+            android:layout_height="@dimen/wh54.0dimens54.0dp"
+            android:layout_toLeftOf="@+id/book_admin">
+
+            <ImageView
+                android:id="@+id/search_ic"
+                android:layout_width="@dimen/wh20.0dimens20.0dp"
+                android:layout_height="@dimen/wh20.0dimens20.0dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/main_search" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/book_admin"
+            android:layout_width="@dimen/wh18.0dimens18.0dp"
+            android:layout_height="@dimen/wh18.0dimens18.0dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/wh16.0dimens16.0dp"
+            android:src="@drawable/book_admin" />
+    </RelativeLayout>
+
     <com.kaqi.reader.view.recyclerview.EasyRecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/recommendRL"
         app:layout_empty="@layout/bookshelf_empty_view"
         app:layout_progress="@layout/common_progress_view"
-        app:scrollbarStyle="insideOverlay"/>
+        app:scrollbarStyle="insideOverlay" />
 
     <LinearLayout
         android:id="@+id/llBatchManagement"
@@ -48,7 +88,7 @@
             android:gravity="center"
             android:padding="15dp"
             android:text="全选"
-            android:textColor="@color/common_h1"/>
+            android:textColor="@color/common_h1" />
 
         <TextView
             android:id="@+id/tvDelete"
@@ -58,7 +98,7 @@
             android:gravity="center"
             android:padding="15dp"
             android:text="删除"
-            android:textColor="@color/dark_red"/>
+            android:textColor="@color/dark_red" />
     </LinearLayout>
 
 </RelativeLayout>
