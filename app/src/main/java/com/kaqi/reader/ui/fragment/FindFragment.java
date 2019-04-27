@@ -44,7 +44,7 @@ public class FindFragment extends BaseFragment {
     @Bind(R.id.viewPager)
     ViewPager mViewPager;
 
-    private String[] titles = new String[]{"精选", "男生", "女生", "图书"};
+    private String[] titles = new String[]{"排行榜", "主题书单", "分类"};
 
     @Override
     public int getLayoutResId() {
@@ -80,7 +80,6 @@ public class FindFragment extends BaseFragment {
         fragments.add(FindItemFragment.newInstance(1));
         fragments.add(FindItemFragment.newInstance(2));
         fragments.add(FindItemFragment.newInstance(3));
-        fragments.add(FindItemFragment.newInstance(4));
         mViewPager.setAdapter(new ComFragmentAdapter(getChildFragmentManager(), fragments));
         MagicIndicatorUtil.init(getContext(), magicIndicator, mViewPager, Arrays.asList(titles));
     }
