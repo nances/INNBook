@@ -15,9 +15,21 @@
  */
 package com.kaqi.reader.ui.fragment;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseFragment;
 import com.kaqi.reader.component.AppComponent;
+import com.kaqi.reader.ui.adapter.ComFragmentAdapter;
+import com.kaqi.reader.utils.MagicIndicatorUtil;
+
+import net.lucode.hackware.magicindicator.MagicIndicator;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import butterknife.Bind;
 
 /**
  * 发现
@@ -26,6 +38,13 @@ import com.kaqi.reader.component.AppComponent;
  * @date 16/9/1.
  */
 public class FindFragment extends BaseFragment {
+
+    @Bind(R.id.magicIndicator)
+    MagicIndicator magicIndicator;
+    @Bind(R.id.viewPager)
+    ViewPager mViewPager;
+
+    private String[] titles = new String[]{"精选", "男生", "女生", "图书"};
 
     @Override
     public int getLayoutResId() {
@@ -43,7 +62,7 @@ public class FindFragment extends BaseFragment {
 
     @Override
     public void configViews() {
-
+        initViewPager();
     }
 
     @Override
@@ -56,4 +75,13 @@ public class FindFragment extends BaseFragment {
 
     }
 
+    private void initViewPager() {
+        ArrayList<Fragment> fragments = new ArrayList<>();
+        fragments.add(FindItemFragment.newInstance(1));
+        fragments.add(FindItemFragment.newInstance(2));
+        fragments.add(FindItemFragment.newInstance(3));
+        fragments.add(FindItemFragment.newInstance(4));
+        mViewPager.setAdapter(new ComFragmentAdapter(getChildFragmentManager(), fragments));
+        MagicIndicatorUtil.init(getContext(), magicIndicator, mViewPager, Arrays.asList(titles));
+    }
 }

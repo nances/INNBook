@@ -47,6 +47,10 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 
@@ -69,26 +73,18 @@ dependencies {
     provided 'org.glassfish:javax.annotation:10.0-b28'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
-
-
     compile 'com.mylhyl:circleDialog:3.0.10'
-
     // Rx
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'io.reactivex:rxjava:1.1.5'
     // Bus
     compile 'org.greenrobot:eventbus:3.0.0'
-
     compile 'com.commit451:PhotoView:1.2.4'
     compile 'org.ccil.cowan.tagsoup:tagsoup:1.2.1'
     compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
-
     // leakcanary
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
-
-
     compile 'com.github.hackware1993:MagicIndicator:1.5.0'
-
 }
