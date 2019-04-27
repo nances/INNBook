@@ -66,6 +66,7 @@ import com.kaqi.reader.component.DaggerBookComponent;
 import com.kaqi.reader.manager.CacheManager;
 import com.kaqi.reader.manager.CollectionsManager;
 import com.kaqi.reader.manager.EventManager;
+import com.kaqi.reader.manager.HistoryManager;
 import com.kaqi.reader.manager.SettingManager;
 import com.kaqi.reader.manager.ThemeManager;
 import com.kaqi.reader.service.DownloadBookService;
@@ -271,8 +272,13 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         bookId = recommendBooks._id;
         isFromSD = getIntent().getBooleanExtra(INTENT_SD, false);
         iSCata = getIntent().getBooleanExtra(IS_CATE, false);
-        Log.v("Nancy", "iSCata is value : " + iSCata);
         currentNewChapter = getIntent().getIntExtra(CURRENT_CHAPTER, 1);
+        if (HistoryManager.getInstance().getHistoryList() != null){
+
+            for (int i = 0; i < HistoryManager.getInstance().getHistoryList().size(); i++) {
+                Log.v("Nancy", "book name is value : " + HistoryManager.getInstance().getHistoryList().get(i).title);
+            }
+        }
 
         if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
             String filePath = Uri.decode(getIntent().getDataString().replace("file://", ""));
@@ -344,7 +350,9 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         mPresenter.getBookMixAToc(bookId, "chapters", iSCata);
     }
 
-
+    /**
+     * 书本目录
+     */
     private void initTocList() {
         mTocListAdapter = new TocListAdapter(this, mChapterList, bookId, currentChapter);
         mTocListPopupWindow = new ListPopupWindow(this);
@@ -796,34 +804,13 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         new CommomAddShuJiaDialog(mContext, R.style.dialog, getString(R.string.book_read_would_you_like_to_add_this_to_the_book_shelf), new CommomAddShuJiaDialog.OnCloseListener() {
             @Override
             public void onClick(Dialog dialog, boolean confirm) {
-                if(confirm){
+                if (confirm) {
                     bean.recentReadingTime = FormatUtils.getCurrentTimeString(FormatUtils.FORMAT_DATE_TIME);
-                        CollectionsManager.getInstance().add(bean);
+                    CollectionsManager.getInstance().add(bean);
                 }
                 finish();
             }
         }).setTitle("加入书架").show();
-//        new AlertDialog.Builder(mContext)
-//                .setTitle(getString(R.string.book_read_add_book))
-//                .setMessage(getString(R.string.book_read_would_you_like_to_add_this_to_the_book_shelf))
-//                .setPositiveButton(getString(R.string.book_read_join_the_book_shelf), new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                        bean.recentReadingTime = FormatUtils.getCurrentTimeString(FormatUtils.FORMAT_DATE_TIME);
-//                        CollectionsManager.getInstance().add(bean);
-//                        finish();
-//                    }
-//                })
-//                .setNegativeButton(getString(R.string.book_read_not), new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                        finish();
-//                    }
-//                })
-//                .create()
-//                .show();
     }
 
     @Override
@@ -858,6 +845,9 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
                     return true;
                 } else if (!CollectionsManager.getInstance().isCollected(bookId)) {
                     showJoinBookShelfDialog(recommendBooks);
+                    return true;
+                } else if (!HistoryManager.getInstance().isHistory(bookId)) {
+                    HistoryManager.getInstance().add(recommendBooks);
                     return true;
                 }
                 break;

@@ -26,6 +26,7 @@ import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseFragment;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.ui.activity.AboutActivity;
+import com.kaqi.reader.ui.activity.ReadBookHistoryActivity;
 import com.kaqi.reader.ui.activity.SettingActivity;
 import com.kaqi.reader.view.textview.SuperTextView;
 
@@ -45,6 +46,8 @@ public class MineFragment extends BaseFragment {
     SuperTextView ucSettingIv;
     @Bind(R.id.about_us)
     SuperTextView about_us;
+    @Bind(R.id.read_history)
+    SuperTextView read_history;
     @Bind(R.id.uc_msg_iv)
     ImageView ucMsgIv;
     @Bind(R.id.frag_uc_nickname_tv)
@@ -100,7 +103,7 @@ public class MineFragment extends BaseFragment {
         ButterKnife.unbind(this);
     }
 
-    @OnClick({R.id.uc_setting_iv, R.id.uc_msg_iv, R.id.regisiter_tv, R.id.login_tv, R.id.uc_avater, R.id.about_us})
+    @OnClick({R.id.uc_setting_iv, R.id.uc_msg_iv, R.id.regisiter_tv, R.id.login_tv, R.id.uc_avater, R.id.about_us, R.id.read_history})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.uc_setting_iv:
@@ -116,6 +119,9 @@ public class MineFragment extends BaseFragment {
                 break;
             case R.id.about_us:
                 AboutActivity.startActivity(getActivity());
+                break;
+            case R.id.read_history:
+                ReadBookHistoryActivity.startActivity(getActivity());
                 break;
         }
     }

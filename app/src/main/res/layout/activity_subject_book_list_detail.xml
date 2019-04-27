@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016 JustWayward Team
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,22 +13,92 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/common_bg"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true">
 
-    <include layout="@layout/common_toolbar" />
-
-    <com.kaqi.reader.view.recyclerview.EasyRecyclerView
-        android:id="@+id/recyclerview"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_empty="@layout/common_empty_view"
-        app:layout_progress="@layout/common_progress_view"
-        app:scrollbarStyle="insideOverlay"
-        android:background="@color/common_gray_bg"/>
-</LinearLayout>
+        android:orientation="vertical">
+
+        <include layout="@layout/common_toolbar" />
+
+        <com.kaqi.reader.view.recyclerview.EasyRecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/common_gray_bg"
+            app:layout_empty="@layout/common_empty_view"
+            app:layout_progress="@layout/common_progress_view"
+            app:scrollbarStyle="insideOverlay" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wh0.5dimens0.5dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/wh54.0dimens54.0dp"
+        android:background="@color/common_gray_bg" />
+
+    <LinearLayout
+        android:id="@+id/llBatchManagement"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wh54.0dimens54.0dp"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <RelativeLayout
+            android:id="@+id/tvSelectAll"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/wh54.0dimens54.0dp"
+            android:layout_alignParentLeft="true"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tvSelecttv "
+
+                style="@style/text_style_Spacing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/wh8.5dimens8.5dp"
+                android:text="全选"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="@dimen/wh0.5dimens0.5dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:background="@color/common_gray_bg" />
+
+        <RelativeLayout
+            android:id="@+id/tvDelete"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/wh54.0dimens54.0dp"
+            android:layout_alignParentRight="true"
+            android:layout_weight="1">
+
+            <TextView
+
+                style="@style/text_style_Spacing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/wh8.5dimens8.5dp"
+                android:text="删除"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </LinearLayout>
+</FrameLayout>

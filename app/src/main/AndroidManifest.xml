@@ -169,6 +169,9 @@
         <activity
             android:name="com.kaqi.reader.ui.activity.AboutActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.kaqi.reader.ui.activity.ReadBookHistoryActivity"
+            android:screenOrientation="portrait" />
 
         <service android:name="com.kaqi.reader.service.DownloadBookService" />
 

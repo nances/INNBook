@@ -29,7 +29,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -53,6 +52,7 @@ import com.kaqi.reader.service.DownloadBookService;
 import com.kaqi.reader.ui.activity.BookDetailActivity;
 import com.kaqi.reader.ui.activity.MainActivity;
 import com.kaqi.reader.ui.activity.ReadActivity;
+import com.kaqi.reader.ui.activity.ReadBookHistoryActivity;
 import com.kaqi.reader.ui.activity.SearchActivity;
 import com.kaqi.reader.ui.activity.WifiBookActivity;
 import com.kaqi.reader.ui.contract.RecommendContract;
@@ -84,11 +84,13 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
     @Bind(R.id.search_rl)
     RelativeLayout searchRl;
     @Bind(R.id.book_admin)
-    ImageView bookAdmin;
+    RelativeLayout bookAdmin;
     @Bind(R.id.recomend_title)
     TextView recomend_title;
     @Bind(R.id.recommendRL)
     RelativeLayout recommendRL;
+    @Bind(R.id.read_book_rl)
+    RelativeLayout read_book_rl;
 
     private boolean isSelectAll = false;
     private Typeface impact_tf;
@@ -458,9 +460,6 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
         gone(llBatchManagement);
         visible(recommendRL);
         List<Recommend.RecommendBooks> data = CollectionsManager.getInstance().getCollectionListBySort();
-//        for (int i = 0; i <data.size() ; i++) {
-//            Log.v("Nancy","pic url " + data.get(i).cover);
-//        }
 
         mAdapter.clear();
         mAdapter.addAll(data);
@@ -550,7 +549,7 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
         return rootView;
     }
 
-    @OnClick({R.id.search_rl, R.id.book_admin})
+    @OnClick({R.id.search_rl, R.id.book_admin, R.id.read_book_rl})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.search_rl:
@@ -559,6 +558,9 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
             case R.id.book_admin:
                 //批量管理提示
                 ShowBatchBookManagement();
+                break;
+            case R.id.read_book_rl:
+                ReadBookHistoryActivity.startActivity(getActivity());
                 break;
         }
     }
