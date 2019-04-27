@@ -74,7 +74,7 @@
                     android:lineSpacingMultiplier="1.1"
                     android:singleLine="true"
                     android:text="武侠世界自由行"
-                    android:textColor="@color/common_bg"
+                    android:textColor="@color/read_theme_white"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -88,7 +88,7 @@
                     android:lineSpacingMultiplier="1.1"
                     android:singleLine="true"
                     android:text="w风雪 | "
-                    android:textColor="@color/orange"
+                    android:textColor="@color/common_h3"
                     android:textSize="14sp" />
 
                 <TextView
@@ -104,7 +104,7 @@
                     android:lineSpacingMultiplier="1.1"
                     android:singleLine="true"
                     android:text="仙侠 | "
-                    android:textColor="@color/alpha_35_black"
+                    android:textColor="@color/common_h2"
                     android:textSize="14sp" />
 
                 <TextView
@@ -118,7 +118,7 @@
                     android:lineSpacingMultiplier="1.1"
                     android:singleLine="true"
                     android:text="594万字"
-                    android:textColor="@color/alpha_35_black"
+                    android:textColor="@color/common_h2"
                     android:textSize="14sp" />
 
                 <TextView
@@ -132,7 +132,7 @@
                     android:lineSpacingMultiplier="1.1"
                     android:singleLine="true"
                     android:text="4月前"
-                    android:textColor="@color/alpha_35_black"
+                    android:textColor="@color/common_h2"
                     android:textSize="14sp" />
 
 
@@ -157,7 +157,7 @@
                             android:lineSpacingMultiplier="1.1"
                             android:singleLine="true"
                             android:text="读书人气"
-                            android:textColor="@color/alpha_35_black"
+                            android:textColor="@color/common_h2"
                             android:textSize="13sp" />
 
                         <TextView
@@ -170,7 +170,7 @@
                             android:lineSpacingMultiplier="1.1"
                             android:singleLine="true"
                             android:text="82"
-                            android:textColor="@color/alpha_35_black"
+                            android:textColor="@color/common_h2"
                             android:textSize="15sp" />
 
                     </LinearLayout>
@@ -192,7 +192,7 @@
                             android:lineSpacingMultiplier="1.1"
                             android:singleLine="true"
                             android:text="读者活跃"
-                            android:textColor="@color/alpha_35_black"
+                            android:textColor="@color/common_h2"
                             android:textSize="13sp" />
 
                         <TextView
@@ -205,7 +205,7 @@
                             android:lineSpacingMultiplier="1.1"
                             android:singleLine="true"
                             android:text="20.29%"
-                            android:textColor="@color/alpha_35_black"
+                            android:textColor="@color/common_h2"
                             android:textSize="15sp" />
 
                     </LinearLayout>
@@ -237,7 +237,7 @@
                             android:ellipsize="end"
                             android:singleLine="true"
                             android:text="4614"
-                            android:textColor="@color/common_h1"
+                            android:textColor="@color/common_h2"
                             android:textSize="15sp" />
 
                     </LinearLayout>

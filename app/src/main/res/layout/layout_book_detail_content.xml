@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="@dimen/wh64.0dimens64.0dp"
+    android:background="@color/common_bg"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -16,13 +17,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/white"
+            android:background="@color/common_bg"
             android:orientation="vertical">
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:background="@color/white" />
+                android:background="@color/common_bg" />
 
             <TextView
                 style="@style/text_style_Spacing"
@@ -31,8 +32,9 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/wh15.0dimens15.0dp"
                 android:text="简介"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:textColor="@color/common_h2"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
 
             <TextView
@@ -44,7 +46,7 @@
                 android:lineSpacingMultiplier="1.2"
                 android:maxLines="5"
                 android:padding="15dp"
-                android:textColor="@color/alpha_35_black"
+                android:textColor="@color/common_h2"
                 android:textSize="15sp"
                 tools:text="千年前，唐峰攀登昆仑山，意外坠崖，穿越上古星空大阵进入星辰之海，自此，走上修仙之路。千年征战，横扫星海，成就无上仙身，为紫微仙君。唐峰穿越星空大阵，损耗元神，重返地球，却发现，地球仅仅过去了六年的时间，而且，他还有了一个粉嘟嘟的宝贝女儿。高冷的霸道女总裁前女友，聪明的女儿，从此，让星辰之海战栗的紫微仙君，开启了极品奶爸的全新人生。" />
 
@@ -76,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="查看目录"
-                    android:textColor="@color/black"
+                    android:textColor="@color/common_h2"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
@@ -89,7 +91,7 @@
                     android:layout_marginLeft="@dimen/wh12.0dimens12.0dp"
                     android:layout_toRightOf="@+id/mulu"
                     android:text="完结 288 章节"
-                    android:textColor="@color/alpha_35_black"
+                    android:textColor="@color/common_h2"
                     android:textSize="10sp" />
 
                 <ImageView
@@ -180,7 +182,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:background="@color/white" />
+                android:background="@color/common_bg" />
 
             <TextView
                 android:id="@+id/tvRecommendBookList"

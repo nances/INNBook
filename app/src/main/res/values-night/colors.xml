@@ -39,4 +39,8 @@
     <!--通用分割线粗-->
     <color name="common_divider_wide">#333333</color>
 
+    <color name="yellow_50">#505050</color>
+    <color name="yellow_30">#212121</color>
+    <color name="read_theme_white">#000000</color>
+
 </resources>

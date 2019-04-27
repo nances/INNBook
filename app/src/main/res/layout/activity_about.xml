@@ -18,6 +18,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/common_bg"
+
     android:orientation="vertical">
 
     <include layout="@layout/common_toolbar" />
@@ -35,10 +37,11 @@
 
     </RelativeLayout>
 
-    <com.allen.library.SuperTextView
+    <com.kaqi.reader.view.textview.SuperTextView
         android:layout_width="match_parent"
         android:layout_height="@dimen/wh50.0dimens50.0dp"
         android:layout_marginTop="20dp"
+        android:background="@color/common_bg"
         stv:sDividerLineType="both"
         stv:sLeftTextString="版本信息：1.0.0" />
 </LinearLayout>

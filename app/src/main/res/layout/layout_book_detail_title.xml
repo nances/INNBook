@@ -5,6 +5,7 @@
     android:id="@+id/title_layout"
     android:layout_width="match_parent"
     android:layout_height="@dimen/wh48.0dimens48.0dp"
+    android:background="@color/yellow_30"
     app:layout_collapseMode="pin">
 
     <LinearLayout
@@ -25,7 +26,7 @@
             android:layout_marginLeft="20px"
             android:paddingRight="15dp"
             android:text="牛牛小说"
-            android:textColor="#333333"
+            android:textColor="@color/read_theme_white"
             android:textSize="15sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -41,7 +42,7 @@
         android:drawableLeft="@drawable/black_back_icon"
         android:gravity="center"
         android:padding="8dp"
-        android:textColor="@color/black"
+        android:textColor="@color/common_h2"
         android:visibility="gone" />
 
 

@@ -30,8 +30,8 @@
 
         <ImageView
             android:id="@+id/ivRecommendCover"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="@dimen/wh64.0dimens64.0dp"
+            android:layout_height="@dimen/wh88.0dimens88.0dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:scaleType="centerCrop"

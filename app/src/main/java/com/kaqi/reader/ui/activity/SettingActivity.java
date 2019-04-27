@@ -25,7 +25,6 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import com.allen.library.SuperTextView;
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseActivity;
 import com.kaqi.reader.base.Constant;
@@ -36,6 +35,7 @@ import com.kaqi.reader.manager.EventManager;
 import com.kaqi.reader.manager.SettingManager;
 import com.kaqi.reader.ui.presenter.MainActivityPresenter;
 import com.kaqi.reader.utils.SharedPreferencesUtil;
+import com.kaqi.reader.view.textview.SuperTextView;
 
 import javax.inject.Inject;
 
