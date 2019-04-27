@@ -38,6 +38,7 @@
     <string name="book_read_mode_day">夜间</string>
     <string name="book_read_mode_day_manual_setting">日间</string>
     <string name="book_read_mode_night_manual_setting">夜间</string>
+    <string name="book_read_hsitory">历史阅读</string>
     <string name="book_read_feedback">反馈</string>
     <string name="book_read_settings">设置</string>
     <string name="book_read_download">缓存</string>

@@ -30,8 +30,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author yuyh.
- * @date 16/8/5.
+ * @author Nancy.
+ * @date 2019年04月26日23:45:12
  */
 public class Constant {
 
@@ -42,6 +42,8 @@ public class Constant {
     public static String PATH_DATA = FileUtils.createRootPath(AppUtils.getAppContext()) + "/cache";
 
     public static String PATH_COLLECT = FileUtils.createRootPath(AppUtils.getAppContext()) + "/collect";
+
+    public static String PATH_HISTORY = FileUtils.createRootPath(AppUtils.getAppContext()) + "/history";
 
     public static String PATH_TXT = PATH_DATA + "/book/";
 

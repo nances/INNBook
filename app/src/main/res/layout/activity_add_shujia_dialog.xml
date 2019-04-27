@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:padding="14dp"
             android:text="加入书架"
-            android:textColor="@color/black"
+            android:textColor="@color/common_h2"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -31,13 +31,13 @@
         android:gravity="center"
         android:lineSpacingExtra="3dp"
         android:text="是否将本书加入书架？"
-        android:textColor="@color/alpha_75_black"
+        android:textColor="@color/common_h2"
         android:textSize="16sp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/gray" />
+        android:background="@color/common_gray_bg" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,10 +49,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
-            android:background="@color/white"
             android:gravity="center"
+            android:background="@color/common_bg"
             android:text="不了"
-            android:textColor="@color/black"
+            android:textColor="@color/common_h2"
             android:textSize="14sp" />
 
 
@@ -64,7 +64,7 @@
             android:background="@color/yellow_30"
             android:gravity="center"
             android:text="加入到书架"
-            android:textColor="@color/white"
+            android:textColor="@color/common_h2"
             android:textSize="14sp" />
 
     </LinearLayout>

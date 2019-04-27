@@ -37,21 +37,21 @@ import java.util.List;
 
 /**
  * 收藏列表管理
- * Created by Nancy on 2019年04月26日23:52:51.
+ * Created by lfh on 2016/9/22.
  */
-public class CollectionsManager {
+public class HistoryManager {
 
-    private volatile static CollectionsManager singleton;
+    private volatile static HistoryManager singleton;
 
-    private CollectionsManager() {
+    private HistoryManager() {
 
     }
 
-    public static CollectionsManager getInstance() {
+    public static HistoryManager getInstance() {
         if (singleton == null) {
-            synchronized (CollectionsManager.class) {
+            synchronized (HistoryManager.class) {
                 if (singleton == null) {
-                    singleton = new CollectionsManager();
+                    singleton = new HistoryManager();
                 }
             }
         }
@@ -59,17 +59,17 @@ public class CollectionsManager {
     }
 
     /**
-     * 获取收藏列表
+     * 获取阅读列表
      *
      * @return
      */
-    public List<Recommend.RecommendBooks> getCollectionList() {
-        List<Recommend.RecommendBooks> list = (ArrayList<Recommend.RecommendBooks>) ACache.get(new File(Constant.PATH_COLLECT)).getAsObject("collection");
+    public List<Recommend.RecommendBooks> getHistoryList() {
+        List<Recommend.RecommendBooks> list = (ArrayList<Recommend.RecommendBooks>) ACache.get(new File(Constant.PATH_HISTORY)).getAsObject("history");
         return list == null ? null : list;
     }
 
     public void putCollectionList(List<Recommend.RecommendBooks> list) {
-        ACache.get(new File(Constant.PATH_COLLECT)).put("collection", (Serializable) list);
+        ACache.get(new File(Constant.PATH_HISTORY)).put("history", (Serializable) list);
     }
 
     /**
@@ -77,8 +77,8 @@ public class CollectionsManager {
      *
      * @return
      */
-    public List<Recommend.RecommendBooks> getCollectionListBySort() {
-        List<Recommend.RecommendBooks> list = getCollectionList();
+    public List<Recommend.RecommendBooks> getHistoryListBySort() {
+        List<Recommend.RecommendBooks> list = getHistoryList();
         if (list == null) {
             return null;
         } else {
@@ -92,12 +92,12 @@ public class CollectionsManager {
     }
 
     /**
-     * 移除单个收藏
+     * 移除单个阅读
      *
      * @param bookId
      */
     public void remove(String bookId) {
-        List<Recommend.RecommendBooks> list = getCollectionList();
+        List<Recommend.RecommendBooks> list = getHistoryList();
         if (list == null) {
             return;
         }
@@ -112,13 +112,13 @@ public class CollectionsManager {
     }
 
     /**
-     * 是否已收藏
+     * 是否已阅读
      *
      * @param bookId
      * @return
      */
-    public boolean isCollected(String bookId) {
-        List<Recommend.RecommendBooks> list = getCollectionList();
+    public boolean isHistory(String bookId) {
+        List<Recommend.RecommendBooks> list = getHistoryList();
         if (list == null || list.isEmpty()) {
             return false;
         }
@@ -137,7 +137,7 @@ public class CollectionsManager {
      * @return
      */
     public boolean isTop(String bookId) {
-        List<Recommend.RecommendBooks> list = getCollectionList();
+        List<Recommend.RecommendBooks> list = getHistoryList();
         if (list == null || list.isEmpty()) {
             return false;
         }
@@ -156,7 +156,7 @@ public class CollectionsManager {
      * @param removeList
      */
     public void removeSome(List<Recommend.RecommendBooks> removeList, boolean removeCache) {
-        List<Recommend.RecommendBooks> list = getCollectionList();
+        List<Recommend.RecommendBooks> list = getHistoryList();
         if (list == null) {
             return;
         }
@@ -184,10 +184,10 @@ public class CollectionsManager {
      * @param bean
      */
     public boolean add(Recommend.RecommendBooks bean) {
-        if (isCollected(bean._id)) {
+        if (isHistory(bean._id)) {
             return false;
         }
-        List<Recommend.RecommendBooks> list = getCollectionList();
+        List<Recommend.RecommendBooks> list = getHistoryList();
         if (list == null) {
             list = new ArrayList<>();
         }
@@ -203,7 +203,7 @@ public class CollectionsManager {
      * @param bookId
      */
     public void top(String bookId, boolean isTop) {
-        List<Recommend.RecommendBooks> list = getCollectionList();
+        List<Recommend.RecommendBooks> list = getHistoryList();
         if (list == null) {
             return;
         }
@@ -225,7 +225,7 @@ public class CollectionsManager {
      * @param bookId
      */
     public synchronized void setLastChapterAndLatelyUpdate(String bookId, String lastChapter, String latelyUpdate) {
-        List<Recommend.RecommendBooks> list = getCollectionList();
+        List<Recommend.RecommendBooks> list = getHistoryList();
         if (list == null) {
             return;
         }
@@ -250,7 +250,7 @@ public class CollectionsManager {
      * @param bookId
      */
     public void setRecentReadingTime(String bookId) {
-        List<Recommend.RecommendBooks> list = getCollectionList();
+        List<Recommend.RecommendBooks> list = getHistoryList();
         if (list == null) {
             return;
         }

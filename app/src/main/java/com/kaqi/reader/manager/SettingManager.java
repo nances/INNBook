@@ -25,8 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author yuyh.
- * @date 2016/9/23.
+ * @author Nancy.
+ * @date 2019年04月26日23:28:35
  */
 public class SettingManager {
 
@@ -79,7 +79,7 @@ public class SettingManager {
      * @param percent 亮度比例 0~100
      */
     public void saveReadBrightness(int percent) {
-        if(percent > 100){
+        if (percent > 100) {
             ToastUtils.showToast("saveReadBrightnessErr CheckRefs");
             percent = 100;
         }
@@ -90,6 +90,13 @@ public class SettingManager {
         return "readLightness";
     }
 
+    /**
+     * 保存阅读的记录
+     * @param bookId
+     * @param currentChapter
+     * @param m_mbBufBeginPos
+     * @param m_mbBufEndPos
+     */
     public synchronized void saveReadProgress(String bookId, int currentChapter, int m_mbBufBeginPos, int m_mbBufEndPos) {
         SharedPreferencesUtil.getInstance()
                 .putInt(getChapterKey(bookId), currentChapter)
@@ -130,7 +137,13 @@ public class SettingManager {
         return bookId + "-endPos";
     }
 
-
+    /**
+     * 添加书签
+     *
+     * @param bookId
+     * @param mark
+     * @return
+     */
     public boolean addBookMark(String bookId, BookMark mark) {
         List<BookMark> marks = SharedPreferencesUtil.getInstance().getObject(getBookMarksKey(bookId), ArrayList.class);
         if (marks != null && marks.size() > 0) {
