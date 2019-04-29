@@ -117,8 +117,7 @@
     </declare-styleable>
 
     <declare-styleable name="DirectionalViewpager">
-        <attr name="direction" format="string">
-        </attr>
+        <attr name="direction" format="string"></attr>
     </declare-styleable>
 
     <declare-styleable name="SuperTextView">
@@ -555,6 +554,11 @@
         <!-- {@deprecated Use civ_circlebackground_color instead.} -->
         <attr name="civ_fill_color" format="color" />
         <attr name="civ_circle_background_color" format="color" />
+    </declare-styleable>
+    <declare-styleable name="CleanableEditText">
+        <attr name="drawableLeftWidth" format="dimension|reference" />
+        <attr name="drawableLeftHeight" format="dimension|reference" />
+        <attr name="clearDrawable" format="boolean" />
     </declare-styleable>
 
 </resources>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/common_bg"
+    android:orientation="vertical">
+    <include
+        layout="@layout/common_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10.0dip">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/area_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/area_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/wh20.0dimens20.0dp"
+                    android:text="+86" />
+
+            </LinearLayout>
+
+
+            <com.kaqi.reader.view.CleanableEditText
+                android:id="@+id/phone_num"
+                style="@style/login_edit_style"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:layout_toLeftOf="@+id/get_code"
+                android:layout_toRightOf="@+id/area_ll"
+                android:hint="请输入手机号码"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:paddingLeft="@dimen/wh22.0dimens22.0dp"
+                android:paddingRight="0dp" />
+
+            <com.kaqi.reader.view.HourglassView
+                android:id="@+id/get_code"
+                android:layout_width="75dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:background="@drawable/blue_line_round"
+                android:clickable="true"
+                android:gravity="center"
+                android:textColor="@color/common_h2" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/wh8.0dimens8.0dp"
+            android:layout_marginTop="@dimen/wh8.0dimens8.0dp"
+            android:background="@color/common_gray_bg" />
+
+        <com.kaqi.reader.view.CleanableEditText
+            android:id="@+id/code_txt"
+            style="@style/login_edit_style"
+            android:drawableLeft="@drawable/icon_code_selector"
+            android:hint="请输入验证码"
+            android:inputType="number"
+            app:drawableLeftHeight="@dimen/wh18.0dimens18.0dp"
+            app:drawableLeftWidth="@dimen/wh18.0dimens18.0dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/wh8.0dimens8.0dp"
+            android:layout_marginTop="@dimen/wh8.0dimens8.0dp"
+            android:background="@color/common_gray_bg" />
+
+        <com.kaqi.reader.view.CleanableEditText
+            android:id="@+id/name_txt"
+            style="@style/login_edit_style"
+            android:drawableLeft="@drawable/icon_user_selector"
+            android:hint="请输入昵称"
+            app:drawableLeftHeight="@dimen/wh18.0dimens18.0dp"
+            app:drawableLeftWidth="@dimen/wh18.0dimens18.0dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/wh8.0dimens8.0dp"
+            android:layout_marginTop="@dimen/wh8.0dimens8.0dp"
+            android:background="@color/common_gray_bg" />
+
+        <com.kaqi.reader.view.CleanableEditText
+            android:id="@+id/pass_txt_1"
+            style="@style/login_edit_style"
+            android:drawableLeft="@drawable/icon_key_selector"
+            android:hint="请输入密码"
+            android:inputType="textPassword"
+            android:maxLength="25"
+            app:drawableLeftHeight="@dimen/wh18.0dimens18.0dp"
+            app:drawableLeftWidth="@dimen/wh18.0dimens18.0dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/wh8.0dimens8.0dp"
+            android:layout_marginTop="@dimen/wh8.0dimens8.0dp"
+            android:background="@color/common_gray_bg" />
+
+        <com.kaqi.reader.view.CleanableEditText
+            android:id="@+id/pass_txt_2"
+            style="@style/login_edit_style"
+            android:drawableLeft="@drawable/icon_confirm_key_selector"
+            android:hint="确认密码"
+            android:inputType="textPassword"
+            android:maxLength="25"
+            app:drawableLeftHeight="@dimen/wh18.0dimens18.0dp"
+            app:drawableLeftWidth="@dimen/wh18.0dimens18.0dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/wh8.0dimens8.0dp"
+            android:layout_marginTop="@dimen/wh8.0dimens8.0dp"
+            android:background="@color/common_gray_bg" />
+
+        <TextView
+            android:id="@+id/register_txt"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/wh26.0dimens26.0dp"
+            android:layout_marginTop="30.0dip"
+            android:layout_marginRight="@dimen/wh26.0dimens26.0dp"
+            android:background="@color/yellow_30"
+            android:clickable="true"
+            android:gravity="center"
+            android:padding="10.0dip"
+            android:text="立即注册"
+            android:textColor="@color/white"
+            android:textSize="16.0sp" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

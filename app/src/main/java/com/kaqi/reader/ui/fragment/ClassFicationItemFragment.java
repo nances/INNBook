@@ -11,9 +11,9 @@ import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.component.DaggerCommunityComponent;
 import com.kaqi.reader.ui.adapter.TopCategoryFemaleListAdapter;
 import com.kaqi.reader.ui.adapter.TopCategoryMaleListAdapter;
+import com.kaqi.reader.ui.adapter.TopCategoryPressListAdapter;
 import com.kaqi.reader.ui.contract.TopCategoryListContract;
 import com.kaqi.reader.ui.presenter.TopCategoryListPresenter;
-import com.kaqi.reader.view.SupportGridItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +32,10 @@ public class ClassFicationItemFragment extends BaseFragment implements TopCatego
 
     private TopCategoryMaleListAdapter mMaleCategoryListAdapter;
     private TopCategoryFemaleListAdapter mFemaleCategoryListAdapter;
+    private TopCategoryPressListAdapter mPressCategoryListAdapter;
     private List<CategoryList.MaleBean> mMaleCategoryList = new ArrayList<>();
     private List<CategoryList.FemaleBean> mFemaleCategoryList = new ArrayList<>();
+    private List<CategoryList.PressBean> mPressCategoryList = new ArrayList<>();
 
     public static ClassFicationItemFragment newInstance(String type) {
         Bundle args = new Bundle();
@@ -68,7 +70,6 @@ public class ClassFicationItemFragment extends BaseFragment implements TopCatego
         }
         recyclerview.setHasFixedSize(true);
         recyclerview.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        recyclerview.addItemDecoration(new SupportGridItemDecoration(getActivity()));
         if (!"".equals(Type_Channle)) {
             if (Type_Channle.equals("男生")) {
                 mMaleCategoryListAdapter = new TopCategoryMaleListAdapter(mContext, mMaleCategoryList);
@@ -77,6 +78,9 @@ public class ClassFicationItemFragment extends BaseFragment implements TopCatego
             } else if (Type_Channle.equals("女生")) {
                 mFemaleCategoryListAdapter = new TopCategoryFemaleListAdapter(mContext, mFemaleCategoryList);
                 recyclerview.setAdapter(mFemaleCategoryListAdapter);
+            } else if (Type_Channle.equals("文学")) {
+                mPressCategoryListAdapter = new TopCategoryPressListAdapter(mContext, mPressCategoryList);
+                recyclerview.setAdapter(mPressCategoryListAdapter);
             }
         }
         mPresenter.attachView(this);
@@ -94,6 +98,7 @@ public class ClassFicationItemFragment extends BaseFragment implements TopCatego
         mFemaleCategoryList.clear();
         mMaleCategoryList.addAll(data.getMale());
         mFemaleCategoryList.addAll(data.getFemale());
+        mPressCategoryList.addAll(data.getPress());
         mMaleCategoryListAdapter.notifyDataSetChanged();
         mFemaleCategoryListAdapter.notifyDataSetChanged();
     }

@@ -98,6 +98,7 @@ public class SubCategoryFragment extends BaseRVFragment<SubCategoryFragmentPrese
             mAdapter.clear();
         }
         mAdapter.addAll(data.books);
+        mAdapter.notifyDataSetChanged();
         start += data.books.size();
     }
 

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/common_bg"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/common_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/common_h2" />
+
+    <LinearLayout
+        android:id="@+id/login_lr"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/common_bg"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/wh10.0dimens10.0dp"
+        android:paddingTop="@dimen/wh15.0dimens15.0dp"
+        android:paddingRight="@dimen/wh10.0dimens10.0dp">
+
+
+        <com.kaqi.reader.view.CleanableEditText
+            android:id="@+id/user_txt"
+            style="@style/login_edit_style"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:drawableLeft="@drawable/icon_code_selector"
+            android:hint="手机/邮箱/账号(5-30位字符)"
+            android:textSize="16sp"
+            app:drawableLeftHeight="@dimen/wh18.0dimens18.0dp"
+            app:drawableLeftWidth="@dimen/wh18.0dimens18.0dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/wh8.0dimens8.0dp"
+            android:layout_marginBottom="@dimen/wh8.0dimens8.0dp"
+            android:background="@color/common_gray_bg" />
+
+        <com.kaqi.reader.view.CleanableEditText
+            android:id="@+id/password_txt"
+            style="@style/login_edit_style"
+            android:drawableLeft="@drawable/icon_key_selector"
+            android:hint="输入密码"
+            android:inputType="textPassword"
+            android:maxLength="25"
+            android:textSize="16sp"
+            app:drawableLeftHeight="@dimen/wh18.0dimens18.0dp"
+            app:drawableLeftWidth="@dimen/wh18.0dimens18.0dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/wh8.0dimens8.0dp"
+            android:background="@color/common_gray_bg" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/find_password_tx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/wh26.0dimens26.0dp"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:clickable="true"
+                android:text="忘记密码?"
+                android:textColor="@color/common_h2"
+                android:textSize="12.0sp" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/sms_login_tx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/wh26.0dimens26.0dp"
+                android:clickable="true"
+                android:text="短信登录 >"
+                android:textColor="#4a90e2"
+                android:textSize="12.0sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/login_tx"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/wh26.0dimens26.0dp"
+            android:layout_marginTop="@dimen/wh40.0dimens40.0dp"
+            android:layout_marginRight="@dimen/wh26.0dimens26.0dp"
+            android:background="@color/yellow_30"
+            android:clickable="true"
+            android:gravity="center"
+            android:padding="10.0dip"
+            android:text="登录"
+            android:textColor="@color/white"
+            android:textSize="16.0sp" />
+    </LinearLayout>
+
+</LinearLayout>

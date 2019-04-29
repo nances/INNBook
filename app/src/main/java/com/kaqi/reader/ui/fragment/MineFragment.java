@@ -15,10 +15,7 @@
  */
 package com.kaqi.reader.ui.fragment;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,7 +24,9 @@ import com.kaqi.reader.base.BaseFragment;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.ui.activity.AboutActivity;
 import com.kaqi.reader.ui.activity.ClassicFicationActivity;
+import com.kaqi.reader.ui.activity.LoginActivity;
 import com.kaqi.reader.ui.activity.ReadBookHistoryActivity;
+import com.kaqi.reader.ui.activity.RegisterActivity;
 import com.kaqi.reader.ui.activity.SettingActivity;
 import com.kaqi.reader.view.textview.SuperTextView;
 
@@ -90,13 +89,6 @@ public class MineFragment extends BaseFragment {
 
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
-    }
 
     @Override
     public void onDestroyView() {
@@ -113,8 +105,10 @@ public class MineFragment extends BaseFragment {
             case R.id.uc_msg_iv:
                 break;
             case R.id.regisiter_tv:
+                RegisterActivity.startAction(getActivity());
                 break;
             case R.id.login_tv:
+                LoginActivity.startActivity(getActivity());
                 break;
             case R.id.uc_avater:
                 ClassicFicationActivity.startActivity(getActivity());
