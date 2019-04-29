@@ -26,6 +26,7 @@ import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseFragment;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.ui.activity.AboutActivity;
+import com.kaqi.reader.ui.activity.ClassicFicationActivity;
 import com.kaqi.reader.ui.activity.ReadBookHistoryActivity;
 import com.kaqi.reader.ui.activity.SettingActivity;
 import com.kaqi.reader.view.textview.SuperTextView;
@@ -116,6 +117,7 @@ public class MineFragment extends BaseFragment {
             case R.id.login_tv:
                 break;
             case R.id.uc_avater:
+                ClassicFicationActivity.startActivity(getActivity());
                 break;
             case R.id.about_us:
                 AboutActivity.startActivity(getActivity());

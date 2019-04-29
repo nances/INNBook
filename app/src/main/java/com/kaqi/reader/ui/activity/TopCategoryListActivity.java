@@ -26,7 +26,7 @@ import com.kaqi.reader.bean.CategoryList;
 import com.kaqi.reader.common.OnRvItemClickListener;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.component.DaggerFindComponent;
-import com.kaqi.reader.ui.adapter.TopCategoryListAdapter;
+import com.kaqi.reader.ui.adapter.TopCategoryMaleListAdapter;
 import com.kaqi.reader.ui.contract.TopCategoryListContract;
 import com.kaqi.reader.ui.presenter.TopCategoryListPresenter;
 import com.kaqi.reader.view.SupportGridItemDecoration;
@@ -51,10 +51,10 @@ public class TopCategoryListActivity extends BaseActivity implements TopCategory
     @Inject
     TopCategoryListPresenter mPresenter;
 
-    private TopCategoryListAdapter mMaleCategoryListAdapter;
-    private TopCategoryListAdapter mFemaleCategoryListAdapter;
+    private TopCategoryMaleListAdapter mMaleCategoryListAdapter;
+    private TopCategoryMaleListAdapter mFemaleCategoryListAdapter;
     private List<CategoryList.MaleBean> mMaleCategoryList = new ArrayList<>();
-    private List<CategoryList.MaleBean> mFemaleCategoryList = new ArrayList<>();
+    private List<CategoryList.FemaleBean> mFemaleCategoryList = new ArrayList<>();
 
     @Override
     public int getLayoutId() {
@@ -89,8 +89,8 @@ public class TopCategoryListActivity extends BaseActivity implements TopCategory
         mRvFeMaleCategory.setHasFixedSize(true);
         mRvFeMaleCategory.setLayoutManager(new GridLayoutManager(this, 3));
         mRvFeMaleCategory.addItemDecoration(new SupportGridItemDecoration(this));
-        mMaleCategoryListAdapter = new TopCategoryListAdapter(mContext, mMaleCategoryList, new ClickListener(Constant.Gender.MALE));
-        mFemaleCategoryListAdapter = new TopCategoryListAdapter(mContext, mFemaleCategoryList, new ClickListener(Constant.Gender.FEMALE));
+//        mMaleCategoryListAdapter = new TopCategoryMaleListAdapter(mContext, mMaleCategoryList, new ClickListener(Constant.Gender.MALE));
+//        mFemaleCategoryListAdapter = new TopCategoryMaleListAdapter(mContext, mFemaleCategoryList, new ClickListener(Constant.Gender.FEMALE));
         mRvMaleCategory.setAdapter(mMaleCategoryListAdapter);
         mRvFeMaleCategory.setAdapter(mFemaleCategoryListAdapter);
 
@@ -101,12 +101,12 @@ public class TopCategoryListActivity extends BaseActivity implements TopCategory
 
     @Override
     public void showCategoryList(CategoryList data) {
-        mMaleCategoryList.clear();
-        mFemaleCategoryList.clear();
-        mMaleCategoryList.addAll(data.male);
-        mFemaleCategoryList.addAll(data.female);
-        mMaleCategoryListAdapter.notifyDataSetChanged();
-        mFemaleCategoryListAdapter.notifyDataSetChanged();
+//        mMaleCategoryList.clear();
+//        mFemaleCategoryList.clear();
+//        mMaleCategoryList.addAll(data.getMale());
+//        mFemaleCategoryList.addAll(data.getMale());
+//        mMaleCategoryListAdapter.notifyDataSetChanged();
+//        mFemaleCategoryListAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -129,7 +129,7 @@ public class TopCategoryListActivity extends BaseActivity implements TopCategory
 
         @Override
         public void onItemClick(View view, int position, CategoryList.MaleBean data) {
-            SubCategoryListActivity.startActivity(mContext, data.name, gender);
+            SubCategoryListActivity.startActivity(mContext, data.getName(), gender);
         }
     }
 

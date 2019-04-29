@@ -21,6 +21,7 @@ import com.kaqi.reader.ui.activity.BookReviewDetailActivity;
 import com.kaqi.reader.ui.fragment.BookDiscussionFragment;
 import com.kaqi.reader.ui.fragment.BookHelpFragment;
 import com.kaqi.reader.ui.fragment.BookReviewFragment;
+import com.kaqi.reader.ui.fragment.ClassFicationItemFragment;
 import com.kaqi.reader.ui.fragment.GirlBookDiscussionFragment;
 
 import dagger.Component;
@@ -45,4 +46,6 @@ public interface CommunityComponent {
     BookHelpDetailActivity inject(BookHelpDetailActivity activity);
 
     GirlBookDiscussionFragment inject(GirlBookDiscussionFragment fragment);
+
+    ClassFicationItemFragment inject(ClassFicationItemFragment fragment);
 }

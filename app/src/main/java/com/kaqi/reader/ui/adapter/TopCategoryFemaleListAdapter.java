@@ -19,35 +19,40 @@ import android.content.Context;
 import android.view.View;
 
 import com.kaqi.reader.R;
+import com.kaqi.reader.base.Constant;
 import com.kaqi.reader.bean.CategoryList;
 import com.kaqi.reader.common.OnRvItemClickListener;
+import com.kaqi.reader.ui.activity.SubCategoryListActivity;
 import com.yuyh.easyadapter.recyclerview.EasyRVAdapter;
 import com.yuyh.easyadapter.recyclerview.EasyRVHolder;
 
 import java.util.List;
 
 /**
- * @author lfh.
- * @date 16/8/30.
+ * @author Nancy.
+ * @date 2019年04月29日11:23:16
  */
-public class TopCategoryListAdapter extends EasyRVAdapter<CategoryList.MaleBean> {
+public class TopCategoryFemaleListAdapter extends EasyRVAdapter<CategoryList.FemaleBean> {
     private OnRvItemClickListener itemClickListener;
 
-    public TopCategoryListAdapter(Context context, List<CategoryList.MaleBean> list, OnRvItemClickListener listener) {
+    public TopCategoryFemaleListAdapter(Context context, List<CategoryList.FemaleBean> list) {
         super(context, list, R.layout.item_top_category_list);
-        this.itemClickListener = listener;
     }
 
     @Override
-    protected void onBindData(final EasyRVHolder holder, final int position, final CategoryList.MaleBean item) {
-        holder.setText(R.id.tvName, item.name)
+    protected void onBindData(final EasyRVHolder holder, final int position, final CategoryList.FemaleBean item) {
+        holder.setText(R.id.tvName, item.getName())
                 .setText(R.id.tvBookCount, String.format(mContext.getString(R.string
-                        .category_book_count), item.bookCount));
+                        .category_book_count), item.getBookCount()));
+        if(item.getBookCover()!=null && item.getBookCover().size()>0){
+            holder.setRoundImageUrl(R.id.ivRecommendCover, Constant.IMG_BASE_URL + item.getBookCover().get(0).toString(),
+                    R.drawable.cover_default);
 
+        }
         holder.setOnItemViewClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemClickListener.onItemClick(holder.getItemView(), position, item);
+                SubCategoryListActivity.startActivity(mContext, item.getName(), Constant.Gender.FEMALE);
             }
         });
     }
