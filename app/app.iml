@@ -125,6 +125,7 @@
     <orderEntry type="library" name="Gradle: __local_aars__:/Users/administrator/INNBook/app/libs/hcicloud_player-5.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.flyco.tablayout:FlycoTabLayout_Lib-2.1.2" level="project" />
     <orderEntry type="library" name="Gradle: io.reactivex:rxandroid-1.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: q.rorbin:VerticalTabLayout-1.2.5" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:/Users/administrator/INNBook/app/libs/mta-sdk-1.6.2.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.retrofit2:converter-scalars:2.0.0-beta4@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:recyclerview-v7-23.4.0" level="project" />
@@ -137,6 +138,7 @@
     <orderEntry type="library" name="Gradle: com.android.support:appcompat-v7-23.4.0" level="project" />
     <orderEntry type="library" name="Gradle: org.greenrobot:eventbus:3.0.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:animated-vector-drawable-23.4.0" level="project" />
+    <orderEntry type="library" name="Gradle: q.rorbin:badgeview-1.1.2" level="project" />
     <orderEntry type="library" name="Gradle: com.commit451:PhotoView-1.2.4" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-v4-23.4.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.dagger:dagger:2.9@jar" level="project" />
