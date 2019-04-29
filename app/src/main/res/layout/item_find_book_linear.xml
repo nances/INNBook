@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/wh124.0dimens124.0dp"
+    android:padding="@dimen/wh12.0dimens12.0dp">
+
+    <ImageView
+        android:id="@+id/imageIv"
+        android:layout_width="@dimen/wh70.0dimens70.0dp"
+        android:layout_height="@dimen/wh100.0dimens100.0dp"
+        android:layout_marginRight="@dimen/wh12.0dimens12.0dp"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/titleTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/imageIv"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/imageIv"
+        android:text="修正全能仙少"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_16" />
+
+    <TextView
+        android:id="@+id/scoreTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/titleTv"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/wh2.0dimens2.0dp"
+        android:text="分"
+        android:textColor="@color/yellow_50"
+        android:textSize="@dimen/sp_12" />
+
+    <TextView
+        android:id="@+id/retentionRatioTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/titleTv"
+        android:layout_toLeftOf="@+id/scoreTv"
+        android:text="8.4"
+        android:textColor="@color/yellow_50"
+        android:textSize="@dimen/sp_16"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/introTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/imageIv"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="重试阿拉斯加到了放假啊可是"
+        android:textColor="@color/gray"
+        android:textSize="14sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/imageIv"
+        android:layout_toRightOf="@+id/imageIv"
+        android:text="完结 2000万字"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/sp_12" />
+
+    <TextView
+        android:id="@+id/minorCateTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageIv"
+        android:layout_alignParentRight="true"
+        android:text="历史穿越"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/sp_12" />
+
+
+</RelativeLayout>
