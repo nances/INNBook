@@ -4,9 +4,10 @@
     android:id="@+id/rootView"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:fitsSystemWindows="true"
     android:background="@color/common_bg"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
+
     <include
         layout="@layout/common_toolbar"
         android:layout_width="match_parent"
@@ -70,9 +71,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="@dimen/wh8.0dimens8.0dp"
+            android:layout_height="@dimen/wh0.5dimens0.5dp"
             android:layout_marginTop="@dimen/wh8.0dimens8.0dp"
+            android:layout_marginBottom="@dimen/wh8.0dimens8.0dp"
             android:background="@color/common_gray_bg" />
 
         <com.kaqi.reader.view.CleanableEditText
@@ -86,9 +87,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="@dimen/wh8.0dimens8.0dp"
+            android:layout_height="@dimen/wh0.5dimens0.5dp"
             android:layout_marginTop="@dimen/wh8.0dimens8.0dp"
+            android:layout_marginBottom="@dimen/wh8.0dimens8.0dp"
             android:background="@color/common_gray_bg" />
 
         <com.kaqi.reader.view.CleanableEditText
@@ -101,9 +102,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="@dimen/wh8.0dimens8.0dp"
+            android:layout_height="@dimen/wh0.5dimens0.5dp"
             android:layout_marginTop="@dimen/wh8.0dimens8.0dp"
+            android:layout_marginBottom="@dimen/wh8.0dimens8.0dp"
             android:background="@color/common_gray_bg" />
 
         <com.kaqi.reader.view.CleanableEditText
@@ -118,9 +119,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="@dimen/wh8.0dimens8.0dp"
+            android:layout_height="@dimen/wh0.5dimens0.5dp"
             android:layout_marginTop="@dimen/wh8.0dimens8.0dp"
+            android:layout_marginBottom="@dimen/wh8.0dimens8.0dp"
             android:background="@color/common_gray_bg" />
 
         <com.kaqi.reader.view.CleanableEditText
@@ -135,9 +136,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="@dimen/wh8.0dimens8.0dp"
+            android:layout_height="@dimen/wh0.5dimens0.5dp"
             android:layout_marginTop="@dimen/wh8.0dimens8.0dp"
+            android:layout_marginBottom="@dimen/wh8.0dimens8.0dp"
             android:background="@color/common_gray_bg" />
 
         <TextView

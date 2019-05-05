@@ -47,7 +47,7 @@ public abstract class BaseReadView extends View {
 
     protected Bitmap mCurPageBitmap, mNextPageBitmap;
     protected Canvas mCurrentPageCanvas, mNextPageCanvas;
-    protected PageFactory pagefactory = null;
+    public PageFactory pagefactory = null;
 
     protected OnReadStateChangeListener listener;
     protected String bookId;
@@ -176,9 +176,9 @@ public abstract class BaseReadView extends View {
 
                 if ((Math.abs(ux - dx) < 10) && (Math.abs(uy - dy) < 10)) {
                     if ((t - et < 1000)) { // 单击
-                        if(this instanceof NoAimWidget) {
-                            ((NoAimWidget)this).startAnimation(0);
-                        }else{
+                        if (this instanceof NoAimWidget) {
+                            ((NoAimWidget) this).startAnimation(0);
+                        } else {
                             startAnimation();
                         }
                     } else { // 长按
@@ -311,6 +311,16 @@ public abstract class BaseReadView extends View {
     public synchronized void setTextColor(int textColor, int titleColor) {
         resetTouchPoint();
         pagefactory.setTextColor(textColor, titleColor);
+        if (isPrepared) {
+            pagefactory.onDraw(mCurrentPageCanvas);
+            pagefactory.onDraw(mNextPageCanvas);
+            postInvalidate();
+        }
+    }
+
+    public synchronized void setUpdateTextType(int current_font) {
+        resetTouchPoint();
+        pagefactory.setUpdateTextType(current_font);
         if (isPrepared) {
             pagefactory.onDraw(mCurrentPageCanvas);
             pagefactory.onDraw(mNextPageCanvas);

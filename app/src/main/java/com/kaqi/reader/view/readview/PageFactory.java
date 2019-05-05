@@ -21,6 +21,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,7 @@ import android.widget.ProgressBar;
 import com.kaqi.reader.R;
 import com.kaqi.reader.bean.BookMixAToc;
 import com.kaqi.reader.manager.SettingManager;
+import com.kaqi.reader.manager.ThemeManager;
 import com.kaqi.reader.utils.AppUtils;
 import com.kaqi.reader.utils.FileUtils;
 import com.kaqi.reader.utils.LogUtils;
@@ -139,9 +141,9 @@ public class PageFactory {
         mTitlePaint.setColor(ContextCompat.getColor(AppUtils.getAppContext(), R.color.chapter_title_day));
         timeLen = (int) mTitlePaint.measureText("00:00");
         percentLen = (int) mTitlePaint.measureText("00.00%");
-        // Typeface typeface = Typeface.createFromAsset(context.getAssets(),"fonts/FZBYSK.TTF");
-        // mPaint.setTypeface(typeface);
-        // mNumPaint.setTypeface(typeface);
+        Typeface typeface = Typeface.createFromAsset(context.getAssets(), ThemeManager.getFontType(SettingManager.getInstance().getReadFont()));
+        mPaint.setTypeface(typeface);
+//        mNumPaint.setTypeface(typeface);
 
         this.bookId = bookId;
         this.chaptersList = chaptersList;
@@ -512,6 +514,7 @@ public class PageFactory {
         return BookStatus.LOAD_SUCCESS;
     }
 
+
     public void cancelPage() {
         currentChapter = tempChapter;
         curBeginPos = tempBeginPos;
@@ -566,6 +569,17 @@ public class PageFactory {
     public void setTextColor(int textColor, int titleColor) {
         mPaint.setColor(textColor);
         mTitlePaint.setColor(titleColor);
+    }
+
+    /**
+     * 设置字体颜色
+     *
+     * @param textColor
+     * @param titleColor
+     */
+    public void setUpdateTextType(int font_cur) {
+        Typeface typeface = Typeface.createFromAsset(mContext.getAssets(), ThemeManager.getFontType(font_cur));
+        mPaint.setTypeface(typeface);
     }
 
     public int getTextFont() {

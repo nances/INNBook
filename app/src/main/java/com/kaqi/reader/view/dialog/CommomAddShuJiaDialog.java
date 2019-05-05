@@ -113,6 +113,7 @@ public class CommomAddShuJiaDialog extends Dialog implements View.OnClickListene
                 if (listener != null) {
                     listener.onClick(this, true);
                 }
+                this.dismiss();
                 break;
         }
     }

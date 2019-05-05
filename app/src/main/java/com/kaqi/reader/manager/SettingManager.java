@@ -92,6 +92,7 @@ public class SettingManager {
 
     /**
      * 保存阅读的记录
+     *
      * @param bookId
      * @param currentChapter
      * @param m_mbBufBeginPos
@@ -182,6 +183,15 @@ public class SettingManager {
         }
         return SharedPreferencesUtil.getInstance().getInt("readTheme", 3);
     }
+
+    public void setReadFont(int cur) {
+        SharedPreferencesUtil.getInstance().putInt("font", cur);
+    }
+
+    public int getReadFont() {
+        return SharedPreferencesUtil.getInstance().getInt("font", 0);
+    }
+
 
     /**
      * 是否可以使用音量键翻页

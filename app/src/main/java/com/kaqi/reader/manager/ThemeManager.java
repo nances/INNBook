@@ -41,6 +41,12 @@ public class ThemeManager {
     public static final int GRAY = 4;
     public static final int NIGHT = 5;
 
+    public static final int MOREN = 0;
+    public static final int SHAONV = 1;
+    public static final int HUAWEN = 2;
+    public static final int KAISHU = 3;
+    public static final int YOUYUAN = 4;
+
     public static void setReaderTheme(int theme, View view) {
         switch (theme) {
             case NORMAL:
@@ -105,4 +111,42 @@ public class ThemeManager {
         return list;
     }
 
+    public static List<ReadTheme> getReaderFontsData(int curTheme) {
+        int[] themes = {MOREN, SHAONV, HUAWEN, KAISHU, YOUYUAN};
+        List<ReadTheme> list = new ArrayList<>();
+        ReadTheme theme;
+        for (int i = 0; i < themes.length; i++) {
+            theme = new ReadTheme();
+            theme.theme = themes[i];
+            list.add(theme);
+        }
+        return list;
+    }
+
+    public static String getFontType(int positing_font) {
+        String font = "";
+        switch (positing_font) {
+            case 0:
+                font = "fonts/ImpactMTStd.otf";
+                break;
+            case 1:
+                font = "fonts/hkshaonv.ttf";
+                break;
+            case 2:
+                font = "fonts/hwzhongsong.ttf";
+                break;
+            case 3:
+                font = "fonts/kaiti.ttf";
+                break;
+            case 4:
+                font = "fonts/youyuan.ttf";
+                break;
+            case 5:
+                font = "";
+                break;
+            default:
+                break;
+        }
+        return font;
+    }
 }

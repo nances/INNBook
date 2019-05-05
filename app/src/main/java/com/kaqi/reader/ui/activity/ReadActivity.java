@@ -22,6 +22,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.ContentObserver;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Handler;
@@ -30,7 +31,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.ListPopupWindow;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,6 +73,7 @@ import com.kaqi.reader.service.DownloadBookService;
 import com.kaqi.reader.ui.adapter.BookMarkAdapter;
 import com.kaqi.reader.ui.adapter.TocListAdapter;
 import com.kaqi.reader.ui.contract.BookReadContract;
+import com.kaqi.reader.ui.easyadapter.ReadFontsAdapter;
 import com.kaqi.reader.ui.easyadapter.ReadThemeAdapter;
 import com.kaqi.reader.ui.presenter.BookReadPresenter;
 import com.kaqi.reader.utils.AppUtils;
@@ -178,6 +179,8 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     CheckBox cbAutoBrightness;
     @Bind(R.id.gvTheme)
     GridView gvTheme;
+    @Bind(R.id.font_type)
+    GridView font_type;
 
     private View decodeView;
 
@@ -207,8 +210,11 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
     private BaseReadView mPageWidget;
     private int curTheme = -1;
+    private int curFont = -1;
     private List<ReadTheme> themes;
     private ReadThemeAdapter gvAdapter;
+    private ReadFontsAdapter fontAdapter;
+    List<String> Fontlist = new ArrayList<String>();
     private Receiver receiver = new Receiver();
     private IntentFilter intentFilter = new IntentFilter();
     private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
@@ -224,7 +230,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     private boolean isAutoLightness = false; // 记录其他页面是否自动调整亮度
     private boolean isFromSD = false;
     private boolean iSCata = false;
-
+    private List<Typeface> mTypefaceList = new ArrayList<>();
 
     //添加收藏需要，所以跳转的时候传递整个实体类
     public static void startActivity(Context context, Recommend.RecommendBooks recommendBooks) {
@@ -273,13 +279,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         isFromSD = getIntent().getBooleanExtra(INTENT_SD, false);
         iSCata = getIntent().getBooleanExtra(IS_CATE, false);
         currentNewChapter = getIntent().getIntExtra(CURRENT_CHAPTER, 1);
-        if (HistoryManager.getInstance().getHistoryList() != null){
-
-            for (int i = 0; i < HistoryManager.getInstance().getHistoryList().size(); i++) {
-                Log.v("Nancy", "book name is value : " + HistoryManager.getInstance().getHistoryList().get(i).title);
-            }
-        }
-
+        getFontFromAssets();
         if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
             String filePath = Uri.decode(getIntent().getDataString().replace("file://", ""));
             String fileName;
@@ -303,7 +303,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         }
         EventBus.getDefault().register(this);
         showDialog();
-
         mTvBookReadTocTitle.setText(recommendBooks.title);
 
         mTtsPlayer = TTSPlayerUtils.getTTSPlayer();
@@ -398,6 +397,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
     private void initAASet() {
         curTheme = SettingManager.getInstance().getReadTheme();
+        curFont = SettingManager.getInstance().getReadFont();
         ThemeManager.setReaderTheme(curTheme, mRlBookReadRoot);
 
         seekbarFontSize.setMax(10);
@@ -428,6 +428,19 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         cbAutoBrightness.setOnCheckedChangeListener(new ChechBoxChangeListener());
 
         gvAdapter = new ReadThemeAdapter(this, (themes = ThemeManager.getReaderThemeData(curTheme)), curTheme);
+        fontAdapter = new ReadFontsAdapter(this, (Fontlist), curFont);
+
+        font_type.setAdapter(fontAdapter);
+        font_type.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                fontAdapter.select(position);
+                SettingManager.getInstance().setReadFont(position);
+                mPageWidget.setUpdateTextType(position);
+            }
+        });
+
+
         gvTheme.setAdapter(gvAdapter);
         gvTheme.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -439,6 +452,17 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
                 }
             }
         });
+    }
+
+    /**
+     * 获取字体
+     */
+    private void getFontFromAssets() {
+        Fontlist.add("默认");
+        Fontlist.add("少女");
+        Fontlist.add("宋体");
+        Fontlist.add("楷书");
+        Fontlist.add("幼体");
     }
 
     private void initPagerWidget() {
@@ -832,6 +856,9 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:
+                if (!HistoryManager.getInstance().isHistory(bookId)) {
+                    HistoryManager.getInstance().add(recommendBooks);
+                }
                 if (mTocListPopupWindow != null && mTocListPopupWindow.isShowing()) {
                     mTocListPopupWindow.dismiss();
                     gone(mTvBookReadTocTitle);
@@ -845,9 +872,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
                     return true;
                 } else if (!CollectionsManager.getInstance().isCollected(bookId)) {
                     showJoinBookShelfDialog(recommendBooks);
-                    return true;
-                } else if (!HistoryManager.getInstance().isHistory(bookId)) {
-                    HistoryManager.getInstance().add(recommendBooks);
                     return true;
                 }
                 break;

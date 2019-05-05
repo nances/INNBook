@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016 JustWayward Team
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,26 +14,36 @@
   ~ limitations under the License.
   -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/touch_bg"
     android:padding="10dp">
 
-    <ImageView
-        android:id="@+id/ivBookCover"
-        android:layout_width="45dp"
-        android:layout_height="60dp"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/cover_default"
-        android:scaleType="centerCrop" />
+    <android.support.v7.widget.CardView
+        android:id="@+id/ivBookCoverCardView"
+        android:layout_width="@dimen/wh64.0dimens64.0dp"
+        android:layout_height="@dimen/wh88.0dimens88.0dp"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="4dp">
+
+        <ImageView
+            android:id="@+id/ivBookCover"
+            android:layout_width="@dimen/wh64.0dimens64.0dp"
+            android:layout_height="@dimen/wh88.0dimens88.0dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/cover_default" />
+    </android.support.v7.widget.CardView>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/ivBookCover">
+        android:layout_toRightOf="@+id/ivBookCoverCardView">
 
         <TextView
             android:id="@+id/tvBookListTitle"
@@ -45,7 +54,8 @@
             android:singleLine="true"
             android:text="武侠世界自由行"
             android:textColor="@color/common_h1"
-            android:textSize="16sp" />
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvLatelyFollower"
@@ -74,8 +84,8 @@
             android:id="@+id/tvBookListAuthor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvBookListTitle"
-            android:layout_toRightOf="@id/tvRetentionRatio"
+            android:layout_below="@id/tvLatelyFollower"
+            android:layout_marginTop="@dimen/wh14.0dimens14.0dp"
             android:ellipsize="end"
             android:singleLine="true"
             android:text="大江入海著"

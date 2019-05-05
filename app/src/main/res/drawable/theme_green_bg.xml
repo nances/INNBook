@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
 
-    <solid android:color="@color/read_theme_green" />
+    <!-- 圆角弧度 20 -->
+    <corners android:radius="18dp" />
 
-    <stroke android:color="@color/read_theme_green" />
+    <!-- 变化率 -->
+    <gradient
+        android:endColor="@color/read_theme_green"
+        android:startColor="@color/read_theme_green" />
 
-    <size
-        android:height="100dp"
-        android:width="100dp" />
 
 </shape>

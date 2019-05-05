@@ -1,5 +1,6 @@
 package com.kaqi.reader.ui.activity;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -16,7 +17,7 @@ import com.kaqi.reader.ui.fragment.CommunityFragment;
 import com.kaqi.reader.ui.fragment.FindFragment;
 import com.kaqi.reader.ui.fragment.MineFragment;
 import com.kaqi.reader.ui.fragment.RecommendFragment;
-import com.kaqi.reader.utils.ToastUtils;
+import com.kaqi.reader.view.dialog.CommomAddShuJiaDialog;
 
 import java.util.ArrayList;
 
@@ -223,17 +224,33 @@ public class MainActivity extends BaseActivity {
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_DOWN
                 && event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
-            if (System.currentTimeMillis() - currentBackPressedTime > BACK_PRESSED_INTERVAL) {
-                currentBackPressedTime = System.currentTimeMillis();
-                ToastUtils.showToast(getString(R.string.exit_tips));
-                return true;
-            } else {
-                finish(); // 退出
-            }
+//            if (System.currentTimeMillis() - currentBackPressedTime > BACK_PRESSED_INTERVAL) {
+////                currentBackPressedTime = System.currentTimeMillis();
+////                ToastUtils.showToast(getString(R.string.exit_tips));
+//                exitDialog();
+//                return true;
+//            } else {
+//                finish(); // 退出
+//            }
+            exitDialog();
         } else if (event.getKeyCode() == KeyEvent.KEYCODE_MENU) {
             return true;
         }
         return super.dispatchKeyEvent(event);
+    }
+
+    /**
+     * 退出提示
+     */
+    public void exitDialog() {
+        new CommomAddShuJiaDialog(mContext, R.style.dialog, getString(R.string.exit_app_tip), new CommomAddShuJiaDialog.OnCloseListener() {
+            @Override
+            public void onClick(Dialog dialog, boolean confirm) {
+                if (confirm) {
+                    finish();
+                }
+            }
+        }).setTitle("提示").setNegativeButton("取消").setPositiveButton("确定").show();
     }
 
 

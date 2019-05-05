@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_margin="10dp"
+        android:layout_marginLeft="@dimen/wh10.0dimens10.0dp"
         android:layout_toRightOf="@+id/ivBookCoverCardView"
         android:orientation="vertical">
 
@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvRecommendTitle"
-            android:paddingTop="@dimen/wh16.0dimens16.0dp"
+            android:layout_marginTop="@dimen/wh16.0dimens16.0dp"
             android:textColor="@color/common_h2"
             android:textSize="12sp"
             tools:text="17小时前:" />
@@ -83,6 +83,18 @@
             android:textColor="@color/common_h2"
             android:textSize="12sp"
             tools:text="第二卷、逆水行舟！第四百六十五章、打蛇七寸！" />
+
+        <TextView
+            android:id="@+id/tvBookListAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvLatelyUpdate"
+            android:layout_marginTop="@dimen/wh14.0dimens14.0dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="大江入海著"
+            android:textColor="@color/common_h2"
+            android:textSize="13sp" />
     </RelativeLayout>
 
     <ImageView

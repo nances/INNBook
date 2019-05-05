@@ -50,7 +50,6 @@ public class ReadHistoryBooksAdapter extends RecyclerArrayAdapter<Recommend.Reco
             public void setData(final Recommend.RecommendBooks item) {
                 super.setData(item);
                 String latelyUpdate = "";
-                Log.v("Nancy", "item book name is value : " + item.title);
                 if (!TextUtils.isEmpty(FormatUtils.getDescriptionTimeFromDateString(item.updated))) {
                     latelyUpdate = FormatUtils.getDescriptionTimeFromDateString(item.updated) + ":";
                 }

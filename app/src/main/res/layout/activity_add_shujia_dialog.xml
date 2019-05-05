@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/wh62.0dimens62.0dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="@dimen/wh28.0dimens28.0dp"
+        android:layout_marginBottom="@dimen/wh12.0dimens12.0dp"
         android:gravity="center"
         android:lineSpacingExtra="3dp"
         android:text="是否将本书加入书架？"

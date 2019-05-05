@@ -54,6 +54,7 @@
     <string name="net_error">网络异常</string>
     <string name="book_read_add_book">添书</string>
     <string name="book_read_would_you_like_to_add_this_to_the_book_shelf">是否将本书加入书架？</string>
+    <string name="exit_app_tip">确定退出牛牛小说</string>
     <string name="book_read_join_the_book_shelf">加入书架</string>
     <string name="book_read_not">不了</string>
 

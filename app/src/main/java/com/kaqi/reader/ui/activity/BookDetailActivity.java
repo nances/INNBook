@@ -251,6 +251,7 @@ public class BookDetailActivity extends BaseActivity implements BookDetailContra
         recommendBooks.title = data.title;
         recommendBooks._id = data._id;
         recommendBooks.cover = data.cover;
+        recommendBooks.author = data.author;
         recommendBooks.lastChapter = data.lastChapter;
         recommendBooks.updated = data.updated;
 

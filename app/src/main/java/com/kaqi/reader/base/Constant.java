@@ -54,6 +54,7 @@ public class Constant {
     public static String BASE_PATH = AppUtils.getAppContext().getCacheDir().getPath();
 
     public static final String ISNIGHT = "isNight";
+    public static final String FONT = "font";
 
     public static final String ISBYUPDATESORT = "isByUpdateSort";
     public static final String FLIP_STYLE = "flipStyle";

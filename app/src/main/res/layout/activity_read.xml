@@ -46,7 +46,7 @@
             android:textColor="@color/white"
             android:textSize="20sp"
             android:visibility="gone"
-            tools:text="武侠世界自由行" />
+            tools:text="" />
 
         <TextView
             android:layout_width="0dp"

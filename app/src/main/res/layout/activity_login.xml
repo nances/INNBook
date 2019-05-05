@@ -16,7 +16,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1px"
+        android:layout_height="@dimen/wh0.5dimens0.5dp"
         android:background="@color/common_h2" />
 
     <LinearLayout
@@ -42,7 +42,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/wh0.5dimens0.5dp"
             android:layout_marginTop="@dimen/wh8.0dimens8.0dp"
             android:layout_marginBottom="@dimen/wh8.0dimens8.0dp"
             android:background="@color/common_gray_bg" />
@@ -60,7 +60,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/wh0.5dimens0.5dp"
             android:layout_marginTop="@dimen/wh8.0dimens8.0dp"
             android:background="@color/common_gray_bg" />
 
