@@ -6,7 +6,9 @@ import android.support.v7.widget.RecyclerView;
 
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseFragment;
+import com.kaqi.reader.bean.BooksByCats;
 import com.kaqi.reader.bean.CategoryList;
+import com.kaqi.reader.bean.RankingList;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.component.DaggerCommunityComponent;
 import com.kaqi.reader.ui.adapter.TopCategoryFemaleListAdapter;
@@ -101,6 +103,16 @@ public class ClassFicationItemFragment extends BaseFragment implements TopCatego
         mPressCategoryList.addAll(data.getPress());
         mMaleCategoryListAdapter.notifyDataSetChanged();
         mFemaleCategoryListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showRankList(RankingList rankingList) {
+
+    }
+
+    @Override
+    public void showRankList(BooksByCats data) {
+
     }
 
     @Override

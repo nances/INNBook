@@ -15,8 +15,6 @@
  */
 package com.kaqi.reader.ui.presenter;
 
-import android.util.Log;
-
 import com.kaqi.reader.api.BookApi;
 import com.kaqi.reader.base.RxPresenter;
 import com.kaqi.reader.bean.RankingList;
@@ -48,7 +46,6 @@ public class TopRankPresenter extends RxPresenter<TopRankContract.View> implemen
     @Override
     public void getRankList() {
         String key = StringUtils.creatAcacheKey("book-ranking-list");
-        Log.v("Nancy", "StringUtils key is value :" + key);
         Observable<RankingList> fromNetWork = bookApi.getRanking()
                 .compose(RxUtil.<RankingList>rxCacheBeanHelper(key));
 

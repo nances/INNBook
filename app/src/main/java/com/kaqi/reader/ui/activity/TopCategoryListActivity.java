@@ -22,7 +22,9 @@ import android.view.View;
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseActivity;
 import com.kaqi.reader.base.Constant;
+import com.kaqi.reader.bean.BooksByCats;
 import com.kaqi.reader.bean.CategoryList;
+import com.kaqi.reader.bean.RankingList;
 import com.kaqi.reader.common.OnRvItemClickListener;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.component.DaggerFindComponent;
@@ -107,6 +109,16 @@ public class TopCategoryListActivity extends BaseActivity implements TopCategory
 //        mFemaleCategoryList.addAll(data.getMale());
 //        mMaleCategoryListAdapter.notifyDataSetChanged();
 //        mFemaleCategoryListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showRankList(RankingList rankingList) {
+
+    }
+
+    @Override
+    public void showRankList(BooksByCats data) {
+
     }
 
     @Override

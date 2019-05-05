@@ -16,20 +16,15 @@
 package com.kaqi.reader.ui.adapter;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.kaqi.reader.R;
-import com.kaqi.reader.base.Constant;
 import com.kaqi.reader.bean.RankingList;
 import com.kaqi.reader.common.OnRvItemClickListener;
-import com.yuyh.easyadapter.glide.GlideCircleTransform;
 
 import java.util.List;
 
@@ -93,24 +88,24 @@ public class TopRankAdapter extends BaseExpandableListAdapter {
     public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         final View group = inflater.inflate(R.layout.item_top_rank_group, null);
 
-        ImageView ivCover = (ImageView) group.findViewById(R.id.ivRankCover);
-        if (!TextUtils.isEmpty(groupArray.get(groupPosition).cover)) {
-            Glide.with(mContext).load(Constant.IMG_BASE_URL + groupArray.get(groupPosition).cover).placeholder(R.drawable.avatar_default)
-                    .transform(new GlideCircleTransform(mContext)).into(ivCover);
-            group.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        listener.onItemClick(group, groupPosition, groupArray.get(groupPosition));
-                    }
-                }
-            });
-        } else {
-            ivCover.setImageResource(R.drawable.ic_rank_collapse);
-        }
-
-        TextView tvName = (TextView) group.findViewById(R.id.tvRankGroupName);
-        tvName.setText(groupArray.get(groupPosition).title);
+//        ImageView ivCover = (ImageView) group.findViewById(R.id.ivRankCover);
+//        if (!TextUtils.isEmpty(groupArray.get(groupPosition).cover)) {
+//            Glide.with(mContext).load(Constant.IMG_BASE_URL + groupArray.get(groupPosition).cover).placeholder(R.drawable.avatar_default)
+//                    .transform(new GlideCircleTransform(mContext)).into(ivCover);
+//            group.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if (listener != null) {
+//                        listener.onItemClick(group, groupPosition, groupArray.get(groupPosition));
+//                    }
+//                }
+//            });
+//        } else {
+//            ivCover.setImageResource(R.drawable.ic_rank_collapse);
+//        }
+//
+//        TextView tvName = (TextView) group.findViewById(R.id.tvRankGroupName);
+//        tvName.setText(groupArray.get(groupPosition).title);
 
         ImageView ivArrow = (ImageView) group.findViewById(R.id.ivRankArrow);
         if (childArray.get(groupPosition).size() > 0) {
@@ -128,16 +123,16 @@ public class TopRankAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         final View child = inflater.inflate(R.layout.item_top_rank_child, null);
-
-        TextView tvName = (TextView) child.findViewById(R.id.tvRankChildName);
-        tvName.setText(childArray.get(groupPosition).get(childPosition).title);
-
-        child.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.onItemClick(child, childPosition, childArray.get(groupPosition).get(childPosition));
-            }
-        });
+//
+//        TextView tvName = (TextView) child.findViewById(R.id.tvRankChildName);
+//        tvName.setText(childArray.get(groupPosition).get(childPosition).title);
+//
+//        child.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                listener.onItemClick(child, childPosition, childArray.get(groupPosition).get(childPosition));
+//            }
+//        });
         return child;
     }
 

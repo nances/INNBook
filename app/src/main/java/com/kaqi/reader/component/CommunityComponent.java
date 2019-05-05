@@ -22,6 +22,7 @@ import com.kaqi.reader.ui.fragment.BookDiscussionFragment;
 import com.kaqi.reader.ui.fragment.BookHelpFragment;
 import com.kaqi.reader.ui.fragment.BookReviewFragment;
 import com.kaqi.reader.ui.fragment.ClassFicationItemFragment;
+import com.kaqi.reader.ui.fragment.ClassRankTopItemFragment;
 import com.kaqi.reader.ui.fragment.GirlBookDiscussionFragment;
 
 import dagger.Component;
@@ -48,4 +49,6 @@ public interface CommunityComponent {
     GirlBookDiscussionFragment inject(GirlBookDiscussionFragment fragment);
 
     ClassFicationItemFragment inject(ClassFicationItemFragment fragment);
+
+    ClassRankTopItemFragment inject(ClassRankTopItemFragment fragment);
 }

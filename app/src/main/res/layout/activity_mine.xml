@@ -133,6 +133,7 @@
                 />
 
             <com.kaqi.reader.view.textview.SuperTextView
+                android:id="@+id/message_icon"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/wh50.0dimens50.0dp"
                 stv:sLeftIconRes="@drawable/v1"

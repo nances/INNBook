@@ -106,38 +106,38 @@ public class TopRankActivity extends BaseActivity implements TopRankContract.Vie
     }
 
     private void updateMale(RankingList rankingList) {
-        List<RankingList.MaleBean> list = rankingList.male;
-        List<RankingList.MaleBean> collapse = new ArrayList<>();
-        for (RankingList.MaleBean bean : list) {
-            if (bean.collapse) { // 折叠
-                collapse.add(bean);
-            } else {
-                maleGroups.add(bean);
-                maleChilds.add(new ArrayList<RankingList.MaleBean>());
-            }
-        }
-        if (collapse.size() > 0) {
-            maleGroups.add(new RankingList.MaleBean("别人家的排行榜"));
-            maleChilds.add(collapse);
-        }
-        maleAdapter.notifyDataSetChanged();
+//        List<RankingList.MaleBean> list = rankingList.male;
+//        List<RankingList.MaleBean> collapse = new ArrayList<>();
+//        for (RankingList.MaleBean bean : list) {
+//            if (bean.collapse) { // 折叠
+//                collapse.add(bean);
+//            } else {
+//                maleGroups.add(bean);
+//                maleChilds.add(new ArrayList<RankingList.MaleBean>());
+//            }
+//        }
+//        if (collapse.size() > 0) {
+//            maleGroups.add(new RankingList.MaleBean("别人家的排行榜"));
+//            maleChilds.add(collapse);
+//        }
+//        maleAdapter.notifyDataSetChanged();
     }
 
     private void updateFemale(RankingList rankingList) {
-        List<RankingList.MaleBean> list = rankingList.female;
-        List<RankingList.MaleBean> collapse = new ArrayList<>();
-        for (RankingList.MaleBean bean : list) {
-            if (bean.collapse) { // 折叠
-                collapse.add(bean);
-            } else {
-                femaleGroups.add(bean);
-                femaleChilds.add(new ArrayList<RankingList.MaleBean>());
-            }
-        }
-        if (collapse.size() > 0) {
-            femaleGroups.add(new RankingList.MaleBean("别人家的排行榜"));
-            femaleChilds.add(collapse);
-        }
+//        List<RankingList.MaleBean> list = rankingList.female;
+//        List<RankingList.MaleBean> collapse = new ArrayList<>();
+//        for (RankingList.MaleBean bean : list) {
+//            if (bean.collapse) { // 折叠
+//                collapse.add(bean);
+//            } else {
+//                femaleGroups.add(bean);
+//                femaleChilds.add(new ArrayList<RankingList.MaleBean>());
+//            }
+//        }
+//        if (collapse.size() > 0) {
+//            femaleGroups.add(new RankingList.MaleBean("别人家的排行榜"));
+//            femaleChilds.add(collapse);
+//        }
         femaleAdapter.notifyDataSetChanged();
     }
 
@@ -155,11 +155,11 @@ public class TopRankActivity extends BaseActivity implements TopRankContract.Vie
 
         @Override
         public void onItemClick(View view, int position, RankingList.MaleBean data) {
-            if (data.monthRank == null) {
-                SubOtherHomeRankActivity.startActivity(mContext, data._id, data.title);
-            } else {
-                SubRankActivity.startActivity(mContext, data._id, data.monthRank, data.totalRank, data.title);
-            }
+//            if (data.monthRank == null) {
+//                SubOtherHomeRankActivity.startActivity(mContext, data._id, data.title);
+//            } else {
+//                SubRankActivity.startActivity(mContext, data._id, data.monthRank, data.totalRank, data.title);
+//            }
         }
     }
 

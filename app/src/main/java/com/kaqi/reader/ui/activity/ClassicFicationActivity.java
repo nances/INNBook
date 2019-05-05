@@ -25,9 +25,7 @@ public class ClassicFicationActivity extends BaseActivity {
 
     @Bind(R.id.indicator)
     VerticalTabLayout slidingTabLayout;
-
     private String[] mTitles = {"男生", "女生"};
-//    private String[] mTitles = {"男生", "女生","文学"};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private ClassFicationItemFragment classBoyFicationItemFragment;
     private ClassFicationItemFragment classGirlFicationItemFragment;
@@ -104,6 +102,7 @@ public class ClassicFicationActivity extends BaseActivity {
                 });
         slidingTabLayout.setTabSelected(0);
     }
+
 
     private List<Fragment> getFragments() {
         List<Fragment> fragments = new ArrayList<>();
