@@ -30,8 +30,8 @@
         android:paddingTop="@dimen/wh2.0dimens2.0dp"
         android:paddingRight="@dimen/wh4.5dimens4.5dp"
         android:paddingBottom="@dimen/wh2.0dimens2.0dp"
-        android:text="跳过"
-        android:textColor="@android:color/white"
+        android:text="2s 跳过"
+        android:textColor="@color/common_h2"
         android:textSize="14sp" />
 
     <include layout="@layout/layout_gender_popup_window" />
