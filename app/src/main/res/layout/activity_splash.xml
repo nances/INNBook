@@ -23,10 +23,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|right"
-        android:layout_marginTop="@dimen/wh25.0dimens25.0dp"
-        android:layout_marginRight="@dimen/wh18.0dimens18.0dp"
+        android:layout_marginTop="@dimen/wh12.0dimens12.0dp"
+        android:layout_marginRight="@dimen/wh12.0dimens12.0dp"
         android:background="@drawable/selector_stroke_roundcir"
-        android:text="跳过" />
+        android:paddingLeft="@dimen/wh4.5dimens4.5dp"
+        android:paddingTop="@dimen/wh2.0dimens2.0dp"
+        android:paddingRight="@dimen/wh4.5dimens4.5dp"
+        android:paddingBottom="@dimen/wh2.0dimens2.0dp"
+        android:text="跳过"
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
 
     <include layout="@layout/layout_gender_popup_window" />
 

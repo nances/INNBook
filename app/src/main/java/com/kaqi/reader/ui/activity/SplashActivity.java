@@ -16,6 +16,7 @@
 package com.kaqi.reader.ui.activity;
 
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +35,7 @@ import butterknife.OnClick;
 
 public class SplashActivity extends BaseActivity {
 
+    public static final int SHOW_TIME = 0x01;
     @Bind(R.id.tvSkip)
     TextView tvSkip;
     @Bind(R.id.mIvGender)
@@ -52,12 +54,13 @@ public class SplashActivity extends BaseActivity {
     ImageView splashImg;
 
     private boolean flag = false;
-    private Runnable runnable;
-    public static final int SHOW_TIME = 0x01;
+    private SplashCountDownTimer mCountDownTimer;
+    private int countDownTime = 3 * 1000;
 
     private synchronized void goHome() {
         if (!flag) {
             flag = true;
+            mCountDownTimer = null;
             startActivity(new Intent(SplashActivity.this, MainActivity.class));
             finish();
         }
@@ -66,6 +69,9 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (mCountDownTimer != null) {
+            mCountDownTimer.cancel();
+        }
         mHandler.removeCallbacksAndMessages(null);
         flag = true;
     }
@@ -84,12 +90,8 @@ public class SplashActivity extends BaseActivity {
     protected void dispatchHandler(Message msg) {
         switch (msg.what) {
             case SHOW_TIME:
-                if (!SettingManager.getInstance().isUserChooseSex()) {
-                    gone(tvSkip, splashImg);
-                    visible(chooseSexRl);
-                } else {
-                    goHome();
-                }
+                mCountDownTimer = new SplashCountDownTimer(countDownTime, 1000);
+                mCountDownTimer.start();
                 break;
         }
     }
@@ -106,7 +108,7 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void configViews() {
-        mHandler.sendEmptyMessageDelayed(SHOW_TIME, 2000);
+        mHandler.sendEmptyMessageDelayed(SHOW_TIME, 100);
     }
 
 
@@ -121,9 +123,15 @@ public class SplashActivity extends BaseActivity {
                 SettingManager.getInstance().saveUserChooseSex(Constant.Gender.MALE);
             case R.id.mBtnFemale:
                 SettingManager.getInstance().saveUserChooseSex(Constant.Gender.FEMALE);
+                if (mCountDownTimer != null) {
+                    mCountDownTimer.cancel();
+                }
                 goHome();
                 break;
             case R.id.tvSkip:
+                if (mCountDownTimer != null) {
+                    mCountDownTimer.cancel();
+                }
                 if (!SettingManager.getInstance().isUserChooseSex()) {
                     gone(tvSkip, splashImg);
                     visible(chooseSexRl);
@@ -132,5 +140,45 @@ public class SplashActivity extends BaseActivity {
                 }
                 break;
         }
+    }
+
+    /**
+     * 倒计时
+     */
+    private class SplashCountDownTimer extends CountDownTimer {
+        /**
+         * @param millisInFuture    表示以「 毫秒 」为单位倒计时的总数
+         *                          例如 millisInFuture = 1000 表示1秒
+         * @param countDownInterval 表示 间隔 多少微秒 调用一次 onTick()
+         *                          例如: countDownInterval = 1000 ; 表示每 1000 毫秒调用一次 onTick()
+         */
+
+        public SplashCountDownTimer(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        public void onFinish() {
+            this.cancel();
+            if (tvSkip == null) {
+                tvSkip = (TextView) findViewById(R.id.tvSkip);
+            }
+            tvSkip.setText("0s 跳过");
+            if (!SettingManager.getInstance().isUserChooseSex()) {
+                gone(tvSkip, splashImg);
+                visible(chooseSexRl);
+            } else {
+                goHome();
+            }
+        }
+
+        public void onTick(final long millisUntilFinished) {
+            try {
+                tvSkip.setText(millisUntilFinished / 1000 + "s 跳过");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
     }
 }
