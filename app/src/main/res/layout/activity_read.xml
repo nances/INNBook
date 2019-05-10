@@ -54,47 +54,15 @@
             android:layout_weight="1.5" />
 
         <TextView
-            android:id="@+id/tvBookReadReading"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/book_read_reading"
-            android:textColor="@color/book_read_top_text"
-            android:textSize="@dimen/book_read_top_text"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/tvBookReadCommunity"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/book_read_community"
-            android:textColor="@color/book_read_top_text"
-            android:textSize="@dimen/book_read_top_text"
-            android:visibility="gone" />
-
-        <TextView
             android:id="@+id/tvBookReadIntroduce"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.5"
             android:gravity="center"
             android:text="@string/book_read_introduce"
             android:textColor="@color/book_read_top_text"
             android:textSize="@dimen/book_read_top_text" />
 
-
-        <TextView
-            android:id="@+id/tvBookReadDownload"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/book_read_download"
-            android:textColor="@color/book_read_bottom_text"
-            android:textSize="@dimen/book_read_bottom_text" />
 
         <TextView
             android:id="@+id/tvBookReadSource"
@@ -121,7 +89,8 @@
         android:singleLine="true"
         android:text="@string/book_read_download_progress"
         android:textColor="@color/white"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:visibility="visible" />
 
     <include layout="@layout/layout_read_aa_set" />
 
@@ -161,6 +130,16 @@
             android:textColor="@color/book_read_bottom_text"
             android:textSize="@dimen/book_read_bottom_text" />
 
+        <TextView
+            android:id="@+id/tvBookReadDownload"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_reader_ab_download"
+            android:gravity="center"
+            android:text="@string/book_read_download"
+            android:textColor="@color/book_read_bottom_text"
+            android:textSize="@dimen/book_read_bottom_text" />
 
         <TextView
             android:id="@+id/tvBookMark"

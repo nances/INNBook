@@ -106,6 +106,7 @@ public class DownloadBookService extends Service {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public synchronized void addToDownloadQueue(DownloadQueue queue) {
+        LogUtils.e("addToDownloadQueue:addToDownloadQueue");
         if (!TextUtils.isEmpty(queue.bookId)) {
             boolean exists = false;
             // 判断当前书籍缓存任务是否存在

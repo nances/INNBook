@@ -20,14 +20,25 @@
     android:background="@color/common_bg"
     android:orientation="vertical">
 
-    <include layout="@layout/common_toolbar" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <net.lucode.hackware.magicindicator.MagicIndicator
-        android:id="@+id/magicIndicator"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/wh48.0dimens48.0dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@color/common_bg" />
+        <ImageView
+            android:id="@+id/back_iv"
+            android:layout_width="@dimen/wh36.0dimens36.0dp"
+            android:layout_height="@dimen/wh36.0dimens36.0dp"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/wh8.0dimens8.0dp"
+            android:src="@drawable/black_back_icon" />
+
+        <net.lucode.hackware.magicindicator.MagicIndicator
+            android:id="@+id/magicIndicator"
+            android:layout_width="@dimen/wh120.0dimens120.0dp"
+            android:layout_height="@dimen/wh48.0dimens48.0dp"
+            android:layout_centerHorizontal="true"
+            android:background="@color/common_bg" />
+    </RelativeLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"

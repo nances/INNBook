@@ -23,6 +23,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -112,7 +113,6 @@ public class PageFactory {
 
     public PageFactory(Context context, String bookId, List<BookMixAToc.mixToc.Chapters> chaptersList) {
         this(context, ScreenUtils.getScreenWidth(), ScreenUtils.getScreenHeight(),
-                //SettingManager.getInstance().getReadFontSize(bookId),
                 SettingManager.getInstance().getReadFontSize(),
                 bookId, chaptersList);
     }
@@ -128,6 +128,8 @@ public class PageFactory {
         marginWidth = ScreenUtils.dpToPxInt(15);
         marginHeight = ScreenUtils.dpToPxInt(15);
         mVisibleHeight = mHeight - marginHeight * 2 - mNumFontSize * 2 - mLineSpace * 2;
+        Log.v("Nancy","mHeight" + mHeight);
+        Log.v("Nancy","mVisibleHeight" + mVisibleHeight);
         mVisibleWidth = mWidth - marginWidth * 2;
         mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
         rectF = new Rect(0, 0, mWidth, mHeight);
@@ -637,8 +639,6 @@ public class PageFactory {
                 View.MeasureSpec.makeMeasureSpec(ScreenUtils.dpToPxInt(14), View.MeasureSpec.EXACTLY));
         batteryView.layout(0, 0, batteryView.getMeasuredWidth(), batteryView.getMeasuredHeight());
         batteryView.buildDrawingCache();
-        //batteryBitmap = batteryView.getDrawingCache();
-        // tips: @link{https://github.com/JustWayward/BookReader/issues/109}
         batteryBitmap = Bitmap.createBitmap(batteryView.getDrawingCache());
         batteryView.setDrawingCacheEnabled(false);
         batteryView.destroyDrawingCache();

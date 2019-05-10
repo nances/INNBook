@@ -82,13 +82,6 @@ public class GenderPopupWindow extends PopupWindow {
                 dismiss();
             }
         });
-        mIvClose = (ImageView) mContentView.findViewById(R.id.mIvClose);
-        mIvClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
     }
 
     private void lighton() {

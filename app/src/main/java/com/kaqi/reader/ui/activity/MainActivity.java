@@ -1,7 +1,9 @@
 package com.kaqi.reader.ui.activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
@@ -13,6 +15,7 @@ import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseActivity;
 import com.kaqi.reader.bean.TabEntity;
 import com.kaqi.reader.component.AppComponent;
+import com.kaqi.reader.service.DownloadBookService;
 import com.kaqi.reader.ui.fragment.CommunityFragment;
 import com.kaqi.reader.ui.fragment.FindFragment;
 import com.kaqi.reader.ui.fragment.MineFragment;
@@ -27,7 +30,7 @@ public class MainActivity extends BaseActivity {
     @Bind(R.id.sliding_tabs)
     CommonTabLayout slidingTabLayout;
 
-    private String[] mTitles = {"首页", "书架", "论坛", "个人"};
+    private String[] mTitles = {"首页", "书架", "书单", "个人"};
     private int[] mIconUnselectIds = {
             R.drawable.home_icon_nor, R.drawable.bookshelf_normal_icon, R.drawable.forum_icon_nor,
             R.drawable.mine_icon_nor};
@@ -108,6 +111,15 @@ public class MainActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void dispatchHandler(Message msg) {
+        switch (msg.what) {
+            case 1:
+                finish();
+                break;
+        }
     }
 
     /**
@@ -206,7 +218,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initDatas() {
-
+        startService(new Intent(this, DownloadBookService.class));
     }
 
     @Override
@@ -214,6 +226,13 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        DownloadBookService.cancel();
+        stopService(new Intent(this, DownloadBookService.class));
+        mHandler.removeCallbacksAndMessages(null);
+    }
 
     // 退出时间
     private long currentBackPressedTime = 0;
@@ -247,7 +266,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(Dialog dialog, boolean confirm) {
                 if (confirm) {
-                    finish();
+                    mHandler.sendEmptyMessageDelayed(1, 100);
                 }
             }
         }).setTitle("提示").setNegativeButton("取消").setPositiveButton("确定").show();

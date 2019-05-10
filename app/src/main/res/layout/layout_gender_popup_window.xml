@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016 JustWayward Team
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,28 +14,34 @@
   ~ limitations under the License.
   -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/choose_sex_rl"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/common_bg"
+    android:layout_gravity="center"
     android:layout_marginLeft="30dp"
-    android:layout_marginRight="30dp">
+    android:layout_marginRight="30dp"
+    android:background="@color/common_bg"
+    android:visibility="gone"
+    tools:visibility="visible">
 
-    <ImageView
-        android:id="@+id/mIvClose"
+    <TextView
+        android:id="@+id/sex_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:background="@drawable/ugcbook_delete" />
+        android:layout_marginLeft="@dimen/wh40.0dimens40.0dp"
+        android:text="性别选择"
+        android:textColor="@color/common_h1"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/mIvGender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/mIvClose"
+        android:layout_below="@+id/sex_tv"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/wh20.5dimens20.5dp"
         android:background="@drawable/ic_gender_logo" />
 
     <TextView
@@ -46,9 +51,9 @@
         android:layout_below="@+id/mIvGender"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:text="我们会根据您的喜好\n推荐相对应的小说"
+        android:text="我们会根据您的性别\n推荐相对应的小说"
         android:textColor="@color/common_h2"
-        android:textSize="11dp" />
+        android:textSize="13dp" />
 
     <TextView
         android:id="@+id/mTvSelect"
@@ -60,32 +65,39 @@
         android:gravity="center"
         android:text="-请选择您的喜好-"
         android:textColor="@color/common_h2"
-        android:textSize="11dp" />
+        android:textSize="11dp"
+        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/wh38.0dimens38.0dp"
         android:layout_below="@+id/mTvSelect"
-        android:layout_margin="@dimen/activity_vertical_margin"
-        android:orientation="horizontal">
+        android:layout_marginLeft="@dimen/wh54.0dimens54.0dp"
+        android:layout_marginTop="@dimen/wh15.0dimens15.0dp"
+        android:layout_marginRight="@dimen/wh54.0dimens54.0dp"
+        android:layout_marginBottom="@dimen/wh15.0dimens15.0dp"
+        android:orientation="horizontal"
+        android:padding="@dimen/wh4.0dimens4.0dp">
 
         <Button
             android:id="@+id/mBtnMale"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/wh30.0dimens30.0dp"
             android:layout_weight="1"
-            android:text="男生小说"
-            android:textColor="@android:color/white"
-            android:background="@drawable/bg_male_button_selector"/>
+            android:background="@drawable/bg_male_button_selector"
+            android:layout_gravity="center_vertical"
+            android:text="男生"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/mBtnFemale"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/wh30.0dimens30.0dp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_weight="1"
-            android:text="女生小说"
-            android:textColor="@android:color/white"
-            android:background="@drawable/bg_female_button_selector"/>
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/bg_female_button_selector"
+            android:text="女生"
+            android:textColor="@color/white" />
     </LinearLayout>
 </RelativeLayout>

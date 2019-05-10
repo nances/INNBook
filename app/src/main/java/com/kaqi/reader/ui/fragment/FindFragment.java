@@ -44,7 +44,7 @@ public class FindFragment extends BaseFragment {
     @Bind(R.id.viewPager)
     ViewPager mViewPager;
 
-    private String[] titles = new String[]{"排行榜", "主题书单", "分类"};
+    private String[] titles = new String[]{"推荐", "男主", "女主"};
 
     @Override
     public int getLayoutResId() {

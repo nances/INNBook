@@ -23,6 +23,7 @@ import com.kaqi.reader.R;
 import com.kaqi.reader.base.Constant;
 import com.kaqi.reader.bean.BooksByCats;
 import com.kaqi.reader.common.OnRvItemClickListener;
+import com.kaqi.reader.ui.activity.BookDetailActivity;
 import com.yuyh.easyadapter.recyclerview.EasyRVAdapter;
 import com.yuyh.easyadapter.recyclerview.EasyRVHolder;
 
@@ -52,6 +53,7 @@ public class TopRankListAdapter extends EasyRVAdapter<BooksByCats.BooksBean> {
         holder.setOnItemViewClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                BookDetailActivity.startActivity(mContext, item._id);
             }
         });
     }

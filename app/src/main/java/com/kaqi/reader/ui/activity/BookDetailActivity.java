@@ -388,18 +388,9 @@ public class BookDetailActivity extends BaseActivity implements BookDetailContra
     private void initCollection(boolean coll) {
         if (coll) {
             mBtnJoinCollection.setText(R.string.book_detail_join_collection);
-//            Drawable drawable = ContextCompat.getDrawable(this, R.drawable.book_detail_info_add_img);
-//            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-//            mBtnJoinCollection.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.shape_common_btn_solid_normal));
-//            mBtnJoinCollection.setCompoundDrawables(drawable, null, null, null);
-            mBtnJoinCollection.postInvalidate();
             isJoinedCollections = false;
         } else {
             mBtnJoinCollection.setText(R.string.book_detail_remove_collection);
-//            Drawable drawable = ContextCompat.getDrawable(this, R.drawable.book_detail_info_del_img);
-//            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-//            mBtnJoinCollection.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.btn_join_collection_pressed));
-//            mBtnJoinCollection.setCompoundDrawables(drawable, null, null, null);
             mBtnJoinCollection.postInvalidate();
             isJoinedCollections = true;
         }

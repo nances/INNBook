@@ -22,7 +22,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.ContentObserver;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Handler;
@@ -120,10 +119,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
     @Bind(R.id.ivBack)
     ImageView mIvBack;
-    @Bind(R.id.tvBookReadReading)
-    TextView mTvBookReadReading;
-    @Bind(R.id.tvBookReadCommunity)
-    TextView mTvBookReadCommunity;
     @Bind(R.id.tvBookReadIntroduce)
     TextView mTvBookReadChangeSource;
     @Bind(R.id.tvBookReadSource)
@@ -230,7 +225,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     private boolean isAutoLightness = false; // 记录其他页面是否自动调整亮度
     private boolean isFromSD = false;
     private boolean iSCata = false;
-    private List<Typeface> mTypefaceList = new ArrayList<>();
 
     //添加收藏需要，所以跳转的时候传递整个实体类
     public static void startActivity(Context context, Recommend.RecommendBooks recommendBooks) {
@@ -278,8 +272,8 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         bookId = recommendBooks._id;
         isFromSD = getIntent().getBooleanExtra(INTENT_SD, false);
         iSCata = getIntent().getBooleanExtra(IS_CATE, false);
-        currentNewChapter = getIntent().getIntExtra(CURRENT_CHAPTER, 1);
-        getFontFromAssets();
+//        currentNewChapter = getIntent().getIntExtra(CURRENT_CHAPTER, 1);
+        getFontFromAssets(); // 获取字体
         if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
             String filePath = Uri.decode(getIntent().getDataString().replace("file://", ""));
             String fileName;
@@ -343,7 +337,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             mChapterList.add(chapters);
             showChapterRead(null, currentChapter);
             //本地书籍隐藏社区、简介、缓存按钮
-            gone(mTvBookReadCommunity, mTvBookReadChangeSource, mTvBookReadDownload);
+            gone(mTvBookReadChangeSource, mTvBookReadDownload);
             return;
         }
         mPresenter.getBookMixAToc(bookId, "chapters", iSCata);
@@ -375,7 +369,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             @Override
             public void onDismiss() {
                 gone(mTvBookReadTocTitle);
-                visible(mTvBookReadReading, mTvBookReadCommunity, mTvBookReadChangeSource);
+                visible(mTvBookReadChangeSource);
             }
         });
     }
@@ -387,7 +381,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         @Override
         public void onChange(boolean selfChange) {
             super.onChange(selfChange);
-            //LogUtils.d("BrightnessOnChange:" + ScreenUtils.getScreenBrightnessInt255());
             if (!ScreenUtils.isAutoBrightness(ReadActivity.this)) {
                 seekbarLightness.setProgress(ScreenUtils.getScreenBrightness());
             }
@@ -505,6 +498,10 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         if (CacheManager.getInstance().getChapterFile(bookId, currentChapter) != null) {
             showChapterRead(null, currentChapter);
         } else {
+            if(iSCata){
+
+                mPresenter.getChapterRead(mChapterList.get(currentChapter - 1).link, currentChapter);
+            }
             mPresenter.getChapterRead(mChapterList.get(currentChapter - 1).link, currentChapter);
         }
     }
@@ -576,17 +573,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         }
     }
 
-    @OnClick(R.id.tvBookReadReading)
-    public void readBook() {
-        gone(rlReadAaSet, rlReadMark);
-        ToastUtils.showToast("正在拼命开发中...");
-    }
-
-    @OnClick(R.id.tvBookReadCommunity)
-    public void onClickCommunity() {
-        gone(rlReadAaSet, rlReadMark);
-        BookDetailCommunityActivity.startActivity(this, bookId, mTvBookReadTocTitle.getText().toString(), 0);
-    }
 
     @OnClick(R.id.tvBookReadIntroduce)
     public void onClickIntroduce() {
@@ -693,7 +679,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         gone(rlReadAaSet, rlReadMark);
         if (!mTocListPopupWindow.isShowing()) {
             visible(mTvBookReadTocTitle);
-            gone(mTvBookReadReading, mTvBookReadCommunity, mTvBookReadChangeSource);
+            gone(mTvBookReadChangeSource);
             mTocListPopupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
             mTocListPopupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
             mTocListPopupWindow.show();
@@ -862,7 +848,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
                 if (mTocListPopupWindow != null && mTocListPopupWindow.isShowing()) {
                     mTocListPopupWindow.dismiss();
                     gone(mTvBookReadTocTitle);
-                    visible(mTvBookReadReading, mTvBookReadCommunity, mTvBookReadChangeSource);
+                    visible(mTvBookReadChangeSource);
                     return true;
                 } else if (isVisible(rlReadAaSet)) {
                     gone(rlReadAaSet);

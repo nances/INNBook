@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.widget.ImageView;
 
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseActivity;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 public class ClassicRankTopActivity extends BaseActivity {
 
@@ -26,6 +28,8 @@ public class ClassicRankTopActivity extends BaseActivity {
     MagicIndicator magicIndicator;
     @Bind(R.id.viewPager)
     ViewPager mViewPager;
+    @Bind(R.id.back_iv)
+    ImageView backIv;
 
     private String[] titles = new String[]{"男生", "女生"};
 
@@ -52,8 +56,6 @@ public class ClassicRankTopActivity extends BaseActivity {
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle("排行榜");
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
     }
 
     @Override
@@ -78,5 +80,10 @@ public class ClassicRankTopActivity extends BaseActivity {
     @Override
     public void configViews() {
         initViewPager();
+    }
+
+    @OnClick(R.id.back_iv)
+    public void onViewClicked() {
+        finish();
     }
 }
