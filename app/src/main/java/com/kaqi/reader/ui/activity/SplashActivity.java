@@ -18,6 +18,7 @@ package com.kaqi.reader.ui.activity;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -32,7 +33,14 @@ import com.kaqi.reader.manager.SettingManager;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-
+/**
+ * 启动页
+ * 1、无网络状态下，3秒后进入首页
+ * 2、有网络状态下，请求数据
+ * 3、请求的网络数据时间小于1.5秒，在1.5秒后展示，大于3秒，直接进入首页
+ * 4、请求网络数据返回 展示服务器广告，则根据服务器的广告显示逻辑处理
+ * 5、请求网络数据返回 展示第三方SDK广告，则显示第三方SDK广告
+ */
 public class SplashActivity extends BaseActivity {
 
     public static final int SHOW_TIME = 0x01;
@@ -55,7 +63,7 @@ public class SplashActivity extends BaseActivity {
 
     private boolean flag = false;
     private SplashCountDownTimer mCountDownTimer;
-    private int countDownTime = 3 * 1000;
+    private int countDownTime = 4 * 1000;
 
     private synchronized void goHome() {
         if (!flag) {
@@ -108,7 +116,8 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void configViews() {
-        mHandler.sendEmptyMessageDelayed(SHOW_TIME, 100);
+        mCountDownTimer = new SplashCountDownTimer(countDownTime, 1000);
+        mCountDownTimer.start();
     }
 
 
@@ -172,6 +181,7 @@ public class SplashActivity extends BaseActivity {
         }
 
         public void onTick(final long millisUntilFinished) {
+            Log.v("Nancy", "millisUntilFinished is value : " + millisUntilFinished);
             try {
                 tvSkip.setText(millisUntilFinished / 1000 + "s 跳过");
             } catch (Exception e) {

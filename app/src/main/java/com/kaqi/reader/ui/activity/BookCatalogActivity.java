@@ -30,6 +30,7 @@ import com.kaqi.reader.bean.Recommend;
 import com.kaqi.reader.common.OnRvItemClickListener;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.component.DaggerBookComponent;
+import com.kaqi.reader.manager.SettingManager;
 import com.kaqi.reader.ui.adapter.BookCatalogListAdapter;
 import com.kaqi.reader.ui.contract.BookReadContract;
 import com.kaqi.reader.ui.presenter.BookReadPresenter;
@@ -167,6 +168,7 @@ public class BookCatalogActivity extends BaseActivity implements BookReadContrac
         recommendBooks.updated = updated;
         recommendBooks.author = author;
         recommendBooks.path = mChapterList.get(position).link;
+        SettingManager.getInstance().saveReadProgress(bookId, position + 1, 0, 0);
         ReadActivity.startActivity(this, recommendBooks, position, true);
         finish();
     }

@@ -272,7 +272,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         bookId = recommendBooks._id;
         isFromSD = getIntent().getBooleanExtra(INTENT_SD, false);
         iSCata = getIntent().getBooleanExtra(IS_CATE, false);
-//        currentNewChapter = getIntent().getIntExtra(CURRENT_CHAPTER, 1);
+        currentNewChapter = getIntent().getIntExtra(CURRENT_CHAPTER, 1);
         getFontFromAssets(); // 获取字体
         if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
             String filePath = Uri.decode(getIntent().getDataString().replace("file://", ""));
@@ -328,7 +328,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         initAASet();
 
         initPagerWidget();
-
         mPresenter.attachView(this);
         // 本地收藏  直接打开
         if (isFromSD) {
@@ -498,10 +497,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         if (CacheManager.getInstance().getChapterFile(bookId, currentChapter) != null) {
             showChapterRead(null, currentChapter);
         } else {
-            if(iSCata){
-
-                mPresenter.getChapterRead(mChapterList.get(currentChapter - 1).link, currentChapter);
-            }
             mPresenter.getChapterRead(mChapterList.get(currentChapter - 1).link, currentChapter);
         }
     }
@@ -933,8 +928,12 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     private class ReadListener implements OnReadStateChangeListener {
         @Override
         public void onChapterChanged(int chapter) {
-            LogUtils.i("onChapterChanged:" + chapter);
-            currentChapter = chapter;
+            if (iSCata) {
+                currentChapter = currentNewChapter + 1;
+            } else {
+                currentChapter = chapter;
+            }
+            LogUtils.i("onChapterChanged:" + currentChapter);
             mTocListAdapter.setCurrentChapter(currentChapter);
             // 加载前一节 与 后三节
             for (int i = chapter - 1; i <= chapter + 3 && i <= mChapterList.size(); i++) {
