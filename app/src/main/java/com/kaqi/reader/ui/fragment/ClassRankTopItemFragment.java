@@ -98,10 +98,12 @@ public class ClassRankTopItemFragment extends BaseFragment implements TopCategor
             if (Type_Channle.equals("男生")) {
                 topRankChannleListAdapter = new TopRankChannleMaleListAdapter(mContext, mMaleCategoryList);
                 rank_recyclerview.setAdapter(topRankChannleListAdapter);
+                topRankChannleListAdapter.setItemChecked(0);
                 topRankChannleListAdapter.setItemClickListener(new ClickListener());
             } else if (Type_Channle.equals("女生")) {
                 topRankChannleFemaleListAdapter = new TopRankChannleFemaleListAdapter(mContext, mFemaleCategoryList);
                 rank_recyclerview.setAdapter(topRankChannleFemaleListAdapter);
+                topRankChannleFemaleListAdapter.setItemChecked(0);
                 topRankChannleFemaleListAdapter.setItemClickListener(new ClickFamelListener());
             }
         }

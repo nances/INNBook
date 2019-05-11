@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -15,6 +16,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.Constant;
+import com.kaqi.reader.ui.activity.ClassicFicationActivity;
+import com.kaqi.reader.ui.activity.ClassicRankTopActivity;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -89,6 +92,17 @@ public class FindItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             Label label = labelList.get(position - 1);
             labelViewHolder.imageIv.setImageResource(label.icon);
             labelViewHolder.nameTv.setText(label.name);
+            labelViewHolder.channle_label_lr.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (label.name.equals("分类")) {
+                        ClassicFicationActivity.startActivity(mContext);
+                    } else if (label.name.equals("排行榜")) {
+                        ClassicRankTopActivity.startActivity(mContext);
+                    }
+                }
+            });
+
         } else if (holder instanceof PartitionTitleViewHolder) {
             PartitionTitleViewHolder partitionTitleViewHolder = (PartitionTitleViewHolder) holder;
             partitionTitleViewHolder.titleTv.setText("本周看点");
@@ -127,6 +141,8 @@ public class FindItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         TextView nameTv;
         @Bind(R.id.imageIv)
         ImageView imageIv;
+        @Bind(R.id.channle_label_lr)
+        LinearLayout channle_label_lr;
 
         public LabelViewHolder(View itemView) {
             super(itemView);

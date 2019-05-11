@@ -326,7 +326,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         initTocList();
 
         initAASet();
-
         initPagerWidget();
         mPresenter.attachView(this);
         // 本地收藏  直接打开
