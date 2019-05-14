@@ -28,6 +28,7 @@ import android.view.ViewGroup;
 import com.kaqi.reader.ReaderApplication;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.view.loadding.CustomDialog;
+import com.umeng.analytics.MobclickAgent;
 
 import butterknife.ButterKnife;
 
@@ -160,5 +161,15 @@ public abstract class BaseFragment extends Fragment {
         return view.getVisibility() == View.VISIBLE;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageStart(this.getClass().getSimpleName());
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
+    }
 }

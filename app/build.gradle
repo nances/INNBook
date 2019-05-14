@@ -89,4 +89,7 @@ dependencies {
     compile 'q.rorbin:VerticalTabLayout:1.2.5'
     compile 'com.github.hackware1993:MagicIndicator:1.5.0'
     compile 'com.youth.banner:banner:1.4.10'
+
+    compile  'com.umeng.umsdk:analytics:8.0.0'
+    compile  'com.umeng.umsdk:common:2.0.0'
 }

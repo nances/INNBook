@@ -36,6 +36,7 @@ import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.utils.SharedPreferencesUtil;
 import com.kaqi.reader.utils.StatusBarCompat;
 import com.kaqi.reader.view.loadding.CustomDialog;
+import com.umeng.analytics.MobclickAgent;
 
 import java.lang.ref.WeakReference;
 
@@ -91,8 +92,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
+        MobclickAgent.onResume(this);
         if (SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT, false) != mNowMode) {
             if (SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT, false)) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);

@@ -34,6 +34,7 @@ import com.sinovoice.hcicloudsdk.common.HciErrorCode;
 import com.sinovoice.hcicloudsdk.common.InitParam;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
+import com.umeng.commonsdk.UMConfigure;
 
 /**
  * @author yuyh.
@@ -54,6 +55,8 @@ public class ReaderApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        String pushSecret = null; // Push 推送业务的secret
+        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, pushSecret);
         refWatcher = LeakCanary.install(this);
         sInstance = this;
         initCompoent();
