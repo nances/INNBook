@@ -40,3 +40,8 @@ public <init> (org.json.JSONObject);
 -keep public class com.kaqi.reader.R$*{
 public static final int *;
 }
+
+# 个推
+-dontwarn com.igexin.**
+-keep class com.igexin.** { *; }
+-keep class org.json.** { *; }

@@ -10,6 +10,12 @@ android {
         versionCode 1
         versionName "1.0"
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
+
+        manifestPlaceholders = [
+                GETUI_APP_ID : "9Y0uWLaYKq5jZ8OBi2eD77",
+                GETUI_APP_KEY : "cUhH6JgCrW7yEodbMfSa75",
+                GETUI_APP_SECRET : "vmynHPXxba8yRgyzEuGZc2"
+        ]
     }
 
     signingConfigs {

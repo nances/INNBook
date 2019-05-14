@@ -17,14 +17,18 @@ package com.kaqi.reader;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Message;
 import android.support.v7.app.AppCompatDelegate;
 
+import com.igexin.sdk.PushManager;
 import com.kaqi.reader.base.Constant;
 import com.kaqi.reader.base.CrashHandler;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.component.DaggerAppComponent;
 import com.kaqi.reader.module.AppModule;
 import com.kaqi.reader.module.BookApiModule;
+import com.kaqi.reader.push.ReaderIntentService;
+import com.kaqi.reader.push.ReaderPushService;
 import com.kaqi.reader.utils.AppUtils;
 import com.kaqi.reader.utils.FileUtils;
 import com.kaqi.reader.utils.LogUtils;
@@ -55,8 +59,9 @@ public class ReaderApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        String pushSecret = null; // Push 推送业务的secret
-        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, pushSecret);
+        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, null);
+        PushManager.getInstance().initialize(this, ReaderPushService.class);
+        PushManager.getInstance().registerPushIntentService(this,ReaderIntentService.class);
         refWatcher = LeakCanary.install(this);
         sInstance = this;
         initCompoent();
@@ -65,6 +70,10 @@ public class ReaderApplication extends Application {
         initPrefs();
         initNightMode();
         //initHciCloud();
+    }
+
+    public static void sendMessage(Message msg){
+
     }
 
     public static ReaderApplication getsInstance() {
