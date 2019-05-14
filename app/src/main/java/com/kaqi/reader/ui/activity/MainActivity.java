@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.KeyEvent;
 
 import com.flyco.tablayout.CommonTabLayout;
@@ -78,6 +79,14 @@ public class MainActivity extends BaseActivity {
         slidingTabLayout.measure(0, 0);
     }
 
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        Log.d("Nancy", "in onRestoreInstanceState >> this:" + this +
+                " savedInstanceState:" + savedInstanceState);
+        super.onRestoreInstanceState(savedInstanceState);
+
+    }
+
     /**
      * 初始化tab
      */
@@ -134,6 +143,7 @@ public class MainActivity extends BaseActivity {
             findFragment = (FindFragment) getSupportFragmentManager().findFragmentByTag("findFragment");
             circleMainFragment = (CommunityFragment) getSupportFragmentManager().findFragmentByTag("circleMainFragment");
             currentTabPosition = savedInstanceState.getInt("HOME_CURRENT_TAB_POSITION");
+            Log.v("Nancy","HOME_CURRENT_TAB_POSITION " + currentTabPosition);
         } else {
             mineFragment = new MineFragment();
             homeFragment = new RecommendFragment();
@@ -145,9 +155,9 @@ public class MainActivity extends BaseActivity {
             transaction.add(R.id.container, findFragment, "findFragment");
             transaction.add(R.id.container, circleMainFragment, "circleMainFragment");
         }
+        Log.v("Nancy","currentTabPosition" + currentTabPosition);
         transaction.commit();
-        SwitchTo(currentTabPosition);
-        slidingTabLayout.setCurrentTab(currentTabPosition);
+        setCurrentItem(currentTabPosition);
     }
 
 

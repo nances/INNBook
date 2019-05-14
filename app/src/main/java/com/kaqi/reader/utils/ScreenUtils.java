@@ -61,22 +61,36 @@ public class ScreenUtils {
     }
 
     /**
-     * 获取屏幕宽度
+     * 获得屏幕宽度
      *
+     * @param context
      * @return
      */
     public static int getScreenWidth() {
-        return AppUtils.getAppContext().getResources().getDisplayMetrics().widthPixels;
+        WindowManager wm = (WindowManager) AppUtils.getAppContext()
+                .getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(outMetrics);
+        return outMetrics.widthPixels;
     }
 
     /**
-     * 获取屏幕高度
+     * 获得屏幕高度
      *
+     * @param
      * @return
      */
     public static int getScreenHeight() {
-        return AppUtils.getAppContext().getResources().getDisplayMetrics().heightPixels;
+        WindowManager wm = (WindowManager) AppUtils.getAppContext()
+                .getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics outMetrics = new DisplayMetrics();
+//        wm.getDefaultDisplay().getRealMetrics(outMetrics);
+        wm.getDefaultDisplay().getRealMetrics(outMetrics);
+//        float height = outMetrics.heightPixels;
+
+        return outMetrics.heightPixels;
     }
+
 
     /**
      * 将dp转换成px

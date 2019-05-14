@@ -24,8 +24,7 @@ import com.yuyh.easyadapter.abslistview.EasyLVHolder;
 import java.util.List;
 
 /**
- * @author yuyh.
- * @date 16/8/6.
+ * @author Nancy.
  */
 public class AutoCompleteAdapter extends EasyLVAdapter<String> {
 

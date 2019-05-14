@@ -1,18 +1,3 @@
-/**
- * Copyright 2016 JustWayward Team
- * <p/>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p/>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p/>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.kaqi.reader.ui.activity;
 
 import android.app.Dialog;
@@ -34,6 +19,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -226,6 +213,12 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     private boolean isFromSD = false;
     private boolean iSCata = false;
 
+    /*****************Animation******************/
+    private Animation mTopInAnim;
+    private Animation mTopOutAnim;
+    private Animation mBottomInAnim;
+    private Animation mBottomOutAnim;
+
     //添加收藏需要，所以跳转的时候传递整个实体类
     public static void startActivity(Context context, Recommend.RecommendBooks recommendBooks) {
         startActivity(context, recommendBooks, false);
@@ -328,16 +321,15 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         initAASet();
         initPagerWidget();
         mPresenter.attachView(this);
-        // 本地收藏  直接打开
-        if (isFromSD) {
-            BookMixAToc.mixToc.Chapters chapters = new BookMixAToc.mixToc.Chapters();
-            chapters.title = recommendBooks.title;
-            mChapterList.add(chapters);
-            showChapterRead(null, currentChapter);
-            //本地书籍隐藏社区、简介、缓存按钮
-            gone(mTvBookReadChangeSource, mTvBookReadDownload);
-            return;
-        }
+//        if (isFromSD) {
+//            BookMixAToc.mixToc.Chapters chapters = new BookMixAToc.mixToc.Chapters();
+//            chapters.title = recommendBooks.title;
+//            mChapterList.add(chapters);
+//            showChapterRead(null, currentChapter);
+//            //本地书籍隐藏社区、简介、缓存按钮
+//            gone(mTvBookReadChangeSource, mTvBookReadDownload);
+//            return;
+//        }
         mPresenter.getBookMixAToc(bookId, "chapters", iSCata);
     }
 
@@ -370,6 +362,19 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
                 visible(mTvBookReadChangeSource);
             }
         });
+    }
+
+
+    //初始化动画
+    private void initMenuAnim() {
+        if (mTopInAnim != null) return;
+        mTopInAnim = AnimationUtils.loadAnimation(this, R.anim.slide_top_in);
+        mTopOutAnim = AnimationUtils.loadAnimation(this, R.anim.slide_top_out);
+        mBottomInAnim = AnimationUtils.loadAnimation(this, R.anim.slide_bottom_in);
+        mBottomOutAnim = AnimationUtils.loadAnimation(this, R.anim.slide_bottom_out);
+        //退出的速度要快
+        mTopOutAnim.setDuration(200);
+        mBottomOutAnim.setDuration(200);
     }
 
     /**
@@ -466,6 +471,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
                 break;
             case 2:
                 mPageWidget = new NoAimWidget(this, bookId, mChapterList, new ReadListener());
+                break;
         }
 
         registerReceiver(receiver, intentFilter);

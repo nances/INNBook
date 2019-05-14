@@ -15,10 +15,10 @@
  */
 package com.kaqi.reader.ui.activity;
 
+import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -28,6 +28,7 @@ import com.kaqi.reader.base.BaseActivity;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.component.DaggerMainComponent;
 import com.kaqi.reader.utils.NetworkUtils;
+import com.kaqi.reader.view.dialog.CommomAddShuJiaDialog;
 import com.kaqi.reader.wifitransfer.Defaults;
 import com.kaqi.reader.wifitransfer.ServerRunner;
 
@@ -38,6 +39,7 @@ import butterknife.OnClick;
  * Created by xiaoshu on 2016/10/9.
  */
 public class WifiBookActivity extends BaseActivity {
+    public static final int EXIT_WIFI_LOCAL = 0x02;
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, WifiBookActivity.class));
@@ -69,6 +71,17 @@ public class WifiBookActivity extends BaseActivity {
         mCommonToolbar.setTitle("WiFi传书");
         mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
     }
+
+
+    @Override
+    protected void dispatchHandler(Message msg) {
+        switch (msg.what) {
+            case EXIT_WIFI_LOCAL:
+                exitDialog();
+                break;
+        }
+    }
+
 
     @Override
     public void initDatas() {
@@ -104,21 +117,23 @@ public class WifiBookActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         if (ServerRunner.serverIsRunning) {
-            new AlertDialog.Builder(this)
-                    .setTitle("提示")
-                    .setMessage("确定要关闭？Wifi传书将会中断！")
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                            finish();
-                        }
-                    }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            }).create().show();
+            mHandler.sendEmptyMessageDelayed(EXIT_WIFI_LOCAL, 50);
+
+//            new AlertDialog.Builder(this)
+//                    .setTitle("提示")
+//                    .setMessage("确定要关闭？Wifi传书将会中断！")
+//                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            dialog.dismiss();
+//                            finish();
+//                        }
+//                    }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    dialog.dismiss();
+//                }
+//            }).create().show();
         } else {
             super.onBackPressed();
         }
@@ -129,4 +144,20 @@ public class WifiBookActivity extends BaseActivity {
         super.onDestroy();
         ServerRunner.stopServer();
     }
+
+    /**
+     * 退出WIFI传输
+     */
+    public void exitDialog() {
+        new CommomAddShuJiaDialog(mContext, R.style.dialog, getString(R.string.exit_wifi_local), new CommomAddShuJiaDialog.OnCloseListener() {
+            @Override
+            public void onClick(Dialog dialog, boolean confirm) {
+                if (confirm) {
+                    finish();
+                }
+            }
+        }).setTitle("提示").setNegativeButton("取消").setPositiveButton("确定").show();
+    }
+
+
 }

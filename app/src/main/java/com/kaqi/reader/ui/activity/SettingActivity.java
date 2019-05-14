@@ -20,6 +20,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Message;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -47,7 +48,7 @@ import butterknife.OnClick;
  * 2019年04月23日18:09:56
  */
 public class SettingActivity extends BaseActivity {
-
+    public static final int EXIT = 0x02;
     @Bind(R.id.action_synchronization_book)
     SuperTextView actionSynchronizationBook;
     @Bind(R.id.scan_local_book)
@@ -56,15 +57,6 @@ public class SettingActivity extends BaseActivity {
     SuperTextView wifiBook;
     @Bind(R.id.tv_more)
     TextView tvMore;
-
-    @Inject
-    MainActivityPresenter mPresenter;
-
-
-    public static void startActivity(Context context) {
-        context.startActivity(new Intent(context, SettingActivity.class));
-    }
-
     @Bind(R.id.bookshelfSort)
     SuperTextView mTvSort;
     @Bind(R.id.rlFlipStyle)
@@ -76,6 +68,22 @@ public class SettingActivity extends BaseActivity {
     @Bind(R.id.nightMode)
     SuperTextView nightMode;
 
+    @Inject
+    MainActivityPresenter mPresenter;
+
+
+    public static void startActivity(Context context) {
+        context.startActivity(new Intent(context, SettingActivity.class));
+    }
+
+    @Override
+    protected void dispatchHandler(Message msg) {
+        switch (msg.what) {
+            case EXIT:
+                finish();
+                break;
+        }
+    }
 
     @Override
     public int getLayoutId() {
@@ -123,6 +131,7 @@ public class SettingActivity extends BaseActivity {
                 if (SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT, false)) {
                     SharedPreferencesUtil.getInstance().putBoolean(Constant.ISNIGHT, false);
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//                    mHandler.sendEmptyMessageDelayed(EXIT,500);
                 } else {
                     SharedPreferencesUtil.getInstance().putBoolean(Constant.ISNIGHT, true);
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
@@ -245,7 +254,7 @@ public class SettingActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.action_synchronization_book:
                 showDialog();
-                mPresenter.syncBookShelf();
+//                mPresenter.syncBookShelf();
                 break;
             case R.id.scan_local_book:
                 ScanLocalBookActivity.startActivity(this);
@@ -254,5 +263,12 @@ public class SettingActivity extends BaseActivity {
                 WifiBookActivity.startActivity(this);
                 break;
         }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 }

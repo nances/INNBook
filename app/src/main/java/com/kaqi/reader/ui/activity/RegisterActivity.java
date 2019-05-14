@@ -147,6 +147,7 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
+        get_code = null;
         super.onDestroy();
     }
 

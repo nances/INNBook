@@ -1,18 +1,3 @@
-/**
- * Copyright 2016 JustWayward Team
- * <p/>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p/>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p/>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.kaqi.reader.view.readview;
 
 import android.content.Context;
@@ -22,11 +7,13 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.kaqi.reader.R;
 import com.kaqi.reader.bean.BookMixAToc;
@@ -49,7 +36,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
-public class PageFactory {
+import q.rorbin.badgeview.DisplayUtil;
+
+public class PageFactory{
     private Context mContext;
     /**
      * 屏幕宽高
@@ -101,6 +90,7 @@ public class PageFactory {
     private int battery = 40;
     private Rect rectF;
     private ProgressBar batteryView;
+    private RelativeLayout relativeLayoutAd;
     private Bitmap batteryBitmap;
 
     private String bookId;
@@ -121,19 +111,21 @@ public class PageFactory {
                        List<BookMixAToc.mixToc.Chapters> chaptersList) {
         mContext = context;
         mWidth = width;
-        mHeight = height;
+//        if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
+//            mHeight = ScreenUtils.getScreenHeight() +  DisplayUtil.dp2px(mContext,34);
+//        }else {
+//        }
+        mHeight = ScreenUtils.getScreenHeight();
         mFontSize = fontSize;
         mLineSpace = mFontSize / 5 * 2;
         mNumFontSize = ScreenUtils.dpToPxInt(16);
         marginWidth = ScreenUtils.dpToPxInt(15);
         marginHeight = ScreenUtils.dpToPxInt(15);
         mVisibleHeight = mHeight - marginHeight * 2 - mNumFontSize * 2 - mLineSpace * 2;
-        Log.v("Nancy","mHeight" + mHeight);
-        Log.v("Nancy","mVisibleHeight" + mVisibleHeight);
         mVisibleWidth = mWidth - marginWidth * 2;
         mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
         rectF = new Rect(0, 0, mWidth, mHeight);
-
+        Log.v("Nancy","mHeight is value : " + mHeight);
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setTextSize(mFontSize);
         mPaint.setTextSize(ContextCompat.getColor(context, R.color.chapter_content_day));
@@ -231,6 +223,7 @@ public class PageFactory {
                 y += mLineSpace;
                 if (line.endsWith("@")) {
                     canvas.drawText(line.substring(0, line.length() - 1), marginWidth, y, mPaint);
+
                     y += mLineSpace;
                 } else {
                     canvas.drawText(line, marginWidth, y, mPaint);
@@ -628,6 +621,17 @@ public class PageFactory {
             listener.onLoadChapterFailure(chapter);
     }
 
+
+    public void convertAd() {
+        relativeLayoutAd = (RelativeLayout) LayoutInflater.from(mContext).inflate(R.layout.book_ad_layout, null);
+        relativeLayoutAd.setDrawingCacheEnabled(true);
+        relativeLayoutAd.measure(View.MeasureSpec.makeMeasureSpec(ScreenUtils.dpToPxInt(26), View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(ScreenUtils.dpToPxInt(14), View.MeasureSpec.EXACTLY));
+        relativeLayoutAd.layout(0, 0, relativeLayoutAd.getMeasuredWidth(), relativeLayoutAd.getMeasuredHeight());
+        relativeLayoutAd.buildDrawingCache();
+    }
+
+
     public void convertBetteryBitmap() {
         batteryView = (ProgressBar) LayoutInflater.from(mContext).inflate(R.layout.layout_battery_progress, null);
         batteryView.setProgressDrawable(ContextCompat.getDrawable(mContext,
@@ -647,6 +651,7 @@ public class PageFactory {
     public void setBattery(int battery) {
         this.battery = battery;
         convertBetteryBitmap();
+        convertAd();
     }
 
     public void setTime(String time) {

@@ -53,6 +53,8 @@ import butterknife.Bind;
  */
 public class ScanLocalBookActivity extends BaseActivity implements RecyclerArrayAdapter.OnItemClickListener {
     public static final int QUERY_LOCAL_FILE = 0x01;
+    public static final int EXIT_WIFI_LOCAL = 0x02;
+
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, ScanLocalBookActivity.class));
     }
@@ -71,6 +73,7 @@ public class ScanLocalBookActivity extends BaseActivity implements RecyclerArray
     protected void setupActivityComponent(AppComponent appComponent) {
 
     }
+
 
     @Override
     public void initToolBar() {
@@ -100,6 +103,9 @@ public class ScanLocalBookActivity extends BaseActivity implements RecyclerArray
         switch (msg.what) {
             case QUERY_LOCAL_FILE:
                 queryFiles();
+                break;
+            case EXIT_WIFI_LOCAL:
+                finish();
                 break;
         }
     }
@@ -205,4 +211,7 @@ public class ScanLocalBookActivity extends BaseActivity implements RecyclerArray
             ReadCHMActivity.start(this, books.path);
         }
     }
+
+
+
 }

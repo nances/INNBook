@@ -13,7 +13,8 @@
         android:layout_height="match_parent"
         android:clickable="false"
         android:focusable="false"
-        android:layerType="hardware" />
+        android:layerType="hardware"
+        />
 
     <LinearLayout
         android:id="@+id/llBookReadTop"

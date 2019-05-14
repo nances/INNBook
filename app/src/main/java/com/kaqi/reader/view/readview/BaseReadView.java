@@ -19,6 +19,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PointF;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Scroller;
@@ -55,6 +56,14 @@ public abstract class BaseReadView extends View {
 
     Scroller mScroller;
 
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        if (pagefactory != null) {
+//            pagefactory.prepareDisplay(w, h);
+        }
+    }
+
     public BaseReadView(Context context, String bookId, List<BookMixAToc.mixToc.Chapters> chaptersList,
                         OnReadStateChangeListener listener) {
         super(context);
@@ -62,15 +71,18 @@ public abstract class BaseReadView extends View {
         this.bookId = bookId;
 
         mScreenWidth = ScreenUtils.getScreenWidth();
+//        if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
+//            mScreenHeight = ScreenUtils.getScreenHeight() +  DisplayUtil.dp2px(getContext(),34);
+//        }else {
+//        }
         mScreenHeight = ScreenUtils.getScreenHeight();
-
+        Log.v("Nancy", "mScreenHeight is value : " + mScreenHeight);
         mCurPageBitmap = Bitmap.createBitmap(mScreenWidth, mScreenHeight, Bitmap.Config.ARGB_8888);
         mNextPageBitmap = Bitmap.createBitmap(mScreenWidth, mScreenHeight, Bitmap.Config.ARGB_8888);
         mCurrentPageCanvas = new Canvas(mCurPageBitmap);
         mNextPageCanvas = new Canvas(mNextPageBitmap);
 
         mScroller = new Scroller(getContext());
-
 
         pagefactory = new PageFactory(getContext(), bookId, chaptersList);
         pagefactory.setOnReadStateChangeListener(listener);

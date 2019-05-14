@@ -181,7 +181,6 @@ public class SplashActivity extends BaseActivity {
         }
 
         public void onTick(final long millisUntilFinished) {
-            Log.v("Nancy", "millisUntilFinished is value : " + millisUntilFinished);
             try {
                 tvSkip.setText(millisUntilFinished / 1000 + "s 跳过");
             } catch (Exception e) {

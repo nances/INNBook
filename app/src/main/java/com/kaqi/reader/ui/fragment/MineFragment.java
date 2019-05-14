@@ -23,7 +23,6 @@ import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseFragment;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.ui.activity.AboutActivity;
-import com.kaqi.reader.ui.activity.ClassicRankTopActivity;
 import com.kaqi.reader.ui.activity.LoginActivity;
 import com.kaqi.reader.ui.activity.ReadBookHistoryActivity;
 import com.kaqi.reader.ui.activity.RegisterActivity;

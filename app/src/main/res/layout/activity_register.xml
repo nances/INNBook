@@ -148,7 +148,7 @@
             android:layout_marginLeft="@dimen/wh26.0dimens26.0dp"
             android:layout_marginTop="30.0dip"
             android:layout_marginRight="@dimen/wh26.0dimens26.0dp"
-            android:background="@color/yellow_30"
+            android:background="@drawable/selector_stroke_roundredcir"
             android:clickable="true"
             android:gravity="center"
             android:padding="10.0dip"

@@ -23,7 +23,56 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <include layout="@layout/common_toolbar" />
+
+    <RelativeLayout
+        android:id="@+id/ll_home_search_item"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wh45.0dimens45.0dp"
+        android:background="@color/common_bg"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/img_search"
+            android:layout_width="@dimen/wh18.0dimens18.0dp"
+            android:layout_height="@dimen/wh18.0dimens18.0dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10.0dip"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/main_search" />
+
+        <com.kaqi.reader.view.CleanableEditText
+            android:id="@+id/search_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/wh8.0dimens8.0dp"
+            android:layout_marginRight="@dimen/wh12.0dimens12.0dp"
+            android:layout_toLeftOf="@+id/search_cancle"
+            android:layout_toRightOf="@+id/img_search"
+            android:background="@null"
+            android:layout_centerVertical="true"
+            android:hint="小说名/作者"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:lines="1"
+            android:singleLine="true"
+            android:textColor="#333333"
+            android:textSize="14.0sp"
+            app:clearDrawable="false" />
+
+        <TextView
+            android:id="@+id/search_cancle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="@dimen/wh10.0dimens10.0dp"
+            android:paddingTop="@dimen/wh4.0dimens4.0dp"
+            android:layout_centerVertical="true"
+            android:paddingBottom="@dimen/wh4.0dimens4.0dp"
+            android:paddingRight="@dimen/wh10.0dimens10.0dp"
+            android:layout_marginLeft="@dimen/wh10.0dimens10.0dp"
+            android:text="取消" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/layoutHotWord"

@@ -17,17 +17,20 @@ package com.kaqi.reader.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.view.MenuItemCompat;
+import android.os.Bundle;
 import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -45,6 +48,8 @@ import com.kaqi.reader.ui.adapter.SearchHistoryAdapter;
 import com.kaqi.reader.ui.contract.SearchContract;
 import com.kaqi.reader.ui.easyadapter.SearchAdapter;
 import com.kaqi.reader.ui.presenter.SearchPresenter;
+import com.kaqi.reader.utils.ToastUtils;
+import com.kaqi.reader.view.CleanableEditText;
 import com.kaqi.reader.view.TagColor;
 import com.kaqi.reader.view.TagGroup;
 
@@ -55,6 +60,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -64,6 +70,14 @@ import butterknife.OnClick;
 public class SearchActivity extends BaseRVActivity<SearchDetail.SearchBooks> implements SearchContract.View {
 
     public static final String INTENT_QUERY = "query";
+    @Bind(R.id.img_search)
+    ImageView imgSearch;
+    @Bind(R.id.search_content)
+    CleanableEditText searchContent;
+    @Bind(R.id.search_cancle)
+    TextView searchCancle;
+    @Bind(R.id.tvSearchHistory)
+    TextView tvSearchHistory;
 
     public static void startActivity(Context context, String query) {
         if (!query.equals("")) {
@@ -125,14 +139,13 @@ public class SearchActivity extends BaseRVActivity<SearchDetail.SearchBooks> imp
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle("");
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
     }
 
     @Override
     public void initDatas() {
+        setOnEditorctionLis();
         key = getIntent().getStringExtra(INTENT_QUERY);
-
+        searchContent.setText(key);
         mHisAdapter = new SearchHistoryAdapter(this, mHisList);
         lvSearchHistory.setAdapter(mHisAdapter);
         lvSearchHistory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -174,7 +187,7 @@ public class SearchActivity extends BaseRVActivity<SearchDetail.SearchBooks> imp
         mListPopupWindow.setAdapter(mAutoAdapter);
         mListPopupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         mListPopupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-        mListPopupWindow.setAnchorView(mCommonToolbar);
+//        mListPopupWindow.setAnchorView(mCommonToolbar);
         mListPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -185,6 +198,29 @@ public class SearchActivity extends BaseRVActivity<SearchDetail.SearchBooks> imp
             }
         });
     }
+
+
+    /**
+     * 监听软键盘搜索按钮
+     */
+    public void setOnEditorctionLis() {
+        searchContent.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionid, KeyEvent keyEvent) {
+                if (actionid == EditorInfo.IME_ACTION_SEARCH) {
+                    if (!searchContent.getText().toString().trim().isEmpty()) {
+                        InputMethodManager imm = (InputMethodManager) SearchActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(searchContent.getWindowToken(), 0);
+                        search(searchContent.getText().toString().trim());
+                    } else {
+                        ToastUtils.showSingleToast("搜索内容不能为空...");
+                    }
+                }
+                return false;
+            }
+        });
+    }
+
 
     @Override
     public synchronized void showHotWordList(List<String> list) {
@@ -232,47 +268,47 @@ public class SearchActivity extends BaseRVActivity<SearchDetail.SearchBooks> imp
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_search, menu);
-
-        searchMenuItem = menu.findItem(R.id.action_search);//在菜单中找到对应控件的item
-        searchView = (SearchView) MenuItemCompat.getActionView(searchMenuItem);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                key = query;
-                mPresenter.getSearchResultList(query);
-                saveSearchHistory(query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if (TextUtils.isEmpty(newText)) {
-                    if (mListPopupWindow.isShowing())
-                        mListPopupWindow.dismiss();
-                    initTagGroup();
-                } else {
-                    mPresenter.getAutoCompleteList(newText);
-                }
-                return false;
-            }
-        });
-        search(key); // 外部调用搜索，则打开页面立即进行搜索
-        MenuItemCompat.setOnActionExpandListener(searchMenuItem,
-                new MenuItemCompat.OnActionExpandListener() {//设置打开关闭动作监听
-                    @Override
-                    public boolean onMenuItemActionExpand(MenuItem item) {
-                        return true;
-                    }
-
-                    @Override
-                    public boolean onMenuItemActionCollapse(MenuItem item) {
-                        initTagGroup();
-                        return true;
-                    }
-                });
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.menu_search, menu);
+//
+//        searchMenuItem = menu.findItem(R.id.action_search);//在菜单中找到对应控件的item
+//        searchView = (SearchView) MenuItemCompat.getActionView(searchMenuItem);
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                key = query;
+//                mPresenter.getSearchResultList(query);
+//                saveSearchHistory(query);
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                if (TextUtils.isEmpty(newText)) {
+//                    if (mListPopupWindow.isShowing())
+//                        mListPopupWindow.dismiss();
+//                    initTagGroup();
+//                } else {
+//                    mPresenter.getAutoCompleteList(newText);
+//                }
+//                return false;
+//            }
+//        });
+//        search(key); // 外部调用搜索，则打开页面立即进行搜索
+//        MenuItemCompat.setOnActionExpandListener(searchMenuItem,
+//                new MenuItemCompat.OnActionExpandListener() {//设置打开关闭动作监听
+//                    @Override
+//                    public boolean onMenuItemActionExpand(MenuItem item) {
+//                        return true;
+//                    }
+//
+//                    @Override
+//                    public boolean onMenuItemActionCollapse(MenuItem item) {
+//                        initTagGroup();
+//                        return true;
+//                    }
+//                });
         return true;
     }
 
@@ -324,9 +360,9 @@ public class SearchActivity extends BaseRVActivity<SearchDetail.SearchBooks> imp
      * @param key
      */
     private void search(String key) {
-        MenuItemCompat.expandActionView(searchMenuItem);
         if (!TextUtils.isEmpty(key)) {
-            searchView.setQuery(key, true);
+            searchContent.setText(key);
+            mPresenter.getSearchResultList(key);
             saveSearchHistory(key);
         }
     }
@@ -351,12 +387,6 @@ public class SearchActivity extends BaseRVActivity<SearchDetail.SearchBooks> imp
         BookDetailActivity.startActivity(this, data._id);
     }
 
-    @OnClick(R.id.tvClear)
-    public void clearSearchHistory() {
-        CacheManager.getInstance().saveSearchHistory(null);
-        initSearchHistory();
-    }
-
     @Override
     public void showError() {
         loaddingError();
@@ -372,6 +402,28 @@ public class SearchActivity extends BaseRVActivity<SearchDetail.SearchBooks> imp
         super.onDestroy();
         if (mPresenter != null) {
             mPresenter.detachView();
+        }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+    @OnClick({R.id.search_content, R.id.search_cancle, R.id.tvClear})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.search_content:
+                break;
+            case R.id.search_cancle:
+                finish();
+                break;
+            case R.id.tvClear:
+                CacheManager.getInstance().saveSearchHistory(null);
+                initSearchHistory();
+                break;
         }
     }
 }
