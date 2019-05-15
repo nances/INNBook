@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Looper;
 
 import com.kaqi.reader.service.DownloadBookService;
+import com.kaqi.reader.utils.AppManager;
 import com.kaqi.reader.utils.FileUtils;
 import com.kaqi.reader.utils.LogUtils;
 import com.kaqi.reader.utils.ToastUtils;
@@ -93,6 +94,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
                 LogUtils.e("CrashHandler.InterruptedException--->" + e.toString());
             }
             //退出程序
+            AppManager.getAppManager().finishActivity();
             android.os.Process.killProcess(android.os.Process.myPid());
             System.exit(1);
         }

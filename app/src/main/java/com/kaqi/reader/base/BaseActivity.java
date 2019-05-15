@@ -33,6 +33,7 @@ import android.view.WindowManager;
 import com.kaqi.reader.R;
 import com.kaqi.reader.ReaderApplication;
 import com.kaqi.reader.component.AppComponent;
+import com.kaqi.reader.utils.AppManager;
 import com.kaqi.reader.utils.SharedPreferencesUtil;
 import com.kaqi.reader.utils.StatusBarCompat;
 import com.kaqi.reader.view.loadding.CustomDialog;
@@ -54,6 +55,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected BaseHandler mHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AppManager.getAppManager().addActivity(this);
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         if (statusBarColor == 0) {
@@ -114,6 +116,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        AppManager.getAppManager().finishActivity(this);
         ButterKnife.unbind(this);
         if (mHandler != null) {
             mHandler.removeCallbacksAndMessages(null);
@@ -231,4 +234,5 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         }
     }
+
 }
