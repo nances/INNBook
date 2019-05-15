@@ -68,7 +68,6 @@ import com.kaqi.reader.utils.FormatUtils;
 import com.kaqi.reader.utils.LogUtils;
 import com.kaqi.reader.utils.ScreenUtils;
 import com.kaqi.reader.utils.SharedPreferencesUtil;
-import com.kaqi.reader.utils.TTSPlayerUtils;
 import com.kaqi.reader.utils.ToastUtils;
 import com.kaqi.reader.view.dialog.CommomAddShuJiaDialog;
 import com.kaqi.reader.view.readview.BaseReadView;
@@ -78,7 +77,6 @@ import com.kaqi.reader.view.readview.OverlappedWidget;
 import com.kaqi.reader.view.readview.PageWidget;
 import com.sinovoice.hcicloudsdk.android.tts.player.TTSPlayer;
 import com.sinovoice.hcicloudsdk.common.tts.TtsConfig;
-import com.sinovoice.hcicloudsdk.player.TTSCommonPlayer;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -292,8 +290,8 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         showDialog();
         mTvBookReadTocTitle.setText(recommendBooks.title);
 
-        mTtsPlayer = TTSPlayerUtils.getTTSPlayer();
-        ttsConfig = TTSPlayerUtils.getTtsConfig();
+//        mTtsPlayer = TTSPlayerUtils.getTTSPlayer();
+//        ttsConfig = TTSPlayerUtils.getTtsConfig();
 
         intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
         intentFilter.addAction(Intent.ACTION_TIME_TICK);
@@ -899,10 +897,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-        if (mTtsPlayer.getPlayerState() == TTSCommonPlayer.PLAYER_STATE_PLAYING) {
-            mTtsPlayer.stop();
-        }
         if (Brightness != null) {
             this.getContentResolver().unregisterContentObserver(Brightness);
         }
