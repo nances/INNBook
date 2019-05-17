@@ -21,6 +21,7 @@ import com.kaqi.reader.ui.fragment.CommunityFragment;
 import com.kaqi.reader.ui.fragment.FindFragment;
 import com.kaqi.reader.ui.fragment.MineFragment;
 import com.kaqi.reader.ui.fragment.RecommendFragment;
+import com.kaqi.reader.utils.AppVersionManager;
 import com.kaqi.reader.view.dialog.CommomAddShuJiaDialog;
 
 import java.util.ArrayList;
@@ -77,6 +78,7 @@ public class MainActivity extends BaseActivity {
         //初始化Fragment
         initFragment(savedInstanceState);
         slidingTabLayout.measure(0, 0);
+        checkAppVersion();
     }
 
     @Override
@@ -143,7 +145,7 @@ public class MainActivity extends BaseActivity {
             findFragment = (FindFragment) getSupportFragmentManager().findFragmentByTag("findFragment");
             circleMainFragment = (CommunityFragment) getSupportFragmentManager().findFragmentByTag("circleMainFragment");
             currentTabPosition = savedInstanceState.getInt("HOME_CURRENT_TAB_POSITION");
-            Log.v("Nancy","HOME_CURRENT_TAB_POSITION " + currentTabPosition);
+            Log.v("Nancy", "HOME_CURRENT_TAB_POSITION " + currentTabPosition);
         } else {
             mineFragment = new MineFragment();
             homeFragment = new RecommendFragment();
@@ -155,7 +157,7 @@ public class MainActivity extends BaseActivity {
             transaction.add(R.id.container, findFragment, "findFragment");
             transaction.add(R.id.container, circleMainFragment, "circleMainFragment");
         }
-        Log.v("Nancy","currentTabPosition" + currentTabPosition);
+        Log.v("Nancy", "currentTabPosition" + currentTabPosition);
         transaction.commit();
         setCurrentItem(currentTabPosition);
     }
@@ -282,5 +284,12 @@ public class MainActivity extends BaseActivity {
         }).setTitle("提示").setNegativeButton("取消").setPositiveButton("确定").show();
     }
 
+    private void checkAppVersion() {
+        boolean isNewVersion = true;
+        if (isNewVersion)
+        {
+            AppVersionManager.upgradeApp(this,"牛牛阅读","更新内容","12M","https://sj.qq.com/myapp/detail.htm?apkName=com.xunmeng.pinduoduo");
+        }
+    }
 
 }

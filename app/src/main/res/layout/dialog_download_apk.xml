@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/wh290.0dimens290.0dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="@dimen/wh290.0dimens290.0dp"
+        android:layout_height="@dimen/wh131.0dimens131.0dp"
+        android:background="@drawable/downloadapk_top" />
+
+    <LinearLayout
+        android:layout_width="@dimen/wh290.0dimens290.0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/checkversion_info_bg"
+        android:orientation="vertical"
+        android:padding="@dimen/wh12.0dimens12.0dp">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="是否升级到2.0.0版本？"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/wh16.0dimens16.0dp"
+            android:text="新版本大小：5M"
+            android:textColor="@color/gray"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/wh16.0dimens16.0dp"
+            android:text="1、添加删除信用卡接口"
+            android:textColor="@color/gray"
+            android:textSize="14sp" />
+
+        <ProgressBar
+            android:id="@+id/downloadProgressBar"
+            android:max="100"
+            android:layout_marginTop="@dimen/wh20.0dimens20.0dp"
+            android:layout_marginBottom="@dimen/wh10.0dimens10.0dp"
+            android:layout_width="match_parent"
+            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/wh1.0dimens1.0dp"
+        android:layout_height="@dimen/wh35.0dimens35.0dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/white" />
+
+    <ImageButton
+        android:id="@id/versionchecklib_loading_dialog_cancel"
+        android:layout_width="@dimen/wh30.0dimens30.0dp"
+        android:layout_height="@dimen/wh30.0dimens30.0dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/checkversion_close"
+        android:src="@null" />
+</LinearLayout>

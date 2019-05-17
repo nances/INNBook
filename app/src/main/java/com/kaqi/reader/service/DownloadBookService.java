@@ -25,8 +25,6 @@ import android.text.TextUtils;
 import com.kaqi.reader.R;
 import com.kaqi.reader.ReaderApplication;
 import com.kaqi.reader.api.BookApi;
-import com.kaqi.reader.api.support.Logger;
-import com.kaqi.reader.api.support.LoggingInterceptor;
 import com.kaqi.reader.bean.BookMixAToc;
 import com.kaqi.reader.bean.ChapterRead;
 import com.kaqi.reader.bean.support.DownloadMessage;
@@ -69,8 +67,6 @@ public class DownloadBookService extends Service {
     public void onCreate() {
         super.onCreate();
         EventBus.getDefault().register(this);
-        LoggingInterceptor logging = new LoggingInterceptor(new Logger());
-        logging.setLevel(LoggingInterceptor.Level.BODY);
         bookApi = ReaderApplication.getsInstance().getAppComponent().getReaderApi();
     }
 
