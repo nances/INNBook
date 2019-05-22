@@ -114,7 +114,8 @@ public class PageFactory {
 
     //是否开启广告
     public boolean is_Ad = false;
-    public int ad_position;// 广告展示在哪行
+    public int ad_position = -1;// 广告展示在哪行
+    public int after_ad_positin = -1;
     public boolean is_adShow = false;
 
 
@@ -232,7 +233,7 @@ public class PageFactory {
             curEndPos = curBeginPos;
             mLines = pageDown();
         }
-
+        mPageCurrentCount = 0;
         if (mLines.size() > 0) {
             int y = marginHeight + (mLineSpace << 1);
             // 绘制背景
@@ -244,19 +245,25 @@ public class PageFactory {
             // 绘制标题
             canvas.drawText(chaptersList.get(currentChapter - 1).title, marginWidth, y, mTitlePaint);
             y += mLineSpace + mNumFontSize;
-            if (mPageLineCount > 6 && !cancel) {
-                ad_position = Utils.getNum(2, mPageLineCount - 6);
-                Log.v("NancysT", "a is value  " + ad_position);
+            if (mPageLineCount > 6) {
+                if (after_ad_positin == -1) {
+                    ad_position = Utils.getNum(2, mPageLineCount - 6);
+                    after_ad_positin = ad_position;
+                } else {
+                    after_ad_positin = -1;
+                }
             }
 
             // 绘制阅读页面文字
             for (String line : mLines) {
-                mPageCurrentCount++;
                 y += mLineSpace;
                 if (line.endsWith("@")) {
                     //绘制广告
-                    if (is_Ad && mPageCurrentCount == ad_position && !is_adShow && adBitmap != null) {
-                        is_adShow = true;
+                    mPageCurrentCount++;
+//                    Log.v("NancysTT","============111111================" + mPageCurrentCount);
+//                    Log.v("NancysT","==============mPageCurrentCount ==============" + mPageCurrentCount +"=======" + after_ad_positin);
+                    if (is_Ad && mPageCurrentCount == ad_position && adBitmap != null) {
+                        Log.v("NancysTT","============================" + mPageCurrentCount);
                         canvas.drawText(line.substring(0, line.length() - 1), marginWidth, y, mPaint);
                         canvas.drawBitmap(adBitmap, 0,
                                 y + 40, paintT);
@@ -282,10 +289,9 @@ public class PageFactory {
 
             String mTime = dateFormat.format(new Date());
             canvas.drawText(mTime, mWidth - marginWidth - timeLen, mHeight - marginHeight, mTitlePaint);
-
             // 保存阅读进度
             SettingManager.getInstance().saveReadProgress(bookId, currentChapter, curBeginPos, curEndPos);
-            mPageCurrentCount = 0;
+
         }
 
     }
@@ -298,7 +304,7 @@ public class PageFactory {
         String strParagraph = "";
         Vector<String> lines = new Vector<>(); // 页面行
         int paraSpace = 0;
-        if (!is_Ad) {
+        if (!is_Ad && after_ad_positin == -1) {
             mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
         } else {
             mPageLineCount = (mVisibleHeight - ScreenUtils.dpToPxInt(232)) / (mFontSize + mLineSpace);
@@ -334,7 +340,7 @@ public class PageFactory {
             }
             curEndPos = curBeginPos; // 6.最后结束指针指向下一段的开始处
             paraSpace += mLineSpace;
-            if (!is_Ad) {
+            if (!is_Ad && after_ad_positin == -1) {
                 mPageLineCount = (mVisibleHeight - paraSpace) / (mFontSize + mLineSpace); // 添加段落间距，实时更新容纳行数
             } else {
 
@@ -352,7 +358,7 @@ public class PageFactory {
         String strParagraph = "";
         Vector<String> lines = new Vector<>();
         int paraSpace = 0;
-        if (!is_Ad) {
+        if (!is_Ad && after_ad_positin == -1) {
             mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
         } else {
             mPageLineCount = (mVisibleHeight - ScreenUtils.dpToPxInt(232)) / (mFontSize + mLineSpace);
@@ -386,14 +392,11 @@ public class PageFactory {
                 }
             }
             paraSpace += mLineSpace;
-            if (!is_Ad) {
-                mPageLineCount = (mVisibleHeight - paraSpace) / (mFontSize + mLineSpace);
+            mPageLineCount = (mVisibleHeight - paraSpace) / (mFontSize + mLineSpace);
+            if (!is_Ad && after_ad_positin == -1) {
             } else {
                 mPageLineCount = (mVisibleHeight - ScreenUtils.dpToPxInt(232) - paraSpace) / (mFontSize + mLineSpace);
             }
-        }
-        if (is_adShow) {
-            is_adShow = false;
         }
         return lines;
     }
@@ -409,7 +412,7 @@ public class PageFactory {
         currentPage = 0;
         while (curEndPos < mbBufferLen) {
             int paraSpace = 0;
-            if (!is_Ad) {
+            if (!is_Ad &&after_ad_positin == -1) {
                 mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
             } else {
                 mPageLineCount = (mVisibleHeight - ScreenUtils.dpToPxInt(232)) / (mFontSize + mLineSpace);
@@ -446,7 +449,7 @@ public class PageFactory {
                     }
                 }
                 paraSpace += mLineSpace;
-                if (is_Ad) {
+                if (is_Ad && after_ad_positin == -1) {
                     mPageLineCount = (mVisibleHeight - paraSpace) / (mFontSize + mLineSpace);
                 } else {
                     mPageLineCount = (mVisibleHeight - paraSpace - ScreenUtils.dpToPxInt(232)) / (mFontSize + mLineSpace);

@@ -55,6 +55,7 @@ import com.kaqi.reader.manager.CacheManager;
 import com.kaqi.reader.manager.CollectionsManager;
 import com.kaqi.reader.manager.EventManager;
 import com.kaqi.reader.manager.HistoryManager;
+import com.kaqi.reader.manager.ReadManager;
 import com.kaqi.reader.manager.SettingManager;
 import com.kaqi.reader.manager.ThemeManager;
 import com.kaqi.reader.service.DownloadBookService;
@@ -336,6 +337,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
                     }
                 });
 
+
     }
 
     @Override
@@ -360,6 +362,15 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 //            return;
 //        }
         mPresenter.getBookMixAToc(bookId, "chapters", iSCata);
+
+
+        //--- 上次设置过的读小说获取金币状态--- //
+        if (ReadManager.getInstance().isReadBookGetMoney() && mPageWidget != null) {
+            mPageWidget.pagefactory.setIs_AdStatus(ReadManager.getInstance().isReadBookGetMoney());
+            readBookTipTv.setVisibility(View.GONE);
+            circleProgress.setVisibility(View.VISIBLE);
+            mHandler.sendEmptyMessageDelayed(TIME_COUNT_ADD, 1000); //开始广告
+        }
     }
 
     /**
@@ -793,10 +804,12 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
                     readBookTipTv.setVisibility(View.GONE);
                     circleProgress.setVisibility(View.VISIBLE);
                     mHandler.sendEmptyMessageDelayed(TIME_COUNT_ADD, 1000); //开始广告
+                    ReadManager.getInstance().saveReadBookGetMoney(true);
                 } else {
                     mPageWidget.pagefactory.setIs_AdStatus(false);
                     readBookTipTv.setVisibility(View.VISIBLE);
                     circleProgress.setVisibility(View.GONE);
+                    ReadManager.getInstance().saveReadBookGetMoney(false);
                 }
                 break;
             case R.id.ivBack:

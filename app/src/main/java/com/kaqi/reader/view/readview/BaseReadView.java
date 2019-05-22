@@ -19,7 +19,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PointF;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Scroller;
@@ -64,7 +63,6 @@ public abstract class BaseReadView extends View {
 
         mScreenWidth = ScreenUtils.getScreenWidth();
         mScreenHeight = ScreenUtils.getScreenHeight();
-        Log.v("Nancy", "mScreenHeight is value : " + mScreenHeight);
         mCurPageBitmap = Bitmap.createBitmap(mScreenWidth, mScreenHeight, Bitmap.Config.ARGB_8888);
         mNextPageBitmap = Bitmap.createBitmap(mScreenWidth, mScreenHeight, Bitmap.Config.ARGB_8888);
         mCurrentPageCanvas = new Canvas(mCurPageBitmap);
@@ -131,9 +129,10 @@ public abstract class BaseReadView extends View {
                         BookStatus status = pagefactory.nextPage();
                         if (status == BookStatus.NO_NEXT_PAGE) {
                             ToastUtils.showSingleToast("没有下一页啦");
+                            restoreAnimation();
+                            postInvalidate();
                             return false;
                         } else if (status == BookStatus.LOAD_SUCCESS) {
-                            Log.v("Nancystt","else if (status == BookStatus.LOAD_SUCCESS)");
                             abortAnimation();
                             pagefactory.onDraw(mNextPageCanvas);
                         } else {
@@ -149,10 +148,12 @@ public abstract class BaseReadView extends View {
                     break;
                 int mx = (int) e.getX();
                 int my = (int) e.getY();
-                pagefactory.cancel = (actiondownX < mScreenWidth / 2 && mx < mTouch.x) || (actiondownX > mScreenWidth / 2 && mx > mTouch.x);
+                //TODO 只要触发就要翻页
+//                pagefactory.cancel = (actiondownX < mScreenWidth / 2 && mx < mTouch.x) || (actiondownX > mScreenWidth / 2 && mx > mTouch.x);
                 mTouch.x = mx;
                 mTouch.y = my;
                 touch_down = mTouch.x - actiondownX;
+                pagefactory.is_adShow = false;
                 this.postInvalidate();
                 break;
             case MotionEvent.ACTION_UP:
