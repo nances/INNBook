@@ -21,7 +21,7 @@ package com.kaqi.reader.view.readview;
  */
 public interface OnReadStateChangeListener {
 
-    void onChapterChanged(int chapter);
+    void onChapterChanged(int chapter,boolean nextPage);
 
     void onPageChanged(int chapter, int page);
 

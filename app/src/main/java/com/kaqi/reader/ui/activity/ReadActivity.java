@@ -1,5 +1,6 @@
 package com.kaqi.reader.ui.activity;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -9,10 +10,11 @@ import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.ListPopupWindow;
 import android.view.KeyEvent;
@@ -69,6 +71,7 @@ import com.kaqi.reader.utils.LogUtils;
 import com.kaqi.reader.utils.ScreenUtils;
 import com.kaqi.reader.utils.SharedPreferencesUtil;
 import com.kaqi.reader.utils.ToastUtils;
+import com.kaqi.reader.view.circleprogress.CircleProgress;
 import com.kaqi.reader.view.dialog.CommomAddShuJiaDialog;
 import com.kaqi.reader.view.readview.BaseReadView;
 import com.kaqi.reader.view.readview.NoAimWidget;
@@ -93,6 +96,7 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Observable;
 import rx.functions.Action1;
@@ -161,6 +165,16 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     GridView gvTheme;
     @Bind(R.id.font_type)
     GridView font_type;
+    @Bind(R.id.read_book_get_money_rl)
+    RelativeLayout readBookMoneyRl;
+    @Bind(R.id.tvClear)
+    TextView tvClear;
+    @Bind(R.id.tvBookMark)
+    TextView tvBookMark;
+    @Bind(R.id.read_book_tip_tv)
+    TextView readBookTipTv;
+    @Bind(R.id.circle_progress)
+    CircleProgress circleProgress;
 
     private View decodeView;
 
@@ -216,6 +230,25 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     private Animation mTopOutAnim;
     private Animation mBottomInAnim;
     private Animation mBottomOutAnim;
+
+    /*****************广告******************/
+    public static final int TIME_COUNT_ADD = 0x01;
+    public float ad_count = 1f;
+
+    @Override
+    protected void dispatchHandler(Message msg) {
+        switch (msg.what) {
+            case TIME_COUNT_ADD:
+                if (ad_count == 1000) {
+                    ad_count = 0;
+                    setReadBookMone(ad_count);
+                }
+                ad_count++;
+                setReadBookMone(ad_count);
+                mHandler.sendEmptyMessageDelayed(TIME_COUNT_ADD, 200); //开始计费
+                break;
+        }
+    }
 
     //添加收藏需要，所以跳转的时候传递整个实体类
     public static void startActivity(Context context, Recommend.RecommendBooks recommendBooks) {
@@ -290,9 +323,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         showDialog();
         mTvBookReadTocTitle.setText(recommendBooks.title);
 
-//        mTtsPlayer = TTSPlayerUtils.getTTSPlayer();
-//        ttsConfig = TTSPlayerUtils.getTtsConfig();
-
         intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
         intentFilter.addAction(Intent.ACTION_TIME_TICK);
 
@@ -305,6 +335,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
                         EventManager.refreshCollectionList();
                     }
                 });
+
     }
 
     @Override
@@ -560,189 +591,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         }
     }
 
-    /***************Title Bar*****************/
-
-    @OnClick(R.id.ivBack)
-    public void onClickBack() {
-        if (mTocListPopupWindow.isShowing()) {
-            mTocListPopupWindow.dismiss();
-        } else {
-            finish();
-        }
-    }
-
-
-    @OnClick(R.id.tvBookReadIntroduce)
-    public void onClickIntroduce() {
-        gone(rlReadAaSet, rlReadMark);
-        BookDetailActivity.startActivity(mContext, bookId);
-    }
-
-    @OnClick(R.id.tvBookReadSource)
-    public void onClickSource() {
-        BookSourceActivity.start(this, bookId, 1);
-    }
-
-    /***************Bottom Bar*****************/
-
-    @OnClick(R.id.tvBookReadMode)
-    public void onClickChangeMode() { // 日/夜间模式切换
-        gone(rlReadAaSet, rlReadMark);
-
-        boolean isNight = !SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT, false);
-        changedMode(isNight, -1);
-    }
-
-    private void changedMode(boolean isNight, int position) {
-        SharedPreferencesUtil.getInstance().putBoolean(Constant.ISNIGHT, isNight);
-        AppCompatDelegate.setDefaultNightMode(isNight ? AppCompatDelegate.MODE_NIGHT_YES
-                : AppCompatDelegate.MODE_NIGHT_NO);
-
-        if (position >= 0) {
-            curTheme = position;
-        } else {
-            curTheme = SettingManager.getInstance().getReadTheme();
-        }
-        gvAdapter.select(curTheme);
-
-        mPageWidget.setTheme(isNight ? ThemeManager.NIGHT : curTheme);
-        mPageWidget.setTextColor(ContextCompat.getColor(mContext, isNight ? R.color.chapter_content_night : R.color.chapter_content_day),
-                ContextCompat.getColor(mContext, isNight ? R.color.chapter_title_night : R.color.chapter_title_day));
-
-        mTvBookReadMode.setText(getString(isNight ? R.string.book_read_mode_day_manual_setting
-                : R.string.book_read_mode_night_manual_setting));
-        Drawable drawable = ContextCompat.getDrawable(this, isNight ? R.drawable.ic_menu_mode_day_manual
-                : R.drawable.ic_menu_mode_night_manual);
-        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-        mTvBookReadMode.setCompoundDrawables(null, drawable, null, null);
-
-        ThemeManager.setReaderTheme(curTheme, mRlBookReadRoot);
-    }
-
-    @OnClick(R.id.tvBookReadSettings)
-    public void setting() {
-        if (isVisible(mLlBookReadBottom)) {
-            if (isVisible(rlReadAaSet)) {
-                gone(rlReadAaSet);
-            } else {
-                visible(rlReadAaSet);
-                gone(rlReadMark);
-            }
-        }
-    }
-
-    @OnClick(R.id.tvBookReadDownload)
-    public void downloadBook() {
-        gone(rlReadAaSet);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("缓存多少章？")
-                .setItems(new String[]{"后面五十章", "后面全部", "全部"}, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
-                            case 0:
-                                DownloadBookService.post(new DownloadQueue(bookId, mChapterList, currentChapter + 1, currentChapter + 50));
-                                break;
-                            case 1:
-                                DownloadBookService.post(new DownloadQueue(bookId, mChapterList, currentChapter + 1, mChapterList.size()));
-                                break;
-                            case 2:
-                                DownloadBookService.post(new DownloadQueue(bookId, mChapterList, 1, mChapterList.size()));
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                });
-        builder.show();
-    }
-
-    @OnClick(R.id.tvBookMark)
-    public void onClickMark() {
-        if (isVisible(mLlBookReadBottom)) {
-            if (isVisible(rlReadMark)) {
-                gone(rlReadMark);
-            } else {
-                gone(rlReadAaSet);
-
-                updateMark();
-
-                visible(rlReadMark);
-            }
-        }
-    }
-
-    @OnClick(R.id.tvBookReadToc)
-    public void onClickToc() {
-        gone(rlReadAaSet, rlReadMark);
-        if (!mTocListPopupWindow.isShowing()) {
-            visible(mTvBookReadTocTitle);
-            gone(mTvBookReadChangeSource);
-            mTocListPopupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
-            mTocListPopupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-            mTocListPopupWindow.show();
-            mTocListPopupWindow.setSelection(currentChapter - 1);
-            mTocListPopupWindow.getListView().setFastScrollEnabled(true);
-        }
-    }
-
-    /***************Setting Menu*****************/
-
-    @OnClick(R.id.ivBrightnessMinus)
-    public void brightnessMinus() {
-        int curBrightness = SettingManager.getInstance().getReadBrightness();
-        if (curBrightness > 5 && !SettingManager.getInstance().isAutoBrightness()) {
-            seekbarLightness.setProgress((curBrightness = curBrightness - 2));
-            ScreenUtils.saveScreenBrightnessInt255(curBrightness, ReadActivity.this);
-        }
-    }
-
-    @OnClick(R.id.ivBrightnessPlus)
-    public void brightnessPlus() {
-        int curBrightness = SettingManager.getInstance().getReadBrightness();
-        if (!SettingManager.getInstance().isAutoBrightness()) {
-            seekbarLightness.setProgress((curBrightness = curBrightness + 2));
-            ScreenUtils.saveScreenBrightnessInt255(curBrightness, ReadActivity.this);
-        }
-    }
-
-    @OnClick(R.id.tvFontsizeMinus)
-    public void fontsizeMinus() {
-        calcFontSize(seekbarFontSize.getProgress() - 1);
-    }
-
-    @OnClick(R.id.tvFontsizePlus)
-    public void fontsizePlus() {
-        calcFontSize(seekbarFontSize.getProgress() + 1);
-    }
-
-    @OnClick(R.id.tvClear)
-    public void clearBookMark() {
-        SettingManager.getInstance().clearBookMarks(bookId);
-
-        updateMark();
-    }
-
-    /***************Book Mark*****************/
-
-    @OnClick(R.id.tvAddMark)
-    public void addBookMark() {
-        int[] readPos = mPageWidget.getReadPos();
-        BookMark mark = new BookMark();
-        mark.chapter = readPos[0];
-        mark.startPos = readPos[1];
-        mark.endPos = readPos[2];
-        if (mark.chapter >= 1 && mark.chapter <= mChapterList.size()) {
-            mark.title = mChapterList.get(mark.chapter - 1).title;
-        }
-        mark.desc = mPageWidget.getHeadLine();
-        if (SettingManager.getInstance().addBookMark(bookId, mark)) {
-            ToastUtils.showSingleToast("添加书签成功");
-            updateMark();
-        } else {
-            ToastUtils.showSingleToast("书签已存在");
-        }
-    }
 
     private void updateMark() {
         if (mMarkAdapter == null) {
@@ -919,14 +767,198 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         if (mPresenter != null) {
             mPresenter.detachView();
         }
-
+        if (mHandler != null) {
+            mHandler.removeCallbacksAndMessages(null);
+        }
         // 观察内存泄漏情况
         ReaderApplication.getRefWatcher(this).watch(this);
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+    @OnClick({R.id.read_book_get_money_rl, R.id.ivBack, R.id.tvDownloadProgress, R.id.ivBrightnessMinus, R.id.tvBookReadIntroduce, R.id.tvBookReadSource, R.id.tvBookReadMode, R.id.tvBookReadDownload, R.id.tvBookMark, R.id.tvBookReadToc, R.id.ivBrightnessPlus
+
+            , R.id.tvFontsizeMinus, R.id.tvFontsizePlus, R.id.tvClear, R.id.tvAddMark, R.id.tvBookReadSettings
+    })
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.read_book_get_money_rl:
+                if (readBookTipTv.getVisibility() == View.VISIBLE) {
+                    mPageWidget.pagefactory.setIs_AdStatus(true);
+                    readBookTipTv.setVisibility(View.GONE);
+                    circleProgress.setVisibility(View.VISIBLE);
+                    mHandler.sendEmptyMessageDelayed(TIME_COUNT_ADD, 1000); //开始广告
+                } else {
+                    mPageWidget.pagefactory.setIs_AdStatus(false);
+                    readBookTipTv.setVisibility(View.VISIBLE);
+                    circleProgress.setVisibility(View.GONE);
+                }
+                break;
+            case R.id.ivBack:
+                if (mTocListPopupWindow.isShowing()) {
+                    mTocListPopupWindow.dismiss();
+                } else {
+                    finish();
+                }
+                break;
+            case R.id.tvDownloadProgress:
+                break;
+            case R.id.ivBrightnessMinus:
+                int curBrightness = SettingManager.getInstance().getReadBrightness();
+                if (curBrightness > 5 && !SettingManager.getInstance().isAutoBrightness()) {
+                    seekbarLightness.setProgress((curBrightness = curBrightness - 2));
+                    ScreenUtils.saveScreenBrightnessInt255(curBrightness, ReadActivity.this);
+                }
+                break;
+            case R.id.tvBookReadIntroduce:
+                gone(rlReadAaSet, rlReadMark);
+                BookDetailActivity.startActivity(mContext, bookId);
+                break;
+            case R.id.tvBookReadSource:
+                BookSourceActivity.start(this, bookId, 1);
+                break;
+            case R.id.tvBookReadMode:
+                gone(rlReadAaSet, rlReadMark);
+
+                boolean isNight = !SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT, false);
+                changedMode(isNight, -1);
+                break;
+            case R.id.tvBookReadDownload:
+                gone(rlReadAaSet);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("缓存多少章？")
+                        .setItems(new String[]{"后面五十章", "后面全部", "全部"}, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch (which) {
+                                    case 0:
+                                        DownloadBookService.post(new DownloadQueue(bookId, mChapterList, currentChapter + 1, currentChapter + 50));
+                                        break;
+                                    case 1:
+                                        DownloadBookService.post(new DownloadQueue(bookId, mChapterList, currentChapter + 1, mChapterList.size()));
+                                        break;
+                                    case 2:
+                                        DownloadBookService.post(new DownloadQueue(bookId, mChapterList, 1, mChapterList.size()));
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                        });
+                builder.show();
+
+                break;
+            case R.id.tvBookMark:
+                if (isVisible(mLlBookReadBottom)) {
+                    if (isVisible(rlReadMark)) {
+                        gone(rlReadMark);
+                    } else {
+                        gone(rlReadAaSet);
+
+                        updateMark();
+
+                        visible(rlReadMark);
+                    }
+                }
+                break;
+            case R.id.tvBookReadToc:
+                gone(rlReadAaSet, rlReadMark);
+                if (!mTocListPopupWindow.isShowing()) {
+                    visible(mTvBookReadTocTitle);
+                    gone(mTvBookReadChangeSource);
+                    mTocListPopupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+                    mTocListPopupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+                    mTocListPopupWindow.show();
+                    mTocListPopupWindow.setSelection(currentChapter - 1);
+                    mTocListPopupWindow.getListView().setFastScrollEnabled(true);
+                }
+                break;
+            case R.id.ivBrightnessPlus:
+                int curBrightnessPlus = SettingManager.getInstance().getReadBrightness();
+                if (!SettingManager.getInstance().isAutoBrightness()) {
+                    seekbarLightness.setProgress((curBrightnessPlus = curBrightnessPlus + 2));
+                    ScreenUtils.saveScreenBrightnessInt255(curBrightnessPlus, ReadActivity.this);
+                }
+                break;
+            case R.id.tvFontsizeMinus:
+                calcFontSize(seekbarFontSize.getProgress() - 1);
+                break;
+            case R.id.tvFontsizePlus:
+                calcFontSize(seekbarFontSize.getProgress() + 1);
+
+                break;
+            case R.id.tvClear:
+                SettingManager.getInstance().clearBookMarks(bookId);
+
+                updateMark();
+
+                break;
+            case R.id.tvAddMark:
+                int[] readPos = mPageWidget.getReadPos();
+                BookMark mark = new BookMark();
+                mark.chapter = readPos[0];
+                mark.startPos = readPos[1];
+                mark.endPos = readPos[2];
+                if (mark.chapter >= 1 && mark.chapter <= mChapterList.size()) {
+                    mark.title = mChapterList.get(mark.chapter - 1).title;
+                }
+                mark.desc = mPageWidget.getHeadLine();
+                if (SettingManager.getInstance().addBookMark(bookId, mark)) {
+                    ToastUtils.showSingleToast("添加书签成功");
+                    updateMark();
+                } else {
+                    ToastUtils.showSingleToast("书签已存在");
+                }
+                break;
+            case R.id.tvBookReadSettings:
+                if (isVisible(mLlBookReadBottom)) {
+                    if (isVisible(rlReadAaSet)) {
+                        gone(rlReadAaSet);
+                    } else {
+                        visible(rlReadAaSet);
+                        gone(rlReadMark);
+                    }
+                }
+                break;
+
+        }
+    }
+
+    private void changedMode(boolean isNight, int position) {
+        SharedPreferencesUtil.getInstance().putBoolean(Constant.ISNIGHT, isNight);
+        AppCompatDelegate.setDefaultNightMode(isNight ? AppCompatDelegate.MODE_NIGHT_YES
+                : AppCompatDelegate.MODE_NIGHT_NO);
+
+        if (position >= 0) {
+            curTheme = position;
+        } else {
+            curTheme = SettingManager.getInstance().getReadTheme();
+        }
+        gvAdapter.select(curTheme);
+
+        mPageWidget.setTheme(isNight ? ThemeManager.NIGHT : curTheme);
+        mPageWidget.setTextColor(ContextCompat.getColor(mContext, isNight ? R.color.chapter_content_night : R.color.chapter_content_day),
+                ContextCompat.getColor(mContext, isNight ? R.color.chapter_title_night : R.color.chapter_title_day));
+
+        mTvBookReadMode.setText(getString(isNight ? R.string.book_read_mode_day_manual_setting
+                : R.string.book_read_mode_night_manual_setting));
+        Drawable drawable = ContextCompat.getDrawable(this, isNight ? R.drawable.ic_menu_mode_day_manual
+                : R.drawable.ic_menu_mode_night_manual);
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+        mTvBookReadMode.setCompoundDrawables(null, drawable, null, null);
+
+        ThemeManager.setReaderTheme(curTheme, mRlBookReadRoot);
+    }
+
+
     private class ReadListener implements OnReadStateChangeListener {
         @Override
-        public void onChapterChanged(int chapter) {
+        public void onChapterChanged(int chapter, boolean isNextPage) {
             if (iSCata) {
                 currentChapter = currentNewChapter + 1;
             } else {
@@ -935,11 +967,14 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             LogUtils.i("onChapterChanged:" + currentChapter);
             mTocListAdapter.setCurrentChapter(currentChapter);
             // 加载前一节 与 后三节
-            for (int i = chapter - 1; i <= chapter + 3 && i <= mChapterList.size(); i++) {
+            for (int i = chapter - 1; i <= chapter + 2 && i <= mChapterList.size(); i++) {
                 if (i > 0 && i != chapter
                         && CacheManager.getInstance().getChapterFile(bookId, i) == null) {
                     mPresenter.getChapterRead(mChapterList.get(i - 1).link, i);
                 }
+            }
+            if (isNextPage && mPageWidget.pagefactory.is_Ad) {
+                ad_count++;
             }
         }
 
@@ -1043,6 +1078,15 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             seekbarFontSize.setProgress(progress);
             mPageWidget.setFontSize(ScreenUtils.dpToPxInt(12 + 1.7f * progress));
         }
+    }
+
+    /**
+     * 设置获取金币进度
+     *
+     * @param value
+     */
+    public void setReadBookMone(float value) {
+        circleProgress.setValue(value);
     }
 
 }

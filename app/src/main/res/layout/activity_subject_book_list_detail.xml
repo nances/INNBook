@@ -51,6 +51,7 @@
         android:layout_height="@dimen/wh54.0dimens54.0dp"
         android:layout_gravity="bottom"
         android:orientation="horizontal"
+        android:background="@color/common_bg"
         android:visibility="gone"
         tools:visibility="visible">
 

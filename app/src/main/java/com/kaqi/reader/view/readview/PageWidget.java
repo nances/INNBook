@@ -529,4 +529,9 @@ public class PageWidget extends BaseReadView {
         calcCornerXY(mTouch.x, mTouch.y);
         super.jumpToChapter(chapter);
     }
+
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+
+    }
 }

@@ -145,7 +145,7 @@ public class MainActivity extends BaseActivity {
             findFragment = (FindFragment) getSupportFragmentManager().findFragmentByTag("findFragment");
             circleMainFragment = (CommunityFragment) getSupportFragmentManager().findFragmentByTag("circleMainFragment");
             currentTabPosition = savedInstanceState.getInt("HOME_CURRENT_TAB_POSITION");
-            Log.v("Nancy", "HOME_CURRENT_TAB_POSITION " + currentTabPosition);
+            Log.v("Nancy","HOME_CURRENT_TAB_POSITION " + currentTabPosition);
         } else {
             mineFragment = new MineFragment();
             homeFragment = new RecommendFragment();
@@ -157,7 +157,7 @@ public class MainActivity extends BaseActivity {
             transaction.add(R.id.container, findFragment, "findFragment");
             transaction.add(R.id.container, circleMainFragment, "circleMainFragment");
         }
-        Log.v("Nancy", "currentTabPosition" + currentTabPosition);
+        Log.v("Nancy","currentTabPosition" + currentTabPosition);
         transaction.commit();
         setCurrentItem(currentTabPosition);
     }

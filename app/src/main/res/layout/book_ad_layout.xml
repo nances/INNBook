@@ -1,37 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ded0d0"
-    android:layout_centerVertical="true"
-    android:padding="10dp">
+    android:layout_height="@dimen/wh210.0dimens210.0dp"
+    android:layout_centerVertical="true">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ad_test" />
 
     <TextView
         android:id="@+id/tv_native"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="12sp"
         android:text="描述文字" />
 
-    <ImageView
-        android:id="@+id/iv_native"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_below="@+id/tv_native"
-        android:layout_marginTop="5dp"
-        android:scaleType="centerCrop" />
-
-    <ImageView
+    <TextView
         android:id="@+id/iv_ad"
         android:layout_width="30dp"
         android:layout_height="20dp"
-        android:layout_alignBottom="@+id/iv_native"
-        android:layout_alignLeft="@+id/iv_native" />
+        android:layout_gravity="bottom"
+        android:text="广告" />
 
     <ImageView
         android:id="@+id/iv_logo"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_alignBottom="@+id/iv_native"
-        android:layout_alignRight="@+id/iv_native" />
+        android:layout_gravity="bottom|right"
+        android:src="@drawable/button_close_web" />
 
-</RelativeLayout>
+</FrameLayout>

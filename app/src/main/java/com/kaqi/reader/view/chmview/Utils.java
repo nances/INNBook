@@ -21,6 +21,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,40 +31,6 @@ public class Utils {
     public static ArrayList<String> domparse(String filePath, String extractPath, String md5) throws IOException {
         final ArrayList<String> listSite = new ArrayList<>();
         listSite.add(md5);
-//        Document doc = Jsoup.parse(chm.getResourceAsStream(""), "UTF-8", "");
-//        Elements listObject = doc.getElementsByTag("object");
-//        for (Element object : listObject) {
-//            Elements listParam = object.getElementsByTag("param");
-//            if (listParam.size() > 0) {
-//                String name = "", local = "";
-//                for (Element param : listParam) {
-//                    if (param.attributes().getIgnoreCase("name").equalsIgnoreCase("name")) {
-//                        name = param.attributes().getIgnoreCase("value");
-//                    } else if (param.attributes().getIgnoreCase("name").equalsIgnoreCase("local")) {
-//                        local = param.attributes().getIgnoreCase("value");
-//                    }
-//                }
-//                listSite.add(local);
-//                object.parent().prepend("<a href=\"" + local + "\">" + name + "</a>");
-//                object.remove();
-//            }
-//        }
-//        try {
-//            FileOutputStream fosHTMLMap =  new FileOutputStream(extractPath + "/" +md5);
-//            fosHTMLMap.write(doc.outerHtml().getBytes());
-//            fosHTMLMap.close();
-//
-//            FileOutputStream fosListSite =  new FileOutputStream(extractPath + "/site_map_" +md5);
-//            for(String str: listSite) {
-//                fosListSite.write((str+";").getBytes());
-//            }
-//            fosListSite.close();
-//            Log.e("Utils", "write ok " + "/site_map_" +md5);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            Log.e("Utils", "write ok sitemap error");
-//        }
-        ///////////////////////////////////////////////////
         try {
 
             final FileOutputStream fosHTMLMap = new FileOutputStream(extractPath + "/" + md5);
@@ -296,33 +263,6 @@ public class Utils {
             if (!filePathTemp.exists()) {
                 if (!filePathTemp.mkdirs()) throw new IOException();
             }
-//            for (String file : chm.list()) {
-//                String temp = pathExtract + file;
-//                String tempName = temp.substring(temp.lastIndexOf("/") + 1);
-//                String tempPath = temp.substring(0, temp.lastIndexOf("/"));
-//                File filePathTemp = new File(tempPath);
-//                if (!filePathTemp.exists()) {
-//                    if (!filePathTemp.mkdirs()) throw new IOException();
-//                }
-//                if (tempName.length() > 0) {
-//                    FileOutputStream fos = null;
-//                    try {
-//                        fos = new FileOutputStream(temp);
-//                        byte[] buf = new byte[1024];
-//                        InputStream in = chm.getResourceAsStream(file);
-//                        int c;
-//                        while ((c = in.read(buf)) >= 0) {
-//                            fos.write(buf, 0, c);
-//                        }
-//                    } catch (IOException e) {
-//                        Log.d("Error extract file: ", file);
-//                        e.printStackTrace();
-//                    } finally {
-//                        if (fos != null) fos.close();
-//                    }
-//                }
-//            }
-//            chm.close();
         } catch (IOException e) {
             e.printStackTrace();
             return false;
@@ -474,6 +414,20 @@ public class Utils {
                 .compile("^9[0-9]{8}$");
         Matcher m = p.matcher(mobiles);
         return m.matches();
+    }
+
+    /**
+     * 生成一个startNum 到 endNum之间的随机数(不包含endNum的随机数)
+     * @param startNum
+     * @param endNum
+     * @return
+     */
+    public static int getNum(int startNum,int endNum){
+        if(endNum > startNum){
+            Random random = new Random();
+            return random.nextInt(endNum - startNum) + startNum;
+        }
+        return 0;
     }
 
 }

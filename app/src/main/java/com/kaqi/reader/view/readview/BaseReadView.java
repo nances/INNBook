@@ -56,14 +56,6 @@ public abstract class BaseReadView extends View {
 
     Scroller mScroller;
 
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        if (pagefactory != null) {
-//            pagefactory.prepareDisplay(w, h);
-        }
-    }
-
     public BaseReadView(Context context, String bookId, List<BookMixAToc.mixToc.Chapters> chaptersList,
                         OnReadStateChangeListener listener) {
         super(context);
@@ -71,10 +63,6 @@ public abstract class BaseReadView extends View {
         this.bookId = bookId;
 
         mScreenWidth = ScreenUtils.getScreenWidth();
-//        if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
-//            mScreenHeight = ScreenUtils.getScreenHeight() +  DisplayUtil.dp2px(getContext(),34);
-//        }else {
-//        }
         mScreenHeight = ScreenUtils.getScreenHeight();
         Log.v("Nancy", "mScreenHeight is value : " + mScreenHeight);
         mCurPageBitmap = Bitmap.createBitmap(mScreenWidth, mScreenHeight, Bitmap.Config.ARGB_8888);
@@ -108,29 +96,25 @@ public abstract class BaseReadView extends View {
         }
     }
 
-    private int dx, dy;
-    private long et = 0;
-    private boolean cancel = false;
-    private boolean center = false;
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
         switch (e.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                et = System.currentTimeMillis();
-                dx = (int) e.getX();
-                dy = (int) e.getY();
-                mTouch.x = dx;
-                mTouch.y = dy;
-                actiondownX = dx;
-                actiondownY = dy;
+                pagefactory.et = System.currentTimeMillis();
+                pagefactory.dx = (int) e.getX();
+                pagefactory.dy = (int) e.getY();
+                mTouch.x = pagefactory.dx;
+                mTouch.y = pagefactory.dy;
+                actiondownX = pagefactory.dx;
+                actiondownY = pagefactory.dy;
                 touch_down = 0;
                 pagefactory.onDraw(mCurrentPageCanvas);
                 if (actiondownX >= mScreenWidth / 3 && actiondownX <= mScreenWidth * 2 / 3
                         && actiondownY >= mScreenHeight / 3 && actiondownY <= mScreenHeight * 2 / 3) {
-                    center = true;
+                    pagefactory.center = true;
                 } else {
-                    center = false;
+                    pagefactory.center = false;
                     calcCornerXY(actiondownX, actiondownY);
                     if (actiondownX < mScreenWidth / 2) {// 从左翻
                         BookStatus status = pagefactory.prePage();
@@ -149,6 +133,7 @@ public abstract class BaseReadView extends View {
                             ToastUtils.showSingleToast("没有下一页啦");
                             return false;
                         } else if (status == BookStatus.LOAD_SUCCESS) {
+                            Log.v("Nancystt","else if (status == BookStatus.LOAD_SUCCESS)");
                             abortAnimation();
                             pagefactory.onDraw(mNextPageCanvas);
                         } else {
@@ -160,11 +145,11 @@ public abstract class BaseReadView extends View {
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (center)
+                if (pagefactory.center)
                     break;
                 int mx = (int) e.getX();
                 int my = (int) e.getY();
-                cancel = (actiondownX < mScreenWidth / 2 && mx < mTouch.x) || (actiondownX > mScreenWidth / 2 && mx > mTouch.x);
+                pagefactory.cancel = (actiondownX < mScreenWidth / 2 && mx < mTouch.x) || (actiondownX > mScreenWidth / 2 && mx > mTouch.x);
                 mTouch.x = mx;
                 mTouch.y = my;
                 touch_down = mTouch.x - actiondownX;
@@ -177,7 +162,7 @@ public abstract class BaseReadView extends View {
                 int ux = (int) e.getX();
                 int uy = (int) e.getY();
 
-                if (center) { // ACTION_DOWN的位置在中间，则不响应滑动事件
+                if (pagefactory.center) { // ACTION_DOWN的位置在中间，则不响应滑动事件
                     resetTouchPoint();
                     if (Math.abs(ux - actiondownX) < 5 && Math.abs(uy - actiondownY) < 5) {
                         listener.onCenterClick();
@@ -186,8 +171,8 @@ public abstract class BaseReadView extends View {
                     break;
                 }
 
-                if ((Math.abs(ux - dx) < 10) && (Math.abs(uy - dy) < 10)) {
-                    if ((t - et < 1000)) { // 单击
+                if ((Math.abs(ux - pagefactory.dx) < 10) && (Math.abs(uy - pagefactory.dy) < 10)) {
+                    if ((t - pagefactory.et < 1000)) { // 单击
                         if (this instanceof NoAimWidget) {
                             ((NoAimWidget) this).startAnimation(0);
                         } else {
@@ -200,7 +185,7 @@ public abstract class BaseReadView extends View {
                     postInvalidate();
                     return true;
                 }
-                if (cancel) {
+                if (pagefactory.cancel) {
                     pagefactory.cancelPage();
                     restoreAnimation();
                     postInvalidate();
@@ -208,13 +193,18 @@ public abstract class BaseReadView extends View {
                     startAnimation();
                     postInvalidate();
                 }
-                cancel = false;
-                center = false;
+                pagefactory.cancel = false;
+                pagefactory.center = false;
                 break;
             default:
                 break;
         }
         return true;
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        postInvalidate();
     }
 
     @Override

@@ -208,4 +208,9 @@ public class OverlappedWidget extends BaseReadView {
             SettingManager.getInstance().saveReadTheme(theme);
         }
     }
+
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+
+    }
 }
