@@ -118,6 +118,9 @@ public class PageFactory {
     public int after_ad_positin = -1;
     public boolean is_adShow = false;
 
+    public float view_y1 = 0;
+    public float view_y2 = 0;
+    public boolean is_click_ad = false;
 
     public PageFactory(Context context, String bookId, List<BookMixAToc.mixToc.Chapters> chaptersList) {
         this(context, ScreenUtils.getScreenWidth(), ScreenUtils.getScreenHeight(),
@@ -251,6 +254,8 @@ public class PageFactory {
                     after_ad_positin = ad_position;
                 } else {
                     after_ad_positin = -1;
+                    view_y1 = 0;
+                    view_y2 = 0;
                 }
             }
 
@@ -258,16 +263,17 @@ public class PageFactory {
             for (String line : mLines) {
                 y += mLineSpace;
                 if (line.endsWith("@")) {
-                    //绘制广告
                     mPageCurrentCount++;
-//                    Log.v("NancysTT","============111111================" + mPageCurrentCount);
-//                    Log.v("NancysT","==============mPageCurrentCount ==============" + mPageCurrentCount +"=======" + after_ad_positin);
+                    //绘制广告
                     if (is_Ad && mPageCurrentCount == ad_position && adBitmap != null) {
-                        Log.v("NancysTT","============================" + mPageCurrentCount);
+                        is_click_ad = false;
                         canvas.drawText(line.substring(0, line.length() - 1), marginWidth, y, mPaint);
                         canvas.drawBitmap(adBitmap, 0,
                                 y + 40, paintT);
+                        view_y1 = y;
                         y += ScreenUtils.dpToPxInt(232);
+                        view_y2 = y;
+
                     } else {
                         canvas.drawText(line.substring(0, line.length() - 1), marginWidth, y, mPaint);
                         y += mLineSpace;
@@ -412,7 +418,7 @@ public class PageFactory {
         currentPage = 0;
         while (curEndPos < mbBufferLen) {
             int paraSpace = 0;
-            if (!is_Ad &&after_ad_positin == -1) {
+            if (!is_Ad && after_ad_positin == -1) {
                 mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
             } else {
                 mPageLineCount = (mVisibleHeight - ScreenUtils.dpToPxInt(232)) / (mFontSize + mLineSpace);

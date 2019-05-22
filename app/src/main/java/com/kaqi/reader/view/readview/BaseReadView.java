@@ -19,6 +19,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PointF;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Scroller;
@@ -106,7 +107,15 @@ public abstract class BaseReadView extends View {
                 mTouch.y = pagefactory.dy;
                 actiondownX = pagefactory.dx;
                 actiondownY = pagefactory.dy;
+
+                Log.v("NancyTTTT", "------------actiondownX is value : " + actiondownX);
+                Log.v("NancyTTTT", "------------actiondownY is value : " + actiondownY);
                 touch_down = 0;
+                if ((pagefactory.view_y1 <= actiondownY) && (actiondownY <= pagefactory.view_y2)) {
+                    ToastUtils.showToast("已经出发点击事件");
+                    pagefactory.is_click_ad = true;
+                    break;
+                }
                 pagefactory.onDraw(mCurrentPageCanvas);
                 if (actiondownX >= mScreenWidth / 3 && actiondownX <= mScreenWidth * 2 / 3
                         && actiondownY >= mScreenHeight / 3 && actiondownY <= mScreenHeight * 2 / 3) {
@@ -144,6 +153,9 @@ public abstract class BaseReadView extends View {
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
+                if (pagefactory.is_click_ad) {
+                    break;
+                }
                 if (pagefactory.center)
                     break;
                 int mx = (int) e.getX();
@@ -158,7 +170,9 @@ public abstract class BaseReadView extends View {
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
-
+                if (pagefactory.is_click_ad) {
+                    break;
+                }
                 long t = System.currentTimeMillis();
                 int ux = (int) e.getX();
                 int uy = (int) e.getY();
