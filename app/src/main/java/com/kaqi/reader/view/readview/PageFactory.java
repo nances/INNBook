@@ -236,6 +236,8 @@ public class PageFactory {
             curEndPos = curBeginPos;
             mLines = pageDown();
         }
+        Log.v("Nancy","mCurrentPageCanvas is value :" + canvas);
+        Log.v("Nancy","mNextPageCanvas is value :" + canvas);
         mPageCurrentCount = 0;
         if (mLines.size() > 0) {
             int y = marginHeight + (mLineSpace << 1);
@@ -248,9 +250,10 @@ public class PageFactory {
             // 绘制标题
             canvas.drawText(chaptersList.get(currentChapter - 1).title, marginWidth, y, mTitlePaint);
             y += mLineSpace + mNumFontSize;
-            if (mPageLineCount > 6) {
+            Log.v("Nancy","========********======");
+            if (mPageLineCount > 8) {
                 if (after_ad_positin == -1) {
-                    ad_position = Utils.getNum(2, mPageLineCount - 6);
+                    ad_position = Utils.getNum(2, mPageLineCount - 8);
                     after_ad_positin = ad_position;
                 } else {
                     after_ad_positin = -1;
@@ -273,7 +276,6 @@ public class PageFactory {
                         view_y1 = y;
                         y += ScreenUtils.dpToPxInt(232);
                         view_y2 = y;
-
                     } else {
                         canvas.drawText(line.substring(0, line.length() - 1), marginWidth, y, mPaint);
                         y += mLineSpace;
@@ -557,6 +559,8 @@ public class PageFactory {
             mLines = pageDown(); // 读取一页内容
             onPageChanged(currentChapter, ++currentPage);
         }
+        view_y1 = 0;
+        view_y2 = 0;
         return BookStatus.LOAD_SUCCESS;
     }
 
@@ -600,7 +604,6 @@ public class PageFactory {
         currentChapter = tempChapter;
         curBeginPos = tempBeginPos;
         curEndPos = curBeginPos;
-        Log.v("NancysT", "nextPage   ==========  ");
         int ret = openBook(currentChapter, new int[]{curBeginPos, curEndPos});
         if (ret == 0) {
             onLoadChapterFailure(currentChapter);
@@ -771,6 +774,12 @@ public class PageFactory {
      */
     public void setIs_AdStatus(boolean is_Ad) {
         this.is_Ad = is_Ad;
+        if (is_Ad) {
+            mPageLineCount = (mVisibleHeight - ScreenUtils.dpToPxInt(232)) / (mFontSize + mLineSpace);
+        } else {
+            mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
+        }
+
 
     }
 

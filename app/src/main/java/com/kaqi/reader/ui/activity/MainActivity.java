@@ -145,7 +145,7 @@ public class MainActivity extends BaseActivity {
             findFragment = (FindFragment) getSupportFragmentManager().findFragmentByTag("findFragment");
             circleMainFragment = (CommunityFragment) getSupportFragmentManager().findFragmentByTag("circleMainFragment");
             currentTabPosition = savedInstanceState.getInt("HOME_CURRENT_TAB_POSITION");
-            Log.v("Nancy","HOME_CURRENT_TAB_POSITION " + currentTabPosition);
+            Log.v("Nancy", "HOME_CURRENT_TAB_POSITION " + currentTabPosition);
         } else {
             mineFragment = new MineFragment();
             homeFragment = new RecommendFragment();
@@ -157,7 +157,7 @@ public class MainActivity extends BaseActivity {
             transaction.add(R.id.container, findFragment, "findFragment");
             transaction.add(R.id.container, circleMainFragment, "circleMainFragment");
         }
-        Log.v("Nancy","currentTabPosition" + currentTabPosition);
+        Log.v("Nancy", "currentTabPosition" + currentTabPosition);
         transaction.commit();
         setCurrentItem(currentTabPosition);
     }
@@ -255,14 +255,6 @@ public class MainActivity extends BaseActivity {
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_DOWN
                 && event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
-//            if (System.currentTimeMillis() - currentBackPressedTime > BACK_PRESSED_INTERVAL) {
-////                currentBackPressedTime = System.currentTimeMillis();
-////                ToastUtils.showToast(getString(R.string.exit_tips));
-//                exitDialog();
-//                return true;
-//            } else {
-//                finish(); // 退出
-//            }
             exitDialog();
         } else if (event.getKeyCode() == KeyEvent.KEYCODE_MENU) {
             return true;
@@ -285,10 +277,9 @@ public class MainActivity extends BaseActivity {
     }
 
     private void checkAppVersion() {
-        boolean isNewVersion = true;
-        if (isNewVersion)
-        {
-            AppVersionManager.upgradeApp(this,"牛牛阅读","更新内容","12M","https://sj.qq.com/myapp/detail.htm?apkName=com.xunmeng.pinduoduo");
+        boolean isNewVersion = false;
+        if (isNewVersion) {
+            AppVersionManager.upgradeApp(this, "牛牛阅读", "更新内容", "12M", "https://sj.qq.com/myapp/detail.htm?apkName=com.xunmeng.pinduoduo");
         }
     }
 

@@ -872,9 +872,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
                         gone(rlReadMark);
                     } else {
                         gone(rlReadAaSet);
-
                         updateMark();
-
                         visible(rlReadMark);
                     }
                 }
