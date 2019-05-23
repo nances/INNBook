@@ -33,6 +33,7 @@ import com.kaqi.reader.utils.AppUtils;
 import com.kaqi.reader.utils.FileUtils;
 import com.kaqi.reader.utils.LogUtils;
 import com.kaqi.reader.utils.SharedPreferencesUtil;
+import com.mob.MobSDK;
 import com.sinovoice.hcicloudsdk.api.HciCloudSys;
 import com.sinovoice.hcicloudsdk.common.HciErrorCode;
 import com.sinovoice.hcicloudsdk.common.InitParam;
@@ -60,6 +61,7 @@ public class ReaderApplication extends Application {
     public void onCreate() {
         super.onCreate();
         UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, null);
+        MobSDK.init(this);
         PushManager.getInstance().initialize(this, ReaderPushService.class);
         PushManager.getInstance().registerPushIntentService(this,ReaderIntentService.class);
         refWatcher = LeakCanary.install(this);

@@ -45,3 +45,16 @@ public static final int *;
 -dontwarn com.igexin.**
 -keep class com.igexin.** { *; }
 -keep class org.json.** { *; }
+
+# shareSDK
+-keep class cn.sharesdk.**{*;}
+-keep class com.sina.**{*;}
+-keep class **.R$* {*;}
+-keep class **.R{*;}
+-keep class com.mob.**{*;}
+-keep class m.framework.**{*;}
+-keep class com.bytedance.**{*;}
+-dontwarn cn.sharesdk.**
+-dontwarn com.sina.**
+-dontwarn com.mob.**
+-dontwarn **.R$*
