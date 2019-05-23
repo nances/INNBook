@@ -112,17 +112,19 @@ public abstract class BaseReadView extends View {
                     pagefactory.is_click_ad = true;
                     break;
                 }
+                pagefactory.onDraw(mCurrentPageCanvas);
                 if (actiondownX >= mScreenWidth / 3 && actiondownX <= mScreenWidth * 2 / 3
                         && actiondownY >= mScreenHeight / 3 && actiondownY <= mScreenHeight * 2 / 3) {
                     pagefactory.center = true;
                 } else {
-                    pagefactory.onDraw(mCurrentPageCanvas);
                     pagefactory.center = false;
                     calcCornerXY(actiondownX, actiondownY);
                     if (actiondownX < mScreenWidth / 2) {// 从左翻
                         BookStatus status = pagefactory.prePage();
                         if (status == BookStatus.NO_PRE_PAGE) {
                             ToastUtils.showSingleToast("没有上一页啦");
+                            restoreAnimation();
+                            postInvalidate();
                             return false;
                         } else if (status == BookStatus.LOAD_SUCCESS) {
                             abortAnimation();
