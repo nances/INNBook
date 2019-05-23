@@ -243,6 +243,8 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
                 if (ad_count == 1000) {
                     ad_count = 0;
                     setReadBookMone(ad_count);
+                    mHandler.removeCallbacksAndMessages(TIME_COUNT_ADD);
+                    mHandler.sendEmptyMessageDelayed(TIME_COUNT_ADD, 200); //开始计费
                 }
                 ad_count++;
                 setReadBookMone(ad_count);
