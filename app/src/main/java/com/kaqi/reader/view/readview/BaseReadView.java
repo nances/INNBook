@@ -112,7 +112,7 @@ public abstract class BaseReadView extends View {
                     pagefactory.is_click_ad = true;
                     break;
                 }
-                pagefactory.onDraw(mCurrentPageCanvas);
+                    pagefactory.onDraw(mCurrentPageCanvas);
                 if (actiondownX >= mScreenWidth / 3 && actiondownX <= mScreenWidth * 2 / 3
                         && actiondownY >= mScreenHeight / 3 && actiondownY <= mScreenHeight * 2 / 3) {
                     pagefactory.center = true;
@@ -132,7 +132,8 @@ public abstract class BaseReadView extends View {
                         } else {
                             return false;
                         }
-                    } else if (actiondownX >= mScreenWidth / 2) {// 从右翻
+                    } else if (actiondownX >= mScreenWidth / 2) {
+                        // 从右翻
                         BookStatus status = pagefactory.nextPage();
                         if (status == BookStatus.NO_NEXT_PAGE) {
                             ToastUtils.showSingleToast("没有下一页啦");
@@ -163,7 +164,6 @@ public abstract class BaseReadView extends View {
                 mTouch.x = mx;
                 mTouch.y = my;
                 touch_down = mTouch.x - actiondownX;
-                pagefactory.is_adShow = false;
                 this.postInvalidate();
                 break;
             case MotionEvent.ACTION_UP:

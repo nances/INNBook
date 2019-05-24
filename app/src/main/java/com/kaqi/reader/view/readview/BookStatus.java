@@ -11,7 +11,7 @@ public enum BookStatus {
 
     PRE_CHAPTER_LOAD_FAILURE,
     NEXT_CHAPTER_LOAD_FAILURE,
-
+    LOAD_AD,
     LOAD_SUCCESS
 
 
