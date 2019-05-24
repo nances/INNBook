@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.mob.sdk'
 
 android {
     compileSdkVersion 27
@@ -16,6 +17,8 @@ android {
                 GETUI_APP_KEY   : "cUhH6JgCrW7yEodbMfSa75",
                 GETUI_APP_SECRET: "vmynHPXxba8yRgyzEuGZc2"
         ]
+
+        multiDexEnabled true
     }
 
     signingConfigs {
@@ -58,6 +61,32 @@ android {
     }
 }
 
+MobSDK {
+    appKey "76ad354bc042"
+    appSecret "1a4801d952f960b7192c381fc4562cf8"
+
+    ShareSDK {
+        //平台配置信息
+        devInfo {
+            SinaWeibo {
+                appKey "568898243"
+                appSecret "38a4f8204cc784f81f9f0daaf31e02e3"
+                callbackUri "http://www.sharesdk.cn"
+                shareByAppClient false
+            }
+            Wechat {
+                appId "wx4868b35061f87885"
+                appSecret "64020361b8ec4c99936c0e3999a9f249"
+            }
+            QQ {
+                appId "100371282"
+                appKey "aed9b0303e3ed1e27bae87c33761161d"
+                shareByAppClient true
+            }
+        }
+    }
+
+}
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
