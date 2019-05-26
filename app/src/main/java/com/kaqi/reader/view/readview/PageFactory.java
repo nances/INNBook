@@ -361,6 +361,7 @@ public class PageFactory {
         mPageActualLines = 0;
         String strParagraph = "";
         Vector<String> lines = new Vector<>(); // 页面行
+		int paraSpace = 0;
         if (!is_Ad && after_ad_positin == -1) {
             mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
         } else {
@@ -404,7 +405,9 @@ public class PageFactory {
 
                 mPageLineCount = (mVisibleHeight - ScreenUtils.dpToPxInt(232) - paraSpace) / (mFontSize + mLineSpace); // 添加段落间距，实时更新容纳行数
             }
+            mPageActualLines = lines.size();
         }
+        Log.v("Nancys","lines is vlaue ;" + lines);
     }
 
     /**
@@ -453,6 +456,7 @@ public class PageFactory {
                 }
             }
             paraSpace += mLineSpace;
+
             mPageTotalLines++;
             if (!is_Ad && after_ad_positin == -1) {
                 mPageLineCount = (mVisibleHeight - paraSpace) / (mFontSize + mLineSpace);
@@ -477,8 +481,8 @@ public class PageFactory {
         currentPage = 0;
         while (curEndPos < mbBufferLen) {
             int paraSpace = 0;
-            mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
             if (!is_Ad && after_ad_positin == -1) {
+                mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
             } else {
                 mPageLineCount = (mVisibleHeight - ScreenUtils.dpToPxInt(232)) / (mFontSize + mLineSpace);
 
@@ -529,6 +533,8 @@ public class PageFactory {
         }
         mPageActualLines = lines.size();
         getPageLast(lines);
+
+        Log.v("Nancys","lines is vlaue ;" + lines);
         //SettingManager.getInstance().saveReadProgress(bookId, currentChapter, curBeginPos, curEndPos);
         return lines;
     }
