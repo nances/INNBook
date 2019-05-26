@@ -22,11 +22,16 @@ import com.kaqi.reader.ui.fragment.FindFragment;
 import com.kaqi.reader.ui.fragment.MineFragment;
 import com.kaqi.reader.ui.fragment.RecommendFragment;
 import com.kaqi.reader.utils.AppVersionManager;
+import com.kaqi.reader.utils.ShareUtils;
 import com.kaqi.reader.view.dialog.CommomAddShuJiaDialog;
+import com.kaqi.reader.view.dialog.ShareDialog;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import butterknife.Bind;
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
 
 public class MainActivity extends BaseActivity {
     @Bind(R.id.sliding_tabs)
@@ -79,6 +84,30 @@ public class MainActivity extends BaseActivity {
         initFragment(savedInstanceState);
         slidingTabLayout.measure(0, 0);
         checkAppVersion();
+
+        ShareUtils.ShareContentBean shareContentBean = new ShareUtils.ShareContentBean(
+                "牛牛阅读",
+                "快来下载吧～～～～～～～～",
+                "",
+                ""
+        );
+
+        ShareDialog.showDialog(this, shareContentBean, new PlatformActionListener() {
+            @Override
+            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+
+            }
+
+            @Override
+            public void onError(Platform platform, int i, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onCancel(Platform platform, int i) {
+
+            }
+        });
     }
 
     @Override

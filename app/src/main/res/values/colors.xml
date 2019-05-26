@@ -24,6 +24,11 @@
 
     <color name="tip">#88303F9F</color>
 
+    <color name="fontBlack">#3a3a3a</color>
+    <color name="fontGray">#bfbfbf</color>
+    <color name="fontBlue">#5b5bec</color>
+    <color name="divider_color">#ececec</color>
+
     <color name="white">#ffffffff</color>
     <color name="black">#ff000000</color>
     <color name="red">#FF0000</color>

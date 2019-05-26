@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_ll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    android:orientation="vertical">
+
+
+    <Button
+        android:id="@+id/wechat_moments_btn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="@drawable/white_bg_bottom_divider"
+        android:gravity="center"
+        android:text="微信朋友圈"
+        android:textColor="@color/fontBlue"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/wechat_btn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="@drawable/white_bg_bottom_divider"
+        android:gravity="center"
+        android:text="微信好友"
+        android:textColor="@color/fontBlue"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/sina_btn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="@drawable/white_bg_bottom_divider"
+        android:gravity="center"
+        android:text="微博"
+        android:textColor="@color/fontBlue"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/cancel_btn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/white_bg_top_divider"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="@color/fontBlue"
+        android:textSize="14sp" />
+
+
+</LinearLayout>
