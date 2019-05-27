@@ -135,10 +135,15 @@ public abstract class BaseReadView extends View {
                         } else if (status == BookStatus.LOAD_SUCCESS) {
                             abortAnimation();
                             Log.v("NancysT", "is ad 上一页 show value =============:" + pagefactory.is_adShow);
-                            if (!pagefactory.is_Ad || pagefactory.is_adShow % 2 == 0) {
+                            if (!pagefactory.is_Ad && pagefactory.CurChapterLastPage) {
+                                pagefactory.onDraw(mNextPageCanvas);
+                                return true;
+                            } else if (pagefactory.is_adShow % 2 == 0 && !pagefactory.CurChapterLastPage) {
                                 pagefactory.onDrawNoAd(mNextPageCanvas);
+                                return true;
                             } else {
                                 pagefactory.onDraw(mNextPageCanvas);
+                                return true;
                             }
                         } else {
                             return false;
@@ -153,8 +158,6 @@ public abstract class BaseReadView extends View {
                             return false;
                         } else if (status == BookStatus.LOAD_SUCCESS) {
                             abortAnimation();
-                            Log.v("NancysT", "is ad 下一页 show value =============:" + pagefactory.is_adShow);
-                            Log.v("NancysT", "is ad 下一页 show value =============:" + pagefactory.is_Ad);
                             if (!pagefactory.is_Ad && pagefactory.CurChapterLastPage) {
                                 pagefactory.onDraw(mNextPageCanvas);
                                 return true;
