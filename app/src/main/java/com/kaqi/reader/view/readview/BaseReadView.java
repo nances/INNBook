@@ -19,6 +19,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PointF;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Scroller;
@@ -99,6 +100,7 @@ public abstract class BaseReadView extends View {
     public boolean onTouchEvent(MotionEvent e) {
         switch (e.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                pagefactory.is_adShow++;
                 pagefactory.et = System.currentTimeMillis();
                 pagefactory.dx = (int) e.getX();
                 pagefactory.dy = (int) e.getY();
@@ -112,7 +114,11 @@ public abstract class BaseReadView extends View {
                     pagefactory.is_click_ad = true;
                     break;
                 }
-                pagefactory.onDraw(mCurrentPageCanvas);
+                if (pagefactory.is_adShow % 2 == 0) {
+                    pagefactory.onDraw(mCurrentPageCanvas);
+                } else {
+                    pagefactory.onDrawNoAd(mCurrentPageCanvas);
+                }
                 if (actiondownX >= mScreenWidth / 3 && actiondownX <= mScreenWidth * 2 / 3
                         && actiondownY >= mScreenHeight / 3 && actiondownY <= mScreenHeight * 2 / 3) {
                     pagefactory.center = true;
@@ -128,7 +134,12 @@ public abstract class BaseReadView extends View {
                             return false;
                         } else if (status == BookStatus.LOAD_SUCCESS) {
                             abortAnimation();
-                            pagefactory.onDraw(mNextPageCanvas);
+                            Log.v("NancysT", "is ad 上一页 show value =============:" + pagefactory.is_adShow);
+                            if (!pagefactory.is_Ad || pagefactory.is_adShow % 2 == 0) {
+                                pagefactory.onDrawNoAd(mNextPageCanvas);
+                            } else {
+                                pagefactory.onDraw(mNextPageCanvas);
+                            }
                         } else {
                             return false;
                         }
@@ -142,7 +153,18 @@ public abstract class BaseReadView extends View {
                             return false;
                         } else if (status == BookStatus.LOAD_SUCCESS) {
                             abortAnimation();
-                            pagefactory.onDraw(mNextPageCanvas);
+                            Log.v("NancysT", "is ad 下一页 show value =============:" + pagefactory.is_adShow);
+                            Log.v("NancysT", "is ad 下一页 show value =============:" + pagefactory.is_Ad);
+                            if (!pagefactory.is_Ad && pagefactory.CurChapterLastPage) {
+                                pagefactory.onDraw(mNextPageCanvas);
+                                return true;
+                            } else if (pagefactory.is_adShow % 2 == 0 && !pagefactory.CurChapterLastPage) {
+                                pagefactory.onDrawNoAd(mNextPageCanvas);
+                                return true;
+                            } else {
+                                pagefactory.onDraw(mNextPageCanvas);
+                                return true;
+                            }
                         } else {
                             return false;
                         }
@@ -162,6 +184,7 @@ public abstract class BaseReadView extends View {
                 //TODO 只要触发就要翻页
 //                pagefactory.cancel = (actiondownX < mScreenWidth / 2 && mx < mTouch.x) || (actiondownX > mScreenWidth / 2 && mx > mTouch.x);
                 mTouch.x = mx;
+
                 mTouch.y = my;
                 touch_down = mTouch.x - actiondownX;
                 this.postInvalidate();
