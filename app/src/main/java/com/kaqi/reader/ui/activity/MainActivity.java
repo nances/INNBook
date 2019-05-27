@@ -21,6 +21,7 @@ import com.kaqi.reader.ui.fragment.CommunityFragment;
 import com.kaqi.reader.ui.fragment.FindFragment;
 import com.kaqi.reader.ui.fragment.MineFragment;
 import com.kaqi.reader.ui.fragment.RecommendFragment;
+import com.kaqi.reader.ui.fragment.TaskFragment;
 import com.kaqi.reader.utils.AppVersionManager;
 import com.kaqi.reader.utils.ShareUtils;
 import com.kaqi.reader.view.dialog.CommomAddShuJiaDialog;
@@ -49,6 +50,7 @@ public class MainActivity extends BaseActivity {
 
     private MineFragment mineFragment;
     private CommunityFragment circleMainFragment;
+    private TaskFragment taskFragment;
     //    private HomeFragment homeFragment;
     private RecommendFragment homeFragment;
     private FindFragment findFragment;
@@ -172,19 +174,20 @@ public class MainActivity extends BaseActivity {
             mineFragment = (MineFragment) getSupportFragmentManager().findFragmentByTag("mineFragment");
             homeFragment = (RecommendFragment) getSupportFragmentManager().findFragmentByTag("homeFragment");
             findFragment = (FindFragment) getSupportFragmentManager().findFragmentByTag("findFragment");
-            circleMainFragment = (CommunityFragment) getSupportFragmentManager().findFragmentByTag("circleMainFragment");
+//            circleMainFragment = (CommunityFragment) getSupportFragmentManager().findFragmentByTag("circleMainFragment");
+            taskFragment = (TaskFragment) getSupportFragmentManager().findFragmentByTag("taskFragment");
             currentTabPosition = savedInstanceState.getInt("HOME_CURRENT_TAB_POSITION");
             Log.v("Nancy", "HOME_CURRENT_TAB_POSITION " + currentTabPosition);
         } else {
             mineFragment = new MineFragment();
             homeFragment = new RecommendFragment();
-            circleMainFragment = new CommunityFragment();
+            taskFragment = new TaskFragment();
             findFragment = new FindFragment();
 
             transaction.add(R.id.container, mineFragment, "mineFragment");
             transaction.add(R.id.container, homeFragment, "homeFragment");
             transaction.add(R.id.container, findFragment, "findFragment");
-            transaction.add(R.id.container, circleMainFragment, "circleMainFragment");
+            transaction.add(R.id.container, taskFragment, "taskFragment");
         }
         Log.v("Nancy", "currentTabPosition" + currentTabPosition);
         transaction.commit();
@@ -201,7 +204,7 @@ public class MainActivity extends BaseActivity {
             //首页
             case 0:
                 transaction.show(homeFragment);
-                transaction.hide(circleMainFragment);
+                transaction.hide(taskFragment);
                 transaction.hide(mineFragment);
                 transaction.hide(findFragment);
                 transaction.commitAllowingStateLoss();
@@ -210,19 +213,19 @@ public class MainActivity extends BaseActivity {
                 transaction.hide(homeFragment);
                 transaction.hide(mineFragment);
                 transaction.show(findFragment);
-                transaction.hide(circleMainFragment);
+                transaction.hide(taskFragment);
                 transaction.commitAllowingStateLoss();
                 break;
             case 2:
                 transaction.hide(homeFragment);
                 transaction.hide(mineFragment);
                 transaction.hide(findFragment);
-                transaction.show(circleMainFragment);
+                transaction.show(taskFragment);
                 transaction.commitAllowingStateLoss();
                 break;
             case 3:
                 transaction.hide(homeFragment);
-                transaction.hide(circleMainFragment);
+                transaction.hide(taskFragment);
                 transaction.show(mineFragment);
                 transaction.hide(findFragment);
                 transaction.commitAllowingStateLoss();

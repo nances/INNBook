@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/wh46.0dimens46.0dp"
+    android:layout_height="@dimen/wh46.0dimens46.0dp"
+    android:background="@drawable/btn_sign_days_font"
+    android:padding="@dimen/wh2.0dimens2.0dp"
+
+    >
+
+    <TextView
+        android:id="@+id/item_days_money"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wh23.0dimens23.0dp"
+        android:gravity="center"
+        android:text="12"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wh23.0dimens23.0dp"
+        android:layout_below="@+id/item_days_money"
+        android:gravity="center_horizontal"
+        android:text="金币"
+        android:textSize="10sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/ivSelected"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/btn_font_selector"
+        android:visibility="gone" />
+</RelativeLayout>

@@ -17,7 +17,8 @@
     android:layout_width="@dimen/wh65.0dimens65.0dp"
     android:layout_height="@dimen/wh30.0dimens30.0dp"
     android:paddingLeft="@dimen/wh3.0dimens3.0dp"
-    android:paddingRight="@dimen/wh3.0dimens3.0dp">
+    android:paddingRight="@dimen/wh3.0dimens3.0dp"
+    >
 
     <TextView
         android:id="@+id/btn_yy"

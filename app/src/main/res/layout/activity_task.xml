@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stv="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wh132.0dimens132.0dp"
+            android:background="@color/yellow_30"></RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wh48.0dimens48.0dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="福利中心"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wh182.0dimens182.0dp"
+            android:layout_marginLeft="@dimen/wh20.0dimens20.0dp"
+            android:layout_marginTop="@dimen/wh64.0dimens64.0dp"
+            android:layout_marginRight="@dimen/wh20.0dimens20.0dp"
+            android:layout_marginBottom="@dimen/wh20.0dimens20.0dp"
+            android:background="@drawable/shape_white_bg"
+            android:orientation="vertical">
+
+            <GridView
+                android:id="@+id/sign_day_gridview"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/wh54.0dimens54.0dp"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="@dimen/wh18.0dimens18.0dp"
+                android:layout_marginBottom="@dimen/wh8.0dimens8.0dp"
+                android:layout_marginLeft="@dimen/wh6.0dimens6.0dp"
+                android:layout_marginRight="@dimen/wh6.0dimens6.0dp"
+                android:listSelector="@android:color/transparent"
+                android:numColumns="7"
+                android:scrollbars="none" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/wh12.0dimens12.0dp"
+                android:text="签满一周可额外获取600金币"
+                android:textColor="@color/common_h2"
+                android:textSize="14sp" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@color/common_bg"
+                android:padding="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.kaqi.reader.view.DrawableCenterButton
+                        android:id="@+id/sign_day"
+                        android:layout_width="@dimen/wh108.0dimens108.0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/selector_stroke_roundcir"
+                        android:clickable="true"
+                        android:gravity="center_horizontal"
+                        android:padding="10dp"
+                        android:text="每日签到"
+                        android:textColor="@color/black" />
+
+                    <com.kaqi.reader.view.DrawableCenterButton
+                        android:id="@+id/read_video_sign"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/selector_stroke_roundredcir"
+                        android:clickable="true"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_horizontal"
+                        android:padding="10dp"
+                        android:text="看小视频，获取丰厚金币"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>
