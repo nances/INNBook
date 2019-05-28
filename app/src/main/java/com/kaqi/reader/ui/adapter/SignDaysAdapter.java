@@ -42,9 +42,9 @@ public class SignDaysAdapter extends EasyLVAdapter<String> {
             holder.setText(R.id.item_days_money, readTheme);
             if (selected == position) {
                 holder.setVisible(R.id.ivSelected, true);
-                holder.setTextColor(R.id.item_days_money, mContext.getResources().getColor(R.color.alpha_55_white));
+//                holder.setTextColor(R.id.sign_item_days, mContext.getResources().getColor(R.color.alpha_55_white));
             } else {
-                holder.setTextColor(R.id.item_days_money, mContext.getResources().getColor(R.color.black));
+//                holder.setTextColor(R.id.sign_item_days, mContext.getResources().getColor(R.color.black));
                 holder.setVisible(R.id.ivSelected, false);
             }
 

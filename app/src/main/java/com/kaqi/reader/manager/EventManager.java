@@ -2,6 +2,7 @@ package com.kaqi.reader.manager;
 
 import com.kaqi.reader.bean.support.RefreshCollectionIconEvent;
 import com.kaqi.reader.bean.support.RefreshCollectionListEvent;
+import com.kaqi.reader.bean.support.ShareEvent;
 import com.kaqi.reader.bean.support.SubEvent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -28,5 +29,10 @@ public class EventManager {
     public static void rerefreshMainRecomend() {
         EventBus.getDefault().post(new RefreshCollectionIconEvent());
     }
+
+    public static void getShareUtisl(int share_type) {
+        EventBus.getDefault().post(new ShareEvent(share_type));
+    }
+
 
 }

@@ -15,6 +15,7 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseActivity;
 import com.kaqi.reader.bean.TabEntity;
+import com.kaqi.reader.bean.support.ShareEvent;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.service.DownloadBookService;
 import com.kaqi.reader.ui.fragment.CommunityFragment;
@@ -26,6 +27,10 @@ import com.kaqi.reader.utils.AppVersionManager;
 import com.kaqi.reader.utils.ShareUtils;
 import com.kaqi.reader.view.dialog.CommomAddShuJiaDialog;
 import com.kaqi.reader.view.dialog.ShareDialog;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -82,34 +87,12 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initTab();
+        EventBus.getDefault().register(this);
         //初始化Fragment
         initFragment(savedInstanceState);
         slidingTabLayout.measure(0, 0);
         checkAppVersion();
 
-        ShareUtils.ShareContentBean shareContentBean = new ShareUtils.ShareContentBean(
-                "牛牛阅读",
-                "快来下载吧～～～～～～～～",
-                "",
-                ""
-        );
-
-        ShareDialog.showDialog(this, shareContentBean, new PlatformActionListener() {
-            @Override
-            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
-
-            }
-
-            @Override
-            public void onError(Platform platform, int i, Throwable throwable) {
-
-            }
-
-            @Override
-            public void onCancel(Platform platform, int i) {
-
-            }
-        });
     }
 
     @Override
@@ -138,19 +121,6 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onTabReselect(int position) {
-                switch (position) {
-//                    case 0:
-//                        mRxManager.post(BundleKey.HOME_REFRESH_INFO, "");
-//                        break;
-//                    case 1:
-//                        mRxManager.post(BundleKey.COOMEND_REFRESH_INFO, "");
-//                        break;
-//                    case 2:
-//                        mRxManager.post(BundleKey.MATCH_REFRESH_INFO, "");
-//                        break;
-//                    case 3:
-//                        break;
-                }
             }
         });
     }
@@ -273,9 +243,17 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
         DownloadBookService.cancel();
         stopService(new Intent(this, DownloadBookService.class));
         mHandler.removeCallbacksAndMessages(null);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void shareUtils(final ShareEvent msg) {
+        if (msg.share_type == 1) {
+            getShare();
+        }
     }
 
     // 退出时间
@@ -308,11 +286,44 @@ public class MainActivity extends BaseActivity {
         }).setTitle("提示").setNegativeButton("取消").setPositiveButton("确定").show();
     }
 
+    /**
+     * 更新提示
+     */
     private void checkAppVersion() {
         boolean isNewVersion = false;
         if (isNewVersion) {
             AppVersionManager.upgradeApp(this, "牛牛阅读", "更新内容", "12M", "https://sj.qq.com/myapp/detail.htm?apkName=com.xunmeng.pinduoduo");
         }
+    }
+
+    /**
+     * 分享
+     */
+    public void getShare() {
+
+        ShareUtils.ShareContentBean shareContentBean = new ShareUtils.ShareContentBean(
+                "牛牛阅读",
+                "快来下载吧～～～～～～～～",
+                "",
+                ""
+        );
+
+        ShareDialog.showDialog(this, shareContentBean, new PlatformActionListener() {
+            @Override
+            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+
+            }
+
+            @Override
+            public void onError(Platform platform, int i, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onCancel(Platform platform, int i) {
+
+            }
+        });
     }
 
 }

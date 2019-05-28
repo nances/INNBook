@@ -111,6 +111,7 @@ public class FindItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             GridBookViewHolder bookViewHolder = (GridBookViewHolder) holder;
             int p = position - (labelList.size() + 1 + 1);
             Book book = bookList.get(p);
+
             Glide.with(mContext)
                     .load(Constant.IMG_BASE_URL + book.cover)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -121,10 +122,10 @@ public class FindItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             int p = position - (labelList.size() + 1 + 1 + 1 + bookList.size());
             Book book = linearBookList.get(p);
             bookViewHolder.titleTv.setText(book.title);
-            Glide.with(mContext)
-                    .load(Constant.IMG_BASE_URL + book.cover)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(bookViewHolder.imageIv);
+//            Glide.with(mContext)
+//                    .load(Constant.IMG_BASE_URL + book.cover)
+//                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                    .into(bookViewHolder.imageIv);
         }
     }
 
