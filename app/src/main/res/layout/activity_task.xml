@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:stv="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
+    android:background="@color/common_bg"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -33,31 +34,36 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/wh182.0dimens182.0dp"
-            android:layout_marginLeft="@dimen/wh20.0dimens20.0dp"
             android:layout_marginTop="@dimen/wh64.0dimens64.0dp"
-            android:layout_marginRight="@dimen/wh20.0dimens20.0dp"
+            android:layout_marginLeft="@dimen/wh14.0dimens14.0dp"
+            android:layout_marginRight="@dimen/wh14.0dimens14.0dp"
             android:layout_marginBottom="@dimen/wh20.0dimens20.0dp"
             android:background="@drawable/shape_white_bg"
             android:orientation="vertical">
 
-            <GridView
-                android:id="@+id/sign_day_gridview"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/wh54.0dimens54.0dp"
-                android:gravity="center_horizontal"
-                android:layout_marginTop="@dimen/wh18.0dimens18.0dp"
-                android:layout_marginBottom="@dimen/wh8.0dimens8.0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/wh6.0dimens6.0dp"
-                android:layout_marginRight="@dimen/wh6.0dimens6.0dp"
-                android:listSelector="@android:color/transparent"
-                android:numColumns="7"
-                android:scrollbars="none" />
+                android:layout_marginRight="@dimen/wh6.0dimens6.0dp">
+
+                <GridView
+                    android:id="@+id/sign_day_gridview"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/wh54.0dimens54.0dp"
+                    android:layout_marginTop="@dimen/wh18.0dimens18.0dp"
+                    android:layout_marginBottom="@dimen/wh8.0dimens8.0dp"
+                    android:gravity="center_horizontal"
+                    android:listSelector="@android:color/transparent"
+                    android:numColumns="7"
+                    android:scrollbars="none" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/wh12.0dimens12.0dp"
+                android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
                 android:text="签满一周可额外获取600金币"
                 android:textColor="@color/common_h2"
                 android:textSize="14sp" />
@@ -66,7 +72,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
+                android:layout_marginLeft="@dimen/wh4.0dimens4.0dp"
+                android:layout_marginRight="@dimen/wh4.0dimens4.0dp"
                 android:background="@color/common_bg"
                 android:padding="15dp">
 
@@ -100,7 +107,162 @@
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
-
     </FrameLayout>
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_white_bg"
+        android:layout_marginLeft="@dimen/wh14.0dimens14.0dp"
+        android:layout_marginRight="@dimen/wh14.0dimens14.0dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/wh12.0dimens12.0dp"
+            android:layout_marginBottom="@dimen/wh12.0dimens12.0dp"
+            android:layout_marginLeft="@dimen/wh16.0dimens16.0dp"
+            android:text="日常任务"
+            android:textColor="@color/common_h2"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line" />
+
+        <RelativeLayout style="@style/my_layout_style">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15.0dip"
+                    android:text="登陆APP"
+                    android:textColor="@color/common_h1"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15.0dip"
+                    android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
+                    android:text="每日登陆可获丰厚金币23"
+                    android:textColor="@color/common_h2"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/sign_every_days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/selector_stroke_roundredcir"
+                android:gravity="center"
+                android:text="去领取"
+                android:textColor="@android:color/white" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line" />
+
+        <RelativeLayout style="@style/my_layout_style">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15.0dip"
+                    android:text="每日阅读"
+                    android:textColor="@color/common_h1"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15.0dip"
+                    android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
+                    android:text="阅读时间越久，累计获得金币越多"
+                    android:textColor="@color/common_h2"
+
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/read_every_days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/selector_stroke_roundredcir"
+                android:gravity="center"
+                android:text="去阅读"
+                android:textColor="@android:color/white" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line" />
+
+        <RelativeLayout style="@style/my_layout_style">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15.0dip"
+                    android:text="每日分享"
+                    android:textColor="@color/common_h1"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15.0dip"
+                    android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
+                    android:text="每日首次分享，被好友点击可获取奖励 100"
+                    android:textColor="@color/common_h2"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/share_every_days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/selector_stroke_roundredcir"
+                android:gravity="center"
+                android:text="去分享"
+                android:textColor="@android:color/white" />
+        </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>

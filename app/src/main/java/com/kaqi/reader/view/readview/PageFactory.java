@@ -151,12 +151,12 @@ public class PageFactory {
         marginHeight = ScreenUtils.dpToPxInt(15);
         mVisibleHeight = mHeight - marginHeight * 2 - mNumFontSize * 2 - mLineSpace * 2;
         mVisibleWidth = mWidth - marginWidth * 2;
-        if (!is_Ad ) {
+        if (!is_Ad) {
             mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
         } else {
-            if( is_adShow % 2 == 0){
+            if (is_adShow % 2 == 0) {
                 mPageLineCount = mVisibleHeight / (mFontSize + mLineSpace);
-            }else {
+            } else {
                 mPageLineCount = (mVisibleHeight - ScreenUtils.dpToPxInt(232)) / (mFontSize + mLineSpace);
             }
         }
@@ -248,7 +248,7 @@ public class PageFactory {
      */
     public synchronized void onDraw(Canvas canvas) {
         Log.v("NancysCanvas", " onDraw mPageTotalLines  ====== " + mPageTotalLines + "===ad_lines======" + ad_lines + "=======mPageLineCount=======" + mPageLineCount + "====mPageCurrentCount=====" + mPageCurrentCount);
-        Log.v("NancysCanvas", " onDraw CurChapterLastPage  ====== " + CurChapterLastPage + "======mPageActualLines==" + mPageActualLines);
+        Log.v("NancysCanvas", " onDraw CurChapterLastPage  ====== " + CurChapterLastPage + "======mPageActualLines==" + mPageActualLines + "===is_adShow===" + is_adShow);
         // 每页绘制完，清理状态
         mPageCurrentCount = 0;
         after_ad_positin = -1;
@@ -326,8 +326,8 @@ public class PageFactory {
      */
     public synchronized void onDrawNoAd(Canvas canvas) {
 
-        Log.v("NancysCanvas", "mPageTotalLines  ====== " + mPageTotalLines + "===ad_lines======" + ad_lines + "=======mPageLineCount=======" + mPageLineCount + "====mPageCurrentCount=====" + mPageCurrentCount);
-        Log.v("NancysCanvas", "CurChapterLastPage  ====== " + CurChapterLastPage + "======mPageActualLines==" + mPageActualLines);
+        Log.v("NancysCanvas", "onDrawNoAd mPageTotalLines  ====== " + mPageTotalLines + "===ad_lines======" + ad_lines + "=======mPageLineCount=======" + mPageLineCount + "====mPageCurrentCount=====" + mPageCurrentCount);
+        Log.v("NancysCanvas", "onDrawNoAd CurChapterLastPage  ====== " + CurChapterLastPage + "======mPageActualLines==" + mPageActualLines);
 
         // 每页绘制完，清理状态
         mPageCurrentCount = 0;
@@ -451,7 +451,7 @@ public class PageFactory {
             }
             curEndPos = curBeginPos; // 6.最后结束指针指向下一段的开始处
             paraSpace += mLineSpace;
-            if (!is_Ad && after_ad_positin == -1 ) {
+            if (!is_Ad && after_ad_positin == -1) {
                 mPageLineCount = (mVisibleHeight - paraSpace) / (mFontSize + mLineSpace); // 添加段落间距，实时更新容纳行数
             } else {
                 if (is_adShow % 2 == 0) {
@@ -709,6 +709,7 @@ public class PageFactory {
                     curEndPos = tempEndPos;
                     return BookStatus.NEXT_CHAPTER_LOAD_FAILURE;
                 } else {
+                    isLeftLastPage = false;
                     currentPage = 0;
                     onChapterChanged(currentChapter, true);
                 }
