@@ -40,10 +40,10 @@ public class FindItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private Context mContext;
 
     public FindItemAdapter() {
-        labelList.add(new Label(R.drawable.uv, "分类"));
-        labelList.add(new Label(R.drawable.uu, "排行榜"));
-        labelList.add(new Label(R.drawable.uy, "完结精品"));
-        labelList.add(new Label(R.drawable.uz, "今日更新"));
+        labelList.add(new Label(R.drawable.classification_icon, "分类"));
+        labelList.add(new Label(R.drawable.ranking_icon, "排行榜"));
+        labelList.add(new Label(R.drawable.complite_book_icon, "完结精品"));
+        labelList.add(new Label(R.drawable.book_today_update_icon, "今日更新"));
 
 
         Gson gson = new Gson();

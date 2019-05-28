@@ -16,8 +16,7 @@
         <RelativeLayout
             android:id="@+id/title_layout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/wh48.0dimens48.0dp"
-            >
+            android:layout_height="@dimen/wh48.0dimens48.0dp">
 
 
             <ImageView
@@ -67,7 +66,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="37dp"
-                        android:text="Lover's Day"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="17sp" />
 
@@ -97,8 +96,6 @@
                             android:gravity="center"
                             android:text="登陆"
                             android:textColor="@android:color/white" />
-
-
                     </LinearLayout>
 
                 </RelativeLayout>
@@ -115,6 +112,108 @@
 
         </FrameLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wh0.5dimens0.5dp"
+            android:layout_marginTop="@dimen/wh10.0dimens10.0dp"
+            android:background="@color/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/wh10.0dimens10.0dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/wh12.0dimens12.0dp"
+                android:paddingBottom="@dimen/wh12.0dimens12.0dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="0.00"
+                    android:textColor="@color/common_h1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="我的金币"
+                    android:textColor="@color/common_h2"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="@dimen/wh0.5dimens0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/line" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/wh12.0dimens12.0dp"
+                android:paddingBottom="@dimen/wh12.0dimens12.0dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="0.00"
+                    android:textColor="@color/common_h1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="今日金币"
+                    android:textColor="@color/common_h2"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="@dimen/wh0.5dimens0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/line" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/wh12.0dimens12.0dp"
+                android:paddingBottom="@dimen/wh12.0dimens12.0dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="0.00"
+                    android:textColor="@color/common_h1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="今日阅读（分钟）"
+                    android:textColor="@color/common_h2"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -125,60 +224,41 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/wh50.0dimens50.0dp"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="@dimen/wh40.0dimens40.0dp"
+                android:layout_marginTop="@dimen/wh20.0dimens20.0dp"
                 android:background="@color/common_bg"
                 stv:sDividerLineType="both"
-                stv:sLeftIconRes="@drawable/v1"
-                stv:sLeftTextString="历史阅读"
-                />
+                stv:sLeftIconRes="@drawable/history_icon"
+                stv:sLeftTextString="历史阅读" />
 
             <com.kaqi.reader.view.textview.SuperTextView
                 android:id="@+id/message_icon"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/wh50.0dimens50.0dp"
-                stv:sLeftIconRes="@drawable/v1"
+                stv:sLeftIconRes="@drawable/message_mine_icon"
                 stv:sLeftTextString="我的消息" />
 
-            <com.kaqi.reader.view.textview.SuperTextView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/wh50.0dimens50.0dp"
-                stv:sDividerLineType="both"
-                android:layout_marginTop="20dp"
-                stv:sLeftIconRes="@drawable/v1"
-                stv:sLeftTextString="邀请好友赚现金" />
-
-            <com.kaqi.reader.view.textview.SuperTextView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/wh50.0dimens50.0dp"
-
-                stv:sLeftIconRes="@drawable/v0"
-                stv:sLeftTextString="积分商城"
-                stv:sRightTextColor="@color/gray"
-                stv:sRightTextSize="10sp"
-                stv:sRightTextString="828积分" />
-
 
             <com.kaqi.reader.view.textview.SuperTextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/wh50.0dimens50.0dp"
                 android:layout_marginTop="20dp"
                 stv:sDividerLineType="both"
-                stv:sLeftIconRes="@drawable/v1"
+                stv:sLeftIconRes="@drawable/suggestion_mine_icon"
                 stv:sLeftTextString="意见反馈" />
 
             <com.kaqi.reader.view.textview.SuperTextView
                 android:id="@+id/uc_setting_iv"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/wh50.0dimens50.0dp"
-                stv:sLeftIconRes="@drawable/v1"
+                stv:sLeftIconRes="@drawable/setting_mine_icon"
                 stv:sLeftTextString="设置" />
 
             <com.kaqi.reader.view.textview.SuperTextView
                 android:id="@+id/about_us"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/wh50.0dimens50.0dp"
-                stv:sLeftIconRes="@drawable/v1"
-                stv:sLeftTextString="关于我们" />
+                stv:sLeftIconRes="@drawable/about_mine_icon"
+                stv:sLeftTextString="关于" />
         </LinearLayout>
 
     </LinearLayout>
