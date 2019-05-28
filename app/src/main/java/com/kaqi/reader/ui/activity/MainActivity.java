@@ -38,7 +38,7 @@ public class MainActivity extends BaseActivity {
     @Bind(R.id.sliding_tabs)
     CommonTabLayout slidingTabLayout;
 
-    private String[] mTitles = {"首页", "书架", "书单", "个人"};
+    private String[] mTitles = {"首页", "书架", "福利", "个人"};
     private int[] mIconUnselectIds = {
             R.drawable.home_icon_nor, R.drawable.bookshelf_normal_icon, R.drawable.forum_icon_nor,
             R.drawable.mine_icon_nor};
