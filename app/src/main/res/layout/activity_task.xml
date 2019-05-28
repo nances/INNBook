@@ -151,7 +151,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="15.0dip"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
                         android:text="登陆APP"
                         android:textColor="@color/common_h1"
                         android:textSize="14sp" />
@@ -160,7 +160,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="15.0dip"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
                         android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
                         android:text="每日登陆可获丰厚金币23"
                         android:textColor="@color/common_h2"
@@ -198,7 +198,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="15.0dip"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
                         android:text="每日阅读"
                         android:textColor="@color/common_h1"
                         android:textSize="12sp" />
@@ -207,7 +207,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="15.0dip"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
                         android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
                         android:text="阅读时间越久，累计获得金币越多"
                         android:textColor="@color/common_h2"
@@ -246,7 +246,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="15.0dip"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
                         android:text="每日分享"
                         android:textColor="@color/common_h1"
                         android:textSize="12sp" />
@@ -255,7 +255,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="15.0dip"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
                         android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
                         android:text="每日首次分享，被好友点击可获取奖励 100"
                         android:textColor="@color/common_h2"
@@ -294,7 +294,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="15.0dip"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
                         android:text="光看广告视频"
                         android:textColor="@color/common_h1"
                         android:textSize="12sp" />
@@ -303,7 +303,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="15.0dip"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
                         android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
                         android:text="观看完整视频广告可获取188金币"
                         android:textColor="@color/common_h2"
@@ -364,7 +364,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="15.0dip"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
                         android:text="登陆APP"
                         android:textColor="@color/common_h1"
                         android:textSize="14sp" />
@@ -373,7 +373,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="15.0dip"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
                         android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
                         android:text="每日登陆可获丰厚金币23"
                         android:textColor="@color/common_h2"
@@ -410,7 +410,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="15.0dip"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
                         android:text="收益任务"
                         android:textColor="@color/common_h1"
                         android:textSize="12sp" />
@@ -419,7 +419,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="15.0dip"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
                         android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
                         android:text="阅读时间越久，累计获得金币越多"
                         android:textColor="@color/common_h2"
@@ -457,7 +457,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="15.0dip"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
                         android:text="每日分享"
                         android:textColor="@color/common_h1"
                         android:textSize="12sp" />
@@ -466,7 +466,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="15.0dip"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
                         android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
                         android:text="每日首次分享，被好友点击可获取奖励 100"
                         android:textColor="@color/common_h2"
@@ -504,7 +504,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="15.0dip"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
                         android:text="光看广告视频"
                         android:textColor="@color/common_h1"
                         android:textSize="12sp" />
@@ -513,7 +513,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="15.0dip"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
                         android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
                         android:text="观看完整视频广告可获取188金币"
                         android:textColor="@color/common_h2"
@@ -533,5 +533,9 @@
                     android:textColor="@android:color/white" />
             </RelativeLayout>
         </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/wh20.0dimens20.0dp" />
     </LinearLayout>
 </com.kaqi.reader.view.ReboundScrollView>
