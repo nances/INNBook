@@ -295,7 +295,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
-                        android:text="光看广告视频"
+                        android:text="观看视频广告"
                         android:textColor="@color/common_h1"
                         android:textSize="12sp" />
 
@@ -505,7 +505,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
-                        android:text="光看广告视频"
+                        android:text="观看视频广告"
                         android:textColor="@color/common_h1"
                         android:textSize="12sp" />
 
@@ -515,7 +515,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
                         android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
-                        android:text="观看完整视频广告可获取188金币"
+                        android:text="观看完整视频广告即可获取188金币"
                         android:textColor="@color/common_h2"
 
                         android:textSize="10sp" />
