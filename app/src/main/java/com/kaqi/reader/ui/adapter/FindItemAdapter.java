@@ -11,13 +11,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.Constant;
 import com.kaqi.reader.ui.activity.ClassicFicationActivity;
 import com.kaqi.reader.ui.activity.ClassicRankTopActivity;
+import com.yuyh.easyadapter.glide.GlideRoundTransform;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -44,7 +44,6 @@ public class FindItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         labelList.add(new Label(R.drawable.ranking_icon, "排行榜"));
         labelList.add(new Label(R.drawable.complite_book_icon, "完结精品"));
         labelList.add(new Label(R.drawable.book_today_update_icon, "今日更新"));
-
 
         Gson gson = new Gson();
         Type bookListType = new TypeToken<ArrayList<Book>>() {
@@ -111,21 +110,15 @@ public class FindItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             GridBookViewHolder bookViewHolder = (GridBookViewHolder) holder;
             int p = position - (labelList.size() + 1 + 1);
             Book book = bookList.get(p);
-
-            Glide.with(mContext)
-                    .load(Constant.IMG_BASE_URL + book.cover)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(bookViewHolder.imageIv);
+            Glide.with(mContext).load(Constant.IMG_BASE_URL + book.cover).placeholder(R.drawable.cover_default).transform(new GlideRoundTransform(mContext)).into(bookViewHolder.imageIv);
             bookViewHolder.nameTv.setText(book.title);
         } else if (holder instanceof LinearBookViewHolder) {
             LinearBookViewHolder bookViewHolder = (LinearBookViewHolder) holder;
             int p = position - (labelList.size() + 1 + 1 + 1 + bookList.size());
             Book book = linearBookList.get(p);
             bookViewHolder.titleTv.setText(book.title);
-//            Glide.with(mContext)
-//                    .load(Constant.IMG_BASE_URL + book.cover)
-//                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                    .into(bookViewHolder.imageIv);
+            Glide.with(mContext).load(Constant.IMG_BASE_URL + book.cover).placeholder(R.drawable.cover_default).transform(new GlideRoundTransform(mContext)).into(bookViewHolder.imageIv);
+
         }
     }
 

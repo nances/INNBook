@@ -237,22 +237,8 @@
                 stv:sLeftIconRes="@drawable/message_mine_icon"
                 stv:sLeftTextString="我的消息" />
 
-            <com.kaqi.reader.view.textview.SuperTextView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/wh50.0dimens50.0dp"
-                android:layout_marginTop="20dp"
-                stv:sDividerLineType="both"
-                stv:sLeftTextString="邀请好友赚现金" />
 
-            <com.kaqi.reader.view.textview.SuperTextView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/wh50.0dimens50.0dp"
-                stv:sLeftTextString="积分商城"
-                stv:sRightTextColor="@color/gray"
-                stv:sRightTextSize="10sp"
-                stv:sRightTextString="828积分" />
-
-
+           
             <com.kaqi.reader.view.textview.SuperTextView
                 android:id="@+id/feedback_stv"
                 android:layout_width="match_parent"

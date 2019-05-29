@@ -37,7 +37,7 @@ public class MagicIndicatorUtil {
                 BoldPagerTitleView titleView = new BoldPagerTitleView(mContext);
                 titleView.setNormalSize(18);
                 titleView.setSelectedSize(22);
-                titleView.setNormalColor(ContextCompat.getColor(mContext, R.color.light_black));
+                titleView.setNormalColor(ContextCompat.getColor(mContext, R.color.common_h1));
                 titleView.setSelectedColor(ContextCompat.getColor(mContext, R.color.yellow_50));
                 titleView.setText(mTitleList.get(i));
                 titleView.setOnClickListener(v -> mViewPager.setCurrentItem(i));
@@ -47,14 +47,15 @@ public class MagicIndicatorUtil {
             @Override
             public IPagerIndicator getIndicator(Context context) {
                 LinePagerIndicator indicator = new LinePagerIndicator(mContext);
-                indicator.setMode(LinePagerIndicator.MODE_EXACTLY);
+                indicator.setMode(LinePagerIndicator.NOT_FOCUSABLE);
                 indicator.setLineHeight(ScreenUtils.dpToPxInt(4f));
                 indicator.setLineWidth(ScreenUtils.dpToPxInt(20f));
                 indicator.setRoundRadius(ScreenUtils.dpToPxInt(2f));
                 indicator.setStartInterpolator(new AccelerateInterpolator());
+                indicator.setEnabled(false);
                 indicator.setEndInterpolator(new DecelerateInterpolator(2.0f));
                 indicator.setColors(ContextCompat.getColor(mContext, R.color.yellow_50));
-                return indicator;
+                return null;
             }
         });
         magicIndicator.setNavigator(commonNavigator);

@@ -7,20 +7,21 @@
     android:background="@color/common_bg"
     android:padding="@dimen/wh8.0dimens8.0dp">
 
+
     <android.support.v7.widget.CardView
         android:id="@+id/ivBookCoverCardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="0px"
-        app:cardUseCompatPadding="false">
+        android:layout_marginRight="@dimen/wh16.0dimens16.0dp"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="4dp">
 
         <ImageView
             android:id="@+id/imageIv"
-            android:layout_width="@dimen/wh64.0dimens64.0dp"
-            android:layout_height="@dimen/wh88.0dimens88.0dp"
+            android:layout_width="@dimen/wh86.0dimens86.0dp"
+            android:layout_height="@dimen/wh114.0dimens114.0dp"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
+            android:contentDescription="@null"
             android:scaleType="centerCrop"
             android:src="@drawable/cover_default" />
     </android.support.v7.widget.CardView>

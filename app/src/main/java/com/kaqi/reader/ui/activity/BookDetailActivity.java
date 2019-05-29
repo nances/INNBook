@@ -68,9 +68,6 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-/**
- * Created by lfh on 2016/8/6.
- */
 public class BookDetailActivity extends BaseActivity implements BookDetailContract.View, OnRvItemClickListener<Object> {
 
     public static String INTENT_BOOK_ID = "bookId";

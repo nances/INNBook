@@ -1,22 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="12dp">
 
-    <ImageView
-        android:id="@+id/imageIv"
-        android:scaleType="centerCrop"
-        android:layout_width="match_parent"
-        android:layout_height="115dp" />
+    <android.support.v7.widget.CardView
+        android:id="@+id/ivBookCoverCardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="4dp">
+
+        <ImageView
+            android:id="@+id/imageIv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wh114.0dimens114.0dp"
+            android:layout_alignParentLeft="true"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop" />
+    </android.support.v7.widget.CardView>
 
     <TextView
         android:id="@+id/nameTv"
-        android:layout_marginTop="6dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
         android:maxLines="2"
         android:textColor="@color/black"
         android:textSize="13sp" />

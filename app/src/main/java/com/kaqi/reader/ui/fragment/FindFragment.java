@@ -67,5 +67,6 @@ public class FindFragment extends BaseFragment {
         fragments.add(FindItemFragment.newInstance(3));
         mViewPager.setAdapter(new ComFragmentAdapter(getChildFragmentManager(), fragments));
         MagicIndicatorUtil.init(getContext(), magicIndicator, mViewPager, Arrays.asList(titles));
+
     }
 }
