@@ -17,6 +17,9 @@ import com.kaqi.reader.R;
 import com.kaqi.reader.base.Constant;
 import com.kaqi.reader.ui.activity.ClassicFicationActivity;
 import com.kaqi.reader.ui.activity.ClassicRankTopActivity;
+import com.kaqi.reader.utils.GlideImageLoader;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
 import com.yuyh.easyadapter.glide.GlideRoundTransform;
 
 import java.lang.reflect.Type;
@@ -37,6 +40,9 @@ public class FindItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private List<Label> labelList = new ArrayList<>();
     private List<Book> bookList = new ArrayList<>();
     private List<Book> linearBookList = new ArrayList<>();
+    private List<String> bannerList = new ArrayList<>();
+
+
     private Context mContext;
 
     public FindItemAdapter() {
@@ -52,6 +58,11 @@ public class FindItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         linearBookList = gson.fromJson(booksJson, bookListType);
         linearBookList.addAll(linearBookList);
 
+
+        bannerList.add("http://ww4.sinaimg.cn/large/006uZZy8jw1faic1xjab4j30ci08cjrv.jpg");
+        bannerList.add("http://ww4.sinaimg.cn/large/006uZZy8jw1faic21363tj30ci08ct96.jpg");
+        bannerList.add("http://ww4.sinaimg.cn/large/006uZZy8jw1faic259ohaj30ci08c74r.jpg");
+        bannerList.add("http://ww4.sinaimg.cn/large/006uZZy8jw1faic2b16zuj30ci08cwf4.jpg");
     }
 
     @Override
@@ -85,7 +96,12 @@ public class FindItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof BannerViewHolder) {
+            BannerViewHolder bannerViewHolder = (BannerViewHolder) holder;
+            bannerViewHolder.banner.setIndicatorGravity(BannerConfig.RIGHT);
+            bannerViewHolder.banner.setImages(bannerList)
 
+                    .setImageLoader(new GlideImageLoader())
+                    .start();
         } else if (holder instanceof LabelViewHolder) {
             LabelViewHolder labelViewHolder = (LabelViewHolder) holder;
             Label label = labelList.get(position - 1);
@@ -123,6 +139,8 @@ public class FindItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     class BannerViewHolder extends RecyclerView.ViewHolder {
+        @Bind(R.id.banner)
+        Banner banner;
 
         public BannerViewHolder(View itemView) {
             super(itemView);

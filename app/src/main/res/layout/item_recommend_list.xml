@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/touch_bg"
     android:padding="@dimen/wh10.0dimens10.0dp">
 
     <android.support.v7.widget.CardView
@@ -51,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvRecommendTitle"
             android:layout_marginTop="@dimen/wh16.0dimens16.0dp"
-            android:textColor="@color/common_h2"
+            android:textColor="@color/common_h3"
             android:textSize="12sp"
             tools:text="17小时前:" />
 
@@ -66,7 +65,7 @@
             android:ellipsize="end"
             android:maxEms="14"
             android:maxLines="1"
-            android:textColor="@color/common_h2"
+            android:textColor="@color/common_h3"
             android:textSize="12sp"
             tools:text="第二卷、逆水行舟！第四百六十五章、打蛇七寸！" />
 
@@ -79,8 +78,8 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:text="大江入海著"
-            android:textColor="@color/common_h2"
-            android:textSize="13sp" />
+            android:textColor="@color/common_h3"
+            android:textSize="14sp" />
     </RelativeLayout>
 
     <ImageView

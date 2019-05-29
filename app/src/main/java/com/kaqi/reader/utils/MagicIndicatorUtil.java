@@ -3,6 +3,7 @@ package com.kaqi.reader.utils;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 
@@ -26,6 +27,7 @@ public class MagicIndicatorUtil {
         commonNavigator.setScrollPivotX(0.65f);
         // ture 即标题平分屏幕宽度的模式
         commonNavigator.setAdjustMode(false);
+        Log.v("Nancys","mTitls list is value : " + mTitleList.size());
         commonNavigator.setAdapter(new CommonNavigatorAdapter() {
             @Override
             public int getCount() {
