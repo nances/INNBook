@@ -65,19 +65,28 @@ public abstract class BaseReadView extends View {
             try {
                 pagefactory.setBgBitmap(ThemeManager.getThemeDrawable(theme));
                 // 自动跳转到上次阅读位置
-                int pos[] = SettingManager.getInstance().getReadProgress(bookId);
-                int ret = pagefactory.openBook(pos[0], new int[]{pos[1], pos[2]});
-                LogUtils.i("上次阅读位置：chapter=" + pos[0] + " startPos=" + pos[1] + " endPos=" + pos[2]);
-                if (ret == 0) {
-                    listener.onLoadChapterFailure(pos[0]);
-                    return;
-                }
-                pagefactory.onDraw(mCurrentPageCanvas);
-                postInvalidate();
+                setAdRefresh();
             } catch (Exception e) {
             }
             isPrepared = true;
         }
+    }
+
+    /**
+     * 开启关闭广告，刷新当前页面
+     */
+    public void setAdRefresh() {
+        int pos[] = SettingManager.getInstance().getReadProgress(bookId);
+        int ret = pagefactory.openBook(pos[0], new int[]{pos[1], pos[2]});
+        LogUtils.i("上次阅读位置：chapter=" + pos[0] + " startPos=" + pos[1] + " endPos=" + pos[2] +"ret = "+ret);
+        if (ret == 0) {
+            listener.onLoadChapterFailure(pos[0]);
+            return;
+        }
+        pagefactory.onDraw(mCurrentPageCanvas);
+        postInvalidate();
+        listener.onLoadAdChapterChange();
+
     }
 
 

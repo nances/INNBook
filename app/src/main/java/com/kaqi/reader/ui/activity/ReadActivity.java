@@ -10,7 +10,6 @@ import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
@@ -97,7 +96,6 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Observable;
 import rx.functions.Action1;
@@ -787,13 +785,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         ReaderApplication.getRefWatcher(this).watch(this);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
     @OnClick({R.id.read_book_get_money_rl, R.id.ivBack, R.id.tvDownloadProgress, R.id.ivBrightnessMinus, R.id.tvBookReadIntroduce, R.id.tvBookReadSource, R.id.tvBookReadMode, R.id.tvBookReadDownload, R.id.tvBookMark, R.id.tvBookReadToc, R.id.ivBrightnessPlus
 
             , R.id.tvFontsizeMinus, R.id.tvFontsizePlus, R.id.tvClear, R.id.tvAddMark, R.id.tvBookReadSettings
@@ -801,18 +792,21 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.read_book_get_money_rl:
+                mPageWidget.pagefactory.is_adShow = 1;
                 if (readBookTipTv.getVisibility() == View.VISIBLE) {
-                    mPageWidget.pagefactory.setIs_AdStatus(true);
+                    mPageWidget.pagefactory.is_Ad = true;
                     readBookTipTv.setVisibility(View.GONE);
                     circleProgress.setVisibility(View.VISIBLE);
                     mHandler.sendEmptyMessageDelayed(TIME_COUNT_ADD, 1000); //开始广告
                     ReadManager.getInstance().saveReadBookGetMoney(true);
+
                 } else {
-                    mPageWidget.pagefactory.setIs_AdStatus(false);
+                    mPageWidget.pagefactory.is_Ad = false;
                     readBookTipTv.setVisibility(View.VISIBLE);
                     circleProgress.setVisibility(View.GONE);
                     ReadManager.getInstance().saveReadBookGetMoney(false);
                 }
+                mPageWidget.setAdRefresh();
                 break;
             case R.id.ivBack:
                 if (mTocListPopupWindow.isShowing()) {
@@ -1002,6 +996,11 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             startRead = false;
             if (CacheManager.getInstance().getChapterFile(bookId, chapter) == null)
                 mPresenter.getChapterRead(mChapterList.get(chapter - 1).link, chapter);
+        }
+
+        @Override
+        public void onLoadAdChapterChange() {
+            hideDialog();
         }
 
         @Override

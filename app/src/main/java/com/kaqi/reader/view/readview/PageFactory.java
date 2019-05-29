@@ -119,7 +119,6 @@ public class PageFactory {
 
     //是否开启广告
     public boolean is_Ad = false;
-    public int ad_position = -1;// 广告展示在哪行
     public int after_ad_positin = -1;
     public int is_adShow = 1;
     public float view_y1 = 0;
@@ -127,9 +126,6 @@ public class PageFactory {
     public boolean is_click_ad = false;
 
     public boolean CurChapterLastPage = false;
-    public boolean CurEndChapterLastPage = false;
-    public boolean CurLastPage = false;
-    public int is_empty_ad = 1;
     public Canvas mCurrentPageCanvas, mNextPageCanvas;
 
 

@@ -15,10 +15,6 @@
  */
 package com.kaqi.reader.view.readview;
 
-/**
- * @author yuyh.
- * @date 2016/9/21.
- */
 public interface OnReadStateChangeListener {
 
     void onChapterChanged(int chapter,boolean nextPage);
@@ -26,6 +22,8 @@ public interface OnReadStateChangeListener {
     void onPageChanged(int chapter, int page);
 
     void onLoadChapterFailure(int chapter);
+
+    void onLoadAdChapterChange();
 
     void onCenterClick();
 
