@@ -78,7 +78,7 @@ public abstract class BaseReadView extends View {
     public void setAdRefresh() {
         int pos[] = SettingManager.getInstance().getReadProgress(bookId);
         int ret = pagefactory.openBook(pos[0], new int[]{pos[1], pos[2]});
-        LogUtils.i("上次阅读位置：chapter=" + pos[0] + " startPos=" + pos[1] + " endPos=" + pos[2] +"ret = "+ret);
+        LogUtils.i("上次阅读位置：chapter=" + pos[0] + " startPos=" + pos[1] + " endPos=" + pos[2] + "ret = " + ret);
         if (ret == 0) {
             listener.onLoadChapterFailure(pos[0]);
             return;
@@ -127,7 +127,10 @@ public abstract class BaseReadView extends View {
                 if (actiondownX >= mScreenWidth / 3 && actiondownX <= mScreenWidth * 2 / 3
                         && actiondownY >= mScreenHeight / 3 && actiondownY <= mScreenHeight * 2 / 3) {
                     pagefactory.center = true;
+                    pagefactory.is_adShow--;
                 } else {
+
+
                     pagefactory.center = false;
                     calcCornerXY(actiondownX, actiondownY);
                     if (actiondownX < mScreenWidth / 2) {// 从左翻

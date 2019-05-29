@@ -383,9 +383,11 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         mTocListPopupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         mTocListPopupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         mTocListPopupWindow.setAnchorView(mLlBookReadTop);
+        mTocListPopupWindow.setModal(true);
         mTocListPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mPageWidget.pagefactory.is_adShow = 1;
                 mTocListPopupWindow.dismiss();
                 currentChapter = position + 1;
                 mTocListAdapter.setCurrentChapter(currentChapter);
@@ -809,8 +811,11 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
                 mPageWidget.setAdRefresh();
                 break;
             case R.id.ivBack:
-                if (mTocListPopupWindow.isShowing()) {
+                if (mTocListPopupWindow != null && mTocListPopupWindow.isShowing()) {
                     mTocListPopupWindow.dismiss();
+                    gone(mTvBookReadTocTitle);
+                    visible(mTvBookReadChangeSource);
+                    return;
                 } else {
                     finish();
                 }
