@@ -16,8 +16,7 @@
         <RelativeLayout
             android:id="@+id/title_layout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/wh48.0dimens48.0dp"
-            >
+            android:layout_height="@dimen/wh48.0dimens48.0dp">
 
 
             <ImageView
@@ -129,8 +128,7 @@
                 android:background="@color/common_bg"
                 stv:sDividerLineType="both"
                 stv:sLeftIconRes="@drawable/v1"
-                stv:sLeftTextString="历史阅读"
-                />
+                stv:sLeftTextString="历史阅读" />
 
             <com.kaqi.reader.view.textview.SuperTextView
                 android:id="@+id/message_icon"
@@ -142,8 +140,8 @@
             <com.kaqi.reader.view.textview.SuperTextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/wh50.0dimens50.0dp"
-                stv:sDividerLineType="both"
                 android:layout_marginTop="20dp"
+                stv:sDividerLineType="both"
                 stv:sLeftIconRes="@drawable/v1"
                 stv:sLeftTextString="邀请好友赚现金" />
 
@@ -159,6 +157,7 @@
 
 
             <com.kaqi.reader.view.textview.SuperTextView
+                android:id="@+id/feedback_stv"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/wh50.0dimens50.0dp"
                 android:layout_marginTop="20dp"

@@ -17,22 +17,20 @@ package com.kaqi.reader.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
+import android.widget.Toast;
 
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseActivity;
 import com.kaqi.reader.component.AppComponent;
-import com.kaqi.reader.view.ProgressWebView;
 
-import butterknife.Bind;
+import butterknife.OnClick;
 
 public class FeedbackActivity extends BaseActivity {
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, FeedbackActivity.class));
     }
-
-    @Bind(R.id.feedbackView)
-    ProgressWebView feedbackView;
 
     @Override
     public int getLayoutId() {
@@ -56,6 +54,11 @@ public class FeedbackActivity extends BaseActivity {
 
     @Override
     public void configViews() {
-        feedbackView.loadUrl("https://github.com/JustWayward/BookReader/issues/new");
+
+    }
+
+    @OnClick(R.id.submit_btn)
+    void submit(View view) {
+        Toast.makeText(this, "提交.......", Toast.LENGTH_SHORT).show();
     }
 }
