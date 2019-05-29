@@ -99,15 +99,22 @@ public abstract class BaseReadView extends View {
                     pagefactory.is_click_ad = true;
                     break;
                 }
+
+
                 if (!pagefactory.is_Ad && pagefactory.CurChapterLastPage) {
+                    Log.v("NancyT", "=========*********=========");
                     pagefactory.onDraw(mCurrentPageCanvas);
                 } else {
                     if (pagefactory.is_adShow % 2 == 0) {
+                        Log.v("NancyT", "=========!!!!!!!!!=========" + pagefactory.is_adShow);
                         pagefactory.onDraw(mCurrentPageCanvas);
                     } else {
+                        Log.v("NancyT", "=========+++++++++=========");
                         pagefactory.onDrawNoAd(mCurrentPageCanvas);
                     }
                 }
+
+
                 if (actiondownX >= mScreenWidth / 3 && actiondownX <= mScreenWidth * 2 / 3
                         && actiondownY >= mScreenHeight / 3 && actiondownY <= mScreenHeight * 2 / 3) {
                     pagefactory.center = true;
@@ -156,7 +163,7 @@ public abstract class BaseReadView extends View {
                             if (!pagefactory.is_Ad && pagefactory.CurChapterLastPage) {
                                 pagefactory.onDraw(mNextPageCanvas);
                                 return true;
-                            } else if (pagefactory.is_Ad && pagefactory.is_adShow % 2 == 0 && !pagefactory.CurChapterLastPage) {
+                            } else if (pagefactory.is_Ad && pagefactory.is_adShow % 2 == 0) {
                                 pagefactory.onDrawNoAd(mNextPageCanvas);
                                 return true;
                             } else {
