@@ -144,22 +144,23 @@
         <LinearLayout
             android:id="@+id/llBookReadBottom"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/wh64.0dimens64.0dp"
             android:layout_alignParentBottom="true"
             android:background="@color/reader_menu_bg_color"
             android:clickable="true"
             android:orientation="horizontal"
-            android:padding="10dp"
             android:visibility="gone"
             tools:visibility="visible">
 
             <TextView
                 android:id="@+id/tvBookReadMode"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/wh64.0dimens64.0dp"
                 android:layout_weight="1"
-                android:drawableTop="@drawable/ic_menu_mode_night_normal"
+                android:drawableTop="@drawable/ic_read_menu_morning"
+                android:drawablePadding="@dimen/wh6.0dimens6.0dp"
                 android:gravity="center"
+                android:paddingTop="@dimen/wh6.0dimens6.0dp"
                 android:text="@string/book_read_mode_day"
                 android:textColor="@color/book_read_bottom_text"
                 android:textSize="@dimen/book_read_bottom_text" />
@@ -167,10 +168,12 @@
             <TextView
                 android:id="@+id/tvBookReadSettings"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/wh64.0dimens64.0dp"
                 android:layout_weight="1"
-                android:drawableTop="@drawable/ic_menu_settings_normal"
+                android:drawableTop="@drawable/ic_read_menu_font"
+                android:drawablePadding="@dimen/wh6.0dimens6.0dp"
                 android:gravity="center"
+                android:paddingTop="@dimen/wh6.0dimens6.0dp"
                 android:text="@string/book_read_settings"
                 android:textColor="@color/book_read_bottom_text"
                 android:textSize="@dimen/book_read_bottom_text" />
@@ -178,21 +181,26 @@
             <TextView
                 android:id="@+id/tvBookReadDownload"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/wh64.0dimens64.0dp"
                 android:layout_weight="1"
                 android:drawableTop="@drawable/ic_reader_ab_download"
+                android:drawablePadding="@dimen/wh6.0dimens6.0dp"
                 android:gravity="center"
+                android:paddingTop="@dimen/wh6.0dimens6.0dp"
                 android:text="@string/book_read_download"
                 android:textColor="@color/book_read_bottom_text"
-                android:textSize="@dimen/book_read_bottom_text" />
+                android:textSize="@dimen/book_read_bottom_text"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tvBookMark"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/wh64.0dimens64.0dp"
                 android:layout_weight="1"
                 android:drawableTop="@drawable/ic_menu_bookmark"
+                android:drawablePadding="@dimen/wh6.0dimens6.0dp"
                 android:gravity="center"
+                android:paddingTop="@dimen/wh6.0dimens6.0dp"
                 android:text="@string/book_read_mark"
                 android:textColor="@color/book_read_bottom_text"
                 android:textSize="@dimen/book_read_bottom_text" />
@@ -200,10 +208,12 @@
             <TextView
                 android:id="@+id/tvBookReadToc"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/wh64.0dimens64.0dp"
                 android:layout_weight="1"
-                android:drawableTop="@drawable/ic_menu_toc_normal"
+                android:drawableTop="@drawable/ic_read_menu_category"
+                android:drawablePadding="@dimen/wh6.0dimens6.0dp"
                 android:gravity="center"
+                android:paddingTop="@dimen/wh6.0dimens6.0dp"
                 android:text="@string/book_read_toc"
                 android:textColor="@color/book_read_bottom_text"
                 android:textSize="@dimen/book_read_bottom_text" />

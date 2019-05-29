@@ -85,7 +85,6 @@ public abstract class BaseReadView extends View {
         }
         pagefactory.onDraw(mCurrentPageCanvas);
         postInvalidate();
-        listener.onLoadAdChapterChange();
 
     }
 

@@ -232,6 +232,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
     /*****************广告******************/
     public static final int TIME_COUNT_ADD = 0x01;
+    public static final int UPDATE_AD_VIDE = 0x02;
     public float ad_count = 1f;
 
     @Override
@@ -247,6 +248,9 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
                 ad_count++;
                 setReadBookMone(ad_count);
                 mHandler.sendEmptyMessageDelayed(TIME_COUNT_ADD, 200); //开始计费
+                break;
+            case UPDATE_AD_VIDE:
+                mPageWidget.setAdRefresh();
                 break;
         }
     }
@@ -348,7 +352,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         params.topMargin = ScreenUtils.getStatusBarHeight(this) - 2;
         mLlBookReadTop.setLayoutParams(params);
         initTocList();
-
+        initMenuAnim();
         initAASet();
         initPagerWidget();
         mPresenter.attachView(this);
@@ -808,7 +812,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
                     circleProgress.setVisibility(View.GONE);
                     ReadManager.getInstance().saveReadBookGetMoney(false);
                 }
-                mPageWidget.setAdRefresh();
+                mHandler.sendEmptyMessageDelayed(UPDATE_AD_VIDE, 300);
                 break;
             case R.id.ivBack:
                 if (mTocListPopupWindow != null && mTocListPopupWindow.isShowing()) {
@@ -959,8 +963,8 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
         mTvBookReadMode.setText(getString(isNight ? R.string.book_read_mode_day_manual_setting
                 : R.string.book_read_mode_night_manual_setting));
-        Drawable drawable = ContextCompat.getDrawable(this, isNight ? R.drawable.ic_menu_mode_day_manual
-                : R.drawable.ic_menu_mode_night_manual);
+        Drawable drawable = ContextCompat.getDrawable(this, isNight ? R.drawable.ic_read_menu_morning
+                : R.drawable.ic_read_menu_night);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         mTvBookReadMode.setCompoundDrawables(null, drawable, null, null);
 
