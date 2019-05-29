@@ -1,18 +1,3 @@
-/**
- * Copyright 2016 JustWayward Team
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.kaqi.reader.ui.fragment;
 
 import android.os.Bundle;
@@ -21,10 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseFragment;
 import com.kaqi.reader.component.AppComponent;
+import com.kaqi.reader.manager.EventManager;
+import com.kaqi.reader.ui.activity.MainActivity;
 import com.kaqi.reader.ui.adapter.SignDaysAdapter;
 import com.kaqi.reader.view.DrawableCenterButton;
 
@@ -48,6 +36,14 @@ public class TaskFragment extends BaseFragment {
     DrawableCenterButton signDay;
     @Bind(R.id.read_video_sign)
     DrawableCenterButton readVideoSign;
+    @Bind(R.id.sign_every_days)
+    TextView signEveryDays;
+    @Bind(R.id.read_every_days)
+    TextView readEveryDays;
+    @Bind(R.id.share_every_days)
+    TextView shareEveryDays;
+    @Bind(R.id.read_ad_every_days)
+    TextView readAdEveryDays;
     private int curFont = -1;
     List<String> DaySign = new ArrayList<String>();
     SignDaysAdapter signDaysAdapter;
@@ -120,12 +116,23 @@ public class TaskFragment extends BaseFragment {
         ButterKnife.unbind(this);
     }
 
-    @OnClick({R.id.sign_day, R.id.read_video_sign})
+    @OnClick({R.id.sign_day, R.id.read_video_sign
+            , R.id.sign_every_days, R.id.read_every_days, R.id.share_every_days, R.id.read_ad_every_days})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.sign_day:
                 break;
             case R.id.read_video_sign:
+                break;
+            case R.id.sign_every_days:
+                break;
+            case R.id.read_every_days:
+                ((MainActivity) activity).setCurrentItem(1);
+                break;
+            case R.id.share_every_days:
+                EventManager.getShareUtisl(1);
+                break;
+            case R.id.read_ad_every_days:
                 break;
         }
     }

@@ -1,14 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!-- 矩形边框+填充 圆角 -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
+    android:shape="rectangle"
+    android:useLevel="true">
 
-    <!-- 圆角弧度 20 -->
-    <corners android:radius="@dimen/wh10.0dimens10.0dp" />
+    <stroke
+        android:width="@dimen/wh0.5dimens0.5dp"
+        android:color="@color/gray" />
 
-    <!-- 变化率 -->
-    <gradient
-        android:endColor="@color/white"
-        android:startColor="@color/white" />
+    <solid android:color="@color/white" />
 
+    <corners
+        android:bottomLeftRadius="@dimen/wh10.0dimens10.0dp"
+        android:bottomRightRadius="@dimen/wh10.0dimens10.0dp"
+        android:topLeftRadius="@dimen/wh10.0dimens10.0dp"
+        android:topRightRadius="@dimen/wh10.0dimens10.0dp" />
 
 </shape>

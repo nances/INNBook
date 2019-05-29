@@ -6,7 +6,7 @@
     <com.youth.banner.Banner
         android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/wh211.0dimens211.0dp"
+        android:layout_height="@dimen/wh186.0dimens186.0dp"
         android:background="@color/yellow_30"></com.youth.banner.Banner>
 
 </LinearLayout>

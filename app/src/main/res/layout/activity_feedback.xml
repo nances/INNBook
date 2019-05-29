@@ -143,9 +143,9 @@
                 android:layout_marginBottom="@dimen/wh30.0dimens30.0dp"
                 android:background="@drawable/shape_common_btn_solid_pressed"
                 android:gravity="center"
-                android:textSize="16sp"
                 android:text="提交"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

@@ -23,6 +23,8 @@ import android.widget.Switch;
 
 import com.kaqi.reader.R;
 
+import q.rorbin.badgeview.DisplayUtil;
+
 /**
  * Created by Allen on 2017/7/1.
  * <p>
@@ -656,14 +658,14 @@ public class SuperTextView extends RelativeLayout {
         if (leftIconIV == null) {
             leftIconIV = new CircleImageView(mContext);
         }
-        leftImgParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        leftImgParams = new LayoutParams(DisplayUtil.dp2px(mContext,22),DisplayUtil.dp2px(mContext,22));
         leftImgParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, TRUE);
         leftImgParams.addRule(RelativeLayout.CENTER_VERTICAL, TRUE);
         if (leftIconHeight != 0 && leftIconWidth != 0) {
             leftImgParams.width = leftIconWidth;
             leftImgParams.height = leftIconHeight;
         }
-//        leftIconIV.setScaleType(ImageView.ScaleType.FIT_CENTER);
+//        leftIconIV.setScaleType(ImageView.ScaleType.FIT_XY);
         leftIconIV.setId(R.id.sLeftImgId);
         leftIconIV.setLayoutParams(leftImgParams);
         if (leftIconRes != null) {

@@ -24,14 +24,14 @@
     <com.flyco.tablayout.CommonTabLayout
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/wh48.0dimens48.0dp"
+        android:layout_height="@dimen/wh54.0dimens54.0dp"
         android:layout_alignParentBottom="true"
         android:background="@color/common_bg"
         tl:tl_iconHeight="20dp"
         tl:tl_iconWidth="20dp"
         tl:tl_indicator_color="@color/gray"
         tl:tl_indicator_height="0dp"
-        tl:tl_textSelectColor="@color/gray"
+        tl:tl_textSelectColor="@color/yellow_30"
         tl:tl_textUnselectColor="@color/black"
         tl:tl_textsize="13sp"
         tl:tl_underline_height="0dp" />

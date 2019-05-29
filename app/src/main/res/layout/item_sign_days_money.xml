@@ -1,35 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/wh46.0dimens46.0dp"
-    android:layout_height="@dimen/wh46.0dimens46.0dp"
-    android:background="@drawable/btn_sign_days_font"
-    android:padding="@dimen/wh2.0dimens2.0dp"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sign_item_days"
+    android:layout_width="@dimen/wh45.0dimens45.0dp"
+    android:layout_height="@dimen/wh45.0dimens45.0dp"
+    android:layout_margin="@dimen/wh4.0dimens4.0dp"
+    android:background="@drawable/btn_sign_days_font">
 
-    >
+    <RelativeLayout
+        android:layout_width="@dimen/wh45.0dimens45.0dp"
+        android:layout_height="@dimen/wh45.0dimens45.0dp"
+        android:layout_gravity="center">
 
-    <TextView
-        android:id="@+id/item_days_money"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/wh23.0dimens23.0dp"
-        android:gravity="center"
-        android:text="12"
-        android:textSize="12sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/item_days_money"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/wh22.0dimens22.0dp"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="@dimen/wh6.0dimens6.0dp"
+            android:text="12"
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/wh23.0dimens23.0dp"
-        android:layout_below="@+id/item_days_money"
-        android:gravity="center_horizontal"
-        android:text="金币"
-        android:textSize="10sp"
-        android:textStyle="bold" />
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/wh22.0dimens22.0dp"
+            android:layout_below="@+id/item_days_money"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:paddingTop="@dimen/wh3.0dimens3.0dp"
+            android:text="金币"
+            android:textSize="8sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/ivSelected"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/btn_font_selector"
-        android:visibility="gone" />
-</RelativeLayout>
+        android:layout_width="@dimen/wh45.0dimens45.0dp"
+        android:layout_height="@dimen/wh45.0dimens45.0dp"
+        android:layout_gravity="center"
+        android:background="@drawable/btn_sign_day_selector"
+        android:visibility="visible" />
+</FrameLayout>

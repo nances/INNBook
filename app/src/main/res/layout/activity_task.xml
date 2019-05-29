@@ -1,106 +1,541 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:stv="http://schemas.android.com/apk/res-auto"
+<com.kaqi.reader.view.ReboundScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical">
+    android:background="@color/yellow_30"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
 
-        <RelativeLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/wh132.0dimens132.0dp"
-            android:background="@color/yellow_30"></RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/wh48.0dimens48.0dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="福利中心"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/wh182.0dimens182.0dp"
-            android:layout_marginLeft="@dimen/wh20.0dimens20.0dp"
-            android:layout_marginTop="@dimen/wh64.0dimens64.0dp"
-            android:layout_marginRight="@dimen/wh20.0dimens20.0dp"
-            android:layout_marginBottom="@dimen/wh20.0dimens20.0dp"
-            android:background="@drawable/shape_white_bg"
-            android:orientation="vertical">
-
-            <GridView
-                android:id="@+id/sign_day_gridview"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/wh54.0dimens54.0dp"
-                android:gravity="center_horizontal"
-                android:layout_marginTop="@dimen/wh18.0dimens18.0dp"
-                android:layout_marginBottom="@dimen/wh8.0dimens8.0dp"
-                android:layout_marginLeft="@dimen/wh6.0dimens6.0dp"
-                android:layout_marginRight="@dimen/wh6.0dimens6.0dp"
-                android:listSelector="@android:color/transparent"
-                android:numColumns="7"
-                android:scrollbars="none" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/wh12.0dimens12.0dp"
-                android:text="签满一周可额外获取600金币"
-                android:textColor="@color/common_h2"
-                android:textSize="14sp" />
-
+            android:layout_height="wrap_content">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:background="@color/common_bg"
-                android:padding="15dp">
+                android:layout_height="@dimen/wh132.0dimens132.0dp"
+                android:background="@color/yellow_30"></RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/wh48.0dimens48.0dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="福利中心"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/wh182.0dimens182.0dp"
+                android:layout_marginLeft="@dimen/wh14.0dimens14.0dp"
+                android:layout_marginTop="@dimen/wh64.0dimens64.0dp"
+                android:layout_marginRight="@dimen/wh14.0dimens14.0dp"
+                android:layout_marginBottom="@dimen/wh20.0dimens20.0dp"
+                android:background="@drawable/shape_white_bg"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/wh6.0dimens6.0dp"
+                    android:layout_marginRight="@dimen/wh6.0dimens6.0dp">
 
-                    <com.kaqi.reader.view.DrawableCenterButton
-                        android:id="@+id/sign_day"
-                        android:layout_width="@dimen/wh108.0dimens108.0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:background="@drawable/selector_stroke_roundcir"
-                        android:clickable="true"
-                        android:gravity="center_horizontal"
-                        android:padding="10dp"
-                        android:text="每日签到"
-                        android:textColor="@color/black" />
-
-                    <com.kaqi.reader.view.DrawableCenterButton
-                        android:id="@+id/read_video_sign"
+                    <GridView
+                        android:id="@+id/sign_day_gridview"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/selector_stroke_roundredcir"
-                        android:clickable="true"
-                        android:drawablePadding="5dp"
+                        android:layout_height="@dimen/wh54.0dimens54.0dp"
+                        android:layout_marginTop="@dimen/wh18.0dimens18.0dp"
+                        android:layout_marginBottom="@dimen/wh8.0dimens8.0dp"
                         android:gravity="center_horizontal"
-                        android:padding="10dp"
-                        android:text="看小视频，获取丰厚金币"
-                        android:textColor="@color/white" />
+                        android:listSelector="@android:color/transparent"
+                        android:numColumns="7"
+                        android:scrollbars="none" />
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
+                    android:text="签满一周可额外获取600金币"
+                    android:textColor="@color/common_h2"
+                    android:textSize="14sp" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/wh4.0dimens4.0dp"
+                    android:layout_marginRight="@dimen/wh4.0dimens4.0dp"
+                    android:background="@color/common_bg"
+                    android:padding="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.kaqi.reader.view.DrawableCenterButton
+                            android:id="@+id/sign_day"
+                            android:layout_width="@dimen/wh108.0dimens108.0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/selector_stroke_roundcir"
+                            android:clickable="true"
+                            android:gravity="center_horizontal"
+                            android:padding="10dp"
+                            android:text="每日签到"
+                            android:textColor="@color/black" />
+
+                        <com.kaqi.reader.view.DrawableCenterButton
+                            android:id="@+id/read_video_sign"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/selector_stroke_roundredcir"
+                            android:clickable="true"
+                            android:drawablePadding="5dp"
+                            android:gravity="center_horizontal"
+                            android:padding="10dp"
+                            android:text="看小视频，金币翻倍"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/wh14.0dimens14.0dp"
+            android:layout_marginRight="@dimen/wh14.0dimens14.0dp"
+            android:background="@drawable/shape_white_bg"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/wh16.0dimens16.0dp"
+                android:layout_marginTop="@dimen/wh12.0dimens12.0dp"
+                android:layout_marginBottom="@dimen/wh12.0dimens12.0dp"
+                android:text="日常任务"
+                android:textColor="@color/common_h2"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                style="@style/my_layout_style"
+                android:layout_margin="@dimen/wh2.0dimens2.0dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
+                        android:text="登陆APP"
+                        android:textColor="@color/common_h1"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
+                        android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
+                        android:text="每日登陆可获丰厚金币23"
+                        android:textColor="@color/common_h2"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/sign_every_days"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/selector_stroke_roundredcir"
+                    android:gravity="center"
+                    android:text="去领取"
+                    android:textColor="@android:color/white" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                style="@style/my_layout_style"
+                android:layout_margin="@dimen/wh2.0dimens2.0dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
+                        android:text="每日阅读"
+                        android:textColor="@color/common_h1"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
+                        android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
+                        android:text="阅读时间越久，累计获得金币越多"
+                        android:textColor="@color/common_h2"
+
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/read_every_days"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/selector_stroke_roundredcir"
+                    android:gravity="center"
+                    android:text="去阅读"
+                    android:textColor="@android:color/white" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                style="@style/my_layout_style"
+                android:layout_margin="@dimen/wh2.0dimens2.0dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
+                        android:text="每日分享"
+                        android:textColor="@color/common_h1"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
+                        android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
+                        android:text="每日首次分享，被好友点击可获取奖励 100"
+                        android:textColor="@color/common_h2"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/share_every_days"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/selector_stroke_roundredcir"
+                    android:gravity="center"
+                    android:text="去分享"
+                    android:textColor="@android:color/white" />
+            </RelativeLayout>
+
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                style="@style/my_layout_style"
+                android:layout_margin="@dimen/wh4.0dimens4.0dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
+                        android:text="观看视频广告"
+                        android:textColor="@color/common_h1"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
+                        android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
+                        android:text="观看完整视频广告可获取188金币"
+                        android:textColor="@color/common_h2"
+
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/read_ad_every_days"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/selector_stroke_roundredcir"
+                    android:gravity="center"
+                    android:text="赚金币（0/10）"
+                    android:textColor="@android:color/white" />
             </RelativeLayout>
         </LinearLayout>
 
-    </FrameLayout>
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/wh14.0dimens14.0dp"
+            android:layout_marginTop="@dimen/wh20.0dimens20.0dp"
+            android:layout_marginRight="@dimen/wh14.0dimens14.0dp"
+            android:background="@drawable/shape_white_bg"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/wh16.0dimens16.0dp"
+                android:layout_marginTop="@dimen/wh12.0dimens12.0dp"
+                android:layout_marginBottom="@dimen/wh12.0dimens12.0dp"
+                android:text="进阶福利"
+                android:textColor="@color/common_h2"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                style="@style/my_layout_style"
+                android:layout_margin="@dimen/wh2.0dimens2.0dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
+                        android:text="登陆APP"
+                        android:textColor="@color/common_h1"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
+                        android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
+                        android:text="每日登陆可获丰厚金币23"
+                        android:textColor="@color/common_h2"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/selector_stroke_roundredcir"
+                    android:gravity="center"
+                    android:text="去领取"
+                    android:textColor="@android:color/white" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                style="@style/my_layout_style"
+                android:layout_margin="@dimen/wh2.0dimens2.0dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
+                        android:text="收益任务"
+                        android:textColor="@color/common_h1"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
+                        android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
+                        android:text="阅读时间越久，累计获得金币越多"
+                        android:textColor="@color/common_h2"
+
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/selector_stroke_roundredcir"
+                    android:gravity="center"
+                    android:text="去阅读"
+                    android:textColor="@android:color/white" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                style="@style/my_layout_style"
+                android:layout_margin="@dimen/wh2.0dimens2.0dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
+                        android:text="每日分享"
+                        android:textColor="@color/common_h1"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
+                        android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
+                        android:text="每日首次分享，被好友点击可获取奖励 100"
+                        android:textColor="@color/common_h2"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/selector_stroke_roundredcir"
+                    android:gravity="center"
+                    android:text="去分享"
+                    android:textColor="@android:color/white" />
+            </RelativeLayout>
+
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                style="@style/my_layout_style"
+                android:layout_margin="@dimen/wh4.0dimens4.0dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
+                        android:text="观看视频广告"
+                        android:textColor="@color/common_h1"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/wh11.0dimens11.0dp"
+                        android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
+                        android:text="观看完整视频广告即可获取188金币"
+                        android:textColor="@color/common_h2"
+
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/selector_stroke_roundredcir"
+                    android:gravity="center"
+                    android:text="赚金币（0/10）"
+                    android:textColor="@android:color/white" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/wh20.0dimens20.0dp" />
+    </LinearLayout>
+</com.kaqi.reader.view.ReboundScrollView>

@@ -1,18 +1,3 @@
-/**
- * Copyright 2016 JustWayward Team
- * <p/>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p/>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p/>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.kaqi.reader.view.readview;
 
 import android.content.Context;
@@ -114,10 +99,14 @@ public abstract class BaseReadView extends View {
                     pagefactory.is_click_ad = true;
                     break;
                 }
-                if (pagefactory.is_adShow % 2 == 0) {
+                if (!pagefactory.is_Ad && pagefactory.CurChapterLastPage) {
                     pagefactory.onDraw(mCurrentPageCanvas);
                 } else {
-                    pagefactory.onDrawNoAd(mCurrentPageCanvas);
+                    if (pagefactory.is_adShow % 2 == 0) {
+                        pagefactory.onDraw(mCurrentPageCanvas);
+                    } else {
+                        pagefactory.onDrawNoAd(mCurrentPageCanvas);
+                    }
                 }
                 if (actiondownX >= mScreenWidth / 3 && actiondownX <= mScreenWidth * 2 / 3
                         && actiondownY >= mScreenHeight / 3 && actiondownY <= mScreenHeight * 2 / 3) {
@@ -134,14 +123,18 @@ public abstract class BaseReadView extends View {
                             return false;
                         } else if (status == BookStatus.LOAD_SUCCESS) {
                             abortAnimation();
-                            Log.v("NancysT", "is ad 上一页 show value =============:" + pagefactory.is_adShow);
+                            Log.v("NancysT", "left ==is_ad==" + pagefactory.is_Ad + "left ==CurChapterLastPage==" + pagefactory.CurChapterLastPage + "left ==is_adShow==" + pagefactory.is_adShow);
+                            //不开启广告，最后一页，加入广告
                             if (!pagefactory.is_Ad && pagefactory.CurChapterLastPage) {
                                 pagefactory.onDraw(mNextPageCanvas);
+                                Log.v("NancysT", "*****************========----------=====*****************");
                                 return true;
-                            } else if (pagefactory.is_adShow % 2 == 0 && !pagefactory.CurChapterLastPage) {
+                            } else if (pagefactory.is_Ad && pagefactory.is_adShow % 2 == 0) {
                                 pagefactory.onDrawNoAd(mNextPageCanvas);
+                                Log.v("NancysT", "*****************=============*****************");
                                 return true;
                             } else {
+                                Log.v("NancysT", "**********************************");
                                 pagefactory.onDraw(mNextPageCanvas);
                                 return true;
                             }
@@ -158,10 +151,12 @@ public abstract class BaseReadView extends View {
                             return false;
                         } else if (status == BookStatus.LOAD_SUCCESS) {
                             abortAnimation();
+                            Log.v("NancysT", "right ==is_ad==" + pagefactory.is_Ad + "left ==CurChapterLastPage==" + pagefactory.CurChapterLastPage + "left ==is_adShow==" + pagefactory.is_adShow);
+                            //不开启广告，最后一页，加入广告
                             if (!pagefactory.is_Ad && pagefactory.CurChapterLastPage) {
                                 pagefactory.onDraw(mNextPageCanvas);
                                 return true;
-                            } else if (pagefactory.is_adShow % 2 == 0 && !pagefactory.CurChapterLastPage) {
+                            } else if (pagefactory.is_Ad && pagefactory.is_adShow % 2 == 0 && !pagefactory.CurChapterLastPage) {
                                 pagefactory.onDrawNoAd(mNextPageCanvas);
                                 return true;
                             } else {

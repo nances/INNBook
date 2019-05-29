@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.kaqi.reader.R;
 import com.kaqi.reader.utils.ShareUtils;
@@ -24,9 +25,9 @@ public class ShareDialog {
         View contentView = LayoutInflater.from(mContext)
                 .inflate(R.layout.dialog_share, null);
 
-        Button wechatMomentsBtn = contentView.findViewById(R.id.wechat_moments_btn);
-        Button sinaBtn = contentView.findViewById(R.id.sina_btn);
-        Button wechatBtn = contentView.findViewById(R.id.wechat_btn);
+        LinearLayout wechatMomentsBtn = contentView.findViewById(R.id.wechat_moments_btn);
+        LinearLayout sinaBtn = contentView.findViewById(R.id.sina_btn);
+        LinearLayout wechatBtn = contentView.findViewById(R.id.wechat_btn);
         Button cancelBtn = contentView.findViewById(R.id.cancel_btn);
         wechatMomentsBtn.setOnClickListener(view -> {
             shareUtils.shareToWechatMoments();

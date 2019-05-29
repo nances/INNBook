@@ -1,56 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/dialog_ll"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="bottom"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
-
-    <Button
-        android:id="@+id/wechat_moments_btn"
-        style="?android:attr/borderlessButtonStyle"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:background="@drawable/white_bg_bottom_divider"
-        android:gravity="center"
-        android:text="微信朋友圈"
-        android:textColor="@color/fontBlue"
-        android:textSize="14sp" />
+        android:layout_height="2dp"
+        android:layout_above="@+id/share_lr"
+        android:background="@drawable/main_bottom_divider_bg" />
 
-    <Button
-        android:id="@+id/wechat_btn"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:background="@drawable/white_bg_bottom_divider"
-        android:gravity="center"
-        android:text="微信好友"
-        android:textColor="@color/fontBlue"
-        android:textSize="14sp" />
 
-    <Button
-        android:id="@+id/sina_btn"
-        style="?android:attr/borderlessButtonStyle"
+    <LinearLayout
+        android:id="@+id/share_lr"
         android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:background="@drawable/white_bg_bottom_divider"
-        android:gravity="center"
-        android:text="微博"
-        android:textColor="@color/fontBlue"
-        android:textSize="14sp" />
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/cancel_btn"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center">
+
+            <LinearLayout
+                android:id="@+id/qq_share_ll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/qq_share_icon_shadow" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp"
+                    android:gravity="center"
+                    android:text="QQ"
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/wechat_moments_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/wechat_cicle_share_icon_shadow" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp"
+                    android:gravity="center"
+                    android:text="朋友圈"
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/wechat_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/wechat_share_icon_shadow" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp"
+                    android:gravity="center"
+                    android:text="微信好友"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center">
+
+            <LinearLayout
+                android:id="@+id/sina_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/weibo_share_icon_shadow" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp"
+                    android:gravity="center"
+                    android:text="新浪微博"
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/qqzone_share_ll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/qqzone_share_icon_shadow" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp"
+                    android:gravity="center"
+                    android:text="QQ空间"
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/copy_url_share_ll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/share_coyp_icon_shadow" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp"
+                    android:gravity="center"
+                    android:text="链接"
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/cancel_btn"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/white_bg_top_divider"
+        android:layout_height="@dimen/wh48.0dimens48.0dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
         android:gravity="center"
         android:text="取消"
-        android:textColor="@color/fontBlue"
+        android:textColor="@color/black"
         android:textSize="14sp" />
-
-
-</LinearLayout>
+</RelativeLayout>
