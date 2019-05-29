@@ -286,7 +286,7 @@ public class PageFactory {
                         y += ScreenUtils.dpToPxInt(232);
                         view_y2 = y;
 
-                    } else if (CurChapterLastPage && ((mPageLineCount > ad_lines + mPageActualLines) || isLeftLastPage) && mPageCurrentCount == mPageTotalLines && adBitmap != null && after_ad_positin != 4) {
+                    } else if (CurChapterLastPage && ((mPageLineCount > ad_lines + mPageActualLines)) && mPageCurrentCount == mPageTotalLines && adBitmap != null && after_ad_positin != 4) {
                         is_click_ad = false;
                         canvas.drawText(line.substring(0, line.length() - 1), marginWidth, y, mPaint);
                         canvas.drawBitmap(adBitmap, 0,
