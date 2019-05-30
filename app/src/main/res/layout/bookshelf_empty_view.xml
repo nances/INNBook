@@ -51,7 +51,6 @@
             android:layout_height="wrap_content"
             android:background="@drawable/shape_common_green_bg"
             android:clickable="true"
-            android:drawableLeft="@drawable/book_detail_info_add_img"
             android:drawablePadding="5dp"
             android:padding="10dp"
             android:text="@string/to_add"

@@ -102,7 +102,7 @@
         <TextView
             android:id="@+id/login_tx"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="26dp"
             android:layout_marginLeft="@dimen/wh26.0dimens26.0dp"
             android:layout_marginTop="@dimen/wh40.0dimens40.0dp"
             android:layout_marginRight="@dimen/wh26.0dimens26.0dp"

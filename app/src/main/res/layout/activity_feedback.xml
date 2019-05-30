@@ -119,19 +119,21 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
-            <Button
+            <TextView
                 android:id="@+id/submit_btn"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="@dimen/wh48.0dimens48.0dp"
                 android:layout_marginLeft="@dimen/wh12.0dimens12.0dp"
                 android:layout_marginTop="@dimen/wh20.0dimens20.0dp"
                 android:layout_marginRight="@dimen/wh12.0dimens12.0dp"
                 android:layout_marginBottom="@dimen/wh30.0dimens30.0dp"
-                android:background="@drawable/shape_common_btn_solid_pressed"
+                android:background="@drawable/selector_stroke_roundredcir"
+                android:clickable="true"
                 android:gravity="center"
+                android:padding="10.0dip"
                 android:text="提交"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16.0sp" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

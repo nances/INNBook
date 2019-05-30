@@ -238,15 +238,23 @@
                 stv:sLeftTextString="我的消息" />
 
 
-           
             <com.kaqi.reader.view.textview.SuperTextView
                 android:id="@+id/feedback_stv"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/wh50.0dimens50.0dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/wh20.0dimens20.0dp"
                 stv:sDividerLineType="both"
                 stv:sLeftIconRes="@drawable/suggestion_mine_icon"
                 stv:sLeftTextString="意见反馈" />
+
+
+            <com.kaqi.reader.view.textview.SuperTextView
+                android:id="@+id/help_stv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/wh50.0dimens50.0dp"
+                stv:sLeftIconRes="@drawable/help_icon"
+                stv:sLeftTextString="帮助" />
+
 
             <com.kaqi.reader.view.textview.SuperTextView
                 android:id="@+id/uc_setting_iv"
