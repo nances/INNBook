@@ -98,6 +98,7 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
         impact_tf = Typeface.createFromAsset(mgr, "fonts/ImpactMTStd.otf");
         recomend_title.setTypeface(impact_tf);
         EventBus.getDefault().register(this);
+        EventBus.getDefault().post(new UserSexChooseFinishedEvent());
         list.add(new NavItemEntity("书架管理", R.drawable.ic_popup_abnormal));
         list.add(new NavItemEntity("WIFI传书", R.drawable.ic_popup_note));
         list.add(new NavItemEntity("申请延迟", R.drawable.ic_popup_delay));

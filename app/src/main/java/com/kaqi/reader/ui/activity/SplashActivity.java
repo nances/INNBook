@@ -18,7 +18,6 @@ package com.kaqi.reader.ui.activity;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,8 +27,13 @@ import android.widget.TextView;
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseActivity;
 import com.kaqi.reader.base.Constant;
+import com.kaqi.reader.bean.support.DownloadProgress;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.manager.SettingManager;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -80,6 +84,7 @@ public class SplashActivity extends BaseActivity {
         if (mCountDownTimer != null) {
             mCountDownTimer.cancel();
         }
+        EventBus.getDefault().unregister(this);
         mHandler.removeCallbacksAndMessages(null);
         flag = true;
     }
@@ -106,12 +111,15 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void initToolBar() {
-
+        EventBus.getDefault().register(this);
     }
 
     @Override
     public void initDatas() {
 
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void showDownProgress(DownloadProgress progress) {
     }
 
     @Override
