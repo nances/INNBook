@@ -33,6 +33,7 @@ import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.component.DaggerMainComponent;
 import com.kaqi.reader.manager.CollectionsManager;
 import com.kaqi.reader.manager.EventManager;
+import com.kaqi.reader.manager.SettingManager;
 import com.kaqi.reader.service.DownloadBookService;
 import com.kaqi.reader.ui.activity.BookDetailActivity;
 import com.kaqi.reader.ui.activity.MainActivity;
@@ -98,7 +99,13 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
         impact_tf = Typeface.createFromAsset(mgr, "fonts/ImpactMTStd.otf");
         recomend_title.setTypeface(impact_tf);
         EventBus.getDefault().register(this);
-        EventBus.getDefault().post(new UserSexChooseFinishedEvent());
+
+
+        if (SettingManager.getInstance().getFirstInApp() == 0) {
+            EventBus.getDefault().post(new UserSexChooseFinishedEvent());
+        }
+
+        SettingManager.getInstance().saveFirstInApp(1);
         list.add(new NavItemEntity("书架管理", R.drawable.ic_popup_abnormal));
         list.add(new NavItemEntity("WIFI传书", R.drawable.ic_popup_note));
         list.add(new NavItemEntity("申请延迟", R.drawable.ic_popup_delay));

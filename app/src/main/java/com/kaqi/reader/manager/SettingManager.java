@@ -177,6 +177,14 @@ public class SettingManager {
         SharedPreferencesUtil.getInstance().putInt("readTheme", theme);
     }
 
+    public void saveFirstInApp(int fisrt) {
+        SharedPreferencesUtil.getInstance().putInt("firstApp", fisrt);
+    }
+
+    public int getFirstInApp() {
+        return SharedPreferencesUtil.getInstance().getInt("firstApp");
+    }
+
     public int getReadTheme() {
         if (SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT, false)) {
             return ThemeManager.NIGHT;

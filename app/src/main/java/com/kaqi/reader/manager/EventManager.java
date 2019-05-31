@@ -4,6 +4,7 @@ import com.kaqi.reader.bean.support.RefreshCollectionIconEvent;
 import com.kaqi.reader.bean.support.RefreshCollectionListEvent;
 import com.kaqi.reader.bean.support.ShareEvent;
 import com.kaqi.reader.bean.support.SubEvent;
+import com.kaqi.reader.bean.support.UserSexChooseFinishedEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -34,5 +35,8 @@ public class EventManager {
         EventBus.getDefault().post(new ShareEvent(share_type));
     }
 
+    public static void setRecommendListook(){
+        EventBus.getDefault().post(new UserSexChooseFinishedEvent());
+    }
 
 }

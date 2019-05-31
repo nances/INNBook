@@ -27,16 +27,13 @@ import android.widget.TextView;
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseActivity;
 import com.kaqi.reader.base.Constant;
-import com.kaqi.reader.bean.support.DownloadProgress;
 import com.kaqi.reader.component.AppComponent;
+import com.kaqi.reader.manager.EventManager;
 import com.kaqi.reader.manager.SettingManager;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+
 /**
  * 启动页
  * 1、无网络状态下，3秒后进入首页
@@ -48,6 +45,7 @@ import butterknife.OnClick;
 public class SplashActivity extends BaseActivity {
 
     public static final int SHOW_TIME = 0x01;
+    public static final int GO_HOME = 0x02;
     @Bind(R.id.tvSkip)
     TextView tvSkip;
     @Bind(R.id.mIvGender)
@@ -84,7 +82,6 @@ public class SplashActivity extends BaseActivity {
         if (mCountDownTimer != null) {
             mCountDownTimer.cancel();
         }
-        EventBus.getDefault().unregister(this);
         mHandler.removeCallbacksAndMessages(null);
         flag = true;
     }
@@ -106,24 +103,23 @@ public class SplashActivity extends BaseActivity {
                 mCountDownTimer = new SplashCountDownTimer(countDownTime, 1000);
                 mCountDownTimer.start();
                 break;
+            case GO_HOME:
+                goHome();
+                break;
         }
     }
 
     @Override
     public void initToolBar() {
-        EventBus.getDefault().register(this);
     }
 
     @Override
     public void initDatas() {
-
-    }
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void showDownProgress(DownloadProgress progress) {
     }
 
     @Override
     public void configViews() {
+
         mCountDownTimer = new SplashCountDownTimer(countDownTime, 1000);
         mCountDownTimer.start();
     }
@@ -143,7 +139,7 @@ public class SplashActivity extends BaseActivity {
                 if (mCountDownTimer != null) {
                     mCountDownTimer.cancel();
                 }
-                goHome();
+                mHandler.sendEmptyMessageDelayed(GO_HOME, 100);
                 break;
             case R.id.tvSkip:
                 if (mCountDownTimer != null) {
@@ -153,7 +149,7 @@ public class SplashActivity extends BaseActivity {
                     gone(tvSkip, splashImg);
                     visible(chooseSexRl);
                 } else {
-                    goHome();
+                    mHandler.sendEmptyMessageDelayed(GO_HOME, 100);
                 }
                 break;
         }
@@ -184,7 +180,7 @@ public class SplashActivity extends BaseActivity {
                 gone(tvSkip, splashImg);
                 visible(chooseSexRl);
             } else {
-                goHome();
+                mHandler.sendEmptyMessageDelayed(GO_HOME, 100);
             }
         }
 

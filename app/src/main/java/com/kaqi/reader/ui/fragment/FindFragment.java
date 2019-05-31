@@ -3,32 +3,30 @@ package com.kaqi.reader.ui.fragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
+import com.flyco.tablayout.SlidingTabLayout;
+import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseFragment;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.ui.adapter.ComFragmentAdapter;
-import com.kaqi.reader.utils.MagicIndicatorUtil;
-
-import net.lucode.hackware.magicindicator.MagicIndicator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import butterknife.Bind;
 
 /**
  * 发现
  *
- * @author yuyh.
- * @date 16/9/1.
+ * @author Niqiao.
+ * @date 2019年05月31日10:59:50
  */
-public class FindFragment extends BaseFragment {
+public class FindFragment extends BaseFragment implements OnTabSelectListener {
 
-    @Bind(R.id.magicIndicator)
-    MagicIndicator magicIndicator;
+    @Bind(R.id.tabs)
+    SlidingTabLayout tabs;
     @Bind(R.id.viewPager)
     ViewPager mViewPager;
-
+    ArrayList<Fragment> fragments = new ArrayList<>();
     private String[] titles = new String[]{"推荐", "男主", "女主"};
 
     @Override
@@ -47,6 +45,7 @@ public class FindFragment extends BaseFragment {
 
     @Override
     public void configViews() {
+        tabs.setOnTabSelectListener(this);
         initViewPager();
     }
 
@@ -61,12 +60,26 @@ public class FindFragment extends BaseFragment {
     }
 
     private void initViewPager() {
-        ArrayList<Fragment> fragments = new ArrayList<>();
+
         fragments.add(FindItemFragment.newInstance(1));
         fragments.add(FindItemFragment.newInstance(2));
         fragments.add(FindItemFragment.newInstance(3));
         mViewPager.setAdapter(new ComFragmentAdapter(getChildFragmentManager(), fragments));
-        MagicIndicatorUtil.init(getContext(), magicIndicator, mViewPager, Arrays.asList(titles));
+
+        tabs.setViewPager(mViewPager, titles);
+        mViewPager.setOffscreenPageLimit(titles.length);
+        tabs.setCurrentTab(0);
+
+
+    }
+
+    @Override
+    public void onTabSelect(int position) {
+        tabs.getTitleView(position).setTextSize(22);
+    }
+
+    @Override
+    public void onTabReselect(int position) {
 
     }
 }

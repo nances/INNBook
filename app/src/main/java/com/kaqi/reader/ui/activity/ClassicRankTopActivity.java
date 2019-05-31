@@ -4,32 +4,28 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.widget.ImageView;
+import android.support.v7.widget.Toolbar;
 
+import com.flyco.tablayout.SlidingTabLayout;
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseActivity;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.ui.adapter.ComFragmentAdapter;
 import com.kaqi.reader.ui.fragment.ClassRankTopItemFragment;
-import com.kaqi.reader.utils.MagicIndicatorUtil;
-
-import net.lucode.hackware.magicindicator.MagicIndicator;
+import com.kaqi.reader.view.NoScrollViewPager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import butterknife.Bind;
-import butterknife.OnClick;
 
 public class ClassicRankTopActivity extends BaseActivity {
 
-    @Bind(R.id.magicIndicator)
-    MagicIndicator magicIndicator;
+    @Bind(R.id.tabs)
+    SlidingTabLayout tabs;
     @Bind(R.id.viewPager)
-    ViewPager mViewPager;
-    @Bind(R.id.back_iv)
-    ImageView backIv;
+    NoScrollViewPager mViewPager;
+    @Bind(R.id.common_toolbar)
+    Toolbar common_toolbar;
 
     private String[] titles = new String[]{"男生", "女生"};
 
@@ -56,6 +52,8 @@ public class ClassicRankTopActivity extends BaseActivity {
 
     @Override
     public void initToolBar() {
+        common_toolbar.setTitle("排行榜");
+        common_toolbar.setNavigationIcon(R.drawable.black_back_icon);
     }
 
     @Override
@@ -69,7 +67,10 @@ public class ClassicRankTopActivity extends BaseActivity {
             fragments.add(ClassRankTopItemFragment.newInstance(titles[i].toString()));
         }
         mViewPager.setAdapter(new ComFragmentAdapter(getSupportFragmentManager(), fragments));
-        MagicIndicatorUtil.init(mContext, magicIndicator, mViewPager, Arrays.asList(titles));
+
+        tabs.setViewPager(mViewPager, titles);
+        mViewPager.setOffscreenPageLimit(titles.length);
+        tabs.setCurrentTab(0);
     }
 
     @Override
@@ -82,8 +83,4 @@ public class ClassicRankTopActivity extends BaseActivity {
         initViewPager();
     }
 
-    @OnClick(R.id.back_iv)
-    public void onViewClicked() {
-        finish();
-    }
 }

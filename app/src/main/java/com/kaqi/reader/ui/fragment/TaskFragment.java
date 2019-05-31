@@ -1,5 +1,6 @@
 package com.kaqi.reader.ui.fragment;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +49,8 @@ public class TaskFragment extends BaseFragment {
     List<String> DaySign = new ArrayList<String>();
     SignDaysAdapter signDaysAdapter;
 
+    public boolean isReadDays = false;
+    Drawable drawable = null;
 
     @Override
     public int getLayoutResId() {
@@ -121,10 +124,13 @@ public class TaskFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.sign_day:
+                signDay.setSelected(signEveryDays.isSelected() ? false : true);
                 break;
             case R.id.read_video_sign:
+                readVideoSign.setSelected(signEveryDays.isSelected() ? false : true);
                 break;
             case R.id.sign_every_days:
+                signEveryDays.setSelected(signEveryDays.isSelected() ? false : true);
                 break;
             case R.id.read_every_days:
                 ((MainActivity) activity).setCurrentItem(1);
@@ -133,6 +139,7 @@ public class TaskFragment extends BaseFragment {
                 EventManager.getShareUtisl(1);
                 break;
             case R.id.read_ad_every_days:
+                readAdEveryDays.setSelected(signEveryDays.isSelected() ? false : true);
                 break;
         }
     }

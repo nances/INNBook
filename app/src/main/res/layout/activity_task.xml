@@ -90,8 +90,8 @@
                             android:layout_width="@dimen/wh108.0dimens108.0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
-                            android:background="@drawable/selector_stroke_roundcir"
-                            android:clickable="true"
+                            android:background="@drawable/selector_btn_task"
+                            android:enabled="true"
                             android:gravity="center_horizontal"
                             android:padding="10dp"
                             android:text="每日签到"
@@ -174,7 +174,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/selector_stroke_roundredcir"
+                    android:background="@drawable/selector_btn_task"
+                    android:enabled="true"
                     android:gravity="center"
                     android:text="去领取"
                     android:textColor="@android:color/white" />
@@ -222,7 +223,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/selector_stroke_roundredcir"
+                    android:background="@drawable/selector_btn_task"
+                    android:clickable="true"
                     android:gravity="center"
                     android:text="去阅读"
                     android:textColor="@android:color/white" />
@@ -269,8 +271,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/selector_stroke_roundredcir"
-                    android:gravity="center"
+                    android:background="@drawable/selector_btn_task"
+                    android:enabled="true"                    android:gravity="center"
                     android:text="去分享"
                     android:textColor="@android:color/white" />
             </RelativeLayout>
@@ -318,8 +320,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/selector_stroke_roundredcir"
-                    android:gravity="center"
+                    android:background="@drawable/selector_btn_task"
+                    android:enabled="true"                    android:gravity="center"
                     android:text="赚金币（0/10）"
                     android:textColor="@android:color/white" />
             </RelativeLayout>
@@ -386,8 +388,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/selector_stroke_roundredcir"
-                    android:gravity="center"
+                    android:background="@drawable/selector_btn_task"
+                    android:enabled="true"                    android:gravity="center"
                     android:text="去领取"
                     android:textColor="@android:color/white" />
             </RelativeLayout>
@@ -433,8 +435,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/selector_stroke_roundredcir"
-                    android:gravity="center"
+                    android:background="@drawable/selector_btn_task"
+                    android:enabled="true"                    android:gravity="center"
                     android:text="去阅读"
                     android:textColor="@android:color/white" />
             </RelativeLayout>
@@ -479,8 +481,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/selector_stroke_roundredcir"
-                    android:gravity="center"
+                    android:background="@drawable/selector_btn_task"
+                    android:enabled="true"                    android:gravity="center"
                     android:text="去分享"
                     android:textColor="@android:color/white" />
             </RelativeLayout>
@@ -527,8 +529,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/selector_stroke_roundredcir"
-                    android:gravity="center"
+                    android:background="@drawable/selector_btn_task"
+                    android:enabled="true"                    android:gravity="center"
                     android:text="赚金币（0/10）"
                     android:textColor="@android:color/white" />
             </RelativeLayout>
