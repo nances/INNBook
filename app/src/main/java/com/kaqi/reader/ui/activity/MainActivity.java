@@ -1,9 +1,13 @@
 package com.kaqi.reader.ui.activity;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -24,7 +28,9 @@ import com.kaqi.reader.ui.fragment.MineFragment;
 import com.kaqi.reader.ui.fragment.RecommendFragment;
 import com.kaqi.reader.ui.fragment.TaskFragment;
 import com.kaqi.reader.utils.AppVersionManager;
+import com.kaqi.reader.utils.PermissionsChecker;
 import com.kaqi.reader.utils.ShareUtils;
+import com.kaqi.reader.utils.ToastUtils;
 import com.kaqi.reader.view.dialog.CommomAddShuJiaDialog;
 import com.kaqi.reader.view.dialog.ShareDialog;
 
@@ -52,7 +58,12 @@ public class MainActivity extends BaseActivity {
             R.drawable.mine_icon_sel};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
 
-
+    private static final int PERMISSIONS_REQUEST_STORAGE = 1;
+    static final String[] PERMISSIONS = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+    private PermissionsChecker mPermissionsChecker;
     private MineFragment mineFragment;
     private CommunityFragment circleMainFragment;
     private TaskFragment taskFragment;
@@ -80,7 +91,19 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initToolBar() {
+        initPermission();
+    }
 
+    public void initPermission() {
+        if (mPermissionsChecker == null) {
+            mPermissionsChecker = new PermissionsChecker(this);
+        }
+
+        //获取读取和写入SD卡的权限
+        if (mPermissionsChecker.lacksPermissions(PERMISSIONS)) {
+            //请求权限
+            ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSIONS_REQUEST_STORAGE);
+        }
     }
 
     @Override
@@ -285,6 +308,27 @@ public class MainActivity extends BaseActivity {
             }
         }).setTitle("提示").setNegativeButton("取消").setPositiveButton("确定").show();
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_STORAGE: {
+                // 如果取消权限，则返回的值为0
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //跳转到 FileSystemActivity
+//                    Intent intent = new Intent(this, FileSystemActivity.class);
+//                    startActivity(intent);
+
+                } else {
+                    ToastUtils.showToast("用户拒绝开启读写权限");
+                }
+                return;
+            }
+        }
+    }
+
 
     /**
      * 更新提示

@@ -16,6 +16,7 @@
 package com.kaqi.reader.component;
 
 import com.kaqi.reader.ui.activity.AboutActivity;
+import com.kaqi.reader.ui.activity.MoneyDetailedListActivity;
 import com.kaqi.reader.ui.activity.ReadBookHistoryActivity;
 import com.kaqi.reader.ui.fragment.HomeFragment;
 import com.kaqi.reader.ui.activity.SettingActivity;
@@ -37,4 +38,6 @@ public interface MainComponent {
     AboutActivity inject(AboutActivity activity);
 
     ReadBookHistoryActivity inject(ReadBookHistoryActivity activity);
+
+    MoneyDetailedListActivity inject(MoneyDetailedListActivity activity);
 }

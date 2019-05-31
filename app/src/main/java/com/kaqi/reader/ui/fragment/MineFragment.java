@@ -11,6 +11,7 @@ import com.kaqi.reader.ui.activity.AboutActivity;
 import com.kaqi.reader.ui.activity.FeedbackActivity;
 import com.kaqi.reader.ui.activity.HelpActivity;
 import com.kaqi.reader.ui.activity.LoginActivity;
+import com.kaqi.reader.ui.activity.MoneyDetailedListActivity;
 import com.kaqi.reader.ui.activity.ReadBookHistoryActivity;
 import com.kaqi.reader.ui.activity.RegisterActivity;
 import com.kaqi.reader.ui.activity.SettingActivity;
@@ -83,7 +84,7 @@ public class MineFragment extends BaseFragment {
     }
 
     @OnClick({R.id.uc_setting_iv, R.id.uc_msg_iv, R.id.regisiter_tv, R.id.login_tv, R.id.uc_avater,
-            R.id.about_us, R.id.read_history, R.id.message_icon, R.id.feedback_stv, R.id.help_stv})
+            R.id.about_us, R.id.read_history, R.id.message_icon, R.id.feedback_stv, R.id.help_stv, R.id.money_detail_list})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.uc_setting_iv:
@@ -115,6 +116,10 @@ public class MineFragment extends BaseFragment {
             case R.id.help_stv:
                 HelpActivity.startActivity(getActivity());
                 break;
+            case R.id.money_detail_list:
+                MoneyDetailedListActivity.startActivity(getActivity());
+                break;
+
         }
     }
 }
