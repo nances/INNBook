@@ -50,7 +50,10 @@ public class MoneyDetailedListActivity extends BaseActivity {
     MoneyListAdapter moneyListAdapter;
     LRecyclerViewAdapter lRecyclerViewAdapter;
     private View moneyheadView;
+
+    public View moneyHeadTitle;
     ArrayList<ItemModel> newList = new ArrayList<>();
+
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, MoneyDetailedListActivity.class));
     }
@@ -80,7 +83,7 @@ public class MoneyDetailedListActivity extends BaseActivity {
         for (int i = 0; i < 10; i++) {
 
             ItemModel item = new ItemModel();
-            item.id =  + i;
+            item.id = +i;
             item.title = "获取多少酒金币 " + (item.id);
             newList.add(item);
         }
@@ -88,13 +91,15 @@ public class MoneyDetailedListActivity extends BaseActivity {
 
     @Override
     public void configViews() {
-        moneyheadView = LayoutInflater.from(this).inflate(R.layout.activity_money_headview,(ViewGroup)findViewById(android.R.id.content), false);
+        moneyheadView = LayoutInflater.from(this).inflate(R.layout.activity_money_headview, (ViewGroup) findViewById(android.R.id.content), false);
+        moneyHeadTitle = LayoutInflater.from(this).inflate(R.layout.money_list_title, (ViewGroup) findViewById(android.R.id.content), false);
         moneyListAdapter = new MoneyListAdapter(this);
         moneyListAdapter.setDataList(newList);
         moneyList.setOverScrollMode(OVER_SCROLL_NEVER);
         lRecyclerViewAdapter = new LRecyclerViewAdapter(moneyListAdapter);
         moneyList.setAdapter(lRecyclerViewAdapter);
         lRecyclerViewAdapter.addHeaderView(moneyheadView);
+        lRecyclerViewAdapter.addHeaderView(moneyHeadTitle);
         moneyList.setLayoutManager(new LinearLayoutManager(this));
         moneyList.setLoadMoreEnabled(true);
 

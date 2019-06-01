@@ -1,21 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/card_view"
     android:layout_width="fill_parent"
-    android:layout_height="65dp"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:background="@color/cardview_light_background">
 
-    <TextView
-        android:id="@+id/info_text"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="left"
-        android:paddingLeft="@dimen/dp_10"
-        android:textColor="@color/common_h1"
-        android:text="22222"
-        android:textSize="@dimen/dp_14"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wh74.0dimens74.0dp">
 
+        <TextView
+            android:id="@+id/money_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/wh14.0dimens14.0dp"
+            android:layout_marginTop="@dimen/wh12.0dimens12.0dp"
+            android:gravity="left"
+            android:paddingLeft="@dimen/dp_10"
+            android:text="每日领取"
+            android:textColor="@color/common_h1"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/money_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/money_tv"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/wh14.0dimens14.0dp"
+            android:layout_marginTop="@dimen/wh12.0dimens12.0dp"
+            android:gravity="left"
+            android:paddingLeft="@dimen/dp_10"
+            android:text="2019年06月01日11:23:36"
+            android:textColor="@color/common_h3"
+            android:textSize="12sp" />
+
+
+        <TextView
+            android:id="@+id/money_sum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/wh15.0dimens15.0dp"
+            android:paddingLeft="@dimen/dp_10"
+            android:text="+18金币"
+            android:textColor="@color/yellow_30"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wh0.5dimens0.5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/wh14.0dimens14.0dp"
+            android:layout_marginRight="@dimen/wh14.0dimens14.0dp"
+            android:background="@color/line" />
+    </RelativeLayout>
 </LinearLayout>

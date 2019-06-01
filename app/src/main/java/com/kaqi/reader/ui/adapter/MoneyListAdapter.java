@@ -40,7 +40,7 @@ public class MoneyListAdapter extends ListBaseAdapter<ItemModel> {
     public void onBindItemHolder(SuperViewHolder holder, int position) {
         ItemModel item = mDataList.get(position);
 
-        TextView titleText = holder.getView(R.id.info_text);
+        TextView titleText = holder.getView(R.id.money_time);
         titleText.setText(item.title);
     }
 }

@@ -12,7 +12,7 @@
         android:layout_marginLeft="@dimen/wh14.0dimens14.0dp"
         android:layout_marginTop="@dimen/wh8.0dimens8.0dp"
         android:layout_marginRight="@dimen/wh14.0dimens14.0dp"
-        android:layout_marginBottom="@dimen/wh20.0dimens20.0dp"
+        android:layout_marginBottom="@dimen/wh10.0dimens10.0dp"
         android:background="@drawable/shape_yellw30_bg"
         android:orientation="vertical">
 
@@ -152,7 +152,8 @@
                 android:text="10000 金币 = 1元"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
-
         </RelativeLayout>
+
     </LinearLayout>
+
 </LinearLayout>

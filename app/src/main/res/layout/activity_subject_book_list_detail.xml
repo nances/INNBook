@@ -10,9 +10,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_marginBottom="@dimen/wh54.0dimens54.0dp"
-        >
+        android:background="@color/common_bg"
+        android:orientation="vertical">
 
         <include layout="@layout/common_toolbar" />
 
@@ -38,8 +38,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/wh54.0dimens54.0dp"
         android:layout_gravity="bottom"
-        android:orientation="horizontal"
         android:background="@color/common_bg"
+        android:orientation="horizontal"
         android:visibility="gone"
         tools:visibility="visible">
 

@@ -136,6 +136,7 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
     public void configViews() {
 
         initAdapter(RecommendAdapter.class, true, false);
+        mRecyclerView.removeAllItemDecoration();
         mAdapter.setOnItemLongClickListener(this);
         mAdapter.addFooter(new RecyclerArrayAdapter.ItemView() {
             @Override
