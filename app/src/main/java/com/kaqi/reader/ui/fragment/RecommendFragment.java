@@ -1,6 +1,7 @@
 package com.kaqi.reader.ui.fragment;
 
 import android.app.ActivityManager;
+import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -44,6 +45,7 @@ import com.kaqi.reader.ui.activity.WifiBookActivity;
 import com.kaqi.reader.ui.contract.RecommendContract;
 import com.kaqi.reader.ui.easyadapter.RecommendAdapter;
 import com.kaqi.reader.ui.presenter.RecommendPresenter;
+import com.kaqi.reader.view.dialog.CommomMannagerDialog;
 import com.kaqi.reader.view.recyclerview.adapter.RecyclerArrayAdapter;
 import com.mylhyl.circledialog.CircleDialog;
 import com.mylhyl.circledialog.params.PopupParams;
@@ -221,7 +223,8 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
     public boolean onItemLongClick(int position) {
         //批量管理时，屏蔽长按事件
         if (isVisible(llBatchManagement)) return false;
-        showLongClickDialog(position);
+//        showLongClickDialog(position);
+        setBookMannager(position);
         return false;
     }
 
@@ -232,9 +235,11 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
      */
     private void showLongClickDialog(final int position) {
         final boolean isTop = CollectionsManager.getInstance().isTop(mAdapter.getItem(position)._id);
+        setBookMannager(position);
         String[] items;
         DialogInterface.OnClickListener listener;
-        if (mAdapter.getItem(position).isFromSD) {
+//        if (mAdapter.getItem(position).isFromSD) {
+        if (true) {
             items = getResources().getStringArray(R.array.recommend_item_long_click_choice_local);
             listener = new DialogInterface.OnClickListener() {
                 @Override
@@ -276,10 +281,6 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
                                     mAdapter.getItem(position)._id);
                             break;
                         case 2:
-                            //移入养肥区
-                            mRecyclerView.showTipViewAndDelayClose("正在拼命开发中...");
-                            break;
-                        case 3:
                             //缓存全本
                             if (mAdapter.getItem(position).isFromSD) {
                                 mRecyclerView.showTipViewAndDelayClose("本地文件不支持该选项哦");
@@ -288,13 +289,13 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
                                 mPresenter.getTocList(mAdapter.getItem(position)._id);
                             }
                             break;
-                        case 4:
+                        case 3:
                             //删除
                             List<Recommend.RecommendBooks> removeList = new ArrayList<>();
                             removeList.add(mAdapter.getItem(position));
                             showDeleteCacheDialog(removeList);
                             break;
-                        case 5:
+                        case 4:
                             //批量管理
                             showBatchManagementLayout();
                             break;
@@ -311,6 +312,39 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
                 .setItems(items, listener)
                 .setNegativeButton(null, null)
                 .create().show();
+    }
+
+    /**
+     * 书本弹框管理
+     */
+    public void setBookMannager(int book_position) {
+
+        new CommomMannagerDialog(mContext, R.style.dialog, new CommomMannagerDialog.OnCloseListener() {
+            @Override
+            public void onClick(Dialog dialog, int type) {
+                final boolean isTop = CollectionsManager.getInstance().isTop(mAdapter.getItem(book_position)._id);
+                switch (type) {
+                    case 0:
+                        //置顶、取消置顶
+                        CollectionsManager.getInstance().top(mAdapter.getItem(book_position)._id, !isTop);
+                        break;
+                    case 1:
+                        //删除
+                        List<Recommend.RecommendBooks> removeList = new ArrayList<>();
+                        removeList.add(mAdapter.getItem(book_position));
+                        showDeleteCacheDialog(removeList);
+                        break;
+                    case 2:
+                        //批量管理
+                        showBatchManagementLayout();
+                        break;
+                    default:
+                        break;
+                }
+                dialog.dismiss();
+            }
+        }).setTitle(mAdapter.getItem(book_position).title).show();
+
     }
 
     /**

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@color/common_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/book_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/yellow_30"
+            android:padding="14dp"
+            android:text="加入书架"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/book_set_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wh54.0dimens54.0dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="3dp"
+        android:paddingLeft="@dimen/wh18.0dimens18.0dp"
+        android:text="置顶"
+        android:textColor="@color/common_h2"
+        android:textSize="16sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/common_gray_bg" />
+
+    <TextView
+        android:id="@+id/book_del"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wh54.0dimens54.0dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="3dp"
+        android:paddingLeft="@dimen/wh18.0dimens18.0dp"
+        android:text="删除"
+        android:textColor="@color/common_h2"
+        android:textSize="16sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/common_gray_bg" />
+
+    <TextView
+        android:id="@+id/book_all_mannager"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wh54.0dimens54.0dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="3dp"
+        android:paddingLeft="@dimen/wh18.0dimens18.0dp"
+        android:text="批量管理"
+        android:textColor="@color/common_h2"
+        android:textSize="16sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/common_gray_bg" />
+
+</LinearLayout>
