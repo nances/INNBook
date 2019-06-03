@@ -69,13 +69,40 @@ public class FindFragment extends BaseFragment implements OnTabSelectListener {
         tabs.setViewPager(mViewPager, titles);
         mViewPager.setOffscreenPageLimit(titles.length);
         tabs.setCurrentTab(0);
+        tabs.getTitleView(0).setTextSize(26);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+            }
 
+            @Override
+            public void onPageSelected(int position) {
+                updateTextSize(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+    }
+
+    public void updateTextSize(int position) {
+        for (int i = 0; i < fragments.size(); i++) {
+            final boolean isSelect = i == position;
+            if (isSelect) {
+                tabs.getTitleView(i).setTextSize(26);
+            } else {
+                tabs.getTitleView(i).setTextSize(16);
+            }
+        }
     }
 
     @Override
     public void onTabSelect(int position) {
-        tabs.getTitleView(position).setTextSize(22);
+
     }
 
     @Override

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stv="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/common_bg"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/yellow_30"
+            android:padding="14dp"
+            android:text="我要提现"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/money_tv_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/wh62.0dimens62.0dp"
+            android:layout_below="@+id/title_tv"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="0dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/wh14.0dimens14.0dp"
+            android:text="金币余额:"
+            android:textColor="@color/common_h2"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/money_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/wh62.0dimens62.0dp"
+            android:layout_below="@+id/title_tv"
+            android:layout_toRightOf="@id/money_tv_tip"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/wh14.0dimens14.0dp"
+            android:text="12000金币 "
+            android:textColor="@color/common_h1"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/wh62.0dimens62.0dp"
+            android:layout_below="@+id/title_tv"
+            android:layout_toRightOf="@+id/money_tv"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/wh4.0dimens4.0dp"
+            android:text="(约1.2元)"
+            android:textColor="@color/common_h3"
+            android:textSize="16sp" />
+
+        <GridView
+            android:id="@+id/pay_grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/money_tv"
+            android:gravity="center"
+            android:horizontalSpacing="@dimen/wh14.0dimens14.0dp"
+            android:numColumns="3"
+            android:verticalSpacing="@dimen/wh14.0dimens14.0dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wh0.5dimens0.5dp"
+            android:layout_above="@id/cancel"
+            android:background="@color/line" />
+
+        <TextView
+            android:id="@+id/out_money"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wh54.0dimens54.0dp"
+            android:layout_below="@+id/pay_grid"
+            android:background="@color/common_bg"
+            android:gravity="center"
+            android:text="取消提现"
+            android:textColor="@color/common_h2"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wh0.5dimens0.5dp"
+            android:layout_below="@id/out_money"
+            android:background="@color/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/out_money"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/wh20.0dimens20.0dp"
+                android:paddingTop="@dimen/wh14.0dimens14.0dp"
+                android:text="温馨提示" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/wh20.0dimens20.0dp"
+                android:paddingTop="@dimen/wh4.0dimens4.0dp"
+                android:text="1.提现申请将在1~2个工作日到账，请耐心等待" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/wh20.0dimens20.0dp"
+                android:paddingTop="@dimen/wh4.0dimens4.0dp"
+                android:text="2.每日阅读，签到，分享或完成福利中心其他任务，均可获取金币" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/wh20.0dimens20.0dp"
+                android:paddingTop="@dimen/wh4.0dimens4.0dp"
+                android:text="3.为保证广大用户的收益不受影响，对于存在用户违规操作行为，平台将封号处理,并且清理所得奖励,请文明" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="36dp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

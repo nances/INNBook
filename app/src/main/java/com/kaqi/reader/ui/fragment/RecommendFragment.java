@@ -318,11 +318,11 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
      * 书本弹框管理
      */
     public void setBookMannager(int book_position) {
-
-        new CommomMannagerDialog(mContext, R.style.dialog, new CommomMannagerDialog.OnCloseListener() {
+        final boolean isTop = CollectionsManager.getInstance().isTop(mAdapter.getItem(book_position)._id);
+        new CommomMannagerDialog(mContext, R.style.dialog, isTop, new CommomMannagerDialog.OnCloseListener() {
             @Override
             public void onClick(Dialog dialog, int type) {
-                final boolean isTop = CollectionsManager.getInstance().isTop(mAdapter.getItem(book_position)._id);
+
                 switch (type) {
                     case 0:
                         //置顶、取消置顶

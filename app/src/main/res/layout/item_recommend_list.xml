@@ -85,8 +85,8 @@
 
     <ImageView
         android:id="@+id/ivTopLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/wh14.0dimens14.0dp"
+        android:layout_height="@dimen/wh12.0dimens12.0dp"
         android:layout_alignParentRight="true"
         android:src="@drawable/label_book_top"
         android:visibility="gone"

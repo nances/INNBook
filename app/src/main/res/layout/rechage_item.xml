@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/pay_rl"
+        android:layout_width="@dimen/wh106.0dimens106.0dp"
+        android:layout_height="@dimen/wh50.0dimens50.0dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/pay_item_selector">
+
+
+        <TextView
+            android:id="@+id/pay_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="元"
+            android:textColor="@color/common_h2"
+            android:textSize="14sp" />
+
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/pay_edit"
+        android:layout_width="@dimen/wh106.0dimens106.0dp"
+        android:layout_height="@dimen/wh50.0dimens50.0dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/pay_item_selector"
+        android:gravity="center"
+        android:hint="其他金额"
+        android:inputType="number"
+        android:maxLines="1"
+        android:textColor="#b1b1b1"
+        android:textSize="14sp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+</RelativeLayout>

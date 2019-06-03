@@ -1,23 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@color/cardview_light_background">
+    android:background="@color/cardview_light_background"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/money_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.flyco.tablayout.SlidingTabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wh52.0dimens52.0dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:tl_indicator_corner_radius="2dp"
+        app:tl_indicator_height="@dimen/wh2.0dimens2.0dp"
+        app:tl_indicator_width_equal_title="true"
+        app:tl_tab_padding="@dimen/wh12.0dimens12.0dp"
+        app:tl_textBold="BOTH"
+        app:tl_textSelectColor="@color/yellow_30"
+        app:tl_textUnselectColor="@color/common_h1"
+        app:tl_textsize="18sp"
+        app:tl_underline_color="@color/white" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wh0.5dimens0.5dp"
         android:layout_marginLeft="@dimen/wh14.0dimens14.0dp"
-        android:layout_marginTop="@dimen/wh12.0dimens12.0dp"
-        android:layout_marginBottom="@dimen/wh12.0dimens12.0dp"
-        android:gravity="left"
-        android:paddingLeft="@dimen/dp_10"
-        android:text="金币明细"
-        android:textColor="@color/common_h1"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:layout_marginRight="@dimen/wh14.0dimens14.0dp"
+        android:background="@color/grey_200" />
 
-
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 </LinearLayout>

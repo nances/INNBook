@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -40,7 +39,7 @@
                     android:layout_marginTop="@dimen/wh8.0dimens8.0dp"
                     android:lineSpacingExtra="1dp"
                     android:lineSpacingMultiplier="1.1"
-                    android:padding="@dimen/wh4.0dimens4.0dp"
+                    android:padding="@dimen/wh6.0dimens6.0dp"
                     android:text="1.如何签到？\n    启动软件后当前未签到，在福利中心点击敲到"
                     android:textSize="13sp" />
 
@@ -49,8 +48,7 @@
                     android:layout_height="match_parent"
                     android:lineSpacingExtra="1dp"
                     android:lineSpacingMultiplier="1.1"
-                    android:padding="@dimen/wh4.0dimens4.0dp"
-                    android:text="2.如何去除书架广告？\n    书架页面长按推广广告，弹出是否去处广告选项"
+                    android:padding="@dimen/wh6.0dimens6.0dp"                    android:text="2.如何去除书架广告？\n    书架页面长按推广广告，弹出是否去处广告选项"
                     android:textSize="13sp" />
 
                 <TextView
@@ -58,8 +56,7 @@
                     android:layout_height="match_parent"
                     android:lineSpacingExtra="1dp"
                     android:lineSpacingMultiplier="1.1"
-                    android:padding="@dimen/wh4.0dimens4.0dp"
-                    android:text="3.如何搜索？\n    首页上方有搜索按钮，点击进入即可"
+                    android:padding="@dimen/wh6.0dimens6.0dp"                    android:text="3.如何搜索？\n    首页上方有搜索按钮，点击进入即可"
                     android:textSize="13sp" />
 
                 <TextView
@@ -67,7 +64,7 @@
                     android:layout_height="match_parent"
                     android:lineSpacingExtra="1dp"
                     android:lineSpacingMultiplier="1.1"
-                    android:padding="@dimen/wh4.0dimens4.0dp"
+                    android:padding="@dimen/wh6.0dimens6.0dp"
                     android:text="4.如何找书阅读？\n    书架上方《分类》《排行》《完结》《更新》选项进入，快速搜索相关类型书籍"
                     android:textSize="13sp" />
 
@@ -76,7 +73,7 @@
                     android:layout_height="match_parent"
                     android:lineSpacingExtra="1dp"
                     android:lineSpacingMultiplier="1.1"
-                    android:padding="@dimen/wh4.0dimens4.0dp"
+                    android:padding="@dimen/wh6.0dimens6.0dp"
                     android:text="5.如何调整字体大小？\n    在阅读中点击书本中间，显示菜单状态栏，点击设置，进入设置文字大小"
                     android:textSize="13sp" />
 
@@ -85,7 +82,7 @@
                     android:layout_height="match_parent"
                     android:lineSpacingExtra="1dp"
                     android:lineSpacingMultiplier="1.1"
-                    android:padding="@dimen/wh4.0dimens4.0dp"
+                    android:padding="@dimen/wh6.0dimens6.0dp"
                     android:text="6.如何设置背景颜色？\n    在阅读中点击书本中间，显示菜单状态栏，点击设置，进入设置背景颜色"
                     android:textSize="13sp" />
 
@@ -94,7 +91,7 @@
                     android:layout_height="match_parent"
                     android:lineSpacingExtra="1dp"
                     android:lineSpacingMultiplier="1.1"
-                    android:padding="@dimen/wh4.0dimens4.0dp"
+                    android:padding="@dimen/wh6.0dimens6.0dp"
                     android:text="7.如何设置字体？\n    在阅读中点击书本中间，显示菜单状态栏，点击设置，进入设置字体"
                     android:textSize="13sp" />
 
@@ -103,7 +100,7 @@
                     android:layout_height="match_parent"
                     android:lineSpacingExtra="1dp"
                     android:lineSpacingMultiplier="1.1"
-                    android:padding="@dimen/wh4.0dimens4.0dp"
+                    android:padding="@dimen/wh6.0dimens6.0dp"
                     android:text="8.如何设置书本翻页模式？\n    在个人中心，进入到设置页面，现在阅读页翻页模式"
                     android:textSize="13sp" />
 
@@ -112,7 +109,7 @@
                     android:layout_height="match_parent"
                     android:lineSpacingExtra="1dp"
                     android:lineSpacingMultiplier="1.1"
-                    android:padding="@dimen/wh4.0dimens4.0dp"
+                    android:padding="@dimen/wh6.0dimens6.0dp"
                     android:text="9.如何查看阅读的历史记录？\n    在首页上方进入历史记录以及设置页面"
                     android:textSize="13sp" />
 
@@ -121,7 +118,7 @@
                     android:layout_height="match_parent"
                     android:lineSpacingExtra="1dp"
                     android:lineSpacingMultiplier="1.1"
-                    android:padding="@dimen/wh4.0dimens4.0dp"
+                    android:padding="@dimen/wh6.0dimens6.0dp"
                     android:text="10.如何删除首页加入的书籍？\n    在首页上方点击菜单设置按钮，选择书架管理即可操作..."
                     android:textSize="13sp" />
 
@@ -148,7 +145,7 @@
                     android:lineSpacingExtra="1dp"
 
                     android:lineSpacingMultiplier="1.1"
-                    android:padding="@dimen/wh4.0dimens4.0dp"
+                    android:padding="@dimen/wh6.0dimens6.0dp"
                     android:text="1.领取今日阅读是指？\n  每天阅读有效时间达30分钟，即可完成当日阅读任务（奖励金额以页面展示为准）"
                     android:textSize="13sp" />
 
@@ -157,7 +154,7 @@
                     android:layout_height="match_parent"
                     android:lineSpacingExtra="1dp"
                     android:lineSpacingMultiplier="1.1"
-                    android:padding="@dimen/wh4.0dimens4.0dp"
+                    android:padding="@dimen/wh6.0dimens6.0dp"
                     android:text="2.如何查看赚了多少钱？\n  每天签到后，到设置页面查点击金币进入，查看收益记录"
                     android:textSize="13sp" />
 
@@ -166,7 +163,7 @@
                     android:layout_height="match_parent"
                     android:lineSpacingExtra="1dp"
                     android:lineSpacingMultiplier="1.1"
-                    android:padding="@dimen/wh4.0dimens4.0dp"
+                    android:padding="@dimen/wh6.0dimens6.0dp"
                     android:text="3.看书赚钱模式是指？\n  开启赚钱模式后，正常有效的阅读会赚取相应的金币，但是会有部门广告展示"
                     android:textSize="13sp" />
 
@@ -175,7 +172,7 @@
                     android:layout_height="match_parent"
                     android:lineSpacingExtra="1dp"
                     android:lineSpacingMultiplier="1.1"
-                    android:padding="@dimen/wh4.0dimens4.0dp"
+                    android:padding="@dimen/wh6.0dimens6.0dp"
                     android:text="4.如何开启/关闭赚钱模式\n  阅读页面右上方，点击打开赚钱模式，再次点击即是关闭"
                     android:textSize="13sp" />
 
@@ -203,7 +200,7 @@
                     android:lineSpacingExtra="1dp"
 
                     android:lineSpacingMultiplier="1.1"
-                    android:padding="@dimen/wh4.0dimens4.0dp"
+                    android:padding="@dimen/wh6.0dimens6.0dp"
                     android:text="1.阅读书籍报错\n  请在个人中心进入反馈页面，记录作者书名反馈问题，我们会跟进核实"
                     android:textSize="13sp" />
 
@@ -212,7 +209,7 @@
                     android:layout_height="match_parent"
                     android:lineSpacingExtra="1dp"
                     android:lineSpacingMultiplier="1.1"
-                    android:padding="@dimen/wh4.0dimens4.0dp"
+                    android:padding="@dimen/wh6.0dimens6.0dp"
                     android:text="2.书籍详情页无法加载怎么办\n  请先检查网络是否通畅，一般都是网络不稳定  \n 切换网络  \n 如果开了代理请关闭"
                     android:textSize="13sp" />
 
@@ -221,7 +218,7 @@
                     android:layout_height="match_parent"
                     android:lineSpacingExtra="1dp"
                     android:lineSpacingMultiplier="1.1"
-                    android:padding="@dimen/wh4.0dimens4.0dp"
+                    android:padding="@dimen/wh6.0dimens6.0dp"
                     android:text="3.书籍报错/内容重复/章节不连贯问题\n  请在个人中心进入反馈页面，记录作者书名反馈问题，我们会跟进核实"
                     android:textSize="13sp" />
             </LinearLayout>

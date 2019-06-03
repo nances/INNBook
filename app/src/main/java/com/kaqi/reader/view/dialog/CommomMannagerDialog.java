@@ -23,6 +23,7 @@ public class CommomMannagerDialog extends Dialog implements View.OnClickListener
     private String content;
     private OnCloseListener listener;
     private String title;
+    private boolean isTop;
 
     public CommomMannagerDialog(Context context) {
         super(context);
@@ -35,9 +36,10 @@ public class CommomMannagerDialog extends Dialog implements View.OnClickListener
         this.content = content;
     }
 
-    public CommomMannagerDialog(Context context, int themeResId,  OnCloseListener listener) {
+    public CommomMannagerDialog(Context context, int themeResId, boolean isTop, OnCloseListener listener) {
         super(context, themeResId);
         this.mContext = context;
+        this.isTop = isTop;
         this.listener = listener;
     }
 
@@ -80,6 +82,7 @@ public class CommomMannagerDialog extends Dialog implements View.OnClickListener
         if (!TextUtils.isEmpty(title)) {
             titleTxt.setText(title);
         }
+        bookTop.setText(isTop ? "取消置顶" : "置顶");
 
     }
 

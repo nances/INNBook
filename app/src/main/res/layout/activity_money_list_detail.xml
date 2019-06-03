@@ -7,12 +7,15 @@
     android:fitsSystemWindows="true"
 
     android:orientation="vertical">
-
     <include layout="@layout/common_toolbar" />
 
-    <com.github.jdsjlzx.recyclerview.LRecyclerView
-        android:id="@+id/money_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.github.jdsjlzx.recyclerview.LRecyclerView>
+    <include layout="@layout/activity_money_headview"/>
+
+    <include layout="@layout/money_list_title"/>
+
+    <!--<com.github.jdsjlzx.recyclerview.LRecyclerView-->
+        <!--android:id="@+id/money_list"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"></com.github.jdsjlzx.recyclerview.LRecyclerView>-->
 
 </LinearLayout>

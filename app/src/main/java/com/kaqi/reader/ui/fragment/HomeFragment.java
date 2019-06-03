@@ -126,6 +126,7 @@ public class HomeFragment extends BaseFragment implements MainContract.View, Log
 
             @Override
             public void onPageSelected(int position) {
+
             }
 
             @Override
