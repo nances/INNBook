@@ -19,10 +19,6 @@ import com.kaqi.reader.bean.base.Base;
 
 import java.util.List;
 
-/**
- * @author yuyh.
- * @date 2016/8/4.
- */
 public class SearchDetail extends Base {
 
 

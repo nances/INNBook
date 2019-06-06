@@ -53,9 +53,7 @@ public class RxUtil {
         return Observable.create(new Observable.OnSubscribe<String>() {
             @Override
             public void call(Subscriber<? super String> subscriber) {
-                LogUtils.d("get data from disk: key==" + key);
                 String json = ACache.get(ReaderApplication.getsInstance()).getAsString(key);
-                LogUtils.d("get data from disk finish , json==" + json);
                 if (!TextUtils.isEmpty(json)) {
                     subscriber.onNext(json);
                 }

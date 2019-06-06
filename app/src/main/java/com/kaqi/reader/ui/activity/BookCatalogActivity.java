@@ -45,7 +45,7 @@ import javax.inject.Inject;
 import butterknife.Bind;
 
 /**
- * Created by lfh on 2016/8/6.
+ * Created by niqiao on 2019年06月05日14:15:39.
  */
 public class BookCatalogActivity extends BaseActivity implements BookReadContract.View, OnRvItemClickListener<BookMixAToc.mixToc.Chapters> {
 

@@ -2,47 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/common_bg"
+    android:background="@color/grey_100"
+    android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
+    android:layout_marginBottom="@dimen/wh6.0dimens6.0dp"
     android:orientation="vertical">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/wh8.0dimens8.0dp"
-        android:background="@color/grey_050" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/wh50.0dimens50.0dp"
-        android:background="@color/common_bg">
-
-        <TextView
-            android:id="@+id/titleTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/wh14.0dimens14.0dp"
-            android:textColor="@color/common_h1"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/subTitleTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/titleTv"
-            android:layout_marginLeft="@dimen/wh12.0dimens12.0dp"
-            android:layout_toRightOf="@+id/titleTv"
-            android:textColor="@color/common_h2"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/rightTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/titleTv"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/wh12.0dimens12.0dp"
-            android:textColor="@color/gray"
-            android:textSize="12sp" />
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/wh38.0dimens38.0dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/wh14.0dimens14.0dp"
+        android:gravity="center_vertical"
+        android:text="每日推荐"
+        android:textColor="@color/common_h1"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 </LinearLayout>

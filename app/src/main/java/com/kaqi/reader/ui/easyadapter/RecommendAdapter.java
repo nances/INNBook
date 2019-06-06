@@ -36,12 +36,14 @@ public class RecommendAdapter extends RecyclerArrayAdapter<Recommend.RecommendBo
                 }
                 holder.setText(R.id.tvRecommendTitle, item.title)
                         .setText(R.id.tvLatelyUpdate, latelyUpdate)
-                        .setText(R.id.tvBookListAuthor,item.author)
+                        .setText(R.id.tvBookListAuthor, item.author)
                         .setText(R.id.tvRecommendShort, item.lastChapter)
                         .setVisible(R.id.ivTopLabel, item.isTop)
                         .setVisible(R.id.ckBoxSelect, item.showCheckBox)
                         .setVisible(R.id.ivUnReadDot, FormatUtils.formatZhuiShuDateString(item.updated)
-                                .compareTo(item.recentReadingTime) > 0);
+                                .compareTo(item.recentReadingTime) > 0)
+                ;
+
 
                 if (item.path != null && item.path.endsWith(Constant.SUFFIX_PDF)) {
                     holder.setImageResource(R.id.ivRecommendCover, R.drawable.ic_shelf_pdf);

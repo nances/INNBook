@@ -4,9 +4,6 @@ import com.kaqi.reader.bean.base.Base;
 
 import java.util.List;
 
-/**
- * Created by lfh on 2016/8/15.
- */
 public class CategoryList extends Base {
 
 

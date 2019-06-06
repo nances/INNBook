@@ -27,8 +27,8 @@ import com.squareup.leakcanary.RefWatcher;
 import com.umeng.commonsdk.UMConfigure;
 
 /**
- * @author yuyh.
- * @date 2016/8/3.
+ * @author niqiao.
+ * @date 2019年06月05日16:10:44.
  */
 public class ReaderApplication extends Application {
 
@@ -48,7 +48,7 @@ public class ReaderApplication extends Application {
         UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, null);
         MobSDK.init(this);
         PushManager.getInstance().initialize(this, ReaderPushService.class);
-        PushManager.getInstance().registerPushIntentService(this,ReaderIntentService.class);
+        PushManager.getInstance().registerPushIntentService(this, ReaderIntentService.class);
         refWatcher = LeakCanary.install(this);
         sInstance = this;
         initCompoent();
@@ -59,7 +59,7 @@ public class ReaderApplication extends Application {
         //initHciCloud();
     }
 
-    public static void sendMessage(Message msg){
+    public static void sendMessage(Message msg) {
 
     }
 

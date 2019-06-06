@@ -20,10 +20,6 @@ import com.kaqi.reader.bean.base.Base;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * @author yuyh.
- * @date 2016/8/4.
- */
 public class Recommend extends Base {
 
     public List<RecommendBooks> books;

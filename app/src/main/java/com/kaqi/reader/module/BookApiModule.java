@@ -16,7 +16,6 @@
 package com.kaqi.reader.module;
 
 import com.kaqi.reader.api.BookApi;
-import com.kaqi.reader.api.support.HeaderInterceptor;
 
 import java.net.Proxy;
 import java.util.concurrent.TimeUnit;
@@ -24,18 +23,21 @@ import java.util.concurrent.TimeUnit;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 @Module
 public class BookApiModule {
 
     @Provides
     public OkHttpClient provideOkHttpClient() {
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder().proxy(Proxy.NO_PROXY).connectTimeout(10, TimeUnit.SECONDS)
                 .connectTimeout(20 * 1000, TimeUnit.MILLISECONDS)
                 .readTimeout(20 * 1000, TimeUnit.MILLISECONDS)
                 .retryOnConnectionFailure(true) // 失败重发
-                .addInterceptor(new HeaderInterceptor());
+                .addInterceptor(loggingInterceptor);
         return builder.build();
     }
 

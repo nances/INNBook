@@ -2,7 +2,6 @@ package com.kaqi.reader.ui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,7 +120,7 @@ public class FindItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         } else if (holder instanceof PartitionTitleViewHolder) {
             PartitionTitleViewHolder partitionTitleViewHolder = (PartitionTitleViewHolder) holder;
             partitionTitleViewHolder.titleTv.setText("本周看点");
-            partitionTitleViewHolder.subTitleTv.setText("热血玄幻，不容错过");
+//            partitionTitleViewHolder.subTitleTv.setText("热血玄幻，不容错过");
         } else if (holder instanceof GridBookViewHolder) {
             GridBookViewHolder bookViewHolder = (GridBookViewHolder) holder;
             int p = position - (labelList.size() + 1 + 1);
@@ -196,10 +195,6 @@ public class FindItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         @Bind(R.id.titleTv)
         TextView titleTv;
-        @Bind(R.id.subTitleTv)
-        TextView subTitleTv;
-        @Bind(R.id.rightTv)
-        TextView rightTv;
 
         public PartitionTitleViewHolder(View itemView) {
             super(itemView);
@@ -210,15 +205,15 @@ public class FindItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemViewType(int position) {
-        Log.v("tag", String.valueOf(position));
+//        Log.v("tag", String.valueOf(position));
         if (position == 0) {
-            Log.v("tag", "TYPE_BANNER");
+//            Log.v("tag", "TYPE_BANNER");
             return TYPE_BANNER;
         } else if (position > 0 && position <= labelList.size()) {
-            Log.v("tag", "TYPE_LABEL");
+//            Log.v("tag", "TYPE_LABEL");
             return TYPE_LABEL;
         } else if (position > labelList.size() && position <= labelList.size() + 1) {
-            Log.v("tag", "TYPE_PARTITION_TITLE");
+//            Log.v("tag", "TYPE_PARTITION_TITLE");
             return TYPE_PARTITION_TITLE;
         } else if (position > labelList.size() + 1 && position <= labelList.size() + 1 + bookList.size()) {
             return TYPE_BOOK_GRID;

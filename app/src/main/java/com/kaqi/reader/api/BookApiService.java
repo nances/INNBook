@@ -2,6 +2,7 @@ package com.kaqi.reader.api;
 
 import com.kaqi.reader.bean.AutoComplete;
 import com.kaqi.reader.bean.BookDetail;
+import com.kaqi.reader.bean.BookHelp;
 import com.kaqi.reader.bean.BookHelpList;
 import com.kaqi.reader.bean.BookListDetail;
 import com.kaqi.reader.bean.BookListTags;
@@ -19,17 +20,17 @@ import com.kaqi.reader.bean.ChapterRead;
 import com.kaqi.reader.bean.CommentList;
 import com.kaqi.reader.bean.DiscussionList;
 import com.kaqi.reader.bean.Disscussion;
-import com.kaqi.reader.bean.BookHelp;
 import com.kaqi.reader.bean.HotReview;
 import com.kaqi.reader.bean.HotWord;
-import com.kaqi.reader.bean.user.Following;
-import com.kaqi.reader.bean.user.Login;
 import com.kaqi.reader.bean.PostCount;
 import com.kaqi.reader.bean.RankingList;
 import com.kaqi.reader.bean.Rankings;
 import com.kaqi.reader.bean.Recommend;
 import com.kaqi.reader.bean.RecommendBookList;
+import com.kaqi.reader.bean.RecommendListBean;
 import com.kaqi.reader.bean.SearchDetail;
+import com.kaqi.reader.bean.user.Following;
+import com.kaqi.reader.bean.user.Login;
 import com.kaqi.reader.bean.user.LoginReq;
 
 import java.util.List;
@@ -48,6 +49,7 @@ public interface BookApiService {
 
     /**
      * 获取正版源(若有) 与 盗版源
+     *
      * @param view
      * @param book
      * @return
@@ -371,4 +373,14 @@ public interface BookApiService {
 
     @GET("/post/original")
     Observable<DiscussionList> getBookOriginalList(@Query("block") String block, @Query("duration") String duration, @Query("sort") String sort, @Query("type") String type, @Query("start") String start, @Query("limit") String limit, @Query("distillate") String distillate);
+
+
+    /**
+     * 获取书架内容
+     * niqiao
+     *
+     * @return
+     */
+    @GET("/main/home")
+    Observable<RecommendListBean> getRecommendList();
 }

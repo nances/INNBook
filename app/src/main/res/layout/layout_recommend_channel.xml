@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home_recommended_banner"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/wh92.0dimens92.0dp"
+    android:background="@drawable/shape_white_bg"
+    android:padding="@dimen/wh10.0dimens10.0dp"
+    android:layout_margin="@dimen/wh10.0dimens10.0dp"
+    android:weightSum="4">
+
+    <LinearLayout
+        android:id="@+id/book_channel_lr"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/wh26.0dimens26.0dp"
+            android:layout_height="@dimen/wh26.0dimens26.0dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
+            android:src="@drawable/classification_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:text="分类"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/book_ranking_lr"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/wh26.0dimens26.0dp"
+            android:layout_height="@dimen/wh26.0dimens26.0dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
+            android:src="@drawable/ranking_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:text="排行榜"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/book_complete_lr"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/wh26.0dimens26.0dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
+            android:src="@drawable/complite_book_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:text="完结"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/book_update_lr"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/wh26.0dimens26.0dp"
+            android:layout_height="@dimen/wh26.0dimens26.0dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
+            android:src="@drawable/book_today_update_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:text="更新"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -49,6 +49,7 @@ import butterknife.OnClick;
  */
 public class SettingActivity extends BaseActivity {
     public static final int EXIT = 0x02;
+    public static final int UPDATE_SIZE = 0x03;
     @Bind(R.id.action_synchronization_book)
     SuperTextView actionSynchronizationBook;
     @Bind(R.id.scan_local_book)
@@ -71,6 +72,7 @@ public class SettingActivity extends BaseActivity {
     @Inject
     MainActivityPresenter mPresenter;
 
+    private String  cacheSizeSt;
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, SettingActivity.class));
@@ -81,6 +83,9 @@ public class SettingActivity extends BaseActivity {
         switch (msg.what) {
             case EXIT:
                 finish();
+                break;
+            case UPDATE_SIZE:
+                mTvCacheSize.setRightString(cacheSizeSt);
                 break;
         }
     }
@@ -231,7 +236,8 @@ public class SettingActivity extends BaseActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        mTvCacheSize.setRightString(cacheSize);
+                                        cacheSizeSt = cacheSize;
+                                        mHandler.sendEmptyMessageDelayed(UPDATE_SIZE, 100);
                                         EventManager.refreshCollectionList();
                                     }
                                 });

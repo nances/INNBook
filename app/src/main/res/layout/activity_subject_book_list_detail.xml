@@ -26,12 +26,6 @@
             app:scrollbarStyle="insideOverlay" />
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/wh0.5dimens0.5dp"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="@dimen/wh54.0dimens54.0dp"
-        android:background="@color/common_gray_bg" />
 
     <LinearLayout
         android:id="@+id/llBatchManagement"

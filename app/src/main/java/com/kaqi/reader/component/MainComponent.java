@@ -18,9 +18,9 @@ package com.kaqi.reader.component;
 import com.kaqi.reader.ui.activity.AboutActivity;
 import com.kaqi.reader.ui.activity.MoneyDetailedListActivity;
 import com.kaqi.reader.ui.activity.ReadBookHistoryActivity;
-import com.kaqi.reader.ui.fragment.HomeFragment;
 import com.kaqi.reader.ui.activity.SettingActivity;
 import com.kaqi.reader.ui.activity.WifiBookActivity;
+import com.kaqi.reader.ui.fragment.HomeFragment;
 import com.kaqi.reader.ui.fragment.RecommendFragment;
 
 import dagger.Component;

@@ -223,6 +223,43 @@
                     android:textSize="13sp" />
             </LinearLayout>
 
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/wh18.0dimens18.0dp"
+                android:text="提现问题"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/wh8.0dimens8.0dp"
+                android:background="@drawable/shape_common_light_white_bg"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/wh8.0dimens8.0dp"
+                    android:lineSpacingExtra="1dp"
+
+                    android:lineSpacingMultiplier="1.1"
+                    android:padding="@dimen/wh6.0dimens6.0dp"
+                    android:text="1.提现方式\n  目前支持支付宝，微信提现"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:lineSpacingExtra="1dp"
+                    android:lineSpacingMultiplier="1.1"
+                    android:padding="@dimen/wh6.0dimens6.0dp"
+                    android:text="2.申请提现\n  申请提现后，将在1~3个工作日到账"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
         </LinearLayout>
     </com.kaqi.reader.view.ReboundScrollView>
 </LinearLayout>

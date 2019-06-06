@@ -22,6 +22,7 @@ import com.kaqi.reader.ui.activity.SubjectBookListActivity;
 import com.kaqi.reader.ui.activity.SubjectBookListDetailActivity;
 import com.kaqi.reader.ui.activity.TopCategoryListActivity;
 import com.kaqi.reader.ui.activity.TopRankActivity;
+import com.kaqi.reader.ui.fragment.FindItemFragment;
 import com.kaqi.reader.ui.fragment.SubCategoryFragment;
 import com.kaqi.reader.ui.fragment.SubRankFragment;
 import com.kaqi.reader.ui.fragment.SubjectFragment;
@@ -35,14 +36,18 @@ import dagger.Component;
 @Component(dependencies = AppComponent.class)
 public interface FindComponent {
 
-    /** 分类 **/
+    /**
+     * 分类
+     **/
     TopCategoryListActivity inject(TopCategoryListActivity activity);
 
     SubCategoryListActivity inject(SubCategoryListActivity activity);
 
     SubCategoryFragment inject(SubCategoryFragment fragment);
 
-    /** 排行 **/
+    /**
+     * 排行
+     **/
     TopRankActivity inject(TopRankActivity activity);
 
     SubRankActivity inject(SubRankActivity activity);
@@ -51,7 +56,11 @@ public interface FindComponent {
 
     SubRankFragment inject(SubRankFragment fragment);
 
-    /** 主题书单 **/
+    FindItemFragment inject(FindItemFragment fragment);
+
+    /**
+     * 主题书单
+     **/
     SubjectBookListActivity inject(SubjectBookListActivity subjectBookListActivity);
 
     SubjectFragment inject(SubjectFragment subjectFragment);

@@ -4,6 +4,12 @@
     android:layout_height="match_parent"
     android:background="@color/common_bg">
 
+    <ImageView
+        android:id="@+id/start_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
     <TextView
         android:id="@+id/tvSkip"
         android:layout_width="wrap_content"
@@ -22,12 +28,36 @@
 
     <include layout="@layout/layout_gender_popup_window" />
 
+    <FrameLayout
+        android:id="@+id/splash_ad_fl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
 
-    <ImageView
-        android:id="@+id/splash_img"
-        android:layout_width="@dimen/wh120.0dimens120.0dp"
-        android:layout_height="@dimen/wh120.0dimens120.0dp"
-        android:layout_gravity="center"
-        android:src="@mipmap/icon" />
+    <LinearLayout
+        android:id="@+id/splash_logo_ll"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wh123.0dimens123.0dp"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        android:clickable="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/wh68.0dimens68.0dp"
+            android:layout_height="@dimen/wh68.0dimens68.0dp"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:src="@mipmap/icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="牛牛读书"
+            android:textSize="14sp"
+            android:paddingTop="@dimen/wh6.0dimens6.0dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
 
 </FrameLayout>

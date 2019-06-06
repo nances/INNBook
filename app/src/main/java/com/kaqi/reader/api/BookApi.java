@@ -26,6 +26,7 @@ import com.kaqi.reader.bean.RankingList;
 import com.kaqi.reader.bean.Rankings;
 import com.kaqi.reader.bean.Recommend;
 import com.kaqi.reader.bean.RecommendBookList;
+import com.kaqi.reader.bean.RecommendListBean;
 import com.kaqi.reader.bean.SearchDetail;
 import com.kaqi.reader.bean.user.Login;
 import com.kaqi.reader.bean.user.LoginReq;
@@ -44,14 +45,18 @@ public class BookApi {
     public static BookApi instance;
 
     private BookApiService service;
+    Retrofit retrofit;
+    OkHttpClient okHttpClient;
 
     public BookApi(OkHttpClient okHttpClient) {
-        Retrofit retrofit = new Retrofit.Builder()
+        this.okHttpClient = okHttpClient;
+        retrofit = new Retrofit.Builder()
                 .baseUrl(Constant.API_BASE_URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create()) // 添加Rx适配器
                 .addConverterFactory(GsonConverterFactory.create()) // 添加Gson转换器
                 .client(okHttpClient)
                 .build();
+
         service = retrofit.create(BookApiService.class);
     }
 
@@ -111,6 +116,16 @@ public class BookApi {
 
     public Observable<RankingList> getRanking() {
         return service.getRanking();
+    }
+
+    public Observable<RecommendListBean> getShowRecommendList() {
+        retrofit = new Retrofit.Builder()
+                .baseUrl("http://apim.ssmnx.com")
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create()) // 添加Rx适配器
+                .addConverterFactory(GsonConverterFactory.create()) // 添加Gson转换器
+                .client(okHttpClient)
+                .build();
+        return retrofit.create(BookApiService.class).getRecommendList();
     }
 
     public Observable<Rankings> getRanking(String rankingId) {

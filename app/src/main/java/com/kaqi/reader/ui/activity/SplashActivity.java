@@ -28,7 +28,6 @@ import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseActivity;
 import com.kaqi.reader.base.Constant;
 import com.kaqi.reader.component.AppComponent;
-import com.kaqi.reader.manager.EventManager;
 import com.kaqi.reader.manager.SettingManager;
 
 import butterknife.Bind;
@@ -60,8 +59,6 @@ public class SplashActivity extends BaseActivity {
     Button mBtnFemale;
     @Bind(R.id.choose_sex_rl)
     RelativeLayout chooseSexRl;
-    @Bind(R.id.splash_img)
-    ImageView splashImg;
 
     private boolean flag = false;
     private SplashCountDownTimer mCountDownTimer;
@@ -146,7 +143,7 @@ public class SplashActivity extends BaseActivity {
                     mCountDownTimer.cancel();
                 }
                 if (!SettingManager.getInstance().isUserChooseSex()) {
-                    gone(tvSkip, splashImg);
+                    gone(tvSkip);
                     visible(chooseSexRl);
                 } else {
                     mHandler.sendEmptyMessageDelayed(GO_HOME, 100);
@@ -177,7 +174,7 @@ public class SplashActivity extends BaseActivity {
             }
             tvSkip.setText("0s 跳过");
             if (!SettingManager.getInstance().isUserChooseSex()) {
-                gone(tvSkip, splashImg);
+                gone(tvSkip);
                 visible(chooseSexRl);
             } else {
                 mHandler.sendEmptyMessageDelayed(GO_HOME, 100);

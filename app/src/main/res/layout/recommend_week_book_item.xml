@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_book"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/common_bg"
+    android:padding="@dimen/wh6.0dimens6.0dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/ivBookCoverCardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="4dp">
+
+        <ImageView
+            android:id="@+id/ivRecommendCover"
+            android:layout_width="@dimen/wh88.0dimens88.0dp"
+            android:layout_height="@dimen/wh124.0dimens124.0dp"
+            android:layout_alignParentLeft="true"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/cover_default" />
+
+
+        <TextView
+            android:id="@+id/ivUnReadDot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@drawable/shape_yellw30_shape4_bg"
+            android:padding="@dimen/wh1.0dimens1.0dp"
+            android:text="已更新"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:visibility="gone"
+            tools:visibility="visible" />
+    </android.support.v7.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/tvRecommendTitle"
+        style="@style/text_style_Spacing"
+        android:paddingTop="@dimen/wh6.0dimens6.0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivBookCoverCardView"
+        android:layout_centerHorizontal="true"
+        android:ellipsize="end"
+        android:maxEms="15"
+        android:maxLines="1"
+        android:text="逆鳞"
+        android:textColor="@color/common_h1"
+        android:textSize="16sp" />
+
+</RelativeLayout>

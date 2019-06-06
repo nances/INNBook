@@ -2,11 +2,6 @@ package com.kaqi.reader.bean;
 
 import java.util.List;
 
-/**
- * @author yuyh.
- * @date 17/1/30.
- */
-
 public class BookAtoc {
 
     /**

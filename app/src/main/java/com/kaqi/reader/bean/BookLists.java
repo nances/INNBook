@@ -27,7 +27,6 @@ public class BookLists extends Base {
 
     /**
      * _id : 57a83783c9b799011623ecff
-     * title : 【追书盘点】男频类型文（六）体育类竞技文
      * author : 追书白小生
      * desc : 在体育竞技的赛场上！
      运动员们，因为一个坚定的信念，而不断前行，努力，付出。
