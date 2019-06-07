@@ -31,7 +31,13 @@
     <FrameLayout
         android:id="@+id/splash_ad_fl"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/splash_icon"/>
+
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/splash_logo_ll"

@@ -1,5 +1,7 @@
 package com.kaqi.reader.ui.adapter;
 
+import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,14 +13,19 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.kaqi.reader.R;
 import com.kaqi.reader.bean.RecommendListBean;
 import com.kaqi.reader.ui.adapter.helper.AbsRecyclerViewAdapter;
+import com.yuyh.easyadapter.glide.GlideRoundTransform;
 
 import java.util.List;
+
 public class ActivityCenterRecyclerAdapter extends AbsRecyclerViewAdapter {
     private List<RecommendListBean.DataBean.ResultBean.BodyBean> activitys;
 
-    public ActivityCenterRecyclerAdapter(RecyclerView recyclerView, List<RecommendListBean.DataBean.ResultBean.BodyBean> activitys) {
+    private Context mContext;
+
+    public ActivityCenterRecyclerAdapter(RecyclerView recyclerView, List<RecommendListBean.DataBean.ResultBean.BodyBean> activitys, Context context) {
         super(recyclerView);
         this.activitys = activitys;
+        this.mContext = context;
     }
 
 
@@ -34,11 +41,14 @@ public class ActivityCenterRecyclerAdapter extends AbsRecyclerViewAdapter {
     public void onBindViewHolder(ClickableViewHolder holder, int position) {
         if (holder instanceof ItemViewHolder) {
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
-            Glide.with(getContext())
-                    .load(activitys.get(position).getCover())
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .dontAnimate()
-                    .into(itemViewHolder.bookImg);
+            if (position < activitys.size() - 1) {
+                Glide.with(getContext())
+                        .load(Uri.parse(activitys.get(position + 1).getCover()))
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .transform(new GlideRoundTransform(mContext, 6))
+                        .dontAnimate()
+                        .into(itemViewHolder.bookImg);
+            }
 
         }
     }

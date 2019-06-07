@@ -5,7 +5,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseFragment;
@@ -35,6 +34,8 @@ public class FindItemFragment extends BaseFragment implements RecommendListContr
     private SectionedRecyclerViewAdapter mSectionedAdapter;
     private List<BannerEntity> banners = new ArrayList<>();
     private List<RecommendListBean.DataBean.ResultBean> results = new ArrayList<>();
+
+    private int type = 0;
 
     public static FindItemFragment newInstance(int type) {
         Bundle args = new Bundle();
@@ -72,8 +73,8 @@ public class FindItemFragment extends BaseFragment implements RecommendListContr
 
     @Override
     public void initDatas() {
+        type = getArguments().getInt("type");
         setModeBannerList();
-
         mPresenter.attachView(this);
         mPresenter.getRecommendList();
 
@@ -94,13 +95,12 @@ public class FindItemFragment extends BaseFragment implements RecommendListContr
 
 //        mPresenter.attachView(this);
 //        mPresenter.getRecommendList();
-        Log.v("Nancys", "============= configViews()");
 
     }
 
     protected void initRecyclerView() {
         mSectionedAdapter = new SectionedRecyclerViewAdapter();
-        GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
+        GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 4);
         mLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
@@ -142,7 +142,9 @@ public class FindItemFragment extends BaseFragment implements RecommendListContr
     public void setDataTask(RecommendListBean rankingList) {
         initRecyclerView();
         mSectionedAdapter.addSection(new HomeRecommendBannerSection(banners));
-        mSectionedAdapter.addSection(new HomeRecommendedChannelSection(getActivity()));
+        if (type == 1) {
+            mSectionedAdapter.addSection(new HomeRecommendedChannelSection(getActivity()));
+        }
         int size = results.size();
         String type = "";
         for (int i = 0; i < size; i++) {

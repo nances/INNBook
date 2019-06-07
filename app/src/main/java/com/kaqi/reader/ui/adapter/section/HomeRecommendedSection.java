@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.kaqi.reader.R;
 import com.kaqi.reader.bean.RecommendListBean;
 import com.kaqi.reader.view.sectioned.StatelessSection;
+import com.yuyh.easyadapter.glide.GlideRoundTransform;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +67,7 @@ public class HomeRecommendedSection extends StatelessSection {
                 .centerCrop()
                 .placeholder(R.drawable.cover_default)
                 .dontAnimate()
+                .transform(new GlideRoundTransform(mContext,6))
                 .into(itemViewHolder.ivRecommendCover);
 
         itemViewHolder.tvRecommendTitle.setText(bodyBean.getTitle());

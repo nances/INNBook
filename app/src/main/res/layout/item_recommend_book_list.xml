@@ -5,19 +5,17 @@
     android:id="@+id/card_book"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/shape_white_bg"
     android:layout_marginLeft="@dimen/wh10.0dimens10.0dp"
-    android:layout_marginRight="@dimen/wh10.0dimens10.0dp"
     android:layout_marginTop="@dimen/wh10.0dimens10.0dp"
+    android:layout_marginRight="@dimen/wh10.0dimens10.0dp"
     android:padding="@dimen/wh10.0dimens10.0dp">
 
     <android.support.v7.widget.CardView
         android:id="@+id/ivBookCoverCardView"
         android:layout_width="@dimen/wh64.0dimens64.0dp"
         android:layout_height="@dimen/wh88.0dimens88.0dp"
-        card_view:cardCornerRadius="2dp"
-        card_view:cardElevation="4dp"
-        android:foreground="?attr/selectableItemBackground">
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="4dp">
 
         <ImageView
             android:id="@+id/ivRecommendCover"
@@ -26,7 +24,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:contentDescription="@null"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:src="@drawable/cover_default" />
 
 
@@ -47,7 +45,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/wh88.0dimens88.0dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/wh10.0dimens10.0dp"
         android:layout_toRightOf="@+id/ivBookCoverCardView"
@@ -66,36 +64,24 @@
             tools:text="逆鳞" />
 
         <TextView
-            android:id="@+id/tvLatelyUpdate"
-            style="@style/text_style_Spacing"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvRecommendTitle"
-            android:layout_marginTop="@dimen/wh16.0dimens16.0dp"
-            android:textColor="@color/common_h3"
-            android:textSize="12sp"
-            tools:text="17小时前:" />
-
-        <TextView
             android:id="@+id/tvRecommendShort"
             style="@style/text_style_Spacing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/tvLatelyUpdate"
-            android:layout_marginTop="4dp"
-            android:layout_toRightOf="@id/tvLatelyUpdate"
+            android:layout_below="@id/tvRecommendTitle"
+            android:layout_marginTop="@dimen/wh8.0dimens8.0dp"
             android:ellipsize="end"
             android:maxEms="14"
             android:maxLines="1"
             android:textColor="@color/common_h3"
             android:textSize="12sp"
-            tools:text="第二卷、逆水行舟！第四百六十五章、打蛇七寸！" />
+            android:text="第二卷、逆水行舟！第四百六十五章、打蛇七寸！" />
 
         <TextView
             android:id="@+id/tvBookListAuthor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvLatelyUpdate"
+            android:layout_below="@id/tvRecommendShort"
             android:layout_marginTop="@dimen/wh14.0dimens14.0dp"
             android:ellipsize="end"
             android:singleLine="true"
@@ -104,24 +90,5 @@
             android:textSize="14sp" />
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/ivTopLabel"
-        android:layout_width="@dimen/wh18.0dimens18.0dp"
-        android:layout_height="@dimen/wh18.0dimens18.0dp"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/label_book_top"
-        android:visibility="gone"
-        tools:visibility="visible" />
-
-    <CheckBox
-        android:id="@+id/ckBoxSelect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="15dp"
-        android:button="@drawable/checkbox_style"
-        android:visibility="gone"
-        tools:visibility="visible" />
 
 </RelativeLayout>
