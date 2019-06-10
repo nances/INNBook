@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.kaqi.reader.R;
+import com.kaqi.reader.ui.activity.BookCompleteAndUpdateActivity;
 import com.kaqi.reader.ui.activity.ClassicFicationActivity;
 import com.kaqi.reader.ui.activity.ClassicRankTopActivity;
 import com.kaqi.reader.view.banner.BannerEntity;
@@ -68,13 +69,13 @@ public class HomeRecommendedChannelSection extends StatelessSection {
         bannerViewHolder.bookCompleteLr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                BookCompleteAndUpdateActivity.startActivity(mContext, 1);
             }
         });
         bannerViewHolder.bookUpdateLr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                BookCompleteAndUpdateActivity.startActivity(mContext, 2);
             }
         });
     }

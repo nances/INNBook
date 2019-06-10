@@ -18,6 +18,7 @@ package com.kaqi.reader.component;
 import com.kaqi.reader.ui.activity.BookDiscussionDetailActivity;
 import com.kaqi.reader.ui.activity.BookHelpDetailActivity;
 import com.kaqi.reader.ui.activity.BookReviewDetailActivity;
+import com.kaqi.reader.ui.fragment.BookCompleteUpdateFragment;
 import com.kaqi.reader.ui.fragment.BookDiscussionFragment;
 import com.kaqi.reader.ui.fragment.BookHelpFragment;
 import com.kaqi.reader.ui.fragment.BookReviewFragment;
@@ -47,4 +48,6 @@ public interface CommunityComponent {
     ClassFicationItemFragment inject(ClassFicationItemFragment fragment);
 
     ClassRankTopItemFragment inject(ClassRankTopItemFragment fragment);
+
+    BookCompleteUpdateFragment inject(BookCompleteUpdateFragment fragment);
 }

@@ -48,7 +48,7 @@
 
                 <ImageView
                     android:id="@+id/ivBookCover"
-                    android:layout_width="@dimen/wh88.0dimens88.0dp"
+                    android:layout_width="@dimen/wh92.0dimens92.0dp"
                     android:layout_height="@dimen/wh124.0dimens124.0dp"
                     android:layout_alignParentLeft="true"
                     android:contentDescription="@null"
@@ -163,7 +163,6 @@
                 </LinearLayout>
             </RelativeLayout>
         </RelativeLayout>
-
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycle"

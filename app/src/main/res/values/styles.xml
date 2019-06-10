@@ -221,7 +221,7 @@
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">18sp</item><!--toolbar标题字体大小-->
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/yellow_30</item><!--toolbar标题字体颜色-->
+        <item name="android:textColor">@color/common_h1</item><!--toolbar标题字体颜色-->
     </style>
 
 </resources>

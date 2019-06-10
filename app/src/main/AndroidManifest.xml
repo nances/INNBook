@@ -214,6 +214,9 @@
         <activity
             android:name="com.kaqi.reader.ui.activity.MoneyDetailedListActivity"
             android:screenOrientation="portrait" />
+   <activity
+            android:name="com.kaqi.reader.ui.activity.BookCompleteAndUpdateActivity"
+            android:screenOrientation="portrait" />
 
         <service android:name="com.kaqi.reader.service.DownloadBookService" />
 
