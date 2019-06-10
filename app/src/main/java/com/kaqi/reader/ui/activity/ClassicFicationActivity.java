@@ -12,6 +12,7 @@ import com.kaqi.reader.base.BaseActivity;
 import com.kaqi.reader.bean.TabEntity;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.ui.fragment.ClassFicationItemFragment;
+import com.kaqi.reader.utils.NormalTitleBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,8 @@ public class ClassicFicationActivity extends BaseActivity {
 
     @Bind(R.id.indicator)
     VerticalTabLayout slidingTabLayout;
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
     private String[] mTitles = {"男生", "女生"};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private ClassFicationItemFragment classBoyFicationItemFragment;
@@ -54,8 +57,8 @@ public class ClassicFicationActivity extends BaseActivity {
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle(R.string.category);
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText(R.string.category);
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override
@@ -112,7 +115,7 @@ public class ClassicFicationActivity extends BaseActivity {
             bundle.putString("type", mTitles[i]);
             fragment.setArguments(bundle);
             fragments.add(fragment);
-            Log.v("Nancy","mTitles[i]"  +mTitles[i]);
+            Log.v("Nancy", "mTitles[i]" + mTitles[i]);
         }
         return fragments;
     }

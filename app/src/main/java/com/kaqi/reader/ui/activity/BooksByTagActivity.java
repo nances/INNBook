@@ -16,6 +16,7 @@
 package com.kaqi.reader.ui.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,6 +31,7 @@ import com.kaqi.reader.component.DaggerBookComponent;
 import com.kaqi.reader.ui.adapter.BooksByTagAdapter;
 import com.kaqi.reader.ui.contract.BooksByTagContract;
 import com.kaqi.reader.ui.presenter.BooksByTagPresenter;
+import com.kaqi.reader.utils.NormalTitleBar;
 import com.kaqi.reader.view.SupportDividerItemDecoration;
 
 import java.util.ArrayList;
@@ -38,6 +40,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by Administrator on 2016/8/7.
@@ -49,6 +52,8 @@ public class BooksByTagActivity extends BaseActivity implements BooksByTagContra
     SwipeRefreshLayout refreshLayout;
     @Bind(R.id.recyclerview)
     RecyclerView mRecyclerView;
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
     private LinearLayoutManager linearLayoutManager;
 
     @Inject
@@ -75,8 +80,8 @@ public class BooksByTagActivity extends BaseActivity implements BooksByTagContra
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle(getIntent().getStringExtra("tag"));
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText(getIntent().getStringExtra("tag"));
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override
@@ -87,7 +92,6 @@ public class BooksByTagActivity extends BaseActivity implements BooksByTagContra
     @Override
     public void configViews() {
         refreshLayout.setOnRefreshListener(new RefreshListener());
-
         mRecyclerView.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
@@ -129,6 +133,13 @@ public class BooksByTagActivity extends BaseActivity implements BooksByTagContra
     @Override
     public void complete() {
         refreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 
     private class RefreshListener extends RecyclerView.OnScrollListener implements SwipeRefreshLayout.OnRefreshListener {

@@ -17,6 +17,7 @@ package com.kaqi.reader.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -39,6 +40,7 @@ import com.kaqi.reader.ui.adapter.MinorAdapter;
 import com.kaqi.reader.ui.contract.SubCategoryActivityContract;
 import com.kaqi.reader.ui.fragment.SubCategoryFragment;
 import com.kaqi.reader.ui.presenter.SubCategoryActivityPresenter;
+import com.kaqi.reader.utils.NormalTitleBar;
 import com.kaqi.reader.view.RVPIndicator;
 
 import java.util.ArrayList;
@@ -48,6 +50,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * @author yuyh.
@@ -57,6 +60,8 @@ public class SubCategoryListActivity extends BaseActivity implements SubCategory
 
     public static final String INTENT_CATE_NAME = "name";
     public static final String INTENT_GENDER = "gender";
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
     private String cate = "";
     private String gender = "";
 
@@ -108,8 +113,8 @@ public class SubCategoryListActivity extends BaseActivity implements SubCategory
             menuItem.setTitle(cate);
         }
         gender = getIntent().getStringExtra(INTENT_GENDER);
-        mCommonToolbar.setTitle(cate);
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText(cate);
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override
@@ -222,7 +227,7 @@ public class SubCategoryListActivity extends BaseActivity implements SubCategory
                 mListPopupWindow.setAdapter(minorAdapter);
                 mListPopupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
                 mListPopupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-                mListPopupWindow.setAnchorView(mCommonToolbar);
+                mListPopupWindow.setAnchorView(commonToolbar);
                 mListPopupWindow.setModal(true);
                 mListPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -236,7 +241,7 @@ public class SubCategoryListActivity extends BaseActivity implements SubCategory
                         int current = mViewPager.getCurrentItem();
                         EventManager.refreshSubCategory(currentMinor, types[current]);
                         mListPopupWindow.dismiss();
-                        mCommonToolbar.setTitle(mMinors.get(position));
+                        commonToolbar.setTitleText(mMinors.get(position));
                     }
                 });
             }
@@ -250,5 +255,12 @@ public class SubCategoryListActivity extends BaseActivity implements SubCategory
         if (mPresenter != null) {
             mPresenter.detachView();
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

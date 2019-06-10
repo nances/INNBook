@@ -17,6 +17,7 @@ package com.kaqi.reader.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -39,6 +40,7 @@ import com.kaqi.reader.ui.contract.BookDiscussionDetailContract;
 import com.kaqi.reader.ui.easyadapter.CommentListAdapter;
 import com.kaqi.reader.ui.presenter.BookDiscussionDetailPresenter;
 import com.kaqi.reader.utils.FormatUtils;
+import com.kaqi.reader.utils.NormalTitleBar;
 import com.kaqi.reader.view.BookContentTextView;
 import com.kaqi.reader.view.SupportDividerItemDecoration;
 import com.kaqi.reader.view.recyclerview.adapter.RecyclerArrayAdapter;
@@ -59,6 +61,8 @@ public class BookDiscussionDetailActivity extends BaseRVActivity<CommentList.Com
         implements BookDiscussionDetailContract.View, OnRvItemClickListener<CommentList.CommentsBean> {
 
     private static final String INTENT_ID = "id";
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
 
     public static void startActivity(Context context, String id) {
         context.startActivity(new Intent(context, BookDiscussionDetailActivity.class)
@@ -81,6 +85,13 @@ public class BookDiscussionDetailActivity extends BaseRVActivity<CommentList.Com
     @Override
     public void complete() {
 
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 
     static class HeaderViewHolder {
@@ -121,8 +132,8 @@ public class BookDiscussionDetailActivity extends BaseRVActivity<CommentList.Com
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle("详情");
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText("详情");
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override

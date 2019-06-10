@@ -33,6 +33,7 @@ import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.component.DaggerMainComponent;
 import com.kaqi.reader.ui.adapter.ComFragmentAdapter;
 import com.kaqi.reader.ui.fragment.MoneyDetailedListFragment;
+import com.kaqi.reader.utils.NormalTitleBar;
 import com.kaqi.reader.view.dialog.CommomRechargeMoneyDialog;
 
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ import butterknife.Bind;
 public class MoneyDetailedListActivity extends BaseActivity {
 
     @Bind(R.id.common_toolbar)
-    Toolbar commonToolbar;
+    NormalTitleBar commonToolbar;
 //    @Bind(R.id.money_list)
 //    LRecyclerView moneyList;
     SlidingTabLayout slidingTabLayout;
@@ -80,8 +81,8 @@ public class MoneyDetailedListActivity extends BaseActivity {
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle("我的钱包");
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText("我的钱包");
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override

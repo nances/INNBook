@@ -25,7 +25,6 @@ import android.os.Message;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -45,7 +44,7 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    public Toolbar mCommonToolbar;
+//    public Toolbar mCommonToolbar;
 
     protected Context mContext;
     protected int statusBarColor = 0;
@@ -68,11 +67,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         mHandler = new BaseHandler(this);
         ButterKnife.bind(this);
         setupActivityComponent(ReaderApplication.getsInstance().getAppComponent());
-        mCommonToolbar = ButterKnife.findById(this, R.id.common_toolbar);
-        if (mCommonToolbar != null) {
-            initToolBar();
-            setSupportActionBar(mCommonToolbar);
-        }
+//        mCommonToolbar = ButterKnife.findById(this, R.id.common_toolbar);
+//        if (mCommonToolbar != null) {
+//            setSupportActionBar(mCommonToolbar);
+//        }
+        initToolBar();
         initDatas();
         configViews();
         mNowMode = SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT);
@@ -89,7 +88,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void toolbarSetElevation(float elevation) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mCommonToolbar.setElevation(elevation);
+//            mCommonToolbar.setElevation(elevation);
         }
     }
 

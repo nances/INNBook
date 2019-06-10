@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseActivity;
 import com.kaqi.reader.component.AppComponent;
+import com.kaqi.reader.utils.NormalTitleBar;
 import com.kaqi.reader.utils.ToastUtils;
 import com.kaqi.reader.view.CleanableEditText;
 
@@ -39,7 +40,8 @@ public class LoginActivity extends BaseActivity {
     LinearLayout loginLr;
     @Bind(R.id.rootView)
     LinearLayout rootView;
-
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
     String loadingTip = "加载中";
 
     @Override
@@ -57,8 +59,8 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle("登陆");
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText("登陆");
+        commonToolbar.setBackVisibility(true);
     }
 
 

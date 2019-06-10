@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
@@ -15,12 +16,14 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseActivity;
 import com.kaqi.reader.base.Constant;
 import com.kaqi.reader.component.AppComponent;
+import com.kaqi.reader.utils.NormalTitleBar;
 import com.kaqi.reader.view.chmview.Utils;
 
 import java.io.File;
@@ -29,12 +32,16 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * @author yuyh.
  * @date 2016/12/19.
  */
 public class ReadCHMActivity extends BaseActivity {
+
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
 
     public static void start(Context context, String filePath) {
         Intent intent = new Intent(context, ReadCHMActivity.class);
@@ -68,8 +75,8 @@ public class ReadCHMActivity extends BaseActivity {
     public void initToolBar() {
         chmFilePath = Uri.decode(getIntent().getDataString().replace("file://", ""));
         chmFileName = chmFilePath.substring(chmFilePath.lastIndexOf("/") + 1, chmFilePath.lastIndexOf("."));
-        mCommonToolbar.setTitle(chmFileName);
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText(chmFileName);
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override
@@ -280,5 +287,12 @@ public class ReadCHMActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

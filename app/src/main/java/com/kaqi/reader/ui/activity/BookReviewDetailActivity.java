@@ -17,6 +17,7 @@ package com.kaqi.reader.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -40,6 +41,7 @@ import com.kaqi.reader.ui.contract.BookReviewDetailContract;
 import com.kaqi.reader.ui.easyadapter.CommentListAdapter;
 import com.kaqi.reader.ui.presenter.BookReviewDetailPresenter;
 import com.kaqi.reader.utils.FormatUtils;
+import com.kaqi.reader.utils.NormalTitleBar;
 import com.kaqi.reader.view.BookContentTextView;
 import com.kaqi.reader.view.SupportDividerItemDecoration;
 import com.kaqi.reader.view.XLHRatingBar;
@@ -61,6 +63,8 @@ import butterknife.ButterKnife;
 public class BookReviewDetailActivity extends BaseRVActivity<CommentList.CommentsBean> implements BookReviewDetailContract.View, OnRvItemClickListener<CommentList.CommentsBean> {
 
     private static final String INTENT_ID = "id";
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
 
     public static void startActivity(Context context, String id) {
         context.startActivity(new Intent(context, BookReviewDetailActivity.class)
@@ -83,6 +87,13 @@ public class BookReviewDetailActivity extends BaseRVActivity<CommentList.Comment
     @Override
     public void complete() {
 
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 
     static class HeaderViewHolder {
@@ -135,8 +146,8 @@ public class BookReviewDetailActivity extends BaseRVActivity<CommentList.Comment
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle("书评详情");
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText("书评详情");
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override
@@ -146,7 +157,7 @@ public class BookReviewDetailActivity extends BaseRVActivity<CommentList.Comment
         mPresenter.attachView(this);
         mPresenter.getBookReviewDetail(id);
         mPresenter.getBestComments(id);
-        mPresenter.getBookReviewComments(id,start, limit);
+        mPresenter.getBookReviewComments(id, start, limit);
     }
 
     @Override
@@ -156,7 +167,7 @@ public class BookReviewDetailActivity extends BaseRVActivity<CommentList.Comment
         mAdapter.addHeader(new RecyclerArrayAdapter.ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
-                View headerView =  LayoutInflater.from(BookReviewDetailActivity.this).inflate(R.layout.header_view_book_review_detail, parent, false);
+                View headerView = LayoutInflater.from(BookReviewDetailActivity.this).inflate(R.layout.header_view_book_review_detail, parent, false);
                 return headerView;
             }
 
@@ -205,9 +216,9 @@ public class BookReviewDetailActivity extends BaseRVActivity<CommentList.Comment
 
     @Override
     public void showBestComments(CommentList list) {
-        if(list.comments.isEmpty()){
+        if (list.comments.isEmpty()) {
             gone(headerViewHolder.tvBestComments, headerViewHolder.rvBestComments);
-        }else{
+        } else {
             mBestCommentList.addAll(list.comments);
             headerViewHolder.rvBestComments.setHasFixedSize(true);
             headerViewHolder.rvBestComments.setLayoutManager(new LinearLayoutManager(this));
@@ -222,13 +233,13 @@ public class BookReviewDetailActivity extends BaseRVActivity<CommentList.Comment
     @Override
     public void showBookReviewComments(CommentList list) {
         mAdapter.addAll(list.comments);
-        start=start+list.comments.size();
+        start = start + list.comments.size();
     }
 
     @Override
     public void onLoadMore() {
         super.onLoadMore();
-        mPresenter.getBookReviewComments(id,start, limit);
+        mPresenter.getBookReviewComments(id, start, limit);
     }
 
     @Override
@@ -238,7 +249,7 @@ public class BookReviewDetailActivity extends BaseRVActivity<CommentList.Comment
 
     @Override
     public void onItemClick(int position) {
-        CommentList.CommentsBean data  = mAdapter.getItem(position);
+        CommentList.CommentsBean data = mAdapter.getItem(position);
     }
 
     @Override

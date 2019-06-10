@@ -2,6 +2,7 @@ package com.kaqi.reader.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
@@ -11,11 +12,13 @@ import android.widget.TextView;
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseActivity;
 import com.kaqi.reader.component.AppComponent;
+import com.kaqi.reader.utils.NormalTitleBar;
 import com.kaqi.reader.view.CleanableEditText;
 import com.kaqi.reader.view.HourglassView;
 import com.kaqi.reader.view.chmview.Utils;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
@@ -49,6 +52,8 @@ public class RegisterActivity extends BaseActivity {
 
     @Bind(R.id.rootView)
     LinearLayout rootView;
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
 
     /**
      * 入口
@@ -73,8 +78,8 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle("注册");
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText("注册");
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override
@@ -151,4 +156,10 @@ public class RegisterActivity extends BaseActivity {
         super.onDestroy();
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

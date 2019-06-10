@@ -18,6 +18,7 @@ package com.kaqi.reader.ui.activity;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 
 import com.kaqi.reader.R;
@@ -28,10 +29,14 @@ import com.kaqi.reader.component.DaggerBookComponent;
 import com.kaqi.reader.ui.contract.BookSourceContract;
 import com.kaqi.reader.ui.easyadapter.BookSourceAdapter;
 import com.kaqi.reader.ui.presenter.BookSourcePresenter;
+import com.kaqi.reader.utils.NormalTitleBar;
 
 import java.util.List;
 
 import javax.inject.Inject;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * @author yuyh.
@@ -40,6 +45,8 @@ import javax.inject.Inject;
 public class BookSourceActivity extends BaseRVActivity<BookSource> implements BookSourceContract.View {
 
     public static final String INTENT_BOOK_ID = "bookId";
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
 
     public static void start(Activity activity, String bookId, int reqId) {
         activity.startActivityForResult(new Intent(activity, BookSourceActivity.class)
@@ -67,8 +74,8 @@ public class BookSourceActivity extends BaseRVActivity<BookSource> implements Bo
     @Override
     public void initToolBar() {
         bookId = getIntent().getStringExtra(INTENT_BOOK_ID);
-        mCommonToolbar.setTitle("选择来源");
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText("选择来源");
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override
@@ -125,4 +132,10 @@ public class BookSourceActivity extends BaseRVActivity<BookSource> implements Bo
         }
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

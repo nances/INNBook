@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.support.v7.widget.ListPopupWindow;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -71,7 +72,7 @@ public class ReadEPubActivity extends BaseActivity implements ReaderCallback {
     private ArrayList<TOCReference> mTocReferences;
     private List<SpineReference> mSpineReferences;
     public boolean mIsSmilParsed = false;
-
+    public Toolbar mCommonToolbar;
     private List<BookMixAToc.mixToc.Chapters> mChapterList = new ArrayList<>();
     private ListPopupWindow mTocListPopupWindow;
     private TocListAdapter mTocListAdapter;
@@ -91,7 +92,7 @@ public class ReadEPubActivity extends BaseActivity implements ReaderCallback {
 
     @Override
     public void initToolBar() {
-
+        mCommonToolbar = this.findViewById(R.id.common_toolbar);
         mCommonToolbar.getViewTreeObserver()
                 .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override

@@ -17,6 +17,7 @@ package com.kaqi.reader.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseRVActivity;
@@ -27,11 +28,15 @@ import com.kaqi.reader.component.DaggerBookComponent;
 import com.kaqi.reader.ui.contract.SearchByAuthorContract;
 import com.kaqi.reader.ui.easyadapter.SearchAdapter;
 import com.kaqi.reader.ui.presenter.SearchByAuthorPresenter;
+import com.kaqi.reader.utils.NormalTitleBar;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * @author yuyh.
@@ -40,6 +45,8 @@ import javax.inject.Inject;
 public class SearchByAuthorActivity extends BaseRVActivity<SearchDetail.SearchBooks> implements SearchByAuthorContract.View {
 
     public static final String INTENT_AUTHOR = "author";
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
 
     public static void startActivity(Context context, String author) {
         context.startActivity(new Intent(context, SearchByAuthorActivity.class)
@@ -67,8 +74,8 @@ public class SearchByAuthorActivity extends BaseRVActivity<SearchDetail.SearchBo
     @Override
     public void initToolBar() {
         author = getIntent().getStringExtra(INTENT_AUTHOR);
-        mCommonToolbar.setTitle(author);
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText(author);
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override
@@ -114,5 +121,12 @@ public class SearchByAuthorActivity extends BaseRVActivity<SearchDetail.SearchBo
         if (mPresenter != null) {
             mPresenter.detachView();
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

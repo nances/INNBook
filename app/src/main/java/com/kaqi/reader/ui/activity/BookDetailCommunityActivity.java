@@ -18,6 +18,7 @@ package com.kaqi.reader.ui.activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -32,6 +33,7 @@ import com.kaqi.reader.bean.support.SelectionEvent;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.ui.fragment.BookDetailDiscussionFragment;
 import com.kaqi.reader.ui.fragment.BookDetailReviewFragment;
+import com.kaqi.reader.utils.NormalTitleBar;
 import com.kaqi.reader.view.RVPIndicator;
 
 import org.greenrobot.eventbus.EventBus;
@@ -41,6 +43,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * 书籍详情 社区
@@ -50,6 +53,8 @@ public class BookDetailCommunityActivity extends BaseActivity {
     public static final String INTENT_ID = "bookId";
     public static final String INTENT_TITLE = "title";
     public static final String INTENT_INDEX = "index";
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
 
     public static void startActivity(Context context, String bookId, String title, int index) {
         context.startActivity(new Intent(context, BookDetailCommunityActivity.class)
@@ -89,8 +94,8 @@ public class BookDetailCommunityActivity extends BaseActivity {
         bookId = getIntent().getStringExtra(INTENT_ID);
         title = getIntent().getStringExtra(INTENT_TITLE);
         index = getIntent().getIntExtra(INTENT_INDEX, 0);
-        mCommonToolbar.setTitle(title);
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText(title);
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override
@@ -172,5 +177,12 @@ public class BookDetailCommunityActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

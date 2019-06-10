@@ -18,18 +18,24 @@ package com.kaqi.reader.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.widget.LinearLayout;
 
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseActivity;
 import com.kaqi.reader.component.AppComponent;
+import com.kaqi.reader.utils.NormalTitleBar;
 import com.kaqi.reader.view.pdfview.PDFViewPager;
 
 import java.io.File;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class ReadPDFActivity extends BaseActivity {
+
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
 
     public static void start(Context context, String filePath) {
         Intent intent = new Intent(context, ReadPDFActivity.class);
@@ -57,8 +63,8 @@ public class ReadPDFActivity extends BaseActivity {
     public void initToolBar() {
         String filePath = Uri.decode(getIntent().getDataString().replace("file://", ""));
         String fileName = filePath.substring(filePath.lastIndexOf("/") + 1, filePath.lastIndexOf("."));
-        mCommonToolbar.setTitle(fileName);
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText(fileName);
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override
@@ -74,5 +80,12 @@ public class ReadPDFActivity extends BaseActivity {
     @Override
     public void configViews() {
 
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

@@ -16,6 +16,7 @@
 package com.kaqi.reader.ui.activity;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 
 import com.kaqi.reader.R;
@@ -24,15 +25,21 @@ import com.kaqi.reader.bean.BookLists;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.manager.CacheManager;
 import com.kaqi.reader.ui.easyadapter.SubjectBookListAdapter;
+import com.kaqi.reader.utils.NormalTitleBar;
 import com.kaqi.reader.view.recyclerview.adapter.RecyclerArrayAdapter;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * 我的书单
- * Created by lfh on 2016/9/23.
  */
 public class MyBookListActivity extends BaseRVActivity<BookLists.BookListsBean> implements RecyclerArrayAdapter.OnItemLongClickListener {
+
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
 
     @Override
     public int getLayoutId() {
@@ -46,8 +53,8 @@ public class MyBookListActivity extends BaseRVActivity<BookLists.BookListsBean> 
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle(R.string.subject_book_list_my_book_list);
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText(R.string.subject_book_list_my_book_list);
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override
@@ -108,5 +115,12 @@ public class MyBookListActivity extends BaseRVActivity<BookLists.BookListsBean> 
         mAdapter.clear();
         mAdapter.addAll(data);
         mRecyclerView.setRefreshing(false);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

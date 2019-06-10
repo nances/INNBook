@@ -22,7 +22,6 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -176,8 +175,6 @@ public class BookDetailActivity extends BaseActivity implements BookDetailContra
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
-        mCommonToolbar.setTitle(R.string.book_detail);
     }
 
     @Override
@@ -416,7 +413,6 @@ public class BookDetailActivity extends BaseActivity implements BookDetailContra
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_back_info:
-                Log.v("Nancy","tv_back_info ");
                 finish();
                 break;
             case R.id.tv_back:

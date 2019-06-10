@@ -37,6 +37,7 @@ import com.kaqi.reader.manager.CacheManager;
 import com.kaqi.reader.ui.contract.SubjectBookListDetailContract;
 import com.kaqi.reader.ui.easyadapter.SubjectBookListDetailBooksAdapter;
 import com.kaqi.reader.ui.presenter.SubjectBookListDetailPresenter;
+import com.kaqi.reader.utils.NormalTitleBar;
 import com.kaqi.reader.view.recyclerview.adapter.RecyclerArrayAdapter;
 import com.yuyh.easyadapter.glide.GlideCircleTransform;
 
@@ -52,7 +53,8 @@ import butterknife.ButterKnife;
  * 书单详情
  */
 public class SubjectBookListDetailActivity extends BaseRVActivity<BookListDetail.BookListBean.BooksBean> implements SubjectBookListDetailContract.View {
-
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar common_toolbar;
     private HeaderViewHolder headerViewHolder;
 
     static class HeaderViewHolder {
@@ -104,8 +106,8 @@ public class SubjectBookListDetailActivity extends BaseRVActivity<BookListDetail
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle(R.string.subject_book_list_detail);
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        common_toolbar.setTitleText(R.string.subject_book_list_detail);
+        common_toolbar.setBackVisibility(true);
     }
 
     @Override

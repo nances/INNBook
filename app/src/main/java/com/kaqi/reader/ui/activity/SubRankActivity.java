@@ -17,6 +17,7 @@ package com.kaqi.reader.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -26,6 +27,7 @@ import com.kaqi.reader.base.BaseActivity;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.component.DaggerFindComponent;
 import com.kaqi.reader.ui.fragment.SubRankFragment;
+import com.kaqi.reader.utils.NormalTitleBar;
 import com.kaqi.reader.view.RVPIndicator;
 
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * @author yuyh.
@@ -44,6 +47,8 @@ public class SubRankActivity extends BaseActivity {
     public static final String INTENT_MONTH = "month";
     public static final String INTENT_ALL = "all";
     public static final String INTENT_TITLE = "title";
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
 
     public static void startActivity(Context context, String week, String month, String all, String title) {
         context.startActivity(new Intent(context, SubRankActivity.class)
@@ -88,8 +93,8 @@ public class SubRankActivity extends BaseActivity {
         all = getIntent().getStringExtra(INTENT_ALL);
 
         title = getIntent().getStringExtra(INTENT_TITLE).split(" ")[0];
-        mCommonToolbar.setTitle(title);
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText(title);
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override
@@ -120,5 +125,12 @@ public class SubRankActivity extends BaseActivity {
         mViewPager.setAdapter(mAdapter);
         mViewPager.setOffscreenPageLimit(3);
         mIndicator.setViewPager(mViewPager, 0);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

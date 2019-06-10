@@ -26,14 +26,19 @@ import com.kaqi.reader.component.DaggerFindComponent;
 import com.kaqi.reader.ui.contract.SubRankContract;
 import com.kaqi.reader.ui.easyadapter.SubCategoryAdapter;
 import com.kaqi.reader.ui.presenter.SubRankPresenter;
+import com.kaqi.reader.utils.NormalTitleBar;
 
 import javax.inject.Inject;
+
+import butterknife.Bind;
 
 /**
  * 别人家的排行榜
  * Created by lfh on 2016/10/15.
  */
 public class SubOtherHomeRankActivity extends BaseRVActivity<BooksByCats.BooksBean> implements SubRankContract.View {
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
 
     public final static String BUNDLE_ID = "_id";
     public static final String INTENT_TITLE = "title";
@@ -66,8 +71,8 @@ public class SubOtherHomeRankActivity extends BaseRVActivity<BooksByCats.BooksBe
         title = getIntent().getStringExtra(INTENT_TITLE).split(" ")[0];
         id = getIntent().getStringExtra(BUNDLE_ID);
 
-        mCommonToolbar.setTitle(title);
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText(title);
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override

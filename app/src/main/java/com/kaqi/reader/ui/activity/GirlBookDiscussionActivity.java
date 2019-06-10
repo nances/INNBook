@@ -17,20 +17,26 @@ package com.kaqi.reader.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseCommuniteActivity;
 import com.kaqi.reader.component.AppComponent;
+import com.kaqi.reader.utils.NormalTitleBar;
 import com.kaqi.reader.view.SelectionLayout;
 
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * 女生区
  */
 public class GirlBookDiscussionActivity extends BaseCommuniteActivity {
+
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, GirlBookDiscussionActivity.class));
@@ -51,8 +57,8 @@ public class GirlBookDiscussionActivity extends BaseCommuniteActivity {
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle("女生区");
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText("女生区");
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override
@@ -67,5 +73,12 @@ public class GirlBookDiscussionActivity extends BaseCommuniteActivity {
 
     @Override
     public void configViews() {
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

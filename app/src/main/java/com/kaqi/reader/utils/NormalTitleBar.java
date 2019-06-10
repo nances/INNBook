@@ -39,7 +39,6 @@ public class NormalTitleBar extends RelativeLayout {
         rlCommonTitle = (RelativeLayout) findViewById(R.id.common_title);
         tvTitle.getPaint().setStyle(Paint.Style.FILL_AND_STROKE);
         tvTitle.getPaint().setStrokeWidth(1.1f);
-        //setHeaderHeight();
         tvBack.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

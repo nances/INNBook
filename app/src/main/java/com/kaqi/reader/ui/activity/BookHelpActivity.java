@@ -17,17 +17,25 @@ package com.kaqi.reader.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseCommuniteActivity;
 import com.kaqi.reader.component.AppComponent;
+import com.kaqi.reader.utils.NormalTitleBar;
 
 import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * 书荒求助区
  */
 public class BookHelpActivity extends BaseCommuniteActivity {
+
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, BookHelpActivity.class));
@@ -45,8 +53,8 @@ public class BookHelpActivity extends BaseCommuniteActivity {
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle("书荒互助区");
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText("书荒互助区");
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override
@@ -62,5 +70,12 @@ public class BookHelpActivity extends BaseCommuniteActivity {
     @Override
     public void configViews() {
 
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

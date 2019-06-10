@@ -39,8 +39,7 @@ import com.kaqi.reader.manager.HistoryManager;
 import com.kaqi.reader.ui.contract.SubjectBookListDetailContract;
 import com.kaqi.reader.ui.easyadapter.ReadHistoryBooksAdapter;
 import com.kaqi.reader.ui.presenter.SubjectBookListDetailPresenter;
-
-import org.w3c.dom.Text;
+import com.kaqi.reader.utils.NormalTitleBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,10 +62,12 @@ public class ReadBookHistoryActivity extends BaseRVActivity<Recommend.RecommendB
     LinearLayout llBatchManagement;
     @Bind(R.id.tvSelectAll)
     RelativeLayout tvSelectAll;
-    @Bind(R.id.tvSelecttv)
-    TextView tvSelecttv;
     @Bind(R.id.tvDelete)
     RelativeLayout tvDelete;
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
+    @Bind(R.id.tvSelecttv)
+    TextView tvSelecttv;
     private List<BookListDetail.BookListBean.BooksBean> mAllBooks = new ArrayList<>();
 
     private int start = 0;
@@ -99,8 +100,8 @@ public class ReadBookHistoryActivity extends BaseRVActivity<Recommend.RecommendB
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle(R.string.book_read_hsitory);
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText(R.string.book_read_hsitory);
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override

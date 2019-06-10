@@ -17,9 +17,9 @@ package com.kaqi.reader.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.kaqi.reader.R;
@@ -34,6 +34,7 @@ import com.kaqi.reader.manager.SettingManager;
 import com.kaqi.reader.ui.adapter.BookCatalogListAdapter;
 import com.kaqi.reader.ui.contract.BookReadContract;
 import com.kaqi.reader.ui.presenter.BookReadPresenter;
+import com.kaqi.reader.utils.NormalTitleBar;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -43,6 +44,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by niqiao on 2019年06月05日14:15:39.
@@ -52,10 +54,10 @@ public class BookCatalogActivity extends BaseActivity implements BookReadContrac
     public static String INTENT_BOOK_ID = "bookId";
     @Inject
     BookReadPresenter mPresenter;
-    @Bind(R.id.common_toolbar)
-    Toolbar commonToolbar;
     @Bind(R.id.recyclerview)
     RecyclerView refreshLayout;
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
 
     private List<BookMixAToc.mixToc.Chapters> mChapterList = new ArrayList<>();
     private Recommend.RecommendBooks recommendBooks;
@@ -95,8 +97,8 @@ public class BookCatalogActivity extends BaseActivity implements BookReadContrac
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
-        mCommonToolbar.setTitle(R.string.book_detail);
+        commonToolbar.setTitleText(R.string.book_detail);
+        commonToolbar.setBackVisibility(true);
         refreshLayout.setHasFixedSize(true);
         refreshLayout.setLayoutManager(new LinearLayoutManager(this));
         mTocListAdapter = new BookCatalogListAdapter(this, mChapterList, bookId, 1, this);
@@ -171,5 +173,12 @@ public class BookCatalogActivity extends BaseActivity implements BookReadContrac
         SettingManager.getInstance().saveReadProgress(bookId, position + 1, 0, 0);
         ReadActivity.startActivity(this, recommendBooks, position, true);
         finish();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

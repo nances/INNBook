@@ -17,6 +17,7 @@ package com.kaqi.reader.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -39,6 +40,7 @@ import com.kaqi.reader.ui.adapter.SubjectTagsAdapter;
 import com.kaqi.reader.ui.contract.SubjectBookListContract;
 import com.kaqi.reader.ui.fragment.SubjectFragment;
 import com.kaqi.reader.ui.presenter.SubjectBookListPresenter;
+import com.kaqi.reader.utils.NormalTitleBar;
 import com.kaqi.reader.utils.ToastUtils;
 import com.kaqi.reader.view.RVPIndicator;
 import com.kaqi.reader.view.ReboundScrollView;
@@ -53,6 +55,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class SubjectBookListActivity extends BaseActivity implements SubjectBookListContract.View, OnRvItemClickListener<String> {
 
@@ -65,6 +68,8 @@ public class SubjectBookListActivity extends BaseActivity implements SubjectBook
 
     @Bind(R.id.rvTags)
     RecyclerView rvTags;
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
     private SubjectTagsAdapter mTagAdapter;
     private List<BookListTags.DataBean> mTagList = new ArrayList<>();
 
@@ -97,8 +102,8 @@ public class SubjectBookListActivity extends BaseActivity implements SubjectBook
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle(R.string.subject_book_list);
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText(R.string.subject_book_list);
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override
@@ -223,5 +228,12 @@ public class SubjectBookListActivity extends BaseActivity implements SubjectBook
         if (mPresenter != null) {
             mPresenter.detachView();
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

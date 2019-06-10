@@ -20,6 +20,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
@@ -35,12 +36,14 @@ import com.kaqi.reader.manager.CacheManager;
 import com.kaqi.reader.manager.EventManager;
 import com.kaqi.reader.manager.SettingManager;
 import com.kaqi.reader.ui.presenter.MainActivityPresenter;
+import com.kaqi.reader.utils.NormalTitleBar;
 import com.kaqi.reader.utils.SharedPreferencesUtil;
 import com.kaqi.reader.view.textview.SuperTextView;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -71,8 +74,10 @@ public class SettingActivity extends BaseActivity {
 
     @Inject
     MainActivityPresenter mPresenter;
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
 
-    private String  cacheSizeSt;
+    private String cacheSizeSt;
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, SettingActivity.class));
@@ -105,8 +110,8 @@ public class SettingActivity extends BaseActivity {
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle("设置");
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText("设置");
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override
@@ -276,5 +281,12 @@ public class SettingActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         mHandler.removeCallbacksAndMessages(null);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

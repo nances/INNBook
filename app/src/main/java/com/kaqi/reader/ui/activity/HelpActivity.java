@@ -21,12 +21,16 @@ import android.content.Intent;
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseActivity;
 import com.kaqi.reader.component.AppComponent;
+import com.kaqi.reader.utils.NormalTitleBar;
+
+import butterknife.Bind;
 
 /**
  * 帮助中心
  */
 public class HelpActivity extends BaseActivity {
-
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, HelpActivity.class));
     }
@@ -43,8 +47,8 @@ public class HelpActivity extends BaseActivity {
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle("帮助");
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText("帮助");
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override

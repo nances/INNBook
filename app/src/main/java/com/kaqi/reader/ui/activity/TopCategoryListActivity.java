@@ -15,6 +15,7 @@
  */
 package com.kaqi.reader.ui.activity;
 
+import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -31,6 +32,7 @@ import com.kaqi.reader.component.DaggerFindComponent;
 import com.kaqi.reader.ui.adapter.TopCategoryMaleListAdapter;
 import com.kaqi.reader.ui.contract.TopCategoryListContract;
 import com.kaqi.reader.ui.presenter.TopCategoryListPresenter;
+import com.kaqi.reader.utils.NormalTitleBar;
 import com.kaqi.reader.view.SupportGridItemDecoration;
 
 import java.util.ArrayList;
@@ -39,6 +41,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by lfh on 2016/8/30.
@@ -52,6 +55,8 @@ public class TopCategoryListActivity extends BaseActivity implements TopCategory
 
     @Inject
     TopCategoryListPresenter mPresenter;
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
 
     private TopCategoryMaleListAdapter mMaleCategoryListAdapter;
     private TopCategoryMaleListAdapter mFemaleCategoryListAdapter;
@@ -73,8 +78,8 @@ public class TopCategoryListActivity extends BaseActivity implements TopCategory
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle(getString(R.string.category));
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText(getString(R.string.category));
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override
@@ -129,6 +134,13 @@ public class TopCategoryListActivity extends BaseActivity implements TopCategory
     @Override
     public void complete() {
         dismissDialog();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 
     class ClickListener implements OnRvItemClickListener<CategoryList.MaleBean> {

@@ -17,6 +17,7 @@ package com.kaqi.reader.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -29,8 +30,8 @@ import com.bumptech.glide.Glide;
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseRVActivity;
 import com.kaqi.reader.base.Constant;
-import com.kaqi.reader.bean.CommentList;
 import com.kaqi.reader.bean.BookHelp;
+import com.kaqi.reader.bean.CommentList;
 import com.kaqi.reader.common.OnRvItemClickListener;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.component.DaggerCommunityComponent;
@@ -39,6 +40,7 @@ import com.kaqi.reader.ui.contract.BookHelpDetailContract;
 import com.kaqi.reader.ui.easyadapter.CommentListAdapter;
 import com.kaqi.reader.ui.presenter.BookHelpDetailPresenter;
 import com.kaqi.reader.utils.FormatUtils;
+import com.kaqi.reader.utils.NormalTitleBar;
 import com.kaqi.reader.view.BookContentTextView;
 import com.kaqi.reader.view.SupportDividerItemDecoration;
 import com.kaqi.reader.view.recyclerview.adapter.RecyclerArrayAdapter;
@@ -59,6 +61,8 @@ import butterknife.ButterKnife;
 public class BookHelpDetailActivity extends BaseRVActivity<CommentList.CommentsBean> implements BookHelpDetailContract.View, OnRvItemClickListener<CommentList.CommentsBean> {
 
     private static final String INTENT_ID = "id";
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
 
     public static void startActivity(Context context, String id) {
         context.startActivity(new Intent(context, BookHelpDetailActivity.class)
@@ -81,6 +85,13 @@ public class BookHelpDetailActivity extends BaseRVActivity<CommentList.CommentsB
     @Override
     public void complete() {
 
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 
     static class HeaderViewHolder {
@@ -121,8 +132,8 @@ public class BookHelpDetailActivity extends BaseRVActivity<CommentList.CommentsB
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle("书荒互助区详情");
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText("书荒互助区详情");
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override

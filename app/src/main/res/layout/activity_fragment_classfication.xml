@@ -6,13 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/white" />
-
-
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -26,29 +19,27 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/common_bg"
+                android:background="@color/white"
                 android:contentInsetStart="0dp"
                 app:contentInsetStart="0dp"
                 app:layout_scrollFlags="scroll|enterAlways">
 
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/common_toolbar"
+                <com.kaqi.reader.utils.NormalTitleBar
+                    android:id="@+id/normaltitle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/common_bg"
-                    android:minHeight="?attr/actionBarSize"
-                    android:theme="@style/Theme.ToolBar.Menu"
-                    app:titleTextAppearance="@style/Toolbar.TitleText" />
+                    android:layout_height="wrap_content"></com.kaqi.reader.utils.NormalTitleBar>
 
             </android.support.v7.widget.Toolbar>
 
             <com.flyco.tablayout.SlidingTabLayout
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/wh52.0dimens52.0dp"
+                android:layout_height="@dimen/wh48.0dimens48.0dp"
                 android:background="@color/common_bg"
                 android:clipChildren="false"
                 android:clipToPadding="false"
+                android:paddingLeft="@dimen/wh10.0dimens10.0dp"
+                android:paddingRight="@dimen/wh10.0dimens10.0dp"
                 app:tl_indicator_corner_radius="2dp"
                 app:tl_indicator_height="@dimen/wh2.0dimens2.0dp"
                 app:tl_indicator_width_equal_title="true"

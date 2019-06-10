@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
 
 import com.flyco.tablayout.SlidingTabLayout;
 import com.kaqi.reader.R;
@@ -12,6 +11,7 @@ import com.kaqi.reader.base.BaseActivity;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.ui.adapter.ComFragmentAdapter;
 import com.kaqi.reader.ui.fragment.ClassRankTopItemFragment;
+import com.kaqi.reader.utils.NormalTitleBar;
 import com.kaqi.reader.view.NoScrollViewPager;
 
 import java.util.ArrayList;
@@ -24,8 +24,8 @@ public class ClassicRankTopActivity extends BaseActivity {
     SlidingTabLayout tabs;
     @Bind(R.id.viewPager)
     NoScrollViewPager mViewPager;
-    @Bind(R.id.common_toolbar)
-    Toolbar common_toolbar;
+    @Bind(R.id.normaltitle)
+    NormalTitleBar common_toolbar;
 
     private String[] titles = new String[]{"男生", "女生"};
 
@@ -52,8 +52,7 @@ public class ClassicRankTopActivity extends BaseActivity {
 
     @Override
     public void initToolBar() {
-        common_toolbar.setTitle("排行榜");
-        common_toolbar.setNavigationIcon(R.drawable.black_back_icon);
+
     }
 
     @Override
@@ -75,7 +74,9 @@ public class ClassicRankTopActivity extends BaseActivity {
 
     @Override
     public void initDatas() {
-
+        common_toolbar.setTitleText("排行榜");
+        common_toolbar.setTitleColor(getResources().getColor(R.color.common_h1));
+        common_toolbar.setBackVisibility(true);
     }
 
     @Override

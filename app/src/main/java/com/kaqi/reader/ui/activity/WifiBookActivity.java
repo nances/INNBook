@@ -18,6 +18,7 @@ package com.kaqi.reader.ui.activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
@@ -28,11 +29,13 @@ import com.kaqi.reader.base.BaseActivity;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.component.DaggerMainComponent;
 import com.kaqi.reader.utils.NetworkUtils;
+import com.kaqi.reader.utils.NormalTitleBar;
 import com.kaqi.reader.view.dialog.CommomAddShuJiaDialog;
 import com.kaqi.reader.wifitransfer.Defaults;
 import com.kaqi.reader.wifitransfer.ServerRunner;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -40,6 +43,8 @@ import butterknife.OnClick;
  */
 public class WifiBookActivity extends BaseActivity {
     public static final int EXIT_WIFI_LOCAL = 0x02;
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, WifiBookActivity.class));
@@ -68,8 +73,8 @@ public class WifiBookActivity extends BaseActivity {
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle("WiFi传书");
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText("WiFi传书");
+        commonToolbar.setBackVisibility(true);
     }
 
 
@@ -160,4 +165,10 @@ public class WifiBookActivity extends BaseActivity {
     }
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

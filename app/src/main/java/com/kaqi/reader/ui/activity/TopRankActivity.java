@@ -17,6 +17,7 @@ package com.kaqi.reader.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ExpandableListView;
 
@@ -29,6 +30,7 @@ import com.kaqi.reader.component.DaggerFindComponent;
 import com.kaqi.reader.ui.adapter.TopRankAdapter;
 import com.kaqi.reader.ui.contract.TopRankContract;
 import com.kaqi.reader.ui.presenter.TopRankPresenter;
+import com.kaqi.reader.utils.NormalTitleBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class TopRankActivity extends BaseActivity implements TopRankContract.View {
 
@@ -43,6 +46,8 @@ public class TopRankActivity extends BaseActivity implements TopRankContract.Vie
     ExpandableListView elvFeMale;
     @Bind(R.id.elvMale)
     ExpandableListView elvMale;
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
 
     private List<RankingList.MaleBean> maleGroups = new ArrayList<>();
     private List<List<RankingList.MaleBean>> maleChilds = new ArrayList<>();
@@ -75,8 +80,8 @@ public class TopRankActivity extends BaseActivity implements TopRankContract.Vie
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle("排行榜");
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText("排行榜");
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override
@@ -120,6 +125,13 @@ public class TopRankActivity extends BaseActivity implements TopRankContract.Vie
     @Override
     public void complete() {
         dismissDialog();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 
     class ClickListener implements OnRvItemClickListener<RankingList.MaleBean> {

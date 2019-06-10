@@ -20,6 +20,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
@@ -36,6 +37,7 @@ import com.kaqi.reader.manager.EventManager;
 import com.kaqi.reader.ui.easyadapter.RecommendAdapter;
 import com.kaqi.reader.utils.AppUtils;
 import com.kaqi.reader.utils.FileUtils;
+import com.kaqi.reader.utils.NormalTitleBar;
 import com.kaqi.reader.view.recyclerview.EasyRecyclerView;
 import com.kaqi.reader.view.recyclerview.adapter.RecyclerArrayAdapter;
 
@@ -44,6 +46,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * 扫描本地
@@ -54,6 +57,8 @@ import butterknife.Bind;
 public class ScanLocalBookActivity extends BaseActivity implements RecyclerArrayAdapter.OnItemClickListener {
     public static final int QUERY_LOCAL_FILE = 0x01;
     public static final int EXIT_WIFI_LOCAL = 0x02;
+    @Bind(R.id.common_toolbar)
+    NormalTitleBar commonToolbar;
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, ScanLocalBookActivity.class));
@@ -77,8 +82,8 @@ public class ScanLocalBookActivity extends BaseActivity implements RecyclerArray
 
     @Override
     public void initToolBar() {
-        mCommonToolbar.setTitle("扫描本地书籍");
-        mCommonToolbar.setNavigationIcon(R.drawable.ab_back);
+        commonToolbar.setTitleText("扫描本地书籍");
+        commonToolbar.setBackVisibility(true);
     }
 
     @Override
@@ -213,5 +218,10 @@ public class ScanLocalBookActivity extends BaseActivity implements RecyclerArray
     }
 
 
-
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }
