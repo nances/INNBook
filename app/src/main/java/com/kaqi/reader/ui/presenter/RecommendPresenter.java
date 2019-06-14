@@ -30,8 +30,8 @@ import rx.schedulers.Schedulers;
 import static com.kaqi.reader.ui.presenter.MainActivityPresenter.isLastSyncUpdateed;
 
 /**
- * @author yuyh.
- * @date 2016/8/3.
+ * @author niqiao.
+ * @date 2019年06月10日22:35:29.
  */
 public class RecommendPresenter extends RxPresenter<RecommendContract.View>
         implements RecommendContract.Presenter<RecommendContract.View> {

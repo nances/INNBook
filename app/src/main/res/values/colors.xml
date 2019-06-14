@@ -3,7 +3,7 @@
     <!--标题栏的颜色-->
     <color name="colorPrimary">#3B99DF</color>
     <!--状态栏的颜色-->
-    <color name="colorPrimaryDark">#3B90DF</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
     <!--控件的选中颜色，即checked或selected状态的颜色。-->
     <color name="colorAccent">#3B99DF</color>
 

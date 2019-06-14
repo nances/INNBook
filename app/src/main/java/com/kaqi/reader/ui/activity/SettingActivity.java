@@ -116,19 +116,9 @@ public class SettingActivity extends BaseActivity {
 
     @Override
     public void initDatas() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                final String cachesize = CacheManager.getInstance().getCacheSize();
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mTvCacheSize.setRightString(cachesize);
-                    }
-                });
+        cacheSizeSt = CacheManager.getInstance().getCacheSize();
+        mHandler.sendEmptyMessageDelayed(UPDATE_SIZE, 100);
 
-            }
-        }).start();
         mTvSort.setRightString(getResources().getStringArray(R.array.setting_dialog_sort_choice)[
                 SharedPreferencesUtil.getInstance().getBoolean(Constant.ISBYUPDATESORT, true) ? 0 : 1]);
         mTvFlipStyle.setRightString(getResources().getStringArray(R.array.setting_dialog_style_choice)[

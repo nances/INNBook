@@ -97,7 +97,7 @@ public class BookCatalogActivity extends BaseActivity implements BookReadContrac
 
     @Override
     public void initToolBar() {
-        commonToolbar.setTitleText(R.string.book_detail);
+        commonToolbar.setTitleText("目录");
         commonToolbar.setBackVisibility(true);
         refreshLayout.setHasFixedSize(true);
         refreshLayout.setLayoutManager(new LinearLayoutManager(this));

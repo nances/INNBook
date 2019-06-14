@@ -3,13 +3,13 @@
 
     BaseContract application theme.
 
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
-        <!--标题栏的颜色-->
-        <item name="colorPrimary">@color/yellow_50</item>
-        <!--状态栏的颜色-->
-        <item name="colorPrimaryDark">@color/yellow_30</item>
-        <!--控件的选中颜色，即checked或selected状态的颜色。-->
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -159,7 +159,7 @@
         <!-- 半透明 -->
         <item name="android:windowIsTranslucent">true</item>
         <!-- Dialog进入及退出动画 -->
-        <item name="android:windowAnimationStyle">@style/ActionSheetDialogAnimation</item>
+        <item name="android:windowAnimationStyle">@style/BottomDialogAnimation</item>
     </style>
 
 
@@ -183,8 +183,14 @@
         <!--背景透明-->
         <item name="android:backgroundDimEnabled">true</item>
         <!--模糊-->
+        <item name="android:windowAnimationStyle">@style/BottomDialogAnimation</item>
     </style>
 
+
+    <style name="BottomDialogAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/giftbox_in</item>
+        <item name="android:windowExitAnimation">@anim/giftbox_out</item>
+    </style>
 
     <style name="login_edit_style">
         <item name="android:textSize">14.0sp</item>

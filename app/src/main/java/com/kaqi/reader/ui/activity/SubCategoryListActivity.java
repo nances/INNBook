@@ -17,7 +17,6 @@ package com.kaqi.reader.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -29,6 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.flyco.tablayout.SlidingTabLayout;
 import com.kaqi.reader.R;
 import com.kaqi.reader.base.BaseActivity;
 import com.kaqi.reader.base.Constant;
@@ -36,25 +36,24 @@ import com.kaqi.reader.bean.CategoryListLv2;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.component.DaggerFindComponent;
 import com.kaqi.reader.manager.EventManager;
+import com.kaqi.reader.ui.adapter.ComFragmentAdapter;
 import com.kaqi.reader.ui.adapter.MinorAdapter;
 import com.kaqi.reader.ui.contract.SubCategoryActivityContract;
 import com.kaqi.reader.ui.fragment.SubCategoryFragment;
 import com.kaqi.reader.ui.presenter.SubCategoryActivityPresenter;
 import com.kaqi.reader.utils.NormalTitleBar;
-import com.kaqi.reader.view.RVPIndicator;
+import com.kaqi.reader.view.NoScrollViewPager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
- * @author yuyh.
- * @date 2016/8/31.
+ * @author Nancys.
+ * @date 2019年06月12日23:16:18.
  */
 public class SubCategoryListActivity extends BaseActivity implements SubCategoryActivityContract.View {
 
@@ -67,17 +66,18 @@ public class SubCategoryListActivity extends BaseActivity implements SubCategory
 
     private String currentMinor = "";
 
-    @Bind(R.id.indicatorSub)
-    RVPIndicator mIndicator;
+    @Bind(R.id.tabs)
+    SlidingTabLayout tabs;
+
     @Bind(R.id.viewpagerSub)
-    ViewPager mViewPager;
+    NoScrollViewPager mViewPager;
 
     @Inject
     SubCategoryActivityPresenter mPresenter;
 
     private List<Fragment> mTabContents;
     private FragmentPagerAdapter mAdapter;
-    private List<String> mDatas;
+    private String[] mDatas = new String[]{"新书", "热门","口碑","完结"};
 
     private List<String> mMinors = new ArrayList<>();
     private ListPopupWindow mListPopupWindow;
@@ -119,36 +119,37 @@ public class SubCategoryListActivity extends BaseActivity implements SubCategory
 
     @Override
     public void initDatas() {
-        mDatas = Arrays.asList(getResources().getStringArray(R.array.sub_tabs));
 
         mPresenter.attachView(this);
         mPresenter.getCategoryListLv2();
 
         mTabContents = new ArrayList<>();
+        initViewPager();
+//
+//        mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
+//            @Override
+//            public int getCount() {
+//                return mTabContents.size();
+//            }
+//
+//            @Override
+//            public Fragment getItem(int position) {
+//                return mTabContents.get(position);
+//            }
+//        };
+    }
+
+    private void initViewPager() {
         mTabContents.add(SubCategoryFragment.newInstance(cate, "", gender, Constant.CateType.NEW));
         mTabContents.add(SubCategoryFragment.newInstance(cate, "", gender, Constant.CateType.HOT));
         mTabContents.add(SubCategoryFragment.newInstance(cate, "", gender, Constant.CateType.REPUTATION));
         mTabContents.add(SubCategoryFragment.newInstance(cate, "", gender, Constant.CateType.OVER));
 
-        mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
-            @Override
-            public int getCount() {
-                return mTabContents.size();
-            }
+        mViewPager.setAdapter(new ComFragmentAdapter(getSupportFragmentManager(), mTabContents));
 
-            @Override
-            public Fragment getItem(int position) {
-                return mTabContents.get(position);
-            }
-        };
-    }
-
-    @Override
-    public void configViews() {
-        mIndicator.setTabItemTitles(mDatas);
-        mViewPager.setAdapter(mAdapter);
-        mViewPager.setOffscreenPageLimit(4);
-        mIndicator.setViewPager(mViewPager, 0);
+        tabs.setViewPager(mViewPager, mDatas);
+        mViewPager.setOffscreenPageLimit(mDatas.length);
+        tabs.setCurrentTab(0);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -165,6 +166,12 @@ public class SubCategoryListActivity extends BaseActivity implements SubCategory
 
             }
         });
+    }
+
+
+    @Override
+    public void configViews() {
+
     }
 
     @Override
@@ -257,10 +264,4 @@ public class SubCategoryListActivity extends BaseActivity implements SubCategory
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

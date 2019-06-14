@@ -1,44 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (c) 2016 JustWayward Team
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~     http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:rvp="http://schemas.android.com/apk/res-auto"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:id="@+id/main_content"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical">
+
+<android.support.design.widget.CoordinatorLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <include layout="@layout/common_toolbar" />
-
-    <com.kaqi.reader.view.RVPIndicator
-        android:id="@+id/indicatorSub"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="@color/colorPrimary"
-        android:orientation="horizontal"
-        rvp:indicator_color="@color/common_bg"
-        rvp:indicator_style="triangle"
-        rvp:item_count="4"
-        rvp:text_color_hightlight="@color/white"
-        rvp:text_color_normal="@color/light_gray" />
+        android:layout_height="wrap_content">
 
-    <android.support.v4.view.ViewPager
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            android:contentInsetStart="0dp"
+            app:contentInsetStart="0dp"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <com.kaqi.reader.utils.NormalTitleBar
+                android:id="@+id/common_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></com.kaqi.reader.utils.NormalTitleBar>
+
+        </android.support.v7.widget.Toolbar>
+
+        <com.flyco.tablayout.SlidingTabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wh48.0dimens48.0dp"
+            android:background="@color/common_bg"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingLeft="@dimen/wh10.0dimens10.0dp"
+            android:paddingRight="@dimen/wh10.0dimens10.0dp"
+            app:tl_indicator_corner_radius="2dp"
+            app:tl_indicator_height="@dimen/wh2.0dimens2.0dp"
+            app:tl_indicator_width_equal_title="true"
+            app:tl_tab_padding="@dimen/wh12.0dimens12.0dp"
+            app:tl_textBold="BOTH"
+            app:tl_textSelectColor="@color/yellow_30"
+            app:tl_textUnselectColor="@color/common_h1"
+            app:tl_textsize="16sp"
+            app:tl_underline_color="@color/white" />
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <com.kaqi.reader.view.NoScrollViewPager
         android:id="@+id/viewpagerSub"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+</android.support.design.widget.CoordinatorLayout>
 </LinearLayout>
+
+
+
+
+

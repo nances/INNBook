@@ -19,7 +19,6 @@
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/common_gray_bg"
             app:layout_empty="@layout/common_empty_view"
             app:layout_progress="@layout/common_progress_view"
             app:scrollbarStyle="insideOverlay" />

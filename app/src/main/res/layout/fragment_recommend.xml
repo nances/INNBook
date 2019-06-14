@@ -44,8 +44,8 @@
             android:layout_toLeftOf="@+id/book_admin">
 
             <ImageView
-                android:layout_width="@dimen/wh20.0dimens20.0dp"
-                android:layout_height="@dimen/wh20.0dimens20.0dp"
+                android:layout_width="@dimen/wh22.0dimens22.0dp"
+                android:layout_height="@dimen/wh22.0dimens22.0dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:background="@drawable/read_book_icon" />

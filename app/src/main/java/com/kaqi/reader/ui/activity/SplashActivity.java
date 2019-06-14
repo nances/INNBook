@@ -20,6 +20,7 @@ import android.os.CountDownTimer;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -59,6 +60,8 @@ public class SplashActivity extends BaseActivity {
     Button mBtnFemale;
     @Bind(R.id.choose_sex_rl)
     RelativeLayout chooseSexRl;
+    @Bind(R.id.splash_ad_fl)
+    FrameLayout splashAdFl;
 
     private boolean flag = false;
     private SplashCountDownTimer mCountDownTimer;
@@ -143,7 +146,7 @@ public class SplashActivity extends BaseActivity {
                     mCountDownTimer.cancel();
                 }
                 if (!SettingManager.getInstance().isUserChooseSex()) {
-                    gone(tvSkip);
+                    gone(tvSkip,splashAdFl);
                     visible(chooseSexRl);
                 } else {
                     mHandler.sendEmptyMessageDelayed(GO_HOME, 100);
@@ -174,7 +177,7 @@ public class SplashActivity extends BaseActivity {
             }
             tvSkip.setText("0s 跳过");
             if (!SettingManager.getInstance().isUserChooseSex()) {
-                gone(tvSkip);
+                gone(tvSkip, splashAdFl);
                 visible(chooseSexRl);
             } else {
                 mHandler.sendEmptyMessageDelayed(GO_HOME, 100);

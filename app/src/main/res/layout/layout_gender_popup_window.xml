@@ -56,7 +56,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/wh38.0dimens38.0dp"
+        android:layout_height="@dimen/wh42.0dimens42.0dp"
         android:layout_below="@+id/mTvSelect"
         android:layout_marginLeft="@dimen/wh54.0dimens54.0dp"
         android:layout_marginTop="@dimen/wh15.0dimens15.0dp"

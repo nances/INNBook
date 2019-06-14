@@ -10,6 +10,7 @@
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="@dimen/wh52.0dimens52.0dp"
+        android:background="@color/common_bg"
         android:clipChildren="false"
         android:clipToPadding="false"
         app:tl_indicator_corner_radius="2dp"

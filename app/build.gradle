@@ -23,12 +23,19 @@ android {
 
     signingConfigs {
         release {
-            storeFile file(KEYSTORE_FILE)
-            storePassword KEYSTORE_PWD
-            keyAlias KEY_ALIAS
-            keyPassword KEY_PWD
+            keyAlias 'kaqi'
+            keyPassword '123456'
+            storePassword '123456'
+            storeFile file('../key_story/kaqi')
         }
     }
+
+    aaptOptions {
+        cruncherEnabled = false
+        useNewCruncher = false
+
+    }
+
 
     buildTypes {
         debug {
@@ -43,7 +50,8 @@ android {
     }
 
     lintOptions {
-        disable 'InvalidPackage'
+        checkReleaseBuilds false
+        abortOnError false
     }
 
     packagingOptions {
