@@ -102,7 +102,6 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
         recomend_title.setTypeface(impact_tf);
         EventBus.getDefault().register(this);
 
-
         if (SettingManager.getInstance().getFirstInApp() == 0) {
             EventBus.getDefault().post(new UserSexChooseFinishedEvent());
         }
@@ -464,6 +463,7 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
     @Override
     public void onRefresh() {
         super.onRefresh();
+
         StackTraceElement stack[] = (new Throwable()).getStackTrace();
 
 

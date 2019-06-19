@@ -11,9 +11,8 @@ import com.kaqi.reader.R;
 import com.kaqi.reader.base.Constant;
 import com.kaqi.reader.bean.DiscussionList;
 import com.kaqi.reader.manager.SettingManager;
-import com.kaqi.reader.utils.LogUtils;
 import com.kaqi.reader.utils.FormatUtils;
-import com.kaqi.reader.utils.ScreenUtils;
+import com.kaqi.reader.utils.LogUtils;
 import com.kaqi.reader.view.recyclerview.adapter.BaseViewHolder;
 import com.kaqi.reader.view.recyclerview.adapter.RecyclerArrayAdapter;
 
@@ -50,11 +49,9 @@ public class BookDiscussionAdapter extends RecyclerArrayAdapter<DiscussionList.P
                     TextView textView = holder.getView(R.id.tvHelpfulYes);
                     if (item.type.equals("vote")) {
                         Drawable drawable = ContextCompat.getDrawable(mContext, R.drawable.ic_notif_vote);
-                        drawable.setBounds(0, 0, ScreenUtils.dpToPxInt(15), ScreenUtils.dpToPxInt(15));
                         textView.setCompoundDrawables(drawable, null, null, null);
                     } else {
                         Drawable drawable = ContextCompat.getDrawable(mContext, R.drawable.ic_notif_post);
-                        drawable.setBounds(0, 0, ScreenUtils.dpToPxInt(15), ScreenUtils.dpToPxInt(15));
                         textView.setCompoundDrawables(drawable, null, null, null);
                     }
 

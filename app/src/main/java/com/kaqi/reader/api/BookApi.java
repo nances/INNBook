@@ -56,7 +56,6 @@ public class BookApi {
                 .addConverterFactory(GsonConverterFactory.create()) // 添加Gson转换器
                 .client(okHttpClient)
                 .build();
-
         service = retrofit.create(BookApiService.class);
     }
 

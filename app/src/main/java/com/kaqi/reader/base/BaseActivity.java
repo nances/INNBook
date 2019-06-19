@@ -1,9 +1,6 @@
 package com.kaqi.reader.base;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -42,40 +39,51 @@ public abstract class BaseActivity extends AppCompatActivity {
         AppManager.getAppManager().addActivity(this);
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-        if (statusBarColor == 0) {
-            statusBarView = StatusBarCompat.compat(this, ContextCompat.getColor(this, R.color.colorPrimaryDark));
-        } else if (statusBarColor != -1) {
-            statusBarView = StatusBarCompat.compat(this, statusBarColor);
-        }
-        transparent19and20();
         mContext = this;
         mHandler = new BaseHandler(this);
         ButterKnife.bind(this);
         setupActivityComponent(ReaderApplication.getsInstance().getAppComponent());
-//        mCommonToolbar = ButterKnife.findById(this, R.id.common_toolbar);
-//        if (mCommonToolbar != null) {
-//            setSupportActionBar(mCommonToolbar);
-//        }
+        setStatusBar();
         initToolBar();
         initDatas();
         configViews();
         mNowMode = SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT);
     }
 
-    protected void transparent19and20() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
-                && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            //透明状态栏
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
+    /**
+     * 设置状态来，需在setContentView初始化布局之后
+     */
+    protected void setStatusBar() {
+        // 默认着色状态栏，MainActivity需处理多fragment布局，状态栏逻辑在子类中处理。
+        SetStatusBarColor();
+        StatusBarCompat.setWhiteStatus(this);
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private void toolbarSetElevation(float elevation) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            mCommonToolbar.setElevation(elevation);
-        }
+    /**
+     * 着色状态栏（4.4以上系统有效）
+     */
+    protected void SetStatusBarColor() {
+        StatusBarCompat.setStatusBarColor(this, ContextCompat.getColor(this, R.color.white));
     }
+
+    /**
+     * 着色状态栏（4.4以上系统有效）
+     */
+    protected void SetStatusBarColor(int color) {
+        StatusBarCompat.setStatusBarColor(this, color);
+    }
+
+    /**
+     * 沉浸状态栏（4.4以上系统有效）
+     */
+    protected void TranslanteBar() {
+        StatusBarCompat.translucentStatusBar(this);
+    }
+
+    protected void SetTranslanteBar() {
+        StatusBarCompat.setTransparentStatus(this);
+    }
+
 
     @Override
     protected void onPause() {
@@ -185,17 +193,19 @@ public abstract class BaseActivity extends AppCompatActivity {
         attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
         getWindow().setAttributes(attrs);
         if(statusBarView != null){
-            statusBarView.setBackgroundColor(Color.TRANSPARENT);
+            statusBarView = StatusBarCompat.compat(this, ContextCompat.getColor(this, R.color.colorPrimaryDark));
         }
     }
 
     protected void showStatusBar() {
         WindowManager.LayoutParams attrs = getWindow().getAttributes();
-        attrs.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
+        attrs.flags &= WindowManager.LayoutParams.FLAG_FULLSCREEN;
         getWindow().setAttributes(attrs);
         if(statusBarView != null){
-            statusBarView.setBackgroundColor(statusBarColor);
+            statusBarView.setBackgroundColor(ContextCompat.getColor(this, R.color.yellow_30));
         }
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
     }
 
     protected void dispatchHandler(Message msg) {

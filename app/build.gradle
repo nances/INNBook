@@ -142,5 +142,4 @@ dependencies {
     implementation 'com.umeng.umsdk:common:2.0.0'
     implementation 'com.allenliu.versionchecklib:library:2.2.0'
     implementation 'com.github.jdsjlzx:LRecyclerView:1.5.4.3'
-
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PointF;
+import android.graphics.RectF;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -34,7 +35,7 @@ public abstract class BaseReadView extends View {
     protected Bitmap mCurPageBitmap, mNextPageBitmap;
     protected Canvas mCurrentPageCanvas, mNextPageCanvas;
     public PageFactory pagefactory = null;
-
+    private RectF mCenterRect = null;
     protected OnReadStateChangeListener listener;
     protected String bookId;
     public boolean isPrepared = false;
@@ -108,7 +109,6 @@ public abstract class BaseReadView extends View {
                     break;
                 }
 
-
                 if (!pagefactory.is_Ad && pagefactory.CurChapterLastPage) {
                     Log.v("NancyT", "=========*********=========");
                     pagefactory.onDraw(mCurrentPageCanvas);
@@ -122,13 +122,23 @@ public abstract class BaseReadView extends View {
                     }
                 }
 
-
-                if (actiondownX >= mScreenWidth / 3 && actiondownX <= mScreenWidth * 2 / 3
-                        && actiondownY >= mScreenHeight / 3 && actiondownY <= mScreenHeight * 2 / 3) {
+                //设置中间区域范围
+                if (mCenterRect == null) {
+                    mCenterRect = new RectF(mScreenWidth / 5, mScreenHeight / 3,
+                            mScreenWidth * 4 / 5, mScreenHeight * 2 / 3);
+                }
+                if (mCenterRect.contains(mTouch.x, mTouch.y)) {
                     pagefactory.center = true;
+                    listener.onCenterClick();
                     pagefactory.is_adShow--;
-                } else {
-
+                    Log.v("NancyS", "=========+++++++++=========11111");
+                }
+//                if (actiondownX >= mScreenWidth / 5 && actiondownX <= mScreenWidth * 2 / 3
+//                        && actiondownY >= mScreenHeight * 4 / 5 && actiondownY <= mScreenHeight * 2 / 3) {
+//                    pagefactory.center = true;
+//                    pagefactory.is_adShow--;
+//                }
+                else {
 
                     pagefactory.center = false;
                     calcCornerXY(actiondownX, actiondownY);
@@ -200,7 +210,6 @@ public abstract class BaseReadView extends View {
                 //TODO 只要触发就要翻页
 //                pagefactory.cancel = (actiondownX < mScreenWidth / 2 && mx < mTouch.x) || (actiondownX > mScreenWidth / 2 && mx > mTouch.x);
                 mTouch.x = mx;
-
                 mTouch.y = my;
                 touch_down = mTouch.x - actiondownX;
                 this.postInvalidate();
@@ -217,7 +226,7 @@ public abstract class BaseReadView extends View {
                 if (pagefactory.center) { // ACTION_DOWN的位置在中间，则不响应滑动事件
                     resetTouchPoint();
                     if (Math.abs(ux - actiondownX) < 5 && Math.abs(uy - actiondownY) < 5) {
-                        listener.onCenterClick();
+//                        listener.onCenterClick();
                         return false;
                     }
                     break;

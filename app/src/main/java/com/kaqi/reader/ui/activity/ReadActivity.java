@@ -65,7 +65,6 @@ import com.kaqi.reader.ui.easyadapter.ReadFontsAdapter;
 import com.kaqi.reader.ui.easyadapter.ReadThemeAdapter;
 import com.kaqi.reader.ui.presenter.BookReadPresenter;
 import com.kaqi.reader.utils.AppUtils;
-import com.kaqi.reader.utils.FileUtils;
 import com.kaqi.reader.utils.FormatUtils;
 import com.kaqi.reader.utils.LogUtils;
 import com.kaqi.reader.utils.ScreenUtils;
@@ -85,7 +84,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -175,6 +173,14 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     @Bind(R.id.circle_progress)
     CircleProgress circleProgress;
 
+
+    // 注册 Brightness 的 uri
+    private final Uri BRIGHTNESS_MODE_URI =
+            Settings.System.getUriFor(Settings.System.SCREEN_BRIGHTNESS_MODE);
+    private final Uri BRIGHTNESS_URI =
+            Settings.System.getUriFor(Settings.System.SCREEN_BRIGHTNESS);
+    private final Uri BRIGHTNESS_ADJ_URI =
+            Settings.System.getUriFor("screen_auto_brightness_adj");
     private View decodeView;
 
     @Inject
@@ -279,7 +285,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     public int getLayoutId() {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        statusBarColor = ContextCompat.getColor(this, R.color.reader_menu_bg_color);
+//        statusBarColor = ContextCompat.getColor(this, R.color.reader_menu_bg_color);
         return R.layout.activity_read;
     }
 
@@ -303,27 +309,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         iSCata = getIntent().getBooleanExtra(IS_CATE, false);
         currentNewChapter = getIntent().getIntExtra(CURRENT_CHAPTER, 1);
         getFontFromAssets(); // 获取字体
-        if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
-            String filePath = Uri.decode(getIntent().getDataString().replace("file://", ""));
-            String fileName;
-            if (filePath.lastIndexOf(".") > filePath.lastIndexOf("/")) {
-                fileName = filePath.substring(filePath.lastIndexOf("/") + 1, filePath.lastIndexOf("."));
-            } else {
-                fileName = filePath.substring(filePath.lastIndexOf("/") + 1);
-            }
-
-            CollectionsManager.getInstance().remove(fileName);
-            // 转存
-            File desc = FileUtils.createWifiTranfesFile(fileName);
-            FileUtils.fileChannelCopy(new File(filePath), desc);
-            // 建立
-            recommendBooks = new Recommend.RecommendBooks();
-            recommendBooks.isFromSD = true;
-            recommendBooks._id = fileName;
-            recommendBooks.title = fileName;
-
-            isFromSD = true;
-        }
         EventBus.getDefault().register(this);
         showDialog();
         mTvBookReadTocTitle.setText(recommendBooks.title);
@@ -346,25 +331,16 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
     @Override
     public void configViews() {
-        hideStatusBar();
+//        hideStatusBar();
         decodeView = getWindow().getDecorView();
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mLlBookReadTop.getLayoutParams();
-        params.topMargin = ScreenUtils.getStatusBarHeight(this) - 2;
+//        params.topMargin = ScreenUtils.getStatusBarHeight(this) - 2;
         mLlBookReadTop.setLayoutParams(params);
         initTocList();
         initMenuAnim();
         initAASet();
         initPagerWidget();
         mPresenter.attachView(this);
-//        if (isFromSD) {
-//            BookMixAToc.mixToc.Chapters chapters = new BookMixAToc.mixToc.Chapters();
-//            chapters.title = recommendBooks.title;
-//            mChapterList.add(chapters);
-//            showChapterRead(null, currentChapter);
-//            //本地书籍隐藏社区、简介、缓存按钮
-//            gone(mTvBookReadChangeSource, mTvBookReadDownload);
-//            return;
-//        }
         mPresenter.getBookMixAToc(bookId, "chapters", iSCata);
 
 
@@ -433,9 +409,23 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             if (!ScreenUtils.isAutoBrightness(ReadActivity.this)) {
                 seekbarLightness.setProgress(ScreenUtils.getScreenBrightness());
             }
+
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            super.onChange(selfChange);
+
+            // 如果系统亮度改变，则修改当前 Activity 亮度
+            if (BRIGHTNESS_MODE_URI.equals(uri)) {
+            } else if (BRIGHTNESS_URI.equals(uri) && !ScreenUtils.isAutoBrightness(ReadActivity.this)) {
+                ScreenUtils.setBrightness(ReadActivity.this, ScreenUtils.getScreenBrightness(ReadActivity.this));
+            } else if (BRIGHTNESS_ADJ_URI.equals(uri) && ScreenUtils.isAutoBrightness(ReadActivity.this)) {
+                ScreenUtils.setDefaultBrightness(ReadActivity.this);
+            } else {
+            }
         }
     };
-
 
     private void initAASet() {
         curTheme = SettingManager.getInstance().getReadTheme();
@@ -453,7 +443,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         seekbarLightness.setOnSeekBarChangeListener(new SeekBarChangeListener());
         seekbarLightness.setProgress(ScreenUtils.getScreenBrightness());
         isAutoLightness = ScreenUtils.isAutoBrightness(this);
-
 
         this.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.SCREEN_BRIGHTNESS), true, Brightness);
 
@@ -597,7 +586,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
     private synchronized void showReadBar() { // 显示工具栏
         visible(mLlBookReadBottom, mLlBookReadTop);
         showStatusBar();
-        decodeView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        decodeView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
     }
 
     private synchronized void toggleReadBar() { // 切换工具栏 隐藏/显示 状态
@@ -775,11 +764,11 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
             LogUtils.e("Receiver not registered");
         }
 
-        if (isAutoLightness) {
-            ScreenUtils.startAutoBrightness(ReadActivity.this);
-        } else {
-            ScreenUtils.stopAutoBrightness(ReadActivity.this);
-        }
+//        if (isAutoLightness) {
+//            ScreenUtils.startAutoBrightness(ReadActivity.this);
+//        } else {
+//            ScreenUtils.stopAutoBrightness(ReadActivity.this);
+//        }
 
         if (mPresenter != null) {
             mPresenter.detachView();
@@ -997,6 +986,9 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         @Override
         public void onPageChanged(int chapter, int page) {
             LogUtils.i("onPageChanged:" + chapter + "-" + page);
+            if (isVisible(mLlBookReadTop)) {
+                hideReadBar();
+            }
         }
 
         @Override
@@ -1014,7 +1006,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
         @Override
         public void onCenterClick() {
-            LogUtils.i("onCenterClick");
             toggleReadBar();
         }
 

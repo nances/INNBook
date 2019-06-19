@@ -59,10 +59,12 @@ public class MainActivity extends BaseActivity {
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
 
     private static final int PERMISSIONS_REQUEST_STORAGE = 1;
-    static final String[] PERMISSIONS = {
+    static final String[] PERMISSIONS = new String[]{
+            Manifest.permission.WRITE_SETTINGS,
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
+
     private PermissionsChecker mPermissionsChecker;
     private MineFragment mineFragment;
     private CommunityFragment circleMainFragment;
@@ -70,7 +72,6 @@ public class MainActivity extends BaseActivity {
     //    private HomeFragment homeFragment;
     private RecommendFragment homeFragment;
     private FindFragment findFragment;
-
 
     private Fragment[] fragments;
     private int currentTabIndex;
@@ -95,9 +96,7 @@ public class MainActivity extends BaseActivity {
     }
 
     public void initPermission() {
-        if (mPermissionsChecker == null) {
-            mPermissionsChecker = new PermissionsChecker(this);
-        }
+        mPermissionsChecker = new PermissionsChecker(this);
 
         //获取读取和写入SD卡的权限
         if (mPermissionsChecker.lacksPermissions(PERMISSIONS)) {
@@ -120,8 +119,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        Log.d("Nancy", "in onRestoreInstanceState >> this:" + this +
-                " savedInstanceState:" + savedInstanceState);
         super.onRestoreInstanceState(savedInstanceState);
 
     }
@@ -167,7 +164,6 @@ public class MainActivity extends BaseActivity {
             mineFragment = (MineFragment) getSupportFragmentManager().findFragmentByTag("mineFragment");
             homeFragment = (RecommendFragment) getSupportFragmentManager().findFragmentByTag("homeFragment");
             findFragment = (FindFragment) getSupportFragmentManager().findFragmentByTag("findFragment");
-//            circleMainFragment = (CommunityFragment) getSupportFragmentManager().findFragmentByTag("circleMainFragment");
             taskFragment = (TaskFragment) getSupportFragmentManager().findFragmentByTag("taskFragment");
             currentTabPosition = savedInstanceState.getInt("HOME_CURRENT_TAB_POSITION");
             Log.v("Nancy", "HOME_CURRENT_TAB_POSITION " + currentTabPosition);
@@ -182,7 +178,6 @@ public class MainActivity extends BaseActivity {
             transaction.add(R.id.container, findFragment, "findFragment");
             transaction.add(R.id.container, taskFragment, "taskFragment");
         }
-        Log.v("Nancy", "currentTabPosition" + currentTabPosition);
         transaction.commit();
         setCurrentItem(currentTabPosition);
     }
@@ -317,9 +312,6 @@ public class MainActivity extends BaseActivity {
                 // 如果取消权限，则返回的值为0
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //跳转到 FileSystemActivity
-//                    Intent intent = new Intent(this, FileSystemActivity.class);
-//                    startActivity(intent);
 
                 } else {
                     ToastUtils.showToast("用户拒绝开启读写权限");
