@@ -24,7 +24,7 @@ public class StatusBarCompat {
     private static final int INVALID_VAL = -1;
 
     private static final int COLOR_TRANSLUCENT = Color.parseColor("#00000000");
-    private static final int COLOR_HALF_TRANSLUCENT = Color.parseColor("#40000000");
+    private static final int COLOR_HALF_TRANSLUCENT = Color.parseColor("#727272");
 
     public static final int DEFAULT_COLOR_ALPHA = 112;
 

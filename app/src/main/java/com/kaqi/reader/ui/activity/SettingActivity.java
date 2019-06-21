@@ -22,7 +22,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
-import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -130,13 +129,14 @@ public class SettingActivity extends BaseActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT, false)) {
                     SharedPreferencesUtil.getInstance().putBoolean(Constant.ISNIGHT, false);
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-//                    mHandler.sendEmptyMessageDelayed(EXIT,500);
+                    EventManager.getShareUtisl(2);
+
                 } else {
                     SharedPreferencesUtil.getInstance().putBoolean(Constant.ISNIGHT, true);
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    EventManager.getShareUtisl(3);
+
                 }
-                recreate();
+                finish();
             }
         });
 

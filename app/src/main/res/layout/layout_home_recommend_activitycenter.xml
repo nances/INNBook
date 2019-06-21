@@ -77,7 +77,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvBookListAuthor"
+                    android:id="@+id/tvBookListInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvBookListTitle"
@@ -89,11 +89,10 @@
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/tvCatgory"
+                    android:id="@+id/AnchorTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tvBookListAuthor"
-                    android:layout_alignParentBottom="true"
+                    android:layout_below="@id/tvBookListInfo"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="@dimen/wh4.0dimens4.0dp"
                     android:ellipsize="end"
@@ -101,8 +100,8 @@
                     android:lineSpacingMultiplier="1.1"
                     android:paddingTop="@dimen/wh6.0dimens6.0dp"
                     android:singleLine="true"
-                    android:text="仙侠 | "
-                    android:textColor="@color/common_h2"
+                    android:text="  仙侠  "
+                    android:textColor="@color/common_h1"
                     android:textSize="14sp" />
 
                 <TextView
@@ -118,6 +117,7 @@
                     android:paddingTop="@dimen/wh6.0dimens6.0dp"
                     android:singleLine="true"
                     android:text="594万字"
+                    android:visibility="gone"
                     android:textColor="@color/common_h2"
                     android:textSize="14sp" />
 

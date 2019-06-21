@@ -56,6 +56,7 @@
         tools:replace="android:name">
         <activity
             android:name="com.kaqi.reader.ui.activity.SplashActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar.FullScreen">
             <intent-filter>

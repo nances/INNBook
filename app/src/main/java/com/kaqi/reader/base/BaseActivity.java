@@ -1,15 +1,18 @@
 package com.kaqi.reader.base;
 
 import android.content.Context;
+import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.kaqi.reader.R;
 import com.kaqi.reader.ReaderApplication;
@@ -34,11 +37,18 @@ public abstract class BaseActivity extends AppCompatActivity {
     private boolean mNowMode;
     private CustomDialog dialog;//进度条
     protected BaseHandler mHandler;
+
+
+    private WindowManager mWindowManager;
+    private TextView mNightView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppManager.getAppManager().addActivity(this);
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+        mWindowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         mContext = this;
         mHandler = new BaseHandler(this);
         ButterKnife.bind(this);
@@ -48,6 +58,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         initDatas();
         configViews();
         mNowMode = SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT);
+        Log.v("Nancys", "mContext is value ======" + getClass().getSimpleName());
+        if (SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT, false)) {
+            night();
+        } else {
+            day();
+        }
     }
 
     /**
@@ -63,7 +79,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 着色状态栏（4.4以上系统有效）
      */
     protected void SetStatusBarColor() {
-        StatusBarCompat.setStatusBarColor(this, ContextCompat.getColor(this, R.color.white));
+        StatusBarCompat.setStatusBarColor(this, ContextCompat.getColor(this, R.color.night));
     }
 
     /**
@@ -95,13 +111,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
-        if (SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT, false) != mNowMode) {
-            if (SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT, false)) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            }
-            recreate();
+        if (SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT, false)) {
+            night();
+        } else {
+            day();
         }
     }
 
@@ -192,7 +205,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         WindowManager.LayoutParams attrs = getWindow().getAttributes();
         attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
         getWindow().setAttributes(attrs);
-        if(statusBarView != null){
+        if (statusBarView != null) {
             statusBarView = StatusBarCompat.compat(this, ContextCompat.getColor(this, R.color.colorPrimaryDark));
         }
     }
@@ -201,7 +214,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         WindowManager.LayoutParams attrs = getWindow().getAttributes();
         attrs.flags &= WindowManager.LayoutParams.FLAG_FULLSCREEN;
         getWindow().setAttributes(attrs);
-        if(statusBarView != null){
+        if (statusBarView != null) {
             statusBarView.setBackgroundColor(ContextCompat.getColor(this, R.color.yellow_30));
         }
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
@@ -226,6 +239,42 @@ public abstract class BaseActivity extends AppCompatActivity {
             if (activity != null) {
                 activity.dispatchHandler(msg);
             }
+        }
+    }
+
+    /**
+     * 设置夜间模式
+     */
+    public void night() {
+        if (mNightView == null) {
+            mNightView = new TextView(this);
+            mNightView.setBackgroundColor(0xaa000000);
+        }
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams(
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.TYPE_APPLICATION,
+                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN |
+                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                PixelFormat.TRANSLUCENT);
+        lp.gravity = Gravity.CENTER;
+        if (getClass().getSimpleName().equals("ReadActivity")) {
+            lp.y = 10;
+        }
+        try {
+            mWindowManager.addView(mNightView, lp);
+        } catch (Exception ex) {
+        }
+    }
+
+    /**
+     * 设置白天模式
+     */
+    public void day() {
+        try {
+            mWindowManager.removeView(mNightView);
+        } catch (Exception ex) {
         }
     }
 

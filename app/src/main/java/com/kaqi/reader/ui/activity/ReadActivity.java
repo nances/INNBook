@@ -14,7 +14,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.ListPopupWindow;
 import android.view.KeyEvent;
 import android.view.View;
@@ -65,6 +64,7 @@ import com.kaqi.reader.ui.easyadapter.ReadFontsAdapter;
 import com.kaqi.reader.ui.easyadapter.ReadThemeAdapter;
 import com.kaqi.reader.ui.presenter.BookReadPresenter;
 import com.kaqi.reader.utils.AppUtils;
+import com.kaqi.reader.utils.FileUtils;
 import com.kaqi.reader.utils.FormatUtils;
 import com.kaqi.reader.utils.LogUtils;
 import com.kaqi.reader.utils.ScreenUtils;
@@ -84,6 +84,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -299,6 +300,7 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
     @Override
     public void initToolBar() {
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -307,9 +309,30 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         bookId = recommendBooks._id;
         isFromSD = getIntent().getBooleanExtra(INTENT_SD, false);
         iSCata = getIntent().getBooleanExtra(IS_CATE, false);
+
+        if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
+            String filePath = Uri.decode(getIntent().getDataString().replace("file://", ""));
+            String fileName;
+            if (filePath.lastIndexOf(".") > filePath.lastIndexOf("/")) {
+                fileName = filePath.substring(filePath.lastIndexOf("/") + 1, filePath.lastIndexOf("."));
+            } else {
+                fileName = filePath.substring(filePath.lastIndexOf("/") + 1);
+            }
+
+            CollectionsManager.getInstance().remove(fileName);
+            // 转存
+            File desc = FileUtils.createWifiTranfesFile(fileName);
+            FileUtils.fileChannelCopy(new File(filePath), desc);
+            // 建立
+            recommendBooks = new Recommend.RecommendBooks();
+            recommendBooks.isFromSD = true;
+            recommendBooks._id = fileName;
+            recommendBooks.title = fileName;
+
+            isFromSD = true;
+        }
         currentNewChapter = getIntent().getIntExtra(CURRENT_CHAPTER, 1);
         getFontFromAssets(); // 获取字体
-        EventBus.getDefault().register(this);
         showDialog();
         mTvBookReadTocTitle.setText(recommendBooks.title);
 
@@ -342,7 +365,16 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         initPagerWidget();
         mPresenter.attachView(this);
         mPresenter.getBookMixAToc(bookId, "chapters", iSCata);
-
+        // 本地收藏  直接打开
+        if (isFromSD) {
+            BookMixAToc.mixToc.Chapters chapters = new BookMixAToc.mixToc.Chapters();
+            chapters.title = recommendBooks.title;
+            mChapterList.add(chapters);
+            showChapterRead(null, currentChapter);
+            //本地书籍隐藏社区、简介、缓存按钮
+            gone(mTvBookReadChangeSource, mTvBookReadDownload);
+            return;
+        }
 
         //--- 上次设置过的读小说获取金币状态--- //
         if (ReadManager.getInstance().isReadBookGetMoney() && mPageWidget != null) {
@@ -831,7 +863,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
                 break;
             case R.id.tvBookReadMode:
                 gone(rlReadAaSet, rlReadMark);
-
                 boolean isNight = !SharedPreferencesUtil.getInstance().getBoolean(Constant.ISNIGHT, false);
                 changedMode(isNight, -1);
                 break;
@@ -936,9 +967,6 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
 
     private void changedMode(boolean isNight, int position) {
         SharedPreferencesUtil.getInstance().putBoolean(Constant.ISNIGHT, isNight);
-        AppCompatDelegate.setDefaultNightMode(isNight ? AppCompatDelegate.MODE_NIGHT_YES
-                : AppCompatDelegate.MODE_NIGHT_NO);
-
         if (position >= 0) {
             curTheme = position;
         } else {
@@ -958,6 +986,11 @@ public class ReadActivity extends BaseActivity implements BookReadContract.View 
         mTvBookReadMode.setCompoundDrawables(null, drawable, null, null);
 
         ThemeManager.setReaderTheme(curTheme, mRlBookReadRoot);
+        if (curTheme == ThemeManager.NIGHT) {
+            night();
+        } else {
+            day();
+        }
     }
 
 

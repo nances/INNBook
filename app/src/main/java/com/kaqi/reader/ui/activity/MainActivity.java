@@ -10,7 +10,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.KeyEvent;
 
 import com.flyco.tablayout.CommonTabLayout;
@@ -22,7 +21,6 @@ import com.kaqi.reader.bean.TabEntity;
 import com.kaqi.reader.bean.support.ShareEvent;
 import com.kaqi.reader.component.AppComponent;
 import com.kaqi.reader.service.DownloadBookService;
-import com.kaqi.reader.ui.fragment.CommunityFragment;
 import com.kaqi.reader.ui.fragment.FindFragment;
 import com.kaqi.reader.ui.fragment.MineFragment;
 import com.kaqi.reader.ui.fragment.RecommendFragment;
@@ -67,7 +65,6 @@ public class MainActivity extends BaseActivity {
 
     private PermissionsChecker mPermissionsChecker;
     private MineFragment mineFragment;
-    private CommunityFragment circleMainFragment;
     private TaskFragment taskFragment;
     //    private HomeFragment homeFragment;
     private RecommendFragment homeFragment;
@@ -96,7 +93,9 @@ public class MainActivity extends BaseActivity {
     }
 
     public void initPermission() {
-        mPermissionsChecker = new PermissionsChecker(this);
+        if (mPermissionsChecker == null) {
+            mPermissionsChecker = new PermissionsChecker(this);
+        }
 
         //获取读取和写入SD卡的权限
         if (mPermissionsChecker.lacksPermissions(PERMISSIONS)) {
@@ -166,7 +165,6 @@ public class MainActivity extends BaseActivity {
             findFragment = (FindFragment) getSupportFragmentManager().findFragmentByTag("findFragment");
             taskFragment = (TaskFragment) getSupportFragmentManager().findFragmentByTag("taskFragment");
             currentTabPosition = savedInstanceState.getInt("HOME_CURRENT_TAB_POSITION");
-            Log.v("Nancy", "HOME_CURRENT_TAB_POSITION " + currentTabPosition);
         } else {
             mineFragment = new MineFragment();
             homeFragment = new RecommendFragment();
@@ -271,6 +269,10 @@ public class MainActivity extends BaseActivity {
     public void shareUtils(final ShareEvent msg) {
         if (msg.share_type == 1) {
             getShare();
+        } else if (msg.share_type == 2) {
+            night();
+        } else if (msg.share_type == 3) {
+            day();
         }
     }
 
@@ -312,7 +314,6 @@ public class MainActivity extends BaseActivity {
                 // 如果取消权限，则返回的值为0
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
                 } else {
                     ToastUtils.showToast("用户拒绝开启读写权限");
                 }

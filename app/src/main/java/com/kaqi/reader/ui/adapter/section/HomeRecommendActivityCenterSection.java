@@ -69,7 +69,7 @@ public class HomeRecommendActivityCenterSection extends StatelessSection {
                 .transform(new GlideRoundTransform(mContext, 6))
                 .dontAnimate()
                 .into(centerViewHolder.ivBookCover);
-
+        centerViewHolder.tv_anchor.setText(activitys.get(0).getTitle());
         centerViewHolder.mRecyclerView.setHasFixedSize(false);
         centerViewHolder.mRecyclerView.setNestedScrollingEnabled(false);
         centerViewHolder.mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext,
@@ -88,10 +88,10 @@ public class HomeRecommendActivityCenterSection extends StatelessSection {
         CardView ivBookCoverCardView;
         @Bind(R.id.tvBookListTitle)
         TextView tvBookListTitle;
-        @Bind(R.id.tvBookListAuthor)
-        TextView tvBookListAuthor;
-        @Bind(R.id.tvCatgory)
-        TextView tvCatgory;
+        @Bind(R.id.tvBookListInfo)
+        TextView tvBookListInfo;
+        @Bind(R.id.AnchorTv)
+        TextView tv_anchor;
         @Bind(R.id.tvWordCount)
         TextView tvWordCount;
         @Bind(R.id.tvSerializeWordCount)

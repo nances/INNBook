@@ -1,14 +1,9 @@
 package com.kaqi.reader.ui.fragment;
 
-import android.app.ActivityManager;
 import android.app.Dialog;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.KeyEvent;
@@ -37,6 +32,7 @@ import com.kaqi.reader.manager.EventManager;
 import com.kaqi.reader.manager.SettingManager;
 import com.kaqi.reader.service.DownloadBookService;
 import com.kaqi.reader.ui.activity.BookDetailActivity;
+import com.kaqi.reader.ui.activity.LoginActivity;
 import com.kaqi.reader.ui.activity.MainActivity;
 import com.kaqi.reader.ui.activity.ReadActivity;
 import com.kaqi.reader.ui.activity.ReadBookHistoryActivity;
@@ -97,9 +93,6 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
 
     @Override
     public void initDatas() {
-        AssetManager mgr = getActivity().getAssets();
-        impact_tf = Typeface.createFromAsset(mgr, "fonts/ImpactMTStd.otf");
-        recomend_title.setTypeface(impact_tf);
         EventBus.getDefault().register(this);
 
         if (SettingManager.getInstance().getFirstInApp() == 0) {
@@ -107,9 +100,9 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
         }
 
         SettingManager.getInstance().saveFirstInApp(1);
-        list.add(new NavItemEntity("书架管理", R.drawable.ic_popup_abnormal));
-        list.add(new NavItemEntity("WIFI传书", R.drawable.ic_popup_note));
-        list.add(new NavItemEntity("申请延迟", R.drawable.ic_popup_delay));
+        list.add(new NavItemEntity("书架管理", R.drawable.menu_admin));
+        list.add(new NavItemEntity("WIFI传书", R.drawable.menu_wifi));
+        list.add(new NavItemEntity("同步书架", R.drawable.menu_update));
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -121,6 +114,8 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
                     showBatchManagementLayout();
                 } else if (position == 1) {
                     WifiBookActivity.startActivity(getActivity());
+                } else if (position == 2) {
+                    LoginActivity.startActivity(getActivity());
                 }
             }
         });
@@ -321,7 +316,6 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
         new CommomMannagerDialog(mContext, R.style.dialog, isTop, new CommomMannagerDialog.OnCloseListener() {
             @Override
             public void onClick(Dialog dialog, int type) {
-
                 switch (type) {
                     case 0:
                         //置顶、取消置顶
@@ -465,8 +459,6 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
         super.onRefresh();
 
         StackTraceElement stack[] = (new Throwable()).getStackTrace();
-
-
         boolean hasRefBookShelfInCallStack = false;
         boolean isMRefresh = false;
         for (int i = 0; i < stack.length; i++) {
@@ -556,26 +548,6 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
         ButterKnife.unbind(this);
     }
 
-    private boolean isForeground() {
-        ActivityManager am = (ActivityManager) activity.getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningTaskInfo> list = am.getRunningTasks(1);
-        if (list != null && list.size() > 0) {
-            ComponentName cpn = list.get(0).topActivity;
-            if (HomeFragment.class.getName().contains(cpn.getClassName())) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
-    }
 
     @OnClick({R.id.search_rl, R.id.book_admin, R.id.read_book_rl})
     public void onViewClicked(View view) {
@@ -599,8 +571,6 @@ public class RecommendFragment extends BaseRVFragment<RecommendPresenter, Recomm
     /**
      * 批量管理
      */
-    boolean isTrue = false;
-
     public void ShowBatchBookManagement() {
         builder.setPopupItems(adapter, new LinearLayoutManager(getActivity()));
         builder.setPopup(bookAdmin, PopupParams.TRIANGLE_TOP_RIGHT)

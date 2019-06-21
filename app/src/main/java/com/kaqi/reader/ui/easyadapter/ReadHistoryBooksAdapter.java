@@ -44,9 +44,6 @@ public class ReadHistoryBooksAdapter extends RecyclerArrayAdapter<Recommend.Reco
                         .setVisible(R.id.ivTopLabel, item.isTop)
                         .setVisible(R.id.ckBoxSelect, item.showCheckBox);
                 //是否有更新
-//                        .setVisible(R.id.ivUnReadDot, FormatUtils.formatZhuiShuDateString(item.updated)
-//                                .compareTo(item.recentReadingTime) > 0);
-
                 if (item.path != null && item.path.endsWith(Constant.SUFFIX_PDF)) {
                     holder.setImageResource(R.id.ivRecommendCover, R.drawable.ic_shelf_pdf);
                 } else if (item.path != null && item.path.endsWith(Constant.SUFFIX_EPUB)) {

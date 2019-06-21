@@ -48,8 +48,8 @@ public class BookDiscussionAdapter extends RecyclerArrayAdapter<DiscussionList.P
                 try {
                     TextView textView = holder.getView(R.id.tvHelpfulYes);
                     if (item.type.equals("vote")) {
-                        Drawable drawable = ContextCompat.getDrawable(mContext, R.drawable.ic_notif_vote);
-                        textView.setCompoundDrawables(drawable, null, null, null);
+//                        Drawable drawable = ContextCompat.getDrawable(mContext, R.drawable.ic_notif_vote);
+//                        textView.setCompoundDrawables(drawable, null, null, null);
                     } else {
                         Drawable drawable = ContextCompat.getDrawable(mContext, R.drawable.ic_notif_post);
                         textView.setCompoundDrawables(drawable, null, null, null);

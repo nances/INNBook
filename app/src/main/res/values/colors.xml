@@ -54,10 +54,11 @@
     <color name="read_theme_green">#bed0cf</color>
     <color name="read_theme_yellow">#e6dbbf</color>
     <color name="read_theme_gray">#AAAAAA</color>
-    <color name="read_theme_night">#000000</color>
+    <color name="read_theme_night">#727272</color>
 
     <color name="yellow_50">#FEA501</color>
     <color name="yellow_30">#FFD11B</color>
+    <color name="night">#727272</color>
     <!--章节标题夜间颜色-->
     <color name="chapter_title_night">#292929</color>
     <!--章节内容夜间颜色-->

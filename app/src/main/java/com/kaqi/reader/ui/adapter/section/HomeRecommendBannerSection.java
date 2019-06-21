@@ -4,22 +4,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.kaqi.reader.R;
+import com.kaqi.reader.ui.adapter.ViewPagerHolder;
 import com.kaqi.reader.view.banner.BannerEntity;
-import com.kaqi.reader.view.banner.BannerView;
+import com.kaqi.reader.view.banner.MZBannerView;
+import com.kaqi.reader.view.banner.holder.MZHolderCreator;
 import com.kaqi.reader.view.sectioned.StatelessSection;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 public class HomeRecommendBannerSection extends StatelessSection {
     private List<BannerEntity> banners = new ArrayList<>();
+    ViewPagerHolder viewPagerHolder;
 
     public HomeRecommendBannerSection(List<BannerEntity> banners) {
         super(R.layout.layout_banner, R.layout.layout_home_recommend_empty);
         this.banners = banners;
+        viewPagerHolder = new ViewPagerHolder();
     }
 
 
@@ -49,7 +50,14 @@ public class HomeRecommendBannerSection extends StatelessSection {
     @Override
     public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder) {
         BannerViewHolder bannerViewHolder = (BannerViewHolder) holder;
-        bannerViewHolder.mBannerView.delayTime(2).build(banners);
+        viewPagerHolder.setData(banners);
+        bannerViewHolder.mBannerView.setPages(banners, new MZHolderCreator<ViewPagerHolder>() {
+            @Override
+            public ViewPagerHolder createViewHolder() {
+                return viewPagerHolder;
+            }
+        });
+        bannerViewHolder.mBannerView.start();
     }
 
 
@@ -60,12 +68,11 @@ public class HomeRecommendBannerSection extends StatelessSection {
     }
 
     static class BannerViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.home_recommended_banner)
-        BannerView mBannerView;
+        MZBannerView mBannerView;
 
         BannerViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            mBannerView = (MZBannerView) itemView.findViewById(R.id.recommended_banner);
         }
     }
 }
