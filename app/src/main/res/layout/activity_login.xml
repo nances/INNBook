@@ -25,7 +25,7 @@
         android:paddingRight="@dimen/wh10.0dimens10.0dp">
 
 
-        <com.kaqi.reader.view.CleanableEditText
+        <com.kaqi.niuniu.ireader.widget.CleanableEditText
             android:id="@+id/user_txt"
             style="@style/login_edit_style"
             android:layout_marginTop="@dimen/activity_vertical_margin"
@@ -40,9 +40,9 @@
             android:layout_height="@dimen/wh0.5dimens0.5dp"
             android:layout_marginTop="@dimen/wh8.0dimens8.0dp"
             android:layout_marginBottom="@dimen/wh8.0dimens8.0dp"
-            android:background="@color/common_gray_bg" />
+            android:background="@color/common_h3_bg" />
 
-        <com.kaqi.reader.view.CleanableEditText
+        <com.kaqi.niuniu.ireader.widget.CleanableEditText
             android:id="@+id/password_txt"
             style="@style/login_edit_style"
             android:drawableLeft="@drawable/icon_key_selector"
@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/wh0.5dimens0.5dp"
             android:layout_marginTop="@dimen/wh8.0dimens8.0dp"
-            android:background="@color/common_gray_bg" />
+            android:background="@color/common_h3_bg" />
 
         <LinearLayout
             android:layout_width="match_parent"

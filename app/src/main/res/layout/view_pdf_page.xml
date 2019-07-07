@@ -3,7 +3,7 @@
     android:id="@+id/pdf_page_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/common_gray_bg">
+    android:background="@color/common_h3_bg">
 
     <ImageView
         android:id="@+id/imageView"

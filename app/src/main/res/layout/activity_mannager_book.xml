@@ -38,7 +38,25 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/common_gray_bg" />
+        android:background="@color/common_h3_bg" />
+
+    <TextView
+        android:id="@+id/book_down_set"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wh54.0dimens54.0dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="3dp"
+        android:paddingLeft="@dimen/wh18.0dimens18.0dp"
+        android:text="缓存"
+        android:textColor="@color/common_h2"
+        android:textSize="16sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/common_h3_bg" />
+
 
     <TextView
         android:id="@+id/book_del"
@@ -55,7 +73,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/common_gray_bg" />
+        android:background="@color/common_h3_bg" />
 
     <TextView
         android:id="@+id/book_all_mannager"
@@ -72,6 +90,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/common_gray_bg" />
+        android:background="@color/common_h3_bg" />
 
 </LinearLayout>

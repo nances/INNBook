@@ -15,7 +15,7 @@
 
         <include layout="@layout/common_toolbar" />
 
-        <com.kaqi.reader.view.recyclerview.EasyRecyclerView
+        <com.kaqi.niuniu.ireader.widget.recyclerview.EasyRecyclerView
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
             android:layout_width="@dimen/wh0.5dimens0.5dp"
             android:layout_height="match_parent"
             android:layout_gravity="bottom"
-            android:background="@color/common_gray_bg" />
+            android:background="@color/common_h3_bg" />
 
         <RelativeLayout
             android:id="@+id/tvDelete"

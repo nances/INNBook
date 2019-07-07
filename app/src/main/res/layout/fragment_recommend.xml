@@ -84,12 +84,13 @@
             <TextView
                 android:id="@+id/tvSelectAll"
                 style="@style/text_style_Spacing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/wh98.0dimens98.0dp"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/wh14.0dimens14.0dp"
+                android:gravity="center_vertical"
                 android:text="全选"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
         </RelativeLayout>
 
@@ -102,24 +103,23 @@
             <TextView
                 android:id="@+id/tvDelete"
                 style="@style/text_style_Spacing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/wh56.0dimens56.0dp"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/wh8.5dimens8.5dp"
+                android:gravity="center_vertical"
                 android:text="完成"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
         </RelativeLayout>
     </RelativeLayout>
 
-    <com.kaqi.reader.view.recyclerview.EasyRecyclerView
-        android:id="@+id/recyclerview"
+    <com.kaqi.niuniu.ireader.widget.refresh.ScrollRefreshRecyclerView
+        android:id="@+id/book_shelf_rv_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/wh54.0dimens54.0dp"
-        app:layout_empty="@layout/bookshelf_empty_view"
-        app:layout_progress="@layout/common_progress_view"
-        app:scrollbarStyle="insideOverlay" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/recommendRL"
+        app:layout_scroll_empty="@layout/view_empty_book_shelf"></com.kaqi.niuniu.ireader.widget.refresh.ScrollRefreshRecyclerView>
 
 
 </RelativeLayout>

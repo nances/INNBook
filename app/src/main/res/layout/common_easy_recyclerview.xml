@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/common_bg">
 
-    <com.kaqi.reader.view.recyclerview.EasyRecyclerView
+    <com.kaqi.niuniu.ireader.widget.recyclerview.EasyRecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

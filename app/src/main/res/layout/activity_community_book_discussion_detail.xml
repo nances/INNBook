@@ -8,7 +8,7 @@
 
     <include layout="@layout/common_toolbar" />
 
-    <com.kaqi.reader.view.recyclerview.EasyRecyclerView xmlns:app="http://schemas.android.com/apk/res-auto"
+    <com.kaqi.niuniu.ireader.widget.recyclerview.EasyRecyclerView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

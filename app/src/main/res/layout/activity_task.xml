@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.kaqi.reader.view.ReboundScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.kaqi.niuniu.ireader.widget.ReboundScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -85,7 +85,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <com.kaqi.reader.view.DrawableCenterButton
+                        <com.kaqi.niuniu.ireader.widget.DrawableCenterButton
                             android:id="@+id/sign_day"
                             android:layout_width="@dimen/wh108.0dimens108.0dp"
                             android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
                             android:text="每日签到"
                             android:textColor="@color/black" />
 
-                        <com.kaqi.reader.view.DrawableCenterButton
+                        <com.kaqi.niuniu.ireader.widget.DrawableCenterButton
                             android:id="@+id/read_video_sign"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -540,4 +540,4 @@
             android:layout_width="fill_parent"
             android:layout_height="@dimen/wh20.0dimens20.0dp" />
     </LinearLayout>
-</com.kaqi.reader.view.ReboundScrollView>
+</com.kaqi.niuniu.ireader.widget.ReboundScrollView>

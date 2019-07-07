@@ -26,8 +26,7 @@
                 android:layout_height="@dimen/wh124.0dimens124.0dp"
                 android:layout_alignParentLeft="true"
                 android:contentDescription="@null"
-                android:scaleType="fitXY"
-                android:src="@drawable/cover_default" />
+                android:scaleType="fitXY"/>
         </android.support.v7.widget.CardView>
 
         <RelativeLayout

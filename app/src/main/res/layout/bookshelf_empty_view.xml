@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/bookshelf_empty_icon"/>
+            android:background="@drawable/app_no_data_icon"/>
 
         <TextView
             android:id="@+id/tvEmptyView"
@@ -30,7 +30,7 @@
             android:textColor="@color/common_h2"
             android:textSize="16sp"/>
 
-        <com.kaqi.reader.view.DrawableCenterButton
+        <com.kaqi.niuniu.ireader.widget.DrawableCenterButton
             android:id="@+id/btnToAdd"
             android:layout_width="150dp"
             android:layout_height="wrap_content"

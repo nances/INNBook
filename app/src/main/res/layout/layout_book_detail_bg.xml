@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.kaqi.reader.view.DisInterceptNestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.kaqi.niuniu.ireader.view.DisInterceptNestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -50,12 +50,11 @@
 
                 <ImageView
                     android:id="@+id/ivBookCover"
-                    android:layout_width="@dimen/wh112.0dimens112.0dp"
-                    android:layout_height="@dimen/wh148.0dimens148.0dp"
+                    android:layout_width="@dimen/wh98.0dimens98.0dp"
+                    android:layout_height="@dimen/wh132.0dimens132.0dp"
                     android:layout_alignParentLeft="true"
                     android:contentDescription="@null"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/cover_default" />
+                    android:scaleType="centerCrop" />
             </android.support.v7.widget.CardView>
 
             <RelativeLayout
@@ -68,7 +67,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_marginBottom="@dimen/wh16.0dimens16.0dp"
+                    android:layout_marginTop="@dimen/wh16.0dimens16.0dp"
+                    android:layout_marginBottom="@dimen/wh20.0dimens20.0dp"
                     android:ellipsize="end"
                     android:lineSpacingExtra="1dp"
                     android:lineSpacingMultiplier="1.1"
@@ -126,7 +126,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvBookListAuthor"
-                    android:layout_marginTop="@dimen/wh16.0dimens16.0dp"
+                    android:layout_marginTop="@dimen/wh20.0dimens20.0dp"
                     android:ellipsize="end"
                     android:lineSpacingExtra="1dp"
                     android:lineSpacingMultiplier="1.1"
@@ -136,114 +136,8 @@
                     android:textSize="14sp" />
 
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvLatelyUpdate"
-                    android:layout_marginTop="@dimen/wh14.0dimens14.0dp"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="end"
-                            android:lineSpacingExtra="1dp"
-                            android:lineSpacingMultiplier="1.1"
-                            android:singleLine="true"
-                            android:text="读书人气"
-                            android:textColor="@color/common_h2"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:id="@+id/tvLatelyFollower"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:ellipsize="end"
-                            android:lineSpacingExtra="1dp"
-                            android:lineSpacingMultiplier="1.1"
-                            android:singleLine="true"
-                            android:text="82"
-                            android:textColor="@color/common_h2"
-                            android:textSize="15sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/wh20.0dimens20.0dp"
-                        android:gravity="center"
-                        android:lineSpacingExtra="1dp"
-                        android:lineSpacingMultiplier="1.1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="end"
-                            android:lineSpacingExtra="1dp"
-                            android:lineSpacingMultiplier="1.1"
-                            android:singleLine="true"
-                            android:text="读者活跃"
-                            android:textColor="@color/common_h2"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:id="@+id/tvRetentionRatio"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:ellipsize="end"
-                            android:lineSpacingExtra="1dp"
-                            android:lineSpacingMultiplier="1.1"
-                            android:singleLine="true"
-                            android:text="20.29%"
-                            android:textColor="@color/common_h2"
-                            android:textSize="15sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:visibility="gone">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="end"
-                            android:lineSpacingExtra="1dp"
-                            android:lineSpacingMultiplier="1.1"
-                            android:singleLine="true"
-                            android:text="日更新字数"
-                            android:textColor="@color/common_h2"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:id="@+id/tvSerializeWordCount"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:ellipsize="end"
-                            android:singleLine="true"
-                            android:text="4614"
-                            android:textColor="@color/common_h2"
-                            android:textSize="15sp" />
-
-                    </LinearLayout>
-                </LinearLayout>
             </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
 
-</com.kaqi.reader.view.DisInterceptNestedScrollView>
+</com.kaqi.niuniu.ireader.view.DisInterceptNestedScrollView>

@@ -21,8 +21,7 @@
             android:layout_height="@dimen/wh89.0dimens89.0dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/cover_default" />
+            android:scaleType="centerCrop" />
     </android.support.v7.widget.CardView>
 
     <LinearLayout

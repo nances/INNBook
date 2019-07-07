@@ -17,12 +17,11 @@
 
         <ImageView
             android:id="@+id/ivRecommendCover"
-            android:layout_width="@dimen/wh88.0dimens88.0dp"
-            android:layout_height="@dimen/wh124.0dimens124.0dp"
+            android:layout_width="@dimen/wh82.0dimens82.0dp"
+            android:layout_height="@dimen/wh116.0dimens116.0dp"
             android:layout_alignParentLeft="true"
             android:contentDescription="@null"
-            android:scaleType="fitXY"
-            android:src="@drawable/cover_default" />
+            android:scaleType="fitXY"/>
 
 
         <TextView

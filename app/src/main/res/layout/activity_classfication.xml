@@ -37,7 +37,7 @@
         <View
             android:layout_width="@dimen/wh0.5dimens0.5dp"
             android:layout_height="match_parent"
-            android:background="@color/common_gray_bg" />
+            android:background="@color/common_h3_bg" />
 
         <FrameLayout
             android:id="@+id/container"

@@ -48,8 +48,7 @@
             android:layout_width="@dimen/wh68.0dimens68.0dp"
             android:layout_height="@dimen/wh68.0dimens68.0dp"
             android:layout_gravity="center"
-            android:scaleType="fitXY"
-            android:src="@mipmap/icon" />
+            android:scaleType="fitXY"/>
 
         <TextView
             android:layout_width="wrap_content"

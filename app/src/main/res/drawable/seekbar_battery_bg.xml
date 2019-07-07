@@ -3,7 +3,6 @@
 
     <item android:id="@android:id/background">
         <shape>
-            <size android:height="1dp" />
 
             <gradient
                 android:endColor="#98888888"
@@ -13,7 +12,6 @@
     <item android:id="@android:id/progress">
         <clip>
             <shape>
-                <size android:height="3dp" />
 
                 <gradient
                     android:endColor="@android:color/white"

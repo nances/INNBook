@@ -1,22 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.kaqi.reader">
+    package="com.kaqi.niuniu.ireader">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
-
-    <!-- 个推SDK权限配置开始 -->
+  <!-- 个推SDK权限配置开始 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -42,189 +29,83 @@
         android:name="getui.permission.GetuiService.${applicationId}"
         android:protectionLevel="normal"></permission>
     <!-- 个推SDK权限配置结束 -->
-
     <application
-        android:name="com.kaqi.reader.ReaderApplication"
+        android:name="com.kaqi.niuniu.ireader.App"
         android:allowBackup="true"
-        android:icon="@mipmap/icon"
+        android:icon="@drawable/app_icon"
         android:label="@string/app_name"
-        android:maxAspectRatio="2.4"
-        android:resizeableActivity="true"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar"
-        android:usesCleartextTraffic="true"
-        tools:replace="android:name">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+
         <activity
-            android:name="com.kaqi.reader.ui.activity.SplashActivity"
-            android:launchMode="singleTask"
+            android:name="com.kaqi.niuniu.ireader.ui.activity.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar.FullScreen">
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name="com.kaqi.reader.ui.activity.MainActivity"
+            android:name="com.kaqi.niuniu.ireader.ui.activity.MainActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustResize"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.SearchActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.SearchByAuthorActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.BookDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.BooksByTagActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.ReadActivity"
-            android:hardwareAccelerated="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar.FullScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+            android:windowSoftInputMode="adjustResize"></activity>
+        <activity android:name="com.kaqi.niuniu.ireader.ui.activity.SearchActivity"></activity>
+        <activity android:name="com.kaqi.niuniu.ireader.ui.activity.BookListDetailActivity" />
+        <activity android:name="com.kaqi.niuniu.ireader.ui.activity.BookDetailActivity" />
+        <activity android:name="com.kaqi.niuniu.ireader.ui.activity.DownloadActivity" />
+        <activity android:name="com.kaqi.niuniu.ireader.ui.activity.ReadActivity"></activity>
+        <activity android:name="com.kaqi.niuniu.ireader.ui.activity.FileSystemActivity" />
+        <activity android:name="com.kaqi.niuniu.ireader.ui.activity.MoreSettingActivity" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:mimeType="text/plain" />
-            </intent-filter>
-        </activity>
+        <service android:name="com.kaqi.niuniu.ireader.service.DownloadService" />
 
         <activity
-            android:name="com.kaqi.reader.ui.activity.BookSourceActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="com.kaqi.reader.ui.activity.ReadPDFActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:mimeType="application/pdf" />
-            </intent-filter>
-        </activity>
-        <activity android:name="com.kaqi.reader.ui.activity.ReadEPubActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:mimeType="application/epub+zip" />
-            </intent-filter>
-        </activity>
-        <activity android:name="com.kaqi.reader.ui.activity.ReadCHMActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:mimeType="application/mshelp" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.kaqi.reader.ui.activity.TopCategoryListActivity"
+            android:name=".ui.activity.WifiBookActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.kaqi.reader.ui.activity.SubCategoryListActivity"
+            android:name=".ui.activity.ClassicRankTopActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.kaqi.reader.ui.activity.SubjectBookListActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.SubjectBookListDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.TopRankActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.SubRankActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.SubOtherHomeRankActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.BookDiscussionActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.BookReviewActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.BookHelpActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.BookDiscussionDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.BookReviewDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.BookHelpDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.BookDetailCommunityActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.GirlBookDiscussionActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.MyBookListActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.SettingActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.ScanLocalBookActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.WifiBookActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.FeedbackActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.BookCatalogActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.AboutActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.kaqi.reader.ui.activity.ReadBookHistoryActivity"
+            android:name=".ui.activity.ClassicFicationActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.kaqi.reader.ui.activity.ClassicFicationActivity"
+            android:name=".ui.activity.BookCatalogActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.kaqi.reader.ui.activity.LoginActivity"
+            android:name=".ui.activity.BookCompleteAndUpdateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.LoginActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.kaqi.reader.ui.activity.RegisterActivity"
+            android:name=".ui.activity.RegisterActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.kaqi.reader.ui.activity.ClassicRankTopActivity"
+            android:name=".ui.activity.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MoneyDetailedListActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.kaqi.reader.ui.activity.HelpActivity"
+            android:name=".ui.activity.HelpActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.kaqi.reader.ui.activity.MoneyDetailedListActivity"
+            android:name=".ui.activity.AboutActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.kaqi.reader.ui.activity.BookCompleteAndUpdateActivity"
+            android:name=".ui.activity.FeedbackActivity"
             android:screenOrientation="portrait" />
-
-        <service android:name="com.kaqi.reader.service.DownloadBookService" />
-
 
         <activity
             android:name="com.tencent.tauth.AuthActivity"
@@ -307,15 +188,47 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <service
-            android:name=".push.ReaderPushService"
+            android:name=".utils.push.ReaderPushService"
             android:exported="true"
             android:label="PushService"
             android:process=":pushservice" />
 
         <service
-            android:name=".push.ReaderIntentService"
+            android:name=".utils.push.ReaderIntentService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <!-- 个推SDK配置结束 -->
+        <!--广点通-->
+        <service
+            android:name="com.qq.e.comm.DownloadService"
+            android:exported="false" />
+        <activity
+            android:name="com.qq.e.ads.ADActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/gdt_file_path" />
+        </provider>
     </application>
 
+
+    <!--********************************permission************************************-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.BATTERY_STATS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />    <!-- 如果需要精确定位的话请加上此权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
 </manifest>

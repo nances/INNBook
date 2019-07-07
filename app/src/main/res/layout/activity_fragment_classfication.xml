@@ -16,7 +16,6 @@
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/white"
@@ -24,10 +23,10 @@
                 app:contentInsetStart="0dp"
                 app:layout_scrollFlags="scroll|enterAlways">
 
-                <com.kaqi.reader.utils.NormalTitleBar
+                <com.kaqi.niuniu.ireader.view.NormalTitleBar
                     android:id="@+id/normaltitle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></com.kaqi.reader.utils.NormalTitleBar>
+                    android:layout_height="wrap_content"></com.kaqi.niuniu.ireader.view.NormalTitleBar>
 
             </android.support.v7.widget.Toolbar>
 
@@ -53,7 +52,7 @@
         </android.support.design.widget.AppBarLayout>
 
 
-        <com.kaqi.reader.view.NoScrollViewPager
+        <com.kaqi.niuniu.ireader.view.NoScrollViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -8,7 +8,7 @@
 
     <include layout="@layout/common_toolbar" />
 
-    <com.kaqi.reader.view.ReboundScrollView
+    <com.kaqi.niuniu.ireader.widget.ReboundScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layerType="software">
@@ -50,6 +50,6 @@
                 android:groupIndicator="@null"
                 android:listSelector="@drawable/shape_common_selector" />
         </LinearLayout>
-    </com.kaqi.reader.view.ReboundScrollView>
+    </com.kaqi.niuniu.ireader.widget.ReboundScrollView>
 
 </LinearLayout>

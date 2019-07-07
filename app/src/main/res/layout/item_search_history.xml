@@ -6,8 +6,8 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/wh24.0dimens24.0dp"
+        android:layout_height="@dimen/wh24.0dimens24.0dp"
         android:src="@drawable/search_history_mark_dark" />
 
     <TextView

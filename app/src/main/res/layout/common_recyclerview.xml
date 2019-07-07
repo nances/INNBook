@@ -1,4 +1,4 @@
-<com.kaqi.reader.view.recyclerview.swipe.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.kaqi.niuniu.ireader.widget.recyclerview.swipe.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ptr_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -39,4 +39,4 @@
         android:textColor="@color/white"
         android:visibility="gone"/>
 
-</com.kaqi.reader.view.recyclerview.swipe.SwipeRefreshLayout>
+</com.kaqi.niuniu.ireader.widget.recyclerview.swipe.SwipeRefreshLayout>

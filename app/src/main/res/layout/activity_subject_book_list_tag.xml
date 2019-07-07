@@ -37,20 +37,20 @@
                 android:layout_weight="1" />
         </LinearLayout>
 
-        <com.kaqi.reader.view.ReboundScrollView
+        <com.kaqi.niuniu.ireader.widget.ReboundScrollView
             android:id="@+id/rsvTags"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/common_gray_bg"
+            android:background="@color/common_h3_bg"
             android:visibility="gone">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvTags"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/common_gray_bg"
+                android:background="@color/common_h3_bg"
                 android:paddingTop="10dp" />
-        </com.kaqi.reader.view.ReboundScrollView>
+        </com.kaqi.niuniu.ireader.widget.ReboundScrollView>
     </FrameLayout>
 
 </LinearLayout>
