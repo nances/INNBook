@@ -339,7 +339,7 @@ public class PageView extends FrameLayout {
         mPageLoader.pageCancel();
 
         //翻页取消的时候，如果当前页是广告页，那么就重新添加
-        if (mPageLoader.mCurPage != null && mPageLoader.mCurPage.isCustomView) {
+        if (mPageLoader.mCurPage != null && mPageLoader.mCurPage.hasAd()) {
             addAdLayout();
         } else {
             //否则清除
@@ -349,15 +349,13 @@ public class PageView extends FrameLayout {
 
 
     private void addAdLayout() {
-        if (mPageLoader == null || mPageLoader.mCurPage == null || !mPageLoader.mCurPage.isCustomView) {
+        if (mPageLoader == null || mPageLoader.mCurPage == null || mPageLoader.mCurPage.hasAd()) {
             return;
         }
         switch (mPageLoader.mCurPage.pageType) {
             case TxtPage.VALUE_STRING_AD_TYPE:
                 if (mAdView != null) {
-                    UtilsView.removeParent(mAdView);
                     Log.v("NancysAdview", "=======================" + mAdView.getDrawingCache());
-                    addView(mAdView);
                 }
                 break;
             case TxtPage.VALUE_STRING_COVER_TYPE:
@@ -440,15 +438,14 @@ public class PageView extends FrameLayout {
         return true;
     }
 
-    public boolean drawAdPage(Bitmap bitmap) {
+    public boolean drawAdPage() {
         if (!isPrepare) return false;
 
         if (mReaderAdListener == null) {
             return false;
         }
-        mBitmap = bitmap;
-        if (mPageLoader.mCurPage.hasDrawAd && mAdView != null) {
-            addAdLayout();
+        if (mPageLoader.mCurPage.hasAd() && mAdView != null) {
+//            addAdLayout();
             return true;
         } else {
             mAdView = mReaderAdListener.getAdView();
@@ -458,11 +455,11 @@ public class PageView extends FrameLayout {
         if (mAdView == null) {
             return false;
         }
-        params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+//        params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
 //        params.gravity = Gravity.CENTER;
-        mAdView.setLayoutParams(params);
-        addAdLayout();
-        mPageLoader.mCurPage.hasDrawAd = true;
+//        mAdView.setLayoutParams(params);
+//        addAdLayout();
+//        mPageLoader.mCurPage.hasDrawAd = true;
         return true;
     }
 

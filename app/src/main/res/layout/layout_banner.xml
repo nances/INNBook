@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/recommended_banner"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/wh128.0dimens128.0dp"
+    android:layout_height="@dimen/wh146.0dimens146.0dp"
     app:canLoop="true"
     app:indicatorAlign="center"
     app:indicatorPaddingLeft="3dp"

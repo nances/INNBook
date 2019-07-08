@@ -12,7 +12,7 @@ public class AdConfigBean {
     public static class Property {
         public int type;
         public int width = -1;
-        public int height = DisplayUtil.dp2px(App.getContext(), 230);
+        public int height = DisplayUtil.dp2px(App.getContext(), 260);
         public int startOffset;
         public int startAdLine = -1;
     }

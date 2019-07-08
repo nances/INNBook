@@ -44,7 +44,9 @@ public class ViewPagerHolder implements MZViewHolder<BannerEntity> {
             return;
         }
         Glide.with(context).load(data.img)
+                .placeholder(R.drawable.bannler_defalue_icon)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .error(R.drawable.bannler_defalue_icon)
                 .transform(new GlideRoundTransform(context, 6))
                 .into(mImageView);
 

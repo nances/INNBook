@@ -5,7 +5,6 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.kaqi.niuniu.ireader.R;
 import com.kaqi.niuniu.ireader.model.bean.AdConfigBean;
 
 public class AdProvider {
@@ -39,8 +38,8 @@ public class AdProvider {
 
     public FrameLayout getAdContainer(Context context, AdConfigBean configBean, int top, int padding) {
         FrameLayout adContainer = new FrameLayout(context);
-        adContainer.setPadding(0, 0,0, 0);
-        adContainer.setBackground(context.getDrawable(R.drawable.meinv));
+        adContainer.setPadding(0,0,0, 0);
+//        adContainer.setBackground(context.getDrawable(R.drawable.meinv));
 
         AdConfigBean.Property property = configBean.getProperty(configBean.getType());
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();

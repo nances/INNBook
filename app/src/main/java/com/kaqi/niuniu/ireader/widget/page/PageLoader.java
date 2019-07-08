@@ -10,6 +10,9 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
 import android.text.TextPaint;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.kaqi.niuniu.ireader.App;
@@ -24,6 +27,7 @@ import com.kaqi.niuniu.ireader.utils.IOUtils;
 import com.kaqi.niuniu.ireader.utils.RxUtils;
 import com.kaqi.niuniu.ireader.utils.ScreenUtils;
 import com.kaqi.niuniu.ireader.utils.StringUtils;
+import com.kaqi.niuniu.ireader.utils.UtilsView;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -730,7 +734,7 @@ public abstract class PageLoader {
 
     private void drawBackground(Bitmap bitmap, boolean isUpdate) {
         Canvas canvas = new Canvas(bitmap);
-        if (mCurPage==null) {
+        if (mCurPage == null) {
             return;
         }
         int tipMarginHeight = ScreenUtils.dpToPx(3);
@@ -828,7 +832,7 @@ public abstract class PageLoader {
             String tip = "";
             switch (mStatus) {
                 case STATUS_LOADING:
-                    tip = "正在拼命加载中...";
+                    tip = "拼命加载中...";
                     break;
                 case STATUS_ERROR:
                     tip = "加载失败(点击边缘重试)";
@@ -863,10 +867,10 @@ public abstract class PageLoader {
                 top = mMarginHeight - mTextPaint.getFontMetrics().top;
             }
 
-            if (mCurPage != null && mCurPage.isCustomView) {
+            if (mCurPage != null && mCurPage.hasAd()) {
                 switch (mCurPage.pageType) {
                     case TxtPage.VALUE_STRING_AD_TYPE:
-                        if (!mPageView.drawAdPage(bitmap)) {
+                        if (!mPageView.drawAdPage()) {
                             //如果获取广告失败，跳下一页
                             mCurPage = isGoNextPage ? getNextPage() : getPrevPage();
                             drawContent(bitmap);
@@ -876,7 +880,6 @@ public abstract class PageLoader {
                         mPageView.drawCoverPage(bitmap);
                         break;
                 }
-                return;
             }
             mPageView.cleanAdView();
 
@@ -917,27 +920,63 @@ public abstract class PageLoader {
                 AdConfigBean.Property property = mCurPage.adConfigBean.getProperty(mCurPage.adConfigBean.getType());
                 if (property.startAdLine != -1) {
                     top = drawTexts(canvas, top, interval, para, mCurPage.titleLines, property.startAdLine);
-//                    top -= (mCurPage.lines.get(property.startAdLine - 1).endsWith("\\n") ? mTextPara : mTextInterval);
+                    top -= (mCurPage.lines.get(property.startAdLine - 1).endsWith("\\n") ? mTextPara : mTextInterval);
                     drawTexts(canvas, top + property.height, interval, para, property.startAdLine, mCurPage.lines.size());
 
                     //绘制广告
                     FrameLayout adContainer = AdProvider.getInstance().getAdContainer(mContext, mCurPage.adConfigBean, (int) top, (int) mTextPaint.getTextSize());
-                    canvas.save();
-                    canvas.translate(adContainer.getLeft(), adContainer.getTop());
-                    adContainer.draw(canvas);
-                    canvas.restore();
+                    drawCanvasAdView(canvas, adContainer);
 
 
                 } else {
                     //到达最后一页，丢弃广告
-                    drawTexts(canvas, top, interval, para,  mCurPage.titleLines, mCurPage.lines.size());
+                    drawTexts(canvas, top, interval, para, mCurPage.titleLines, mCurPage.lines.size());
                 }
             } else {
-                drawTexts(canvas, top, interval, para,  mCurPage.titleLines, mCurPage.lines.size());
+                drawTexts(canvas, top, interval, para, mCurPage.titleLines, mCurPage.lines.size());
             }
         }
     }
 
+    /**
+     * 绘制广告
+     *
+     * @param canvas
+     * @param adContainer
+     */
+    public void drawCanvasAdView(Canvas canvas, FrameLayout adContainer) {
+        canvas.save();
+        if (mPageView.mAdView != null && adContainer!=null) {
+            UtilsView.removeParent(mPageView.mAdView);
+            Log.v("NancysAdview","=======mPageView.mAdView====" + mPageView.mAdView.toString());
+            adContainer.addView(mPageView.mAdView, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (ViewGroup.LayoutParams.WRAP_CONTENT)));
+        }
+         canvas.translate(adContainer.getLeft(), adContainer.getTop());
+        adContainer.draw(canvas);
+        canvas.restore();
+    }
+
+    /**
+     * 绘制内容
+     *
+     * @param adView
+     * @param adFramelayout
+     */
+    public void canvasAdView(View adView, FrameLayout adFramelayout) {
+
+    }
+
+    /**
+     * 绘制内容
+     *
+     * @param canvas
+     * @param top
+     * @param interval
+     * @param para
+     * @param startLine
+     * @param endLine
+     * @return
+     */
     private float drawTexts(Canvas canvas, float top, int interval, int para, int startLine, int endLine) {
         String str;
         for (int i = startLine; i < endLine; ++i) {
@@ -1342,8 +1381,6 @@ public abstract class PageLoader {
 
                         //为下一页创建广告配置
                         adConfig = createAdConfig(pages.size() + 1);
-                        //尝试加入广告page
-//                        addAdPage(pages,chapter.getTitle(),titleLinesCount);
                         // 重置Lines
                         lines.clear();
                         rHeight = adConfig != null ? mVisibleHeight - adConfig.getProperty(adType).height : mVisibleHeight;
@@ -1369,8 +1406,8 @@ public abstract class PageLoader {
                         if (adConfig != null) {
                             AdConfigBean.Property property = adConfig.getProperty(adType);
                             int diff = (int) (showTitle ? mTitlePaint.getTextSize() : mTextPaint.getTextSize());
-                            property.startOffset = DisplayUtil.dp2px(App.getContext(), 300); //默认偏移到中间
-                            if (mVisibleHeight - rHeight  + diff >= property.startOffset && property.startAdLine == -1) {
+                            property.startOffset = DisplayUtil.dp2px(App.getContext(), 140); //默认偏移到中间
+                            if (mVisibleHeight - rHeight + diff >= property.startOffset && property.startAdLine == -1) {
                                 property.startAdLine = lines.size();
 
                             }
@@ -1420,12 +1457,14 @@ public abstract class PageLoader {
         }
         return pages;
     }
+
     private AdConfigBean createAdConfig(int pageSize) {
         return AdProvider.getInstance().getAdConfig(pageSize);
     }
 
-    private int mShowAdIntervel=2;
-    private void addAdPage(List<TxtPage> pages,String title,int titleLinesCount) {
+    private int mShowAdIntervel = 2;
+
+    private void addAdPage(List<TxtPage> pages, String title, int titleLinesCount) {
         if (pages.size() % mShowAdIntervel == 0) {
             TxtPage adPage = new TxtPage();
             adPage.isCustomView = true;

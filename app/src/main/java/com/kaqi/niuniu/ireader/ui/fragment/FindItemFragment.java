@@ -139,7 +139,7 @@ public class FindItemFragment extends BaseMVPFragment<RecommendBookContract.Pres
         banners.add(new BannerEntity("", "", "http://i0.hdslb.com/bfs/archive/01f5de4cca62444dae00917c6db484220ca35944.jpg", 1));
         banners.add(new BannerEntity("", "", "http://i0.hdslb.com/bfs/archive/f2e14575271f3194daa26592ca76f68cc075d7f2.jpg", 1));
         banners.add(new BannerEntity("", "", "http://i0.hdslb.com/bfs/archive/a35eef8e17acbd6b2591e6c700c8b1c26f851376.jpg", 1));
-        banners.add(new BannerEntity("", "", "http://i0.hdslb.com/bfs/archive/463f860b9659e2a136f616b9d63e72fe375145b6.jpg", 1));
+        banners.add(new BannerEntity("", "", "http://i0.hdslb.com/bfs/archive/463f860b9659e2a136f616b9d63e72fe375145b6s.jpg", 1));
 
     }
 
