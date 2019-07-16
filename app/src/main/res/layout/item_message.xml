@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/wh78.0dimens78.0dp"
+    android:background="@drawable/selector_common_bg"
+    >
+
+
+    <ImageView
+        android:id="@+id/coll_book_iv_cover"
+        android:layout_width="@dimen/wh28.0dimens28.0dp"
+        android:layout_height="@dimen/wh28.0dimens28.0dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY"
+        android:layout_marginLeft="@dimen/wh14.0dimens14.0dp"
+        android:src="@drawable/message_list_icon" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/wh14.0dimens14.0dp"
+        android:layout_marginRight="@dimen/wh14.0dimens14.0dp"
+        android:layout_toRightOf="@+id/coll_book_iv_cover"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/message_title"
+            style="@style/text_style_Spacing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxEms="15"
+            android:maxLines="1"
+            android:textColor="@color/common_h1"
+            android:textSize="16sp"
+            tools:text="签到成功" />
+
+        <TextView
+            android:id="@+id/message_time"
+            style="@style/text_style_Spacing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:ellipsize="end"
+            android:maxEms="15"
+            android:maxLines="1"
+            android:paddingTop="@dimen/wh4.0dimens4.0dp"
+            android:textColor="@color/common_h2"
+            android:textSize="12sp"
+            tools:text="2019年07月16日16:23:34" />
+
+
+        <TextView
+            android:id="@+id/message_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/message_title"
+            android:layout_marginTop="@dimen/wh14.0dimens14.0dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@color/common_h2"
+            android:textSize="12sp"
+            tools:text="签到成功，赠送金币28金币" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wh0.5dimens0.5dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/grey_100" />
+</RelativeLayout>

@@ -31,13 +31,16 @@
                 android:layout_below="@+id/common_toolbar"
                 android:padding="@dimen/activity_vertical_margin"
                 android:text="设置"
-                android:textSize="12sp" />
+                android:textStyle="bold"
+                android:textColor="@color/common_h1"
+                android:textSize="16sp" />
 
 
             <com.kaqi.niuniu.ireader.widget.textview.SuperTextView
                 android:id="@+id/action_synchronization_book"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/wh50.0dimens50.0dp"
+                stv:sLeftTextColor="@color/common_h2"
                 stv:sDividerLineType="both"
                 stv:sLeftTextString="同步书架" />
 
@@ -46,12 +49,14 @@
                 android:id="@+id/scan_local_book"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/wh50.0dimens50.0dp"
+                stv:sLeftTextColor="@color/common_h2"
                 stv:sLeftTextString="扫描本地书籍" />
 
             <com.kaqi.niuniu.ireader.widget.textview.SuperTextView
                 android:id="@+id/wifi_book"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/wh50.0dimens50.0dp"
+                stv:sLeftTextColor="@color/common_h2"
                 stv:sLeftTextString="WIFI传书" />
 
             <TextView
@@ -61,13 +66,16 @@
                 android:layout_below="@+id/rlFlipStyle"
                 android:padding="@dimen/activity_vertical_margin"
                 android:text="更多"
-                android:textSize="12sp" />
+                android:textStyle="bold"
+                android:textColor="@color/common_h1"
+                android:textSize="16sp" />
 
             <com.kaqi.niuniu.ireader.widget.textview.SuperTextView
                 android:id="@+id/disclaimer"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/wh50.0dimens50.0dp"
                 android:layout_below="@+id/tv_more"
+                stv:sLeftTextColor="@color/common_h2"
                 stv:sLeftTextSize="14sp"
                 stv:sLeftTextString="免责声明"
                 stv:sRightIconRes="@drawable/arrow_right_red"
@@ -81,6 +89,7 @@
                 android:layout_height="@dimen/wh50.0dimens50.0dp"
                 android:layout_below="@+id/disclaimer"
                 stv:sLeftTextSize="14sp"
+                stv:sLeftTextColor="@color/common_h2"
                 stv:sLeftTextString="清除缓存"
                 stv:sRightIconRes="@drawable/arrow_right_red"
                 stv:sRightTextColor="@color/common_h2"

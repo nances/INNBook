@@ -347,7 +347,9 @@ public class PageView extends FrameLayout {
         }
     }
 
-
+    /**
+     * 广告
+     */
     private void addAdLayout() {
         if (mPageLoader == null || mPageLoader.mCurPage == null || mPageLoader.mCurPage.hasAd()) {
             return;
@@ -355,7 +357,8 @@ public class PageView extends FrameLayout {
         switch (mPageLoader.mCurPage.pageType) {
             case TxtPage.VALUE_STRING_AD_TYPE:
                 if (mAdView != null) {
-                    Log.v("NancysAdview", "=======================" + mAdView.getDrawingCache());
+                    //绘制广告视图
+                    Log.v("NancysAdview", "=======================" + mAdView);
                 }
                 break;
             case TxtPage.VALUE_STRING_COVER_TYPE:
@@ -440,26 +443,22 @@ public class PageView extends FrameLayout {
 
     public boolean drawAdPage() {
         if (!isPrepare) return false;
-
         if (mReaderAdListener == null) {
             return false;
         }
-        if (mPageLoader.mCurPage.hasAd() && mAdView != null) {
-//            addAdLayout();
+        if (mPageLoader.mCurPage.hasDrawAd && mPageLoader.mCurPage.hasDrawAd && mAdView != null) {
             return true;
         } else {
             mAdView = mReaderAdListener.getAdView();
+
+            Log.v("NancysAdview", " ======" + mAdView);
             mReaderAdListener.onRequestAd();
         }
 
         if (mAdView == null) {
             return false;
         }
-//        params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-//        params.gravity = Gravity.CENTER;
-//        mAdView.setLayoutParams(params);
-//        addAdLayout();
-//        mPageLoader.mCurPage.hasDrawAd = true;
+        mPageLoader.mCurPage.hasDrawAd = true;
         return true;
     }
 

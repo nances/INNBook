@@ -41,6 +41,7 @@ public class CollBookBeanDao extends AbstractDao<CollBookBean, String> {
         public final static Property IsTop = new Property(14, boolean.class, "isTop", false, "IS_TOP");
         public final static Property IsCheckBox = new Property(15, boolean.class, "isCheckBox", false, "IS_CHECK_BOX");
         public final static Property IsCheckShow = new Property(16, boolean.class, "isCheckShow", false, "IS_CHECK_SHOW");
+        public final static Property IsJoinAddBookSlef = new Property(17, boolean.class, "isJoinAddBookSlef", false, "IS_JOIN_ADD_BOOK_SLEF");
     }
 
     private DaoSession daoSession;
@@ -75,7 +76,8 @@ public class CollBookBeanDao extends AbstractDao<CollBookBean, String> {
                 "\"IS_LOCAL\" INTEGER NOT NULL ," + // 13: isLocal
                 "\"IS_TOP\" INTEGER NOT NULL ," + // 14: isTop
                 "\"IS_CHECK_BOX\" INTEGER NOT NULL ," + // 15: isCheckBox
-                "\"IS_CHECK_SHOW\" INTEGER NOT NULL );"); // 16: isCheckShow
+                "\"IS_CHECK_SHOW\" INTEGER NOT NULL ," + // 16: isCheckShow
+                "\"IS_JOIN_ADD_BOOK_SLEF\" INTEGER NOT NULL );"); // 17: isJoinAddBookSlef
     }
 
     /** Drops the underlying database table. */
@@ -136,6 +138,7 @@ public class CollBookBeanDao extends AbstractDao<CollBookBean, String> {
         stmt.bindLong(15, entity.getIsTop() ? 1L: 0L);
         stmt.bindLong(16, entity.getIsCheckBox() ? 1L: 0L);
         stmt.bindLong(17, entity.getIsCheckShow() ? 1L: 0L);
+        stmt.bindLong(18, entity.getIsJoinAddBookSlef() ? 1L: 0L);
     }
 
     @Override
@@ -190,6 +193,7 @@ public class CollBookBeanDao extends AbstractDao<CollBookBean, String> {
         stmt.bindLong(15, entity.getIsTop() ? 1L: 0L);
         stmt.bindLong(16, entity.getIsCheckBox() ? 1L: 0L);
         stmt.bindLong(17, entity.getIsCheckShow() ? 1L: 0L);
+        stmt.bindLong(18, entity.getIsJoinAddBookSlef() ? 1L: 0L);
     }
 
     @Override
@@ -222,7 +226,8 @@ public class CollBookBeanDao extends AbstractDao<CollBookBean, String> {
             cursor.getShort(offset + 13) != 0, // isLocal
             cursor.getShort(offset + 14) != 0, // isTop
             cursor.getShort(offset + 15) != 0, // isCheckBox
-            cursor.getShort(offset + 16) != 0 // isCheckShow
+            cursor.getShort(offset + 16) != 0, // isCheckShow
+            cursor.getShort(offset + 17) != 0 // isJoinAddBookSlef
         );
         return entity;
     }
@@ -246,6 +251,7 @@ public class CollBookBeanDao extends AbstractDao<CollBookBean, String> {
         entity.setIsTop(cursor.getShort(offset + 14) != 0);
         entity.setIsCheckBox(cursor.getShort(offset + 15) != 0);
         entity.setIsCheckShow(cursor.getShort(offset + 16) != 0);
+        entity.setIsJoinAddBookSlef(cursor.getShort(offset + 17) != 0);
      }
     
     @Override

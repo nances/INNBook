@@ -67,7 +67,7 @@ public class HomeRecommendedSection extends StatelessSection {
                 .centerCrop()
                 .placeholder(R.drawable.ic_book_loading)
                 .dontAnimate()
-                .transform(new GlideRoundTransform(mContext,6))
+                .transform(new GlideRoundTransform(mContext))
                 .into(itemViewHolder.ivRecommendCover);
 
         itemViewHolder.tvRecommendTitle.setText(bodyBean.getTitle());

@@ -218,4 +218,27 @@ public class BookManager{
             this.size = size;
         }
     }
+
+    /**
+     * 获取缓存大小
+     *
+     * @return
+     */
+    public synchronized String getCacheSize() {
+        long cacheSize = 0;
+
+        try {
+            String cacheDir = Constant.BOOK_CACHE_PATH;
+            cacheSize += FileUtils.getFolderSize(cacheDir);
+            if (FileUtils.isSdCardAvailable()) {
+                String extCacheDir = AppUtils.getAppContext().getExternalCacheDir().getPath();
+                cacheSize += FileUtils.getFolderSize(extCacheDir);
+            }
+        } catch (Exception e) {
+            LogUtils.e(e.toString());
+        }
+
+        return FileUtils.formatFileSizeToString(cacheSize);
+    }
+
 }

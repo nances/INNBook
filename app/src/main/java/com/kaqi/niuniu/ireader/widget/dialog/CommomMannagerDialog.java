@@ -3,28 +3,44 @@ package com.kaqi.niuniu.ireader.widget.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.support.v7.widget.CardView;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.kaqi.niuniu.ireader.R;
+import com.kaqi.niuniu.ireader.model.bean.CollBookBean;
+import com.kaqi.niuniu.ireader.utils.Constant;
+import com.kaqi.niuniu.ireader.utils.StringUtils;
+import com.yuyh.easyadapter.glide.GlideRoundTransform;
 
 
 public class CommomMannagerDialog extends Dialog implements View.OnClickListener {
-    private TextView contentTxt;
-    private TextView titleTxt;
-    private TextView bookTop;
-    private TextView bookDel;
-    private TextView bookMananger;
-    private TextView bookDown;
+    ImageView collBookIvCover;
+    CardView ivRecommendCover;
+    TextView collBookTvName;
+    TextView collBookTvLatelyUpdate;
+    TextView collBookTvChapter;
+    TextView tvBookListAuthor;
+    TextView tvBookCat;
+    TextView bookSetTop;
+    LinearLayout bookSetTopLr;
+    TextView bookDownSet;
+    LinearLayout bookDownSetLr;
+    TextView bookDel;
+    LinearLayout bookDelLr;
+    TextView bookAllMannager;
+    LinearLayout bookAllMannagerLr;
     private Context mContext;
     private String content;
     private OnCloseListener listener;
     private String title;
-    private boolean isTop;
+    CollBookBean collBookBean;
 
     public CommomMannagerDialog(Context context) {
         super(context);
@@ -37,10 +53,10 @@ public class CommomMannagerDialog extends Dialog implements View.OnClickListener
         this.content = content;
     }
 
-    public CommomMannagerDialog(Context context, int themeResId, boolean isTop, OnCloseListener listener) {
+    public CommomMannagerDialog(Context context, int themeResId, CollBookBean collBookBean, OnCloseListener listener) {
         super(context, themeResId);
         this.mContext = context;
-        this.isTop = isTop;
+        this.collBookBean = collBookBean;
         this.listener = listener;
     }
 
@@ -69,54 +85,72 @@ public class CommomMannagerDialog extends Dialog implements View.OnClickListener
     }
 
     private void initView() {
-        contentTxt = (TextView) findViewById(R.id.content);
-        titleTxt = (TextView) findViewById(R.id.book_title);
-        bookTop = (TextView) findViewById(R.id.book_set_top);
-        bookDel = (TextView) findViewById(R.id.book_del);
-        bookDown = (TextView) findViewById(R.id.book_down_set);
-        bookMananger = (TextView) findViewById(R.id.book_all_mannager);
+
+        collBookIvCover = (ImageView) this.findViewById(R.id.coll_book_iv_cover_manager);
+
+        collBookTvName = (TextView) findViewById(R.id.coll_book_tv_name);
+        collBookTvLatelyUpdate = (TextView) findViewById(R.id.coll_book_tv_lately_update);
+        collBookTvChapter = (TextView) findViewById(R.id.coll_book_tv_chapter);
+        tvBookListAuthor = (TextView) findViewById(R.id.tvBookListAuthor);
+        tvBookCat = (TextView) findViewById(R.id.tvBookCat);
+        bookSetTop = (TextView) findViewById(R.id.book_set_top);
+        bookSetTopLr = (LinearLayout) findViewById(R.id.book_set_top_lr);
+        bookDownSet = (TextView) findViewById(R.id.book_down_set);
+        bookDownSetLr = (LinearLayout) findViewById(R.id.book_down_set_lr);
+        bookDelLr = (LinearLayout) findViewById(R.id.book_del_lr);
+        bookAllMannagerLr = (LinearLayout) findViewById(R.id.book_all_mannager_lr);
+
+        bookSetTopLr.setOnClickListener(this);
+        bookDownSetLr.setOnClickListener(this);
+        bookDelLr.setOnClickListener(this);
+        bookAllMannagerLr.setOnClickListener(this);
 
 
-        bookTop.setOnClickListener(this);
-        bookDel.setOnClickListener(this);
-        bookMananger.setOnClickListener(this);
-        bookDown.setOnClickListener(this);
-
-        if (!TextUtils.isEmpty(title)) {
-            titleTxt.setText(title);
+        if (collBookBean != null) {
+            Glide.with(getContext())
+                    .load(Constant.IMG_BASE_URL + collBookBean.getCover())
+                    .asBitmap()
+                    .skipMemoryCache(true)
+                    .placeholder(R.drawable.ic_book_loading)
+                    .error(R.drawable.ic_load_error)
+                    .transform(new GlideRoundTransform(getContext()))
+                    .into(collBookIvCover);
+            collBookTvName.setText(collBookBean.getTitle());
+            tvBookListAuthor.setText(collBookBean.getAuthor());
+            if (!collBookBean.isLocal()) {
+                //时间
+                collBookTvLatelyUpdate.setText(StringUtils.
+                        dateConvert(collBookBean.getUpdated(), Constant.FORMAT_BOOK_DATE) + ":");
+                collBookTvLatelyUpdate.setVisibility(View.VISIBLE);
+            } else {
+                collBookTvLatelyUpdate.setText("阅读进度:");
+            }
+            collBookTvChapter.setText(collBookBean.getLastChapter());
         }
-        bookTop.setText(isTop ? "取消置顶" : "置顶");
-
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.book_set_top:
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.book_set_top_lr:
                 if (listener != null) {
                     listener.onClick(this, 0);
                 }
-                this.dismiss();
                 break;
-            case R.id.book_down_set:
+            case R.id.book_down_set_lr:
                 if (listener != null) {
                     listener.onClick(this, 1);
                 }
-                this.dismiss();
                 break;
-            case R.id.book_del:
+            case R.id.book_del_lr:
                 if (listener != null) {
                     listener.onClick(this, 2);
                 }
-                this.dismiss();
                 break;
-            case R.id.book_all_mannager:
+            case R.id.book_all_mannager_lr:
                 if (listener != null) {
                     listener.onClick(this, 3);
                 }
-                this.dismiss();
                 break;
-
         }
     }
 

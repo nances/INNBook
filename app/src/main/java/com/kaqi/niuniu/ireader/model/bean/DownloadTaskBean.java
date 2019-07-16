@@ -40,6 +40,33 @@ public class DownloadTaskBean{
     private volatile int status = STATUS_WAIT;
     //总大小 -> (完成之后才会赋值)
     private long size = 0;
+    private String book_anchor;
+    private String book_info;
+    private String book_cover;
+
+    public String getBook_anchor() {
+        return book_anchor;
+    }
+
+    public void setBook_anchor(String book_anchor) {
+        this.book_anchor = book_anchor;
+    }
+
+    public String getBook_info() {
+        return book_info;
+    }
+
+    public void setBook_info(String book_info) {
+        this.book_info = book_info;
+    }
+
+    public String getBook_cover() {
+        return book_cover;
+    }
+
+    public void setBook_cover(String book_cover) {
+        this.book_cover = book_cover;
+    }
 
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
@@ -48,15 +75,18 @@ public class DownloadTaskBean{
     @Generated(hash = 1584592296)
     private transient DownloadTaskBeanDao myDao;
 
-    @Generated(hash = 597395122)
+    @Generated(hash = 75267781)
     public DownloadTaskBean(String taskName, String bookId, int currentChapter, int lastChapter,
-            int status, long size) {
+            int status, long size, String book_anchor, String book_info, String book_cover) {
         this.taskName = taskName;
         this.bookId = bookId;
         this.currentChapter = currentChapter;
         this.lastChapter = lastChapter;
         this.status = status;
         this.size = size;
+        this.book_anchor = book_anchor;
+        this.book_info = book_info;
+        this.book_cover = book_cover;
     }
 
     @Generated(hash = 2123101309)

@@ -22,6 +22,8 @@ public class Constant {
     public static final String SHARED_CONVERT_TYPE = "convert_type";
     public static final String SEX_BOY = "boy";
     public static final String SEX_GIRL = "girl";
+    //是否开启赚钱模式
+    public static final String MONEY_VP = "money_vp";
 
     /*URL_BASE*/
 //    public static final String API_BASE_URL = "http://apim.ssmnx.com";

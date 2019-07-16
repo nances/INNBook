@@ -45,7 +45,6 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View>
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         beans -> {
-
                             //设置 id
                             for(BookChapterBean bean :beans){
                                 bean.setId(MD5Utils.strToMd5By16(bean.getLink()));

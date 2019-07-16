@@ -35,7 +35,7 @@ import io.reactivex.SingleEmitter;
 import io.reactivex.SingleOnSubscribe;
 
 /**
- * Created by newbiechen on 17-5-8.
+ * Created by 倪桥 on 2019年07月16日11:09:04.
  * 存储关于书籍内容的信息(CollBook(收藏书籍),BookChapter(书籍列表),ChapterInfo(书籍章节),BookRecord(记录))
  */
 
@@ -109,8 +109,8 @@ public class BookRepository {
     public void saveCollBooks(List<CollBookBean> beans) {
         mCollBookDao.insertOrReplaceInTx(beans);
 
-
     }
+
 
     /**
      * 异步存储BookChapter
@@ -155,7 +155,6 @@ public class BookRepository {
                 .insertOrReplace(bean);
     }
 
-
     /*****************************get************************************************/
     public CollBookBean getCollBook(String bookId) {
         CollBookBean bean = mCollBookDao.queryBuilder()
@@ -168,7 +167,20 @@ public class BookRepository {
     public List<CollBookBean> getCollBooks() {
         return mCollBookDao
                 .queryBuilder()
+                .where(CollBookBeanDao.Properties.IsJoinAddBookSlef.eq(true))
 //                .orderDesc(CollBookBeanDao.Properties.LastRead)
+                .list();
+    }
+
+    /**
+     * 获取阅读历史记录
+     *
+     * @return
+     */
+    public List<CollBookBean> getHistoryCollBooks() {
+        return mCollBookDao
+                .queryBuilder()
+//                .where(CollBookBeanDao.Properties.IsJoinAddBookSlef.eq(false))
                 .list();
     }
 

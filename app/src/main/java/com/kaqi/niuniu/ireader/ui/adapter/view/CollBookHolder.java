@@ -1,6 +1,5 @@
 package com.kaqi.niuniu.ireader.ui.adapter.view;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -13,6 +12,7 @@ import com.kaqi.niuniu.ireader.model.bean.CollBookBean;
 import com.kaqi.niuniu.ireader.ui.base.adapter.ViewHolderImpl;
 import com.kaqi.niuniu.ireader.utils.Constant;
 import com.kaqi.niuniu.ireader.utils.StringUtils;
+import com.yuyh.easyadapter.glide.GlideRoundTransform;
 
 import static android.view.View.GONE;
 
@@ -56,9 +56,11 @@ public class CollBookHolder extends ViewHolderImpl<CollBookBean> {
             //书的图片
             Glide.with(getContext())
                     .load(Constant.IMG_BASE_URL + value.getCover())
+                    .asBitmap()
+                    .skipMemoryCache(true)
                     .placeholder(R.drawable.ic_book_loading)
                     .error(R.drawable.ic_load_error)
-                    .fitCenter()
+                    .transform(new GlideRoundTransform(getContext(),4))
                     .into(mIvCover);
         }
         mCbSelected.setVisibility(value.getIsCheckShow() ? View.VISIBLE : GONE);

@@ -31,15 +31,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="选择反馈类型"
-                    android:textColor="@color/fontBlack"
+                    android:textStyle="bold"
+                    android:textColor="@color/common_h1"
                     android:textSize="16sp" />
 
-                <android.support.v7.widget.RecyclerView
+                <GridView
                     android:id="@+id/mRecyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/wh12.0dimens12.0dp"
-                    android:nestedScrollingEnabled="true" />
+                    android:layout_height="@dimen/wh92.0dimens92.0dp"
+                    android:layout_marginTop="@dimen/wh18.0dimens18.0dp"
+                    android:layout_marginBottom="@dimen/wh8.0dimens8.0dp"
+                    android:gravity="center_horizontal"
+                    android:listSelector="@android:color/transparent"
+                    android:numColumns="3"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="@dimen/wh14.0dimens14.0dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -57,17 +63,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="补充详情"
-                    android:textColor="@color/fontBlack"
+                    android:textStyle="bold"
+                    android:textColor="@color/common_h1"
                     android:textSize="16sp" />
 
                 <EditText
+                    android:id="@+id/suggest_detail_info_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/wh12.0dimens12.0dp"
-                    android:background="@null"
+                    android:background="@drawable/shape_white_bg"
                     android:gravity="left|top"
                     android:hint="请写下您的意见或建议"
-                    android:minHeight="@dimen/wh50.0dimens50.0dp"
+                    android:minHeight="@dimen/wh86.0dimens86.0dp"
+                    android:padding="@dimen/wh6.0dimens6.0dp"
                     android:textColor="@color/fontBlack"
                     android:textColorHint="@color/fontGray"
                     android:textSize="14sp" />
@@ -89,16 +98,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="填写联系方式"
-                    android:textColor="@color/fontBlack"
-                    android:textSize="16sp" />
+                    android:textColor="@color/common_h1"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    />
 
                 <EditText
+                    android:id="@+id/qq_num"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/wh49.0dimens49.0dp"
+                    android:layout_height="@dimen/wh54.0dimens54.0dp"
                     android:layout_marginTop="@dimen/wh12.0dimens12.0dp"
                     android:background="@null"
                     android:gravity="center_vertical"
                     android:hint="请填写QQ号（必填）"
+                    android:padding="@dimen/wh6.0dimens6.0dp"
                     android:textColor="@color/fontBlack"
                     android:textColorHint="@color/fontGray"
                     android:textSize="14sp" />
@@ -109,11 +122,13 @@
                     android:background="@color/divider_color" />
 
                 <EditText
+                    android:id="@+id/phone_num"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/wh49.0dimens49.0dp"
+                    android:layout_height="@dimen/wh54.0dimens54.0dp"
                     android:background="@null"
                     android:gravity="center_vertical"
                     android:hint="请填写手机号（）"
+                    android:padding="@dimen/wh6.0dimens6.0dp"
                     android:textColor="@color/fontBlack"
                     android:textColorHint="@color/fontGray"
                     android:textSize="14sp" />

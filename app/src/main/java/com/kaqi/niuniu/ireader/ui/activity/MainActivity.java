@@ -264,7 +264,7 @@ public class MainActivity extends BaseActivity {
 
 
     /**
-     * 分享
+     * 分享 书本加入书架
      */
     public void shareEvent() {
         Disposable donwloadDisp = RxBus.getInstance()
@@ -272,8 +272,10 @@ public class MainActivity extends BaseActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         event -> {
-                            if(event.getType() == 1){
+                            if (event.getType() == 1) {
                                 getShare();
+                            } else if (event.getType() == 2) {
+                                setCurrentItem(1);
                             }
                         }
                 );

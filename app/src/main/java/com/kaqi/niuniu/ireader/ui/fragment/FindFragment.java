@@ -3,7 +3,6 @@ package com.kaqi.niuniu.ireader.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 
 import com.flyco.tablayout.SlidingTabLayout;
 import com.kaqi.niuniu.ireader.R;

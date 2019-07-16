@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/scroll_refresh_tv_tip"
-	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
-	android:background="@color/grey_200"
-	android:gravity="center"
-	android:padding="8dp"
-	android:text="似乎没有网络哦"
-	android:textColor="@color/white"
-	android:translationZ="100dp"
-	android:visibility="gone">
-</TextView>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll_refresh_tv_tip"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/grey_100"
+    android:gravity="center"
+    android:padding="@dimen/wh8.0dimens8.0dp"
+    android:text="似乎没有网络哦"
+    android:textColor="@color/common_h2"
+    android:translationZ="100dp"
+    android:visibility="gone"
+    tools:visibility="visible"></TextView>

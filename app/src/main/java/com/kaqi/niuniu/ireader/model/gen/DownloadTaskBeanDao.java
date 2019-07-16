@@ -30,6 +30,9 @@ public class DownloadTaskBeanDao extends AbstractDao<DownloadTaskBean, String> {
         public final static Property LastChapter = new Property(3, int.class, "lastChapter", false, "LAST_CHAPTER");
         public final static Property Status = new Property(4, int.class, "status", false, "STATUS");
         public final static Property Size = new Property(5, long.class, "size", false, "SIZE");
+        public final static Property Book_anchor = new Property(6, String.class, "book_anchor", false, "BOOK_ANCHOR");
+        public final static Property Book_info = new Property(7, String.class, "book_info", false, "BOOK_INFO");
+        public final static Property Book_cover = new Property(8, String.class, "book_cover", false, "BOOK_COVER");
     }
 
     private DaoSession daoSession;
@@ -53,7 +56,10 @@ public class DownloadTaskBeanDao extends AbstractDao<DownloadTaskBean, String> {
                 "\"CURRENT_CHAPTER\" INTEGER NOT NULL ," + // 2: currentChapter
                 "\"LAST_CHAPTER\" INTEGER NOT NULL ," + // 3: lastChapter
                 "\"STATUS\" INTEGER NOT NULL ," + // 4: status
-                "\"SIZE\" INTEGER NOT NULL );"); // 5: size
+                "\"SIZE\" INTEGER NOT NULL ," + // 5: size
+                "\"BOOK_ANCHOR\" TEXT," + // 6: book_anchor
+                "\"BOOK_INFO\" TEXT," + // 7: book_info
+                "\"BOOK_COVER\" TEXT);"); // 8: book_cover
     }
 
     /** Drops the underlying database table. */
@@ -79,6 +85,21 @@ public class DownloadTaskBeanDao extends AbstractDao<DownloadTaskBean, String> {
         stmt.bindLong(4, entity.getLastChapter());
         stmt.bindLong(5, entity.getStatus());
         stmt.bindLong(6, entity.getSize());
+ 
+        String book_anchor = entity.getBook_anchor();
+        if (book_anchor != null) {
+            stmt.bindString(7, book_anchor);
+        }
+ 
+        String book_info = entity.getBook_info();
+        if (book_info != null) {
+            stmt.bindString(8, book_info);
+        }
+ 
+        String book_cover = entity.getBook_cover();
+        if (book_cover != null) {
+            stmt.bindString(9, book_cover);
+        }
     }
 
     @Override
@@ -98,6 +119,21 @@ public class DownloadTaskBeanDao extends AbstractDao<DownloadTaskBean, String> {
         stmt.bindLong(4, entity.getLastChapter());
         stmt.bindLong(5, entity.getStatus());
         stmt.bindLong(6, entity.getSize());
+ 
+        String book_anchor = entity.getBook_anchor();
+        if (book_anchor != null) {
+            stmt.bindString(7, book_anchor);
+        }
+ 
+        String book_info = entity.getBook_info();
+        if (book_info != null) {
+            stmt.bindString(8, book_info);
+        }
+ 
+        String book_cover = entity.getBook_cover();
+        if (book_cover != null) {
+            stmt.bindString(9, book_cover);
+        }
     }
 
     @Override
@@ -119,7 +155,10 @@ public class DownloadTaskBeanDao extends AbstractDao<DownloadTaskBean, String> {
             cursor.getInt(offset + 2), // currentChapter
             cursor.getInt(offset + 3), // lastChapter
             cursor.getInt(offset + 4), // status
-            cursor.getLong(offset + 5) // size
+            cursor.getLong(offset + 5), // size
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // book_anchor
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // book_info
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8) // book_cover
         );
         return entity;
     }
@@ -132,6 +171,9 @@ public class DownloadTaskBeanDao extends AbstractDao<DownloadTaskBean, String> {
         entity.setLastChapter(cursor.getInt(offset + 3));
         entity.setStatus(cursor.getInt(offset + 4));
         entity.setSize(cursor.getLong(offset + 5));
+        entity.setBook_anchor(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setBook_info(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setBook_cover(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
      }
     
     @Override

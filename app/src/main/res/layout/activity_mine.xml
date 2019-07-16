@@ -79,7 +79,7 @@
                         <TextView
                             android:id="@+id/regisiter_tv"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:background="@drawable/selector_stroke_roundcir"
                             android:gravity="center"
                             android:text="注册"
@@ -230,6 +230,13 @@
                 stv:sDividerLineType="both"
                 stv:sLeftIconRes="@drawable/history_icon"
                 stv:sLeftTextString="历史阅读" />
+
+            <com.kaqi.niuniu.ireader.widget.textview.SuperTextView
+                android:id="@+id/downlaod_icon"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/wh50.0dimens50.0dp"
+                stv:sLeftIconRes="@drawable/download_icon"
+                stv:sLeftTextString="下载列表" />
 
             <com.kaqi.niuniu.ireader.widget.textview.SuperTextView
                 android:id="@+id/message_icon"

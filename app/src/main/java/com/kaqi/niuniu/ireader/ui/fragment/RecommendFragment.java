@@ -1,10 +1,16 @@
 package com.kaqi.niuniu.ireader.ui.fragment;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,17 +31,21 @@ import com.kaqi.niuniu.ireader.event.DeleteTaskEvent;
 import com.kaqi.niuniu.ireader.event.DownloadMessage;
 import com.kaqi.niuniu.ireader.event.RecommendBookEvent;
 import com.kaqi.niuniu.ireader.event.RefresRecommendBookEvent;
+import com.kaqi.niuniu.ireader.event.TaskShareEvent;
 import com.kaqi.niuniu.ireader.model.bean.CollBookBean;
 import com.kaqi.niuniu.ireader.model.bean.NavItemEntity;
 import com.kaqi.niuniu.ireader.model.local.BookRepository;
 import com.kaqi.niuniu.ireader.presenter.BookShelfPresenter;
 import com.kaqi.niuniu.ireader.presenter.contract.BookShelfContract;
+import com.kaqi.niuniu.ireader.ui.activity.BookCatalogActivity;
+import com.kaqi.niuniu.ireader.ui.activity.FileSystemActivity;
 import com.kaqi.niuniu.ireader.ui.activity.ReadActivity;
 import com.kaqi.niuniu.ireader.ui.activity.SearchActivity;
 import com.kaqi.niuniu.ireader.ui.activity.WifiBookActivity;
 import com.kaqi.niuniu.ireader.ui.adapter.CollBookAdapter;
 import com.kaqi.niuniu.ireader.ui.base.BaseMVPFragment;
 import com.kaqi.niuniu.ireader.utils.Constant;
+import com.kaqi.niuniu.ireader.utils.PermissionsChecker;
 import com.kaqi.niuniu.ireader.utils.RxUtils;
 import com.kaqi.niuniu.ireader.utils.SharedPreUtils;
 import com.kaqi.niuniu.ireader.utils.ToastUtils;
@@ -58,7 +68,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
 public class RecommendFragment extends BaseMVPFragment<BookShelfContract.Presenter> implements BookShelfContract.View, RecyclerArrayAdapter.OnItemLongClickListener {
-
+    private static final int PERMISSIONS_REQUEST_STORAGE = 1;
+    private static final int REQUEST_READ = 2;
     @BindView(R.id.llBatchManagement)
     RelativeLayout llBatchManagement;
     @BindView(R.id.tvSelectAll)
@@ -87,7 +98,13 @@ public class RecommendFragment extends BaseMVPFragment<BookShelfContract.Present
     List<NavItemEntity> list = new ArrayList<>();
     List<CollBookBean> collBookListBeans = new ArrayList<>();
 
+    static final String[] PERMISSIONS = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
 
+    PermissionsChecker mPermissionsChecker;
+    Class<?> activityCls = null;
     //是否是第一次进入
     private boolean isInit = true;
     public boolean isFirstApp = false;
@@ -114,7 +131,7 @@ public class RecommendFragment extends BaseMVPFragment<BookShelfContract.Present
                 .getBoolean(Constant.FITST_APP, false);
         list.add(new NavItemEntity("书架管理", R.drawable.menu_admin));
         list.add(new NavItemEntity("WIFI传书", R.drawable.menu_wifi));
-        list.add(new NavItemEntity("同步书架", R.drawable.menu_update));
+        list.add(new NavItemEntity("本地导入", R.drawable.local_import_book_icon));
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -127,7 +144,24 @@ public class RecommendFragment extends BaseMVPFragment<BookShelfContract.Present
                 } else if (position == 1) {
                     WifiBookActivity.startActivity(getActivity());
                 } else if (position == 2) {
-//                    LoginActivity.startActivity(getActivity());
+                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+
+                        if (mPermissionsChecker == null) {
+                            mPermissionsChecker = new PermissionsChecker(getActivity());
+                        }
+
+                        //获取读取和写入SD卡的权限
+                        if (mPermissionsChecker.lacksPermissions(PERMISSIONS)) {
+                            //请求权限
+                            ActivityCompat.requestPermissions(getActivity(), PERMISSIONS, PERMISSIONS_REQUEST_STORAGE);
+                        }
+                    }
+
+                    activityCls = FileSystemActivity.class;
+                    if (activityCls != null) {
+                        Intent intent = new Intent(getActivity(), activityCls);
+                        startActivity(intent);
+                    }
                 }
             }
         });
@@ -257,7 +291,7 @@ public class RecommendFragment extends BaseMVPFragment<BookShelfContract.Present
      */
     public void setBookMannager(int book_position) {
         final boolean isTop = BookRepository.getInstance().isTop(mCollBookAdapter.getItem(book_position).get_id());
-        new CommomMannagerDialog(getActivity(), R.style.dialog, isTop, new CommomMannagerDialog.OnCloseListener() {
+        new CommomMannagerDialog(getActivity(), R.style.dialog, mCollBookAdapter.getItem(book_position), new CommomMannagerDialog.OnCloseListener() {
             @Override
             public void onClick(Dialog dialog, int type) {
                 switch (type) {
@@ -273,8 +307,11 @@ public class RecommendFragment extends BaseMVPFragment<BookShelfContract.Present
                         deleteBook(mCollBookAdapter.getItem(book_position));
                         break;
                     case 3:
-                        //批量管理
-                        showBatchManagementLayout();
+                        //mulu
+                        startActivityForResult(new Intent(getContext(), BookCatalogActivity.class)
+                                .putExtra(BookCatalogActivity.EXTRA_BOOK_ID, mCollBookAdapter.getItem(book_position).get_id())
+                                .putExtra(ReadActivity.EXTRA_IS_COLLECTED, true)
+                                .putExtra(ReadActivity.EXTRA_COLL_BOOK, mCollBookAdapter.getItem(book_position)), REQUEST_READ);
                         break;
                     default:
                         break;
@@ -542,13 +579,11 @@ public class RecommendFragment extends BaseMVPFragment<BookShelfContract.Present
     }
 
 
-
-
-
     /**
      * 批量管理
      */
     CircleDialog.Builder builder = new CircleDialog.Builder();
+
     public void ShowBatchBookManagement() {
         builder.setPopupItems(adapter, new LinearLayoutManager(getActivity()));
         builder.setPopup(bookAdmin, PopupParams.TRIANGLE_TOP_RIGHT)
@@ -583,6 +618,31 @@ public class RecommendFragment extends BaseMVPFragment<BookShelfContract.Present
 
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_STORAGE: {
+                // 如果取消权限，则返回的值为0
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //跳转到 FileSystemActivity
+                    Intent intent = new Intent(getActivity(), FileSystemActivity.class);
+                    startActivity(intent);
+
+                } else {
+                    ToastUtils.show("用户拒绝开启读写权限");
+                }
+                return;
+            }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
     public void finishUpdate() {
         //重新从数据库中获取数据
         mCollBookAdapter.refreshItems(BookRepository
@@ -602,6 +662,7 @@ public class RecommendFragment extends BaseMVPFragment<BookShelfContract.Present
             view.setOnClickListener(
                     (v) -> {
                         //设置RxBus回调
+                        RxBus.getInstance().post(new TaskShareEvent(2));
                     }
             );
             return view;

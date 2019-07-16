@@ -6,7 +6,7 @@ import com.kaqi.niuniu.ireader.widget.page.PageMode;
 import com.kaqi.niuniu.ireader.widget.page.PageStyle;
 
 /**
- * Created by newbiechen on 17-5-17.
+ * Created by Niqiao on 2019年07月16日11:15:53.
  * 阅读器的配置管理
  */
 

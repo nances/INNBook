@@ -1,17 +1,18 @@
 package com.kaqi.niuniu.ireader.ui.activity;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 import android.widget.CheckBox;
 
+import com.flyco.tablayout.SlidingTabLayout;
 import com.kaqi.niuniu.ireader.R;
 import com.kaqi.niuniu.ireader.model.bean.CollBookBean;
 import com.kaqi.niuniu.ireader.model.local.BookRepository;
-import com.kaqi.niuniu.ireader.ui.base.BaseTabActivity;
+import com.kaqi.niuniu.ireader.ui.base.BaseActivity;
 import com.kaqi.niuniu.ireader.ui.fragment.BaseFileFragment;
 import com.kaqi.niuniu.ireader.ui.fragment.FileCategoryFragment;
 import com.kaqi.niuniu.ireader.ui.fragment.LocalBookFragment;
@@ -19,10 +20,12 @@ import com.kaqi.niuniu.ireader.utils.Constant;
 import com.kaqi.niuniu.ireader.utils.MD5Utils;
 import com.kaqi.niuniu.ireader.utils.StringUtils;
 import com.kaqi.niuniu.ireader.utils.ToastUtils;
+import com.kaqi.niuniu.ireader.view.NoScrollViewPager;
+import com.kaqi.niuniu.ireader.view.NormalTitleBar;
+import com.kaqi.niuniu.ireader.widget.ComFragmentAdapter;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -30,10 +33,10 @@ import butterknife.BindView;
 import static com.kaqi.niuniu.ireader.ui.fragment.BaseFileFragment.OnFileCheckedListener;
 
 /**
- * Created by newbiechen on 17-5-27.
+ * Create by niqiao 2019年07月10日23:10:16
  */
 
-public class FileSystemActivity extends BaseTabActivity {
+public class FileSystemActivity extends BaseActivity {
     private static final String TAG = "FileSystemActivity";
 
     @BindView(R.id.file_system_cb_selected_all)
@@ -42,7 +45,13 @@ public class FileSystemActivity extends BaseTabActivity {
     Button mBtnDelete;
     @BindView(R.id.file_system_btn_add_book)
     Button mBtnAddBook;
-
+    @BindView(R.id.tabs)
+    SlidingTabLayout tabs;
+    @BindView(R.id.viewPager)
+    NoScrollViewPager mViewPager;
+    @BindView(R.id.normaltitle_file)
+    NormalTitleBar normalTitle;
+    private String[] titles = new String[]{"智能导入", "手机目录"};
     private LocalBookFragment mLocalFragment;
     private FileCategoryFragment mCategoryFragment;
     private BaseFileFragment mCurFragment;
@@ -64,27 +73,27 @@ public class FileSystemActivity extends BaseTabActivity {
         }
     };
 
-    @Override
-    protected List<Fragment> createTabFragments() {
+    private void initViewPager() {
+        ArrayList<Fragment> fragments = new ArrayList<>();
         mLocalFragment = new LocalBookFragment();
         mCategoryFragment = new FileCategoryFragment();
-        return Arrays.asList(mLocalFragment,mCategoryFragment);
-    }
+        fragments.add(mLocalFragment);
+        fragments.add(mCategoryFragment);
+        mViewPager.setAdapter(new ComFragmentAdapter(getSupportFragmentManager(), fragments));
 
-    @Override
-    protected List<String> createTabTitles() {
-        return Arrays.asList("智能导入","手机目录");
+        tabs.setViewPager(mViewPager, titles);
+        mViewPager.setOffscreenPageLimit(titles.length);
+        tabs.setCurrentTab(0);
     }
-
     @Override
     protected int getContentId() {
         return R.layout.activity_file_system;
     }
 
     @Override
-    protected void setUpToolbar(Toolbar toolbar) {
-        super.setUpToolbar(toolbar);
-        getSupportActionBar().setTitle("本机导入");
+    protected void initData(Bundle savedInstanceState) {
+        normalTitle.setBackVisibility(true);
+        normalTitle.setTitleText("本机导入");
     }
 
     @Override
@@ -99,8 +108,7 @@ public class FileSystemActivity extends BaseTabActivity {
                     changeMenuStatus();
                 }
         );
-
-        mVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -108,10 +116,9 @@ public class FileSystemActivity extends BaseTabActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 0){
+                if (position == 0) {
                     mCurFragment = mLocalFragment;
-                }
-                else {
+                } else {
                     mCurFragment = mCategoryFragment;
                 }
                 //改变菜单状态
@@ -139,7 +146,7 @@ public class FileSystemActivity extends BaseTabActivity {
                     //改变是否可以全选
                     changeCheckedAllStatus();
                     //提示加入书架成功
-                    ToastUtils.show(getResources().getString(R.string.nb_file_add_succeed,collBooks.size()));
+                    ToastUtils.show(getResources().getString(R.string.nb_file_add_succeed, collBooks.size()));
 
                 }
         );
@@ -174,20 +181,26 @@ public class FileSystemActivity extends BaseTabActivity {
         mCurFragment = mLocalFragment;
     }
 
+    @Override
+    protected void initWidget() {
+        initViewPager();
+    }
+
     /**
      * 将文件转换成CollBook
+     *
      * @param files:需要加载的文件列表
      * @return
      */
-    private List<CollBookBean> convertCollBook(List<File> files){
+    private List<CollBookBean> convertCollBook(List<File> files) {
         List<CollBookBean> collBooks = new ArrayList<>(files.size());
-        for(File file : files){
+        for (File file : files) {
             //判断文件是否存在
             if (!file.exists()) continue;
 
             CollBookBean collBook = new CollBookBean();
             collBook.set_id(MD5Utils.strToMd5By16(file.getAbsolutePath()));
-            collBook.setTitle(file.getName().replace(".txt",""));
+            collBook.setTitle(file.getName().replace(".txt", ""));
             collBook.setAuthor("");
             collBook.setShortIntro("无");
             collBook.setCover(file.getAbsolutePath());
@@ -204,50 +217,48 @@ public class FileSystemActivity extends BaseTabActivity {
     /**
      * 改变底部选择栏的状态
      */
-    private void changeMenuStatus(){
+    private void changeMenuStatus() {
 
         //点击、删除状态的设置
-        if (mCurFragment.getCheckedCount() == 0){
+        if (mCurFragment.getCheckedCount() == 0) {
             mBtnAddBook.setText(getString(R.string.nb_file_add_shelf));
             //设置某些按钮的是否可点击
             setMenuClickable(false);
 
-            if (mCbSelectAll.isChecked()){
+            if (mCbSelectAll.isChecked()) {
                 mCurFragment.setChecked(false);
                 mCbSelectAll.setChecked(mCurFragment.isCheckedAll());
             }
 
-        }
-        else {
-            mBtnAddBook.setText(getString(R.string.nb_file_add_shelves,mCurFragment.getCheckedCount()));
+        } else {
+            mBtnAddBook.setText(getString(R.string.nb_file_add_shelves, mCurFragment.getCheckedCount()));
             setMenuClickable(true);
 
             //全选状态的设置
 
             //如果选中的全部的数据，则判断为全选
-            if (mCurFragment.getCheckedCount() == mCurFragment.getCheckableCount()){
+            if (mCurFragment.getCheckedCount() == mCurFragment.getCheckableCount()) {
                 //设置为全选
                 mCurFragment.setChecked(true);
                 mCbSelectAll.setChecked(mCurFragment.isCheckedAll());
             }
             //如果曾今是全选则替换
-            else if (mCurFragment.isCheckedAll()){
+            else if (mCurFragment.isCheckedAll()) {
                 mCurFragment.setChecked(false);
                 mCbSelectAll.setChecked(mCurFragment.isCheckedAll());
             }
         }
 
         //重置全选的文字
-        if (mCurFragment.isCheckedAll()){
+        if (mCurFragment.isCheckedAll()) {
             mCbSelectAll.setText("取消");
-        }
-        else {
+        } else {
             mCbSelectAll.setText("全选");
         }
 
     }
 
-    private void setMenuClickable(boolean isClickable){
+    private void setMenuClickable(boolean isClickable) {
 
         //设置是否可删除
         mBtnDelete.setEnabled(isClickable);
@@ -261,16 +272,15 @@ public class FileSystemActivity extends BaseTabActivity {
     /**
      * 改变全选按钮的状态
      */
-    private void changeCheckedAllStatus(){
+    private void changeCheckedAllStatus() {
         //获取可选择的文件数量
         int count = mCurFragment.getCheckableCount();
 
         //设置是否能够全选
-        if (count > 0){
+        if (count > 0) {
             mCbSelectAll.setClickable(true);
             mCbSelectAll.setEnabled(true);
-        }
-        else {
+        } else {
             mCbSelectAll.setClickable(false);
             mCbSelectAll.setEnabled(false);
         }

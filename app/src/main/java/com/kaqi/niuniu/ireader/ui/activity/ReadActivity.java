@@ -30,6 +30,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -48,6 +49,7 @@ import com.kaqi.niuniu.ireader.utils.Constant;
 import com.kaqi.niuniu.ireader.utils.LogUtils;
 import com.kaqi.niuniu.ireader.utils.RxUtils;
 import com.kaqi.niuniu.ireader.utils.ScreenUtils;
+import com.kaqi.niuniu.ireader.utils.SharedPreUtils;
 import com.kaqi.niuniu.ireader.utils.StringUtils;
 import com.kaqi.niuniu.ireader.utils.SystemBarUtils;
 import com.kaqi.niuniu.ireader.utils.ToastUtils;
@@ -67,6 +69,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import info.abdolahi.CircularMusicProgressBar;
+import info.abdolahi.OnCircularSeekBarChangeListener;
 import io.reactivex.disposables.Disposable;
 
 import static android.support.v4.view.ViewCompat.LAYER_TYPE_SOFTWARE;
@@ -92,8 +96,10 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
     private final Uri BRIGHTNESS_ADJ_URI =
             Settings.System.getUriFor("screen_auto_brightness_adj");
 
-    private static final int WHAT_CATEGORY = 1;
-    private static final int WHAT_CHAPTER = 2;
+    private static final int WHAT_CATEGORY = 2;
+    private static final int WHAT_CHAPTER = 3;
+    public static final int MSG_ONE = 4;
+    public int money_time_sum = 1;
 
 
     @BindView(R.id.read_dl_slide)
@@ -112,6 +118,7 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
     @BindView(R.id.read_tv_page_tip)
     TextView mTvPageTip;
 
+
     @BindView(R.id.read_ll_bottom_menu)
     LinearLayout mLlBottomMenu;
     @BindView(R.id.read_tv_pre_chapter)
@@ -128,6 +135,13 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
 //    TextView mTvDownload;
     @BindView(R.id.read_tv_setting)
     TextView mTvSetting;
+
+    @BindView(R.id.money_vp)
+    CircularMusicProgressBar money_vp;
+    @BindView(R.id.money_vp_rl)
+    RelativeLayout money_vp_rl;
+    @BindView(R.id.is_money_vp_tv)
+    TextView is_money_vp_tv;
     /***************left slide*******************************/
     @BindView(R.id.read_iv_category)
     ListView mLvCategory;
@@ -166,6 +180,11 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
                 break;
             case WHAT_CHAPTER:
                 mPageLoader.openChapter();
+                break;
+            case MSG_ONE:
+                money_time_sum++;
+                updateMoneyProgress();
+                mHandler.sendEmptyMessageDelayed(MSG_ONE, 1000);
                 break;
         }
     }
@@ -226,10 +245,20 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
         mSettingDialog = new ReadSettingDialog(this, mPageLoader);
 
         setUpAdapter();
-
+        setChangeListner();
         //夜间模式按钮的状态
         toggleNightMode();
-
+        /*** 抓取模式 ***/
+        mPageLoader.is_money_vp = SharedPreUtils.getInstance().getBoolean(Constant.MONEY_VP, false);
+        if (mPageLoader.is_money_vp) {
+            is_money_vp_tv.setVisibility(GONE);
+            money_vp.setVisibility(VISIBLE);
+            mHandler.sendEmptyMessageDelayed(MSG_ONE, 1000);
+        } else {
+            is_money_vp_tv.setVisibility(VISIBLE);
+            money_vp.setVisibility(GONE);
+        }
+        /*** 抓取模式 ***/
         //注册广播
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
@@ -258,7 +287,6 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
 
         //初始化TopMenu
         initTopMenu();
-
         //初始化BottomMenu
         initBottomMenu();
 
@@ -298,12 +326,11 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
 
             @Override
             public void onADLoaded(List<NativeExpressADView> list) {
-                Log.i("niqiao", "loaded");
+                Log.i("niqiao", "loaded ===== ");
                 NativeExpressADView nativeExpressADView = list.get(0);
                 nativeExpressADView.setId(R.id.nativeExpressAdId);
                 nativeExpressADView.render();
                 mAdView = nativeExpressADView;
-//                Log.i("niqiao", "loaded" + nativeExpressADView.getMeasuredHeight());
             }
 
             @Override
@@ -391,6 +418,9 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
         }
     }
 
+    /**
+     * 目录
+     */
     private void setUpAdapter() {
         mCategoryAdapter = new CategoryAdapter();
         mLvCategory.setAdapter(mCategoryAdapter);
@@ -688,11 +718,21 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
                     //设置为已收藏
                     isCollected = true;
                     //设置阅读时间
+                    mCollBook.setIsJoinAddBookSlef(false);
                     mCollBook.setLastRead(StringUtils.
                             dateConvert(System.currentTimeMillis(), Constant.FORMAT_BOOK_DATE));
 
                     BookRepository.getInstance()
                             .saveCollBookWithAsync(mCollBook);
+                } else {
+                    //表示当前CollBook已经阅读
+                    mCollBook.setIsUpdate(false);
+                    mCollBook.setIsJoinAddBookSlef(false);
+                    mCollBook.setLastRead(StringUtils.
+                            dateConvert(System.currentTimeMillis(), Constant.FORMAT_BOOK_DATE));
+                    //直接更新
+                    BookRepository.getInstance()
+                            .saveCollBook(mCollBook);
                 }
                 exit();
             }
@@ -719,6 +759,9 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
     @Override
     protected void onResume() {
         super.onResume();
+        if (mPageLoader.is_money_vp) {
+            mHandler.sendEmptyMessageDelayed(MSG_ONE, 1000);
+        }
         mWakeLock.acquire();
     }
 
@@ -726,6 +769,9 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
     protected void onPause() {
         super.onPause();
         mWakeLock.release();
+        if (mPageLoader.is_money_vp) {
+            mHandler.removeMessages(MSG_ONE);
+        }
         if (isCollected) {
             mPageLoader.saveRecord();
         }
@@ -774,6 +820,30 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
                 break;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    /**
+     * 金币Progress 监听
+     */
+    public void setChangeListner() {
+        money_vp.setOnCircularBarChangeListener(new OnCircularSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(CircularMusicProgressBar circularBar, int progress, boolean fromUser) {
+                if (progress == 100) {
+                    money_time_sum = 0;
+                }
+            }
+
+            @Override
+            public void onClick(CircularMusicProgressBar circularBar) {
+
+            }
+
+            @Override
+            public void onLongPress(CircularMusicProgressBar circularBar) {
+
+            }
+        });
     }
 
     @Override
@@ -872,7 +942,7 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
     }
 
 
-    @OnClick({R.id.read_tv_pre_chapter, R.id.read_sb_chapter_progress, R.id.read_tv_next_chapter, R.id.read_tv_category, R.id.read_tv_night_mode, R.id.read_tv_setting, R.id.read_ll_bottom_menu, R.id.read_tv_community, R.id.read_tv_brief})
+    @OnClick({R.id.read_tv_pre_chapter, R.id.read_sb_chapter_progress, R.id.read_tv_next_chapter, R.id.read_tv_category, R.id.read_tv_night_mode, R.id.read_tv_setting, R.id.read_ll_bottom_menu, R.id.read_tv_community, R.id.read_tv_brief, R.id.money_vp_rl})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.read_tv_pre_chapter:
@@ -915,6 +985,32 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
             case R.id.read_tv_brief:
                 BookDetailActivity.startActivity(this, mBookId);
                 break;
+            case R.id.money_vp_rl:
+                if (mPageLoader.is_money_vp) {
+                    is_money_vp_tv.setVisibility(VISIBLE);
+                    money_vp.setVisibility(GONE);
+                    SharedPreUtils.getInstance().putBoolean(Constant.MONEY_VP, false);
+                    mPageLoader.is_money_vp = false;
+                    ToastUtils.show("已关闭赚钱模式");
+                    mHandler.removeMessages(MSG_ONE);
+                    money_time_sum = 0;
+                } else {
+                    is_money_vp_tv.setVisibility(GONE);
+                    money_vp.setVisibility(VISIBLE);
+                    ToastUtils.show("已开启赚钱魔模式");
+                    mPageLoader.is_money_vp = true;
+                    SharedPreUtils.getInstance().putBoolean(Constant.MONEY_VP, true);
+                    mHandler.sendEmptyMessageDelayed(MSG_ONE, 1000);
+                }
+                break;
         }
     }
+
+    /**
+     * 刷新金币计时器
+     */
+    public void updateMoneyProgress() {
+        money_vp.setValue(money_time_sum * 1f);
+    }
+
 }

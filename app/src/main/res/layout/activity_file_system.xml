@@ -1,57 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:orientation="vertical">
-	<!--指示器-->
-	<include layout="@layout/scroll_title_indicator"/>
-	
-	<android.support.v4.view.ViewPager
-		android:id="@+id/tab_vp"
-		android:layout_width="match_parent"
-		android:layout_height="0dp"
-		android:layout_weight="1">
-	</android.support.v4.view.ViewPager>
-	
-	<!--文件点击按钮-->
-	<RelativeLayout
-		android:layout_width="match_parent"
-		android:layout_height="52dp"
-		android:paddingRight="10dp"
-		android:gravity="center_vertical">
-		
-		<CheckBox
-			android:id="@+id/file_system_cb_selected_all"
-			android:layout_width="120dp"
-			android:layout_height="40dp"
-			android:layout_centerVertical="true"
-			android:button="@drawable/selector_cb_file"
-			android:text="全选"
-			android:textColor="@color/selector_cb_file"/>
-		
-		<Button
-			android:id="@+id/file_system_btn_add_book"
-			android:layout_width="wrap_content"
-			android:layout_height="35dp"
-			android:minWidth="110dp"
-			android:layout_alignParentRight="true"
-			android:layout_centerVertical="true"
-			android:background="@drawable/selector_btn_add"
-			android:textColor="@color/selector_btn_file_add"
-			android:text="加入书架" />
-		
-		<Button
-			android:id="@+id/file_system_btn_delete"
-			android:layout_width="70dp"
-			android:layout_height="35dp"
-			android:layout_centerVertical="true"
-			android:layout_marginRight="15dp"
-			android:background="@drawable/selector_btn_delete"
-			android:textColor="@color/selector_btn_file_delete"
-			android:layout_toLeftOf="@id/file_system_btn_add_book"
-			android:text="删除"/>
-	</RelativeLayout>
-</LinearLayout>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/white"
+                android:contentInsetStart="0dp"
+                app:contentInsetStart="0dp"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+                <com.kaqi.niuniu.ireader.view.NormalTitleBar
+                    android:id="@+id/normaltitle_file"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></com.kaqi.niuniu.ireader.view.NormalTitleBar>
+
+            </android.support.v7.widget.Toolbar>
+
+            <com.flyco.tablayout.SlidingTabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/wh48.0dimens48.0dp"
+                android:background="@color/common_bg"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:paddingLeft="@dimen/wh10.0dimens10.0dp"
+                android:paddingRight="@dimen/wh10.0dimens10.0dp"
+                app:tl_indicator_corner_radius="2dp"
+                app:tl_indicator_height="@dimen/wh2.0dimens2.0dp"
+                app:tl_indicator_width_equal_title="true"
+                app:tl_tab_padding="@dimen/wh12.0dimens12.0dp"
+                app:tl_textBold="BOTH"
+                app:tl_textSelectColor="@color/yellow_30"
+                app:tl_textUnselectColor="@color/common_h1"
+                app:tl_textsize="16sp"
+                app:tl_underline_color="@color/white" />
+
+        </android.support.design.widget.AppBarLayout>
+
+
+        <com.kaqi.niuniu.ireader.view.NoScrollViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/wh54.0dimens54.0dp"
+            android:overScrollMode="never"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <!--文件点击按钮-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wh52.0dimens52.0dp"
+        android:layout_gravity="bottom"
+        android:gravity="center_vertical"
+        android:background="@color/white"
+        android:paddingRight="10dp">
+
+        <CheckBox
+            android:id="@+id/file_system_cb_selected_all"
+            android:layout_width="@dimen/wh120.0dimens120.0dp"
+            android:layout_height="@dimen/wh40.0dimens40.0dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/wh14.0dimens14.0dp"
+            android:button="@drawable/checkbox_style"
+            android:drawablePadding="@dimen/wh10.0dimens10.0dp"
+            android:text="全选"
+            android:textColor="@color/selector_cb_file" />
+
+        <Button
+            android:id="@+id/file_system_btn_add_book"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/selector_btn_add"
+            android:minWidth="110dp"
+            android:text="加入书架"
+            android:textColor="@color/selector_btn_file_add" />
+
+        <Button
+            android:id="@+id/file_system_btn_delete"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@id/file_system_btn_add_book"
+            android:background="@drawable/selector_btn_delete"
+            android:text="删除"
+            android:textColor="@color/selector_btn_file_delete" />
+    </RelativeLayout>
+</FrameLayout>

@@ -9,7 +9,7 @@ import com.kaqi.niuniu.ireader.model.local.update.Update2Helper;
 import org.greenrobot.greendao.database.Database;
 
 /**
- * Created by newbiechen on 2017/10/9.
+ * Created by Niqiao on 2019年07月16日11:16:14.
  */
 
 public class MyOpenHelper extends DaoMaster.DevOpenHelper {

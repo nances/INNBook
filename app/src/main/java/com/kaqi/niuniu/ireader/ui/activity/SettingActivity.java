@@ -30,10 +30,17 @@ import android.widget.TextView;
 
 import com.kaqi.niuniu.ireader.R;
 import com.kaqi.niuniu.ireader.ui.base.BaseActivity;
+import com.kaqi.niuniu.ireader.utils.BookManager;
+import com.kaqi.niuniu.ireader.utils.Constant;
+import com.kaqi.niuniu.ireader.utils.FileUtils;
+import com.kaqi.niuniu.ireader.utils.LogUtils;
 import com.kaqi.niuniu.ireader.utils.PermissionsChecker;
+import com.kaqi.niuniu.ireader.utils.SharedPreUtils;
 import com.kaqi.niuniu.ireader.utils.ToastUtils;
 import com.kaqi.niuniu.ireader.view.NormalTitleBar;
 import com.kaqi.niuniu.ireader.widget.textview.SuperTextView;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -85,7 +92,7 @@ public class SettingActivity extends BaseActivity {
                 finish();
                 break;
             case UPDATE_SIZE:
-                mTvCacheSize.setRightString(cacheSizeSt);
+                mTvCacheSize.setRightString(BookManager.getInstance().getCacheSize());
                 break;
         }
     }
@@ -101,12 +108,11 @@ public class SettingActivity extends BaseActivity {
     @Override
     protected void initData(Bundle savedInstanceState) {
         super.initData(savedInstanceState);
-
-
+        mHandler.sendEmptyMessageDelayed(UPDATE_SIZE, 200);
     }
 
 
-    @OnClick({R.id.action_synchronization_book, R.id.scan_local_book, R.id.wifi_book})
+    @OnClick({R.id.action_synchronization_book, R.id.scan_local_book, R.id.wifi_book, R.id.cleanCache})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.action_synchronization_book:
@@ -135,8 +141,40 @@ public class SettingActivity extends BaseActivity {
             case R.id.wifi_book:
                 WifiBookActivity.startActivity(this);
                 break;
+            case R.id.cleanCache:
+                clearCache();
+                break;
         }
     }
+
+
+    /**
+     * 清除缓存
+     *
+     * @param clearReadPos 是否删除阅读记录
+     */
+    public synchronized void clearCache() {
+        try {
+            // 删除内存缓存
+            String cacheDir = Constant.BOOK_CACHE_PATH;
+            FileUtils.deleteFileOrDirectory(new File(cacheDir));
+            if (FileUtils.isSdCardAvailable()) {
+                // 删除SD书籍缓存
+                FileUtils.deleteFileOrDirectory(new File(Constant.PATH_DATA));
+            }
+            // 删除阅读记录（SharePreference）
+            //防止再次弹出性别选择框，sp要重写入保存的性别
+
+            String chooseSex = SharedPreUtils.getInstance().getString(Constant.SHARED_SEX);
+            SharedPreUtils.getInstance()
+                    .putString(Constant.SHARED_SEX, chooseSex);
+            mHandler.sendEmptyMessageDelayed(UPDATE_SIZE,1000);
+        } catch (Exception e) {
+
+            LogUtils.e(e.toString());
+        }
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

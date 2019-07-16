@@ -45,6 +45,9 @@ public class BookShelfPresenter extends RxPresenter<BookShelfContract.View>
         DownloadTaskBean task = new DownloadTaskBean();
         task.setTaskName(collBookBean.getTitle());
         task.setBookId(collBookBean.get_id());
+        task.setBook_anchor(collBookBean.getAuthor());
+        task.setBook_cover(collBookBean.getCover());
+        task.setBook_info(collBookBean.getShortIntro());
         task.setBookChapters(collBookBean.getBookChapters());
         task.setLastChapter(collBookBean.getBookChapters().size());
 
@@ -58,7 +61,7 @@ public class BookShelfPresenter extends RxPresenter<BookShelfContract.View>
                 .getRecommendBooks(gender)
                 .doOnSuccess(new Consumer<List<CollBookBean>>() {
                     @Override
-                    public void accept(List<CollBookBean> collBooks) throws Exception{
+                    public void accept(List<CollBookBean> collBooks) throws Exception {
                         //更新目录
                         updateCategory(collBooks);
                         //异步存储到数据库中
@@ -90,13 +93,12 @@ public class BookShelfPresenter extends RxPresenter<BookShelfContract.View>
         List<CollBookBean> collBooks = new ArrayList<>(collBookBeans);
         List<Single<BookDetailBean>> observables = new ArrayList<>(collBooks.size());
         Iterator<CollBookBean> it = collBooks.iterator();
-        while (it.hasNext()){
+        while (it.hasNext()) {
             CollBookBean collBook = it.next();
             //删除本地文件
             if (collBook.isLocal()) {
                 it.remove();
-            }
-            else {
+            } else {
                 observables.add(RemoteRepository.getInstance()
                         .getBookDetail(collBook.get_id()));
             }
@@ -106,15 +108,14 @@ public class BookShelfPresenter extends RxPresenter<BookShelfContract.View>
             @Override
             public List<CollBookBean> apply(Object[] objects) throws Exception {
                 List<CollBookBean> newCollBooks = new ArrayList<CollBookBean>(objects.length);
-                for (int i=0; i<collBooks.size(); ++i){
+                for (int i = 0; i < collBooks.size(); ++i) {
                     CollBookBean oldCollBook = collBooks.get(i);
-                    CollBookBean newCollBook = ((BookDetailBean)objects[i]).getCollBookBean();
+                    CollBookBean newCollBook = ((BookDetailBean) objects[i]).getCollBookBean();
                     //如果是oldBook是update状态，或者newCollBook与oldBook章节数不同
                     if (oldCollBook.isUpdate() ||
-                            !oldCollBook.getLastChapter().equals(newCollBook.getLastChapter())){
+                            !oldCollBook.getLastChapter().equals(newCollBook.getLastChapter())) {
                         newCollBook.setUpdate(true);
-                    }
-                    else {
+                    } else {
                         newCollBook.setUpdate(false);
                     }
                     newCollBook.setLastRead(oldCollBook.getLastRead());
@@ -151,9 +152,9 @@ public class BookShelfPresenter extends RxPresenter<BookShelfContract.View>
     }
 
     //更新每个CollBook的目录
-    private void updateCategory(List<CollBookBean> collBookBeans){
+    private void updateCategory(List<CollBookBean> collBookBeans) {
         List<Single<List<BookChapterBean>>> observables = new ArrayList<>(collBookBeans.size());
-        for (CollBookBean bean : collBookBeans){
+        for (CollBookBean bean : collBookBeans) {
             observables.add(
                     RemoteRepository.getInstance().getBookChapters(bean.get_id())
             );
@@ -164,7 +165,7 @@ public class BookShelfPresenter extends RxPresenter<BookShelfContract.View>
                 .subscribe(
                         chapterList -> {
 
-                            for (BookChapterBean bean : chapterList){
+                            for (BookChapterBean bean : chapterList) {
                                 bean.setId(MD5Utils.strToMd5By16(bean.getLink()));
                             }
 

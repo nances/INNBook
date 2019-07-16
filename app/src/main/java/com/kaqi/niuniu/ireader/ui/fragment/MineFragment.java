@@ -6,10 +6,13 @@ import android.widget.TextView;
 
 import com.kaqi.niuniu.ireader.R;
 import com.kaqi.niuniu.ireader.ui.activity.AboutActivity;
+import com.kaqi.niuniu.ireader.ui.activity.DownloadActivity;
 import com.kaqi.niuniu.ireader.ui.activity.FeedbackActivity;
 import com.kaqi.niuniu.ireader.ui.activity.HelpActivity;
 import com.kaqi.niuniu.ireader.ui.activity.LoginActivity;
+import com.kaqi.niuniu.ireader.ui.activity.MessageActivity;
 import com.kaqi.niuniu.ireader.ui.activity.MoneyDetailedListActivity;
+import com.kaqi.niuniu.ireader.ui.activity.ReadBookHistoryActivity;
 import com.kaqi.niuniu.ireader.ui.activity.RegisterActivity;
 import com.kaqi.niuniu.ireader.ui.activity.SettingActivity;
 import com.kaqi.niuniu.ireader.ui.base.BaseFragment;
@@ -49,7 +52,7 @@ public class MineFragment extends BaseFragment {
 
 
     @OnClick({R.id.uc_setting_iv, R.id.uc_msg_iv, R.id.regisiter_tv, R.id.login_tv, R.id.uc_avater,
-            R.id.about_us, R.id.read_history, R.id.message_icon, R.id.feedback_stv, R.id.help_stv, R.id.money_detail_list})
+            R.id.about_us, R.id.read_history, R.id.message_icon, R.id.feedback_stv, R.id.help_stv, R.id.money_detail_list, R.id.downlaod_icon})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.uc_setting_iv:
@@ -70,10 +73,10 @@ public class MineFragment extends BaseFragment {
                 AboutActivity.startActivity(getActivity());
                 break;
             case R.id.read_history:
-//                ReadBookHistoryActivity.startActivity(getActivity());
+                ReadBookHistoryActivity.startActivity(getActivity());
                 break;
             case R.id.message_icon:
-
+                MessageActivity.startActivity(getActivity());
                 break;
             case R.id.feedback_stv:
                 FeedbackActivity.startActivity(getActivity());
@@ -83,6 +86,9 @@ public class MineFragment extends BaseFragment {
                 break;
             case R.id.money_detail_list:
                 MoneyDetailedListActivity.startActivity(getActivity());
+                break;
+            case R.id.downlaod_icon:
+                DownloadActivity.startActivity(getActivity());
                 break;
 
         }

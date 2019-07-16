@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stv="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_bg"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_toolbar" />
+
+    <com.kaqi.niuniu.ireader.widget.refresh.ScrollRefreshRecyclerView
+        android:id="@+id/book_shelf_rv_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/recommendRL"></com.kaqi.niuniu.ireader.widget.refresh.ScrollRefreshRecyclerView>
+
+</LinearLayout>

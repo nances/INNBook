@@ -66,6 +66,8 @@ public class CollBookBean implements Parcelable {
     private boolean isCheckBox = false;
 
     private boolean isCheckShow = false;
+    //是否加入书架，用来确认数据
+    private boolean isJoinAddBookSlef = true;
 
     @ToMany(referencedJoinProperty = "bookId")
     private List<BookChapterBean> bookChapterList;
@@ -80,10 +82,10 @@ public class CollBookBean implements Parcelable {
     @Generated(hash = 1552163441)
     private transient CollBookBeanDao myDao;
 
-    @Generated(hash = 288295580)
-    public CollBookBean(String _id, String title, String author, String shortIntro, String cover, boolean hasCp,
-            int latelyFollower, double retentionRatio, String updated, String lastRead, int chaptersCount,
-            String lastChapter, boolean isUpdate, boolean isLocal, boolean isTop, boolean isCheckBox, boolean isCheckShow) {
+    @Generated(hash = 2010842548)
+    public CollBookBean(String _id, String title, String author, String shortIntro, String cover, boolean hasCp, int latelyFollower,
+            double retentionRatio, String updated, String lastRead, int chaptersCount, String lastChapter, boolean isUpdate, boolean isLocal,
+            boolean isTop, boolean isCheckBox, boolean isCheckShow, boolean isJoinAddBookSlef) {
         this._id = _id;
         this.title = title;
         this.author = author;
@@ -101,6 +103,7 @@ public class CollBookBean implements Parcelable {
         this.isTop = isTop;
         this.isCheckBox = isCheckBox;
         this.isCheckShow = isCheckShow;
+        this.isJoinAddBookSlef = isJoinAddBookSlef;
     }
 
     public CollBookBean() {
@@ -379,6 +382,14 @@ public class CollBookBean implements Parcelable {
 
     public void setIsCheckShow(boolean isCheckShow) {
         this.isCheckShow = isCheckShow;
+    }
+
+    public boolean getIsJoinAddBookSlef() {
+        return this.isJoinAddBookSlef;
+    }
+
+    public void setIsJoinAddBookSlef(boolean isJoinAddBookSlef) {
+        this.isJoinAddBookSlef = isJoinAddBookSlef;
     }
 
     protected CollBookBean(Parcel in) {

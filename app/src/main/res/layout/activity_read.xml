@@ -4,21 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/read_dl_slide"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.ReadActivity"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/theme_leather_bg">
 
-        <!--阅读页面-->
-        <com.kaqi.niuniu.ireader.widget.page.PageView
-            android:id="@+id/read_pv_page"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            tools:visibility="gone" />
+            android:layout_height="match_parent">
+            <!--阅读页面-->
+            <com.kaqi.niuniu.ireader.widget.page.PageView
+                android:id="@+id/read_pv_page"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                tools:visibility="gone" />
 
+            <RelativeLayout
+                android:id="@+id/money_vp_rl"
+                android:layout_width="@dimen/wh74.0dimens74.0dp"
+                android:layout_height="@dimen/wh38.0dimens38.0dp"
+                android:layout_gravity="right">
+
+                <info.abdolahi.CircularMusicProgressBar
+                    android:id="@+id/money_vp"
+                    android:layout_width="@dimen/wh24.0dimens24.0dp"
+                    android:layout_height="@dimen/wh24.0dimens24.0dp"
+                    android:layout_marginTop="@dimen/wh8.0dimens8.0dp"
+                    android:layout_marginRight="@dimen/wh16.0dimens16.0dp"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/money_icon"
+                    app:border_color="#00796B"
+                    app:border_overlay="true"
+                    app:border_width="@dimen/wh3.0dimens3.0dp"
+                    app:centercircle_diammterer="1"
+                    app:draw_anticlockwise="true"
+                    app:progress_color="#FFD11B"
+                    android:visibility="gone"
+                    app:enable_touch="false"
+                    tools:visibility="visible"
+                    app:progress_startAngle="-90" />
+
+
+                <TextView
+                    android:id="@+id/is_money_vp_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:background="@drawable/shape_yellw30_shape4_bg"
+                    android:layout_marginRight="@dimen/wh6.0dimens6.0dp"
+                    android:padding="@dimen/wh1.0dimens1.0dp"
+                    android:text="开启赚钱模式"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+            </RelativeLayout>
+        </FrameLayout>
         <!--切换页面提示-->
         <TextView
             android:id="@+id/read_tv_page_tip"
@@ -29,10 +77,10 @@
             android:layout_marginBottom="10dp"
             android:background="@color/reader_menu_bg_color"
             android:gravity="center"
-            android:paddingBottom="8dp"
             android:paddingLeft="12dp"
-            android:paddingRight="12dp"
             android:paddingTop="8dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="8dp"
             android:text="1/12"
             android:textColor="@color/white"
             android:visibility="gone" />
@@ -44,7 +92,7 @@
             android:layout_height="wrap_content"
             android:background="@color/reader_menu_bg_color"
             android:visibility="gone"
-            tools:visibility="visible">
+            tools:visibility="gone">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -69,8 +117,8 @@
                         android:id="@+id/read_tv_community"
                         style="@style/NB.Theme.TextAppearance.Read.TopMenu"
                         android:layout_toLeftOf="@id/read_tv_brief"
-                        android:visibility="gone"
-                        android:text="@string/nb.read.community" />
+                        android:text="@string/nb.read.community"
+                        android:visibility="gone" />
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
@@ -128,8 +176,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
                 android:orientation="horizontal"
-                android:paddingBottom="12dp"
-                android:paddingTop="12dp">
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp">
 
                 <TextView
                     android:id="@+id/read_tv_category"
@@ -160,14 +208,14 @@
         android:background="@color/white"
         android:clickable="true"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/nb.padding.large"
-        android:paddingTop="@dimen/nb.padding.large">
+        android:paddingTop="@dimen/nb.padding.large"
+        android:paddingBottom="@dimen/nb.padding.large">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginLeft="15dp"
+            android:layout_marginBottom="8dp"
             android:text="目录"
             android:textColor="@color/common_h2"
             android:textSize="20sp" />
