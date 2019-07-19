@@ -29,6 +29,7 @@ public class ReadSettingManager {
     public static final String SHARED_READ_VOLUME_TURN_PAGE = "shared_read_volume_turn_page";
     public static final String SHARED_READ_FULL_SCREEN = "shared_read_full_screen";
     public static final String SHARED_READ_CONVERT_TYPE = "shared_read_convert_type";
+    public static final String SHARED_READ_TXT_STYLE_TYPE = "shared_read_txt_style_type";
 
     private static volatile ReadSettingManager sInstance;
 
@@ -79,6 +80,14 @@ public class ReadSettingManager {
 
     public int getBrightness() {
         return sharedPreUtils.getInt(SHARED_READ_BRIGHTNESS, 40);
+    }
+
+    public int getTxtStyle() {
+        return sharedPreUtils.getInt(SHARED_READ_TXT_STYLE_TYPE, 0);
+    }
+
+    public void setTxtStyle(int mtxtStlye) {
+        sharedPreUtils.putInt(SHARED_READ_TXT_STYLE_TYPE, mtxtStlye);
     }
 
     public boolean isBrightnessAuto() {

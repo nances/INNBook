@@ -12,7 +12,7 @@
         >
         <TextView
             android:id="@+id/item_days_money"
-            android:layout_width="@dimen/wh120.0dimens120.0dp"
+            android:layout_width="@dimen/wh84.0dimens84.0dp"
             android:layout_height="@dimen/wh36.0dimens36.0dp"
             android:gravity="center"
             android:padding="@dimen/wh2.5dimens2.5dp"
@@ -24,7 +24,7 @@
 
     <TextView
         android:id="@+id/ivSelected"
-        android:layout_width="@dimen/wh120.0dimens120.0dp"
+        android:layout_width="@dimen/wh84.0dimens84.0dp"
         android:layout_height="@dimen/wh36.0dimens36.0dp"
         android:layout_gravity="center"
         android:background="@drawable/btn_sign_day_selector"

@@ -14,6 +14,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
@@ -76,6 +77,20 @@ public class ReadSettingDialog extends Dialog {
     RecyclerView mRvBg;
     @BindView(R.id.read_setting_tv_more)
     TextView mTvMore;
+    @BindView(R.id.read_setting_text_defalue)
+    RadioButton readSettingTextDefalue;
+    @BindView(R.id.read_setting_text_shaonv)
+    RadioButton readSettingTextShaonv;
+    @BindView(R.id.read_setting_text_songti)
+    RadioButton readSettingTextSongti;
+    @BindView(R.id.read_setting_text_kati)
+    RadioButton readSettingTextKati;
+    @BindView(R.id.read_setting_text_youti)
+    RadioButton readSettingTextYouti;
+    @BindView(R.id.read_setting_text_style_mode)
+    RadioGroup readSettingTextStyleMode;
+    @BindView(R.id.read_setting_ll_menu)
+    LinearLayout readSettingLlMenu;
     /************************************/
     private PageStyleAdapter mPageStyleAdapter;
     private ReadSettingManager mSettingManager;
@@ -84,6 +99,7 @@ public class ReadSettingDialog extends Dialog {
 
     private PageMode mPageMode;
     private PageStyle mPageStyle;
+    private int mTxtStyle = 0;
 
     private int mBrightness;
     private int mTextSize;
@@ -128,6 +144,7 @@ public class ReadSettingDialog extends Dialog {
         isTextDefault = mSettingManager.isDefaultTextSize();
         mPageMode = mSettingManager.getPageMode();
         mPageStyle = mSettingManager.getPageStyle();
+        mTxtStyle = mSettingManager.getTxtStyle();
     }
 
     private void initWidget() {
@@ -136,6 +153,7 @@ public class ReadSettingDialog extends Dialog {
         mCbBrightnessAuto.setChecked(isBrightnessAuto);
         mCbFontDefault.setChecked(isTextDefault);
         initPageMode();
+        initTxtStyleMode();
         //RecyclerView
         setUpAdapter();
     }
@@ -173,6 +191,26 @@ public class ReadSettingDialog extends Dialog {
                 break;
             case SCROLL:
                 mRbScroll.setChecked(true);
+                break;
+        }
+    }
+
+    private void initTxtStyleMode() {
+        switch (mTxtStyle) {
+            case 0:
+                readSettingTextDefalue.setChecked(true);
+                break;
+            case 1:
+                readSettingTextShaonv.setChecked(true);
+                break;
+            case 2:
+                readSettingTextSongti.setChecked(true);
+                break;
+            case 3:
+                readSettingTextKati.setChecked(true);
+                break;
+            case 4:
+                readSettingTextYouti.setChecked(true);
                 break;
         }
     }
@@ -309,6 +347,30 @@ public class ReadSettingDialog extends Dialog {
                 }
         );
 
+        readSettingTextStyleMode.setOnCheckedChangeListener(
+                (group, checkedId) -> {
+                    int txtMode = 0;
+                    switch (checkedId) {
+                        case R.id.read_setting_text_defalue:
+                            txtMode = 0;
+                            break;
+                        case R.id.read_setting_text_shaonv:
+                            txtMode = 1;
+                            break;
+                        case R.id.read_setting_text_songti:
+                            txtMode = 2;
+                            break;
+                        case R.id.read_setting_text_kati:
+                            txtMode = 3;
+                            break;
+                        case R.id.read_setting_text_youti:
+                            txtMode = 4;
+                            break;
+                    }
+                    mSettingManager.setTxtStyle(txtMode);
+                    mPageLoader.setTextStyle(txtMode);
+                }
+        );
         //背景的点击事件
         mPageStyleAdapter.setOnItemClickListener(
                 (view, pos) -> mPageLoader.setPageStyle(PageStyle.values()[pos])

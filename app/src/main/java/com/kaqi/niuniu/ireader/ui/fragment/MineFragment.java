@@ -16,6 +16,8 @@ import com.kaqi.niuniu.ireader.ui.activity.ReadBookHistoryActivity;
 import com.kaqi.niuniu.ireader.ui.activity.RegisterActivity;
 import com.kaqi.niuniu.ireader.ui.activity.SettingActivity;
 import com.kaqi.niuniu.ireader.ui.base.BaseFragment;
+import com.kaqi.niuniu.ireader.utils.Constant;
+import com.kaqi.niuniu.ireader.utils.SharedPreUtils;
 import com.kaqi.niuniu.ireader.widget.textview.SuperTextView;
 
 import butterknife.BindView;
@@ -64,10 +66,11 @@ public class MineFragment extends BaseFragment {
                 RegisterActivity.startAction(getActivity());
                 break;
             case R.id.login_tv:
-                LoginActivity.startActivity(getActivity());
+                if("".equals(SharedPreUtils.getInstance().getString(Constant.UID))){
+                    LoginActivity.startActivity(getActivity());
+                }
                 break;
             case R.id.uc_avater:
-
                 break;
             case R.id.about_us:
                 AboutActivity.startActivity(getActivity());
@@ -76,6 +79,10 @@ public class MineFragment extends BaseFragment {
                 ReadBookHistoryActivity.startActivity(getActivity());
                 break;
             case R.id.message_icon:
+//                if("".equals(SharedPreUtils.getInstance().getString(Constant.UID))){
+//                    LoginActivity.startActivity(getActivity());
+//                }else{
+//                }
                 MessageActivity.startActivity(getActivity());
                 break;
             case R.id.feedback_stv:

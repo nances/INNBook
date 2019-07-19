@@ -28,15 +28,31 @@ public class ShareDialog {
         LinearLayout wechatMomentsBtn = contentView.findViewById(R.id.wechat_moments_btn);
         LinearLayout sinaBtn = contentView.findViewById(R.id.sina_btn);
         LinearLayout wechatBtn = contentView.findViewById(R.id.wechat_btn);
+        LinearLayout qqbtn = contentView.findViewById(R.id.qq_share_ll);
+        LinearLayout qqzonebtn = contentView.findViewById(R.id.qqzone_share_ll);
+
+
         Button cancelBtn = contentView.findViewById(R.id.cancel_btn);
         wechatMomentsBtn.setOnClickListener(view -> {
             shareUtils.shareToWechatMoments();
+            dialog.dismiss();
         });
         wechatBtn.setOnClickListener(view -> {
             shareUtils.shareToWechat();
+            dialog.dismiss();
         });
         sinaBtn.setOnClickListener(view -> {
             shareUtils.shareToSinaWeibo();
+            dialog.dismiss();
+        });
+        qqbtn.setOnClickListener(view -> {
+            shareUtils.shareToQQ();
+            dialog.dismiss();
+        });
+
+        qqzonebtn.setOnClickListener(view -> {
+            shareUtils.shareToQQZone();
+            dialog.dismiss();
         });
         cancelBtn.setOnClickListener(view -> {
             dialog.dismiss();

@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/coll_book_iv_cover"
-        android:layout_width="@dimen/wh28.0dimens28.0dp"
-        android:layout_height="@dimen/wh28.0dimens28.0dp"
+        android:layout_width="@dimen/wh24.0dimens24.0dp"
+        android:layout_height="@dimen/wh24.0dimens24.0dp"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:scaleType="fitXY"

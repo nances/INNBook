@@ -1,22 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?><LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/read_setting_ll_menu"
     android:layout_width="match_parent"
-    android:layout_height="280dp"
-    android:clickable="true"
+    android:layout_height="@dimen/wh338.0dimens338.0dp"
     android:layout_alignParentBottom="true"
     android:background="@color/reader_menu_bg_color"
+    android:clickable="true"
     android:orientation="vertical"
     android:paddingLeft="12dp"
     android:paddingRight="12dp">
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/nb.read_setting.divider"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:layout_marginTop="@dimen/nb.read_setting.divider">
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/read_setting_iv_brightness_minus"
@@ -44,36 +45,36 @@
             android:layout_marginRight="20dp"
             android:scaleType="center"
             android:src="@drawable/ic_brightness_plus" />
-        
+
         <CheckBox
             android:id="@+id/read_setting_cb_brightness_auto"
+            style="@style/NB.Theme.TextAppearance.Read.BottomMenu"
             android:layout_width="40dp"
             android:layout_height="35dp"
+            android:background="@drawable/selector_btn_read_setting"
+            android:button="@null"
             android:gravity="center"
             android:text="系统"
-            android:button="@null"
-            android:textColor="@color/selector_btn_read_setting"
-            android:background="@drawable/selector_btn_read_setting"
-            style="@style/NB.Theme.TextAppearance.Read.BottomMenu"/>
+            android:textColor="@color/selector_btn_read_setting" />
     </LinearLayout>
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/nb.read_setting.divider"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:layout_marginTop="@dimen/nb.read_setting.divider">
-        
+        android:orientation="horizontal">
+
         <TextView
             android:id="@+id/read_setting_tv_font_minus"
+            style="@style/NB.Theme.TextAppearance.Read.BottomMenu"
             android:layout_width="100dp"
             android:layout_height="@dimen/nb.read_setting.btn_height"
+            android:background="@drawable/shape_btn_read_setting_normal"
             android:gravity="center"
             android:text="Aa-"
-            android:textSize="14dp"
-            android:background="@drawable/shape_btn_read_setting_normal"
-            style="@style/NB.Theme.TextAppearance.Read.BottomMenu"/>
-        
+            android:textSize="14dp" />
+
         <TextView
             android:id="@+id/read_setting_tv_font"
             android:layout_width="0dp"
@@ -81,121 +82,216 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="15"
-            android:textSize="14dp"
-            android:textColor="@color/white"/>
-        
+            android:textColor="@color/white"
+            android:textSize="14dp" />
+
         <TextView
             android:id="@+id/read_setting_tv_font_plus"
+            style="@style/NB.Theme.TextAppearance.Read.BottomMenu"
             android:layout_width="100dp"
             android:layout_height="@dimen/nb.read_setting.btn_height"
             android:layout_marginRight="20dp"
+            android:background="@drawable/shape_btn_read_setting_normal"
             android:gravity="center"
             android:padding="5dp"
             android:text="Aa+"
-            android:textSize="18dp"
-            android:background="@drawable/shape_btn_read_setting_normal"
-            style="@style/NB.Theme.TextAppearance.Read.BottomMenu" />
-    
+            android:textSize="18dp" />
+
         <CheckBox
             android:id="@+id/read_setting_cb_font_default"
+            style="@style/NB.Theme.TextAppearance.Read.BottomMenu"
             android:layout_width="40dp"
             android:layout_height="@dimen/nb.read_setting.btn_height"
+            android:background="@drawable/selector_btn_read_setting"
+            android:button="@null"
             android:gravity="center"
             android:text="默认"
-            android:button="@null"
-            android:textColor="@color/selector_btn_read_setting"
-            android:background="@drawable/selector_btn_read_setting"
-            style="@style/NB.Theme.TextAppearance.Read.BottomMenu" />
+            android:textColor="@color/selector_btn_read_setting" />
     </LinearLayout>
-    
+
     <RadioGroup
         android:id="@+id/read_setting_rg_page_mode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="@dimen/nb.read_setting.divider">
-        
+        android:layout_marginTop="@dimen/nb.read_setting.divider"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/NB.Theme.TextAppearance.Read.BottomMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/wh14.0dimens14.0dp"
+            android:button="@null"
+            android:gravity="center"
+            android:text="翻页"
+            android:layout_gravity="center_vertical"
+            android:textSize="18sp" />
+
         <RadioButton
             android:id="@+id/read_setting_rb_simulation"
+            style="@style/NB.Theme.TextAppearance.Read.BottomMenu"
             android:layout_width="0dp"
             android:layout_height="@dimen/nb.read_setting.btn_height"
+            android:layout_marginRight="@dimen/wh14.0dimens14.0dp"
             android:layout_weight="1"
-            android:text="仿真"
-            android:textSize="14dp"
-            android:layout_marginRight="18dp"
-            android:gravity="center"
-            android:button="@null"
             android:background="@drawable/selector_btn_read_setting"
-            style="@style/NB.Theme.TextAppearance.Read.BottomMenu"/>
-        
+            android:button="@null"
+            android:gravity="center"
+            android:text="仿真"
+            android:textSize="14dp" />
+
         <RadioButton
             android:id="@+id/read_setting_rb_cover"
+            style="@style/NB.Theme.TextAppearance.Read.BottomMenu"
             android:layout_width="0dp"
             android:layout_height="@dimen/nb.read_setting.btn_height"
+            android:layout_marginRight="@dimen/wh14.0dimens14.0dp"
             android:layout_weight="1"
-            android:text="覆盖"
-            android:textSize="14dp"
-            android:gravity="center"
-            android:layout_marginRight="18dp"
-            android:button="@null"
             android:background="@drawable/selector_btn_read_setting"
-            style="@style/NB.Theme.TextAppearance.Read.BottomMenu"/>
-        
+            android:button="@null"
+            android:gravity="center"
+            android:text="覆盖"
+            android:textSize="14dp" />
+
         <RadioButton
             android:id="@+id/read_setting_rb_slide"
+            style="@style/NB.Theme.TextAppearance.Read.BottomMenu"
             android:layout_width="0dp"
             android:layout_height="@dimen/nb.read_setting.btn_height"
+            android:layout_marginRight="18dp"
             android:layout_weight="1"
+            android:background="@drawable/selector_btn_read_setting"
+            android:button="@null"
+            android:gravity="center"
             android:text="滑动"
             android:textSize="14dp"
-            android:gravity="center"
-            android:layout_marginRight="18dp"
-            android:button="@null"
-            android:background="@drawable/selector_btn_read_setting"
-            android:visibility="gone"
-            style="@style/NB.Theme.TextAppearance.Read.BottomMenu"/>
-    
+            android:visibility="gone" />
+
         <RadioButton
             android:id="@+id/read_setting_rb_scroll"
+            style="@style/NB.Theme.TextAppearance.Read.BottomMenu"
             android:layout_width="0dp"
-            android:layout_height="@dimen/nb.read_setting.btn_height"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/wh14.0dimens14.0dp"
             android:layout_weight="1"
-            android:text="滚动"
-            android:textSize="14dp"
-            android:gravity="center"
-            android:layout_marginRight="18dp"
-            android:button="@null"
             android:background="@drawable/selector_btn_read_setting"
-            style="@style/NB.Theme.TextAppearance.Read.BottomMenu"/>
-    
+            android:button="@null"
+            android:gravity="center"
+            android:text="滚动"
+            android:textSize="14dp" />
+
         <RadioButton
             android:id="@+id/read_setting_rb_none"
+            style="@style/NB.Theme.TextAppearance.Read.BottomMenu"
             android:layout_width="0dp"
             android:layout_height="@dimen/nb.read_setting.btn_height"
             android:layout_weight="1"
-            android:text="无"
-            android:textSize="14dp"
-            android:gravity="center"
-            android:button="@null"
             android:background="@drawable/selector_btn_read_setting"
-            style="@style/NB.Theme.TextAppearance.Read.BottomMenu"/>
+            android:button="@null"
+            android:gravity="center"
+            android:text="无"
+            android:textSize="14dp" />
     </RadioGroup>
-    
+
+    <RadioGroup
+        android:id="@+id/read_setting_text_style_mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/nb.read_setting.divider"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/NB.Theme.TextAppearance.Read.BottomMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/wh14.0dimens14.0dp"
+            android:button="@null"
+            android:gravity="center"
+            android:text="字体"
+            android:layout_gravity="center_vertical"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/read_setting_text_defalue"
+            style="@style/NB.Theme.TextAppearance.Read.BottomMenu"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/nb.read_setting.btn_height"
+            android:layout_marginRight="@dimen/wh14.0dimens14.0dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_read_setting"
+            android:button="@null"
+            android:gravity="center"
+            android:text="默认"
+            android:textSize="14dp" />
+
+        <RadioButton
+            android:id="@+id/read_setting_text_shaonv"
+            style="@style/NB.Theme.TextAppearance.Read.BottomMenu"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/nb.read_setting.btn_height"
+            android:layout_marginRight="@dimen/wh14.0dimens14.0dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_read_setting"
+            android:button="@null"
+            android:gravity="center"
+            android:text="少女"
+            android:textSize="14dp" />
+
+        <RadioButton
+            android:id="@+id/read_setting_text_songti"
+            style="@style/NB.Theme.TextAppearance.Read.BottomMenu"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/nb.read_setting.btn_height"
+            android:layout_marginRight="@dimen/wh14.0dimens14.0dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_read_setting"
+            android:button="@null"
+            android:gravity="center"
+            android:text="宋体"
+            android:textSize="14dp" />
+
+        <RadioButton
+            android:id="@+id/read_setting_text_kati"
+            style="@style/NB.Theme.TextAppearance.Read.BottomMenu"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/nb.read_setting.btn_height"
+            android:layout_marginRight="@dimen/wh14.0dimens14.0dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_read_setting"
+            android:button="@null"
+            android:gravity="center"
+            android:text="楷体"
+            android:textSize="14dp" />
+
+        <RadioButton
+            android:id="@+id/read_setting_text_youti"
+            style="@style/NB.Theme.TextAppearance.Read.BottomMenu"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/nb.read_setting.btn_height"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_read_setting"
+            android:button="@null"
+            android:gravity="center"
+            android:text="幼体"
+            android:textSize="14dp" />
+    </RadioGroup>
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/read_setting_rv_bg"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/wh40.0dimens40.0dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
         android:layout_marginTop="@dimen/nb.read_setting.divider"
+        android:layout_marginRight="5dp"
         android:scrollbars="none" />
-    
+
     <TextView
         android:id="@+id/read_setting_tv_more"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/wh40.0dimens40.0dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
         android:text="更多设置 >>"
-        android:textColor="@color/white"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="20dp"/>
+        android:textColor="@color/white" />
 </LinearLayout>

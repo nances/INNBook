@@ -14,8 +14,8 @@
         android:layout_height="@dimen/wh270.0dimens270.0dp">
 
         <ImageView
-            android:layout_width="@dimen/wh120.0dimens120.0dp"
-            android:layout_height="@dimen/wh120.0dimens120.0dp"
+            android:layout_width="@dimen/wh92.0dimens92.0dp"
+            android:layout_height="@dimen/wh92.0dimens92.0dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:src="@drawable/app_icon" />

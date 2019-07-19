@@ -19,7 +19,6 @@ import android.provider.Settings;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -47,6 +46,7 @@ import com.kaqi.niuniu.ireader.ui.dialog.ReadSettingDialog;
 import com.kaqi.niuniu.ireader.utils.BrightnessUtils;
 import com.kaqi.niuniu.ireader.utils.Constant;
 import com.kaqi.niuniu.ireader.utils.LogUtils;
+import com.kaqi.niuniu.ireader.utils.NetworkUtils;
 import com.kaqi.niuniu.ireader.utils.RxUtils;
 import com.kaqi.niuniu.ireader.utils.ScreenUtils;
 import com.kaqi.niuniu.ireader.utils.SharedPreUtils;
@@ -62,12 +62,16 @@ import com.qq.e.ads.nativ.ADSize;
 import com.qq.e.ads.nativ.NativeExpressAD;
 import com.qq.e.ads.nativ.NativeExpressADView;
 import com.qq.e.comm.util.AdError;
+import com.yirong.library.annotation.NetType;
+import com.yirong.library.annotation.NetworkListener;
+import com.yirong.library.utils.Constants;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import info.abdolahi.CircularMusicProgressBar;
 import info.abdolahi.OnCircularSeekBarChangeListener;
@@ -107,8 +111,6 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
     /*************top_menu_view*******************/
     @BindView(R.id.read_abl_top_menu)
     AppBarLayout mAblTopMenu;
-    @BindView(R.id.read_tv_community)
-    TextView mTvCommunity;
     @BindView(R.id.read_tv_brief)
     TextView mTvBrief;
     /***************content_view******************/
@@ -142,9 +144,15 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
     RelativeLayout money_vp_rl;
     @BindView(R.id.is_money_vp_tv)
     TextView is_money_vp_tv;
+    @BindView(R.id.net_tip)
+    TextView net_tip;
     /***************left slide*******************************/
     @BindView(R.id.read_iv_category)
     ListView mLvCategory;
+    @BindView(R.id.back_rl)
+    RelativeLayout backRl;
+    @BindView(R.id.book_title)
+    TextView bookTitle;
     /*****************view******************/
     private ReadSettingDialog mSettingDialog;
     private PageLoader mPageLoader;
@@ -165,7 +173,7 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
     private boolean isRegistered = false;
 
     private String mBookId;
-
+    public boolean isConnection = false;
 
     /***************Ad view *****************/
     private View mAdView;
@@ -215,21 +223,14 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
         isFullScreen = ReadSettingManager.getInstance().isFullScreen();
 
         mBookId = mCollBook.get_id();
-    }
-
-    @Override
-    protected void setUpToolbar(Toolbar toolbar) {
-        super.setUpToolbar(toolbar);
-        //设置标题
-        toolbar.setTitle(mCollBook.getTitle());
-        //半透明化StatusBar
-        SystemBarUtils.transparentStatusBar(this);
+        bookTitle.setText(mCollBook.getTitle());
+//        initMenuAnim();
     }
 
     @Override
     protected void initWidget() {
         super.initWidget();
-
+        SystemBarUtils.transparentStatusBar(this);
         // 如果 API < 18 取消硬件加速
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2
                 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -250,7 +251,7 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
         toggleNightMode();
         /*** 抓取模式 ***/
         mPageLoader.is_money_vp = SharedPreUtils.getInstance().getBoolean(Constant.MONEY_VP, false);
-        if (mPageLoader.is_money_vp) {
+        if (mPageLoader.is_money_vp && NetworkUtils.isConnected()) {
             is_money_vp_tv.setVisibility(GONE);
             money_vp.setVisibility(VISIBLE);
             mHandler.sendEmptyMessageDelayed(MSG_ONE, 1000);
@@ -580,12 +581,12 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
      * 默认是隐藏的
      */
     private void toggleMenu(boolean hideStatusBar) {
-        initMenuAnim();
+
 
         if (mAblTopMenu.getVisibility() == VISIBLE) {
             //关闭
-            mAblTopMenu.startAnimation(mTopOutAnim);
-            mLlBottomMenu.startAnimation(mBottomOutAnim);
+//            mAblTopMenu.startAnimation(mTopOutAnim);
+//            mLlBottomMenu.startAnimation(mBottomOutAnim);
             mAblTopMenu.setVisibility(GONE);
             mLlBottomMenu.setVisibility(GONE);
             mTvPageTip.setVisibility(GONE);
@@ -596,8 +597,8 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
         } else {
             mAblTopMenu.setVisibility(VISIBLE);
             mLlBottomMenu.setVisibility(VISIBLE);
-            mAblTopMenu.startAnimation(mTopInAnim);
-            mLlBottomMenu.startAnimation(mBottomInAnim);
+//            mAblTopMenu.startAnimation(mTopInAnim);
+//            mLlBottomMenu.startAnimation(mBottomInAnim);
 
             showSystemBar();
         }
@@ -612,8 +613,8 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
         mBottomInAnim = AnimationUtils.loadAnimation(this, R.anim.slide_bottom_in);
         mBottomOutAnim = AnimationUtils.loadAnimation(this, R.anim.slide_bottom_out);
         //退出的速度要快
-        mTopOutAnim.setDuration(200);
-        mBottomOutAnim.setDuration(200);
+        mTopOutAnim.setDuration(50);
+        mBottomOutAnim.setDuration(50);
     }
 
     @Override
@@ -942,7 +943,7 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
     }
 
 
-    @OnClick({R.id.read_tv_pre_chapter, R.id.read_sb_chapter_progress, R.id.read_tv_next_chapter, R.id.read_tv_category, R.id.read_tv_night_mode, R.id.read_tv_setting, R.id.read_ll_bottom_menu, R.id.read_tv_community, R.id.read_tv_brief, R.id.money_vp_rl})
+    @OnClick({R.id.read_tv_pre_chapter, R.id.read_sb_chapter_progress, R.id.read_tv_next_chapter, R.id.read_tv_category, R.id.read_tv_night_mode, R.id.read_tv_setting, R.id.read_ll_bottom_menu, R.id.read_tv_brief, R.id.money_vp_rl, R.id.back_rl})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.read_tv_pre_chapter:
@@ -992,6 +993,7 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
                     SharedPreUtils.getInstance().putBoolean(Constant.MONEY_VP, false);
                     mPageLoader.is_money_vp = false;
                     ToastUtils.show("已关闭赚钱模式");
+                    net_tip.setVisibility(GONE);
                     mHandler.removeMessages(MSG_ONE);
                     money_time_sum = 0;
                 } else {
@@ -1003,7 +1005,83 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
                     mHandler.sendEmptyMessageDelayed(MSG_ONE, 1000);
                 }
                 break;
+            case R.id.back_rl:
+                finish();
+                break;
         }
+    }
+
+    //网络监听
+    @NetworkListener(type = NetType.WIFI)
+    public void netork(@NetType String type) {
+        switch (type) {
+            case NetType.AUTO:
+                resumeReadBookVpMoney(true);
+                Log.i(Constants.TAG, "AUTO");
+                break;
+            case NetType.CMNET:
+                resumeReadBookVpMoney(true);
+                Log.i(Constants.TAG, "CMNET");
+                break;
+            case NetType.CMWAP:
+                resumeReadBookVpMoney(true);
+                Log.i(Constants.TAG, "CMWAP");
+                break;
+            case NetType.WIFI:
+                resumeReadBookVpMoney(true);
+                Log.i(Constants.TAG, "WIFI");
+                break;
+            case NetType.NONE:
+                Log.i(Constants.TAG, "NONE");
+                resumeReadBookVpMoney(false);
+                break;
+        }
+    }
+
+
+    //网络监听
+    @NetworkListener(type = NetType.WIFI)
+    public void netorkListen(@NetType String type) {
+        switch (type) {
+            case NetType.AUTO:
+                resumeReadBookVpMoney(true);
+                Log.i(Constants.TAG, "AUTO*");
+                break;
+            case NetType.CMNET:
+                resumeReadBookVpMoney(true);
+                Log.i(Constants.TAG, "CMNET*");
+                break;
+            case NetType.CMWAP:
+                resumeReadBookVpMoney(true);
+                Log.i(Constants.TAG, "CMWAP*");
+                break;
+            case NetType.WIFI:
+                resumeReadBookVpMoney(true);
+                Log.i(Constants.TAG, "WIFI*");
+                break;
+            case NetType.NONE:
+                resumeReadBookVpMoney(false);
+                Log.i(Constants.TAG, "NONE*");
+                break;
+        }
+    }
+
+    /**
+     * 网络监听变化 阅读赚钱模式
+     */
+    public void resumeReadBookVpMoney(boolean isConnection) {
+        mHandler.removeMessages(MSG_ONE);
+        this.isConnection = isConnection;
+        if (mPageLoader.is_money_vp && isConnection) {
+            //开启
+            net_tip.setVisibility(GONE);
+            mHandler.sendEmptyMessageDelayed(MSG_ONE, 1000);
+        } else {
+            //关闭
+            net_tip.setVisibility(VISIBLE);
+            mHandler.removeMessages(MSG_ONE);
+        }
+
     }
 
     /**
@@ -1013,4 +1091,10 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
         money_vp.setValue(money_time_sum * 1f);
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

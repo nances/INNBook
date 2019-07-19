@@ -40,6 +40,7 @@ import com.kaqi.niuniu.ireader.presenter.contract.BookShelfContract;
 import com.kaqi.niuniu.ireader.ui.activity.BookCatalogActivity;
 import com.kaqi.niuniu.ireader.ui.activity.FileSystemActivity;
 import com.kaqi.niuniu.ireader.ui.activity.ReadActivity;
+import com.kaqi.niuniu.ireader.ui.activity.ReadBookHistoryActivity;
 import com.kaqi.niuniu.ireader.ui.activity.SearchActivity;
 import com.kaqi.niuniu.ireader.ui.activity.WifiBookActivity;
 import com.kaqi.niuniu.ireader.ui.adapter.CollBookAdapter;
@@ -559,7 +560,7 @@ public class RecommendFragment extends BaseMVPFragment<BookShelfContract.Present
                 ShowBatchBookManagement();
                 break;
             case R.id.read_book_rl:
-//                ReadBookHistoryActivity.startActivity(getActivity());
+                ReadBookHistoryActivity.startActivity(getActivity());
                 break;
             case R.id.tvSelectAll:
                 selectAll();

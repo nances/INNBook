@@ -10,9 +10,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
+import com.gyf.barlibrary.ImmersionBar;
+import com.gyf.barlibrary.OSUtils;
 import com.kaqi.niuniu.ireader.R;
 import com.kaqi.niuniu.ireader.utils.StatusBarCompat;
+import com.yirong.library.manager.NetworkManager;
 
 import java.lang.ref.WeakReference;
 
@@ -60,6 +64,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void dispatchHandler(Message msg) {
 
     }
+
     /**
      * 初始化零件
      */
@@ -87,7 +92,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getContentId());
         unbinder = ButterKnife.bind(this);
         mHandler = new BaseHandler(this);
+        Log.v("Nancys","class is value :" + this.getClass().getSimpleName());
+        ImmersionBar.with(this)
+                .statusBarDarkFont(true, 0.2f) //原理：如果当前设备支持状态栏字体变色，会设置状态栏字体为黑色，如果当前设备不支持状态栏字体变色，会使当前状态栏加上透明度，否则不执行透明度
+                .init();
+
         initData(savedInstanceState);
+        //注册广播
+        NetworkManager.getDefault().registerObserver(this);
         initToolbar();
         initWidget();
         initClick();
@@ -104,6 +116,18 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // 非必加
+        // 如果你的app可以横竖屏切换，适配了华为emui3系列系统手机，并且navigationBarWithEMUI3Enable为true，
+        // 请在onResume方法里添加这句代码（同时满足这三个条件才需要加上代码哦：1、横竖屏可以切换；2、华为emui3系列系统手机；3、navigationBarWithEMUI3Enable为true）
+        // 否则请忽略
+        if (OSUtils.isEMUI3_x()) {
+            ImmersionBar.with(this).init();
+        }
+    }
+
 
     @Override
     protected void onDestroy() {
@@ -115,6 +139,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (mHandler != null) {
             mHandler.removeCallbacksAndMessages(null);
         }
+        //注销目标广播
+        NetworkManager.getDefault().unRegisterObserver(this);
+        ImmersionBar.with(this).destroy(); //必须调用该方法，防止内存泄漏
+
     }
 
     /**************************used method area*******************************************/

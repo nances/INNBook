@@ -142,7 +142,8 @@ public abstract class PageLoader {
     private int mBatteryLevel;
     //当前页面的背景
     private int mBgColor;
-
+    //字体
+    private int mTxtStyle = 0;
     boolean isGoNextPage = false;
 
     //记录是否偶数页
@@ -162,7 +163,6 @@ public abstract class PageLoader {
         mContext = pageView.getContext();
         mCollBook = collBook;
         mChapterList = new ArrayList<>(1);
-
         // 初始化数据
         initData();
         // 初始化画笔
@@ -171,6 +171,7 @@ public abstract class PageLoader {
         initPageView();
         // 初始化书籍
         prepareBook();
+
     }
 
     private void initData() {
@@ -237,6 +238,7 @@ public abstract class PageLoader {
 
         // 初始化页面样式
         setNightMode(mSettingManager.isNightMode());
+        setTextStyle(ReadSettingManager.getInstance().getTxtStyle());
     }
 
     private void initPageView() {
@@ -457,6 +459,46 @@ public abstract class PageLoader {
     }
 
     /**
+     * 字体 调整
+     */
+    public void setTextStyle(int txtMode) {
+        mTxtStyle = txtMode;
+        selectText(txtMode);
+        // 重新绘制当前页
+        mPageView.drawCurPage(false);
+    }
+
+    Typeface typeface;
+
+    public void selectText(int mode) {
+        String font = "";
+        switch (mode) {
+            case 0:
+                font = "fonts/ImpactMTStd.otf";
+                break;
+            case 1:
+                font = "fonts/hkshaonv.ttf";
+                break;
+            case 2:
+                font = "fonts/hwzhongsong.ttf";
+                break;
+            case 3:
+                font = "fonts/kaiti.ttf";
+                break;
+            case 4:
+                font = "fonts/youyuan.ttf";
+                break;
+            case 5:
+                font = "";
+                break;
+            default:
+                break;
+        }
+        typeface = Typeface.createFromAsset(mContext.getAssets(), font);
+        mTextPaint.setTypeface(typeface);
+    }
+
+    /**
      * 翻页动画
      *
      * @param pageMode:翻页模式
@@ -471,6 +513,7 @@ public abstract class PageLoader {
         // 重新绘制当前页
         mPageView.drawCurPage(false);
     }
+
 
     /**
      * 设置内容与屏幕的间距
@@ -1362,7 +1405,7 @@ public abstract class PageLoader {
                         pages.add(page);
 
                         //为下一页创建广告配置
-                        if(is_money_vp){
+                        if (is_money_vp) {
                             adConfig = createAdConfig(pages.size() + 1);
                         }
                         // 重置Lines

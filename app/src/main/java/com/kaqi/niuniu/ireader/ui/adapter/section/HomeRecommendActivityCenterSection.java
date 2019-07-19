@@ -65,7 +65,7 @@ public class HomeRecommendActivityCenterSection extends StatelessSection {
         Glide.with(getContext())
                 .load(Uri.parse(activitys.get(0).getCover()))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .transform(new GlideRoundTransform(mContext, 6))
+                .transform(new GlideRoundTransform(mContext, 4))
                 .dontAnimate()
                 .into(centerViewHolder.ivBookCover);
         centerViewHolder.tv_anchor.setText(activitys.get(0).getTitle());
@@ -91,8 +91,8 @@ public class HomeRecommendActivityCenterSection extends StatelessSection {
         TextView tvBookListInfo;
         @BindView(R.id.AnchorTv)
         TextView tv_anchor;
-        @BindView(R.id.tvWordCount)
-        TextView tvWordCount;
+//        @BindView(R.id.tvWordCount)
+//        TextView tvWordCount;
         @BindView(R.id.tvSerializeWordCount)
         TextView tvSerializeWordCount;
 

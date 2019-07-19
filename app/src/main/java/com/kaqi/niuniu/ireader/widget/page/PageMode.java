@@ -1,7 +1,7 @@
 package com.kaqi.niuniu.ireader.widget.page;
 
 /**
- * Created by newbiechen on 2018/2/5.
+ * Created by niqiao on 2018/2/5.
  * 作用：翻页动画的模式
  */
 

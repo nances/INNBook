@@ -16,8 +16,8 @@
                 <size android:height="3dp" />
 
                 <gradient
-                    android:endColor="@color/orange"
-                    android:startColor="@color/orange" />
+                    android:endColor="@color/yellow_30"
+                    android:startColor="@color/yellow_30" />
             </shape>
         </clip>
     </item>

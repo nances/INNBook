@@ -7,6 +7,7 @@ import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.sina.weibo.SinaWeibo;
 import cn.sharesdk.tencent.qq.QQ;
+import cn.sharesdk.tencent.qzone.QZone;
 import cn.sharesdk.wechat.friends.Wechat;
 import cn.sharesdk.wechat.moments.WechatMoments;
 
@@ -54,7 +55,7 @@ public class ShareUtils {
         platform.share(params);
     }
 
-    private void shareToQQ() {
+    public void shareToQQ() {
         QQ.ShareParams params = new QQ.ShareParams();
         params.setShareType(QQ.SHARE_WEBPAGE);
         params.setTitle(shareContent.title);
@@ -63,6 +64,18 @@ public class ShareUtils {
         params.setUrl(shareContent.url);
         Platform platform = ShareSDK.getPlatform(QQ.NAME);
         platform.share(params);
+    }
+
+    public void shareToQQZone() {
+        QZone.ShareParams params = new QZone.ShareParams();
+        params.setShareType(QZone.SHARE_WEBPAGE);
+        params.setTitle(shareContent.title);
+        params.setText(shareContent.text);
+        params.setImageUrl(shareContent.imageUrl);
+        params.setUrl(shareContent.url);
+        Platform platform = ShareSDK.getPlatform(QZone.NAME);
+        platform.share(params);
+
     }
 
 

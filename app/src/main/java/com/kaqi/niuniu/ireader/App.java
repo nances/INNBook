@@ -13,6 +13,7 @@ import com.kaqi.niuniu.ireader.utils.push.ReaderPushService;
 import com.mob.MobSDK;
 import com.squareup.leakcanary.LeakCanary;
 import com.umeng.commonsdk.UMConfigure;
+import com.yirong.library.manager.NetworkManager;
 
 /**
  * Created by niqiao on 17-4-15.
@@ -31,6 +32,7 @@ public class App extends Application {
         PushManager.getInstance().registerPushIntentService(this, ReaderIntentService.class);
         sInstance = this;
         AppUtils.init(this);
+        NetworkManager.getDefault().init(this);
         // 初始化内存分析工具
         if (!LeakCanary.isInAnalyzerProcess(this)) {
             LeakCanary.install(this);

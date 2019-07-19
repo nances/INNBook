@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.gyf.barlibrary.ImmersionBar;
 import com.kaqi.niuniu.ireader.R;
 import com.kaqi.niuniu.ireader.model.bean.BookDetailBean;
 import com.kaqi.niuniu.ireader.model.bean.BookListBean;
@@ -29,6 +30,7 @@ import com.kaqi.niuniu.ireader.utils.StringUtils;
 import com.kaqi.niuniu.ireader.utils.ToastUtils;
 import com.kaqi.niuniu.ireader.widget.RefreshLayout;
 import com.kaqi.niuniu.ireader.widget.itemdecoration.DividerItemDecoration;
+import com.yuyh.easyadapter.glide.GlideRoundTransform;
 
 import java.util.List;
 
@@ -121,6 +123,14 @@ public class BookDetailActivity extends BaseMVPActivity<BookDetailContract.Prese
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        commonToolbar.setBackVisibility(true);
+        ImmersionBar.with(this)
+                .statusBarView(R.id.top_view)
+                .navigationBarColor(R.color.colorPrimary)
+                .fitsSystemWindows(true)
+                .fullScreen(true)
+                .statusBarDarkFont(true, 0.2f) //原理：如果当前设备支持状态栏字体变色，会设置状态栏字体为黑色，如果当前设备不支持状态栏字体变色，会使当前状态栏加上透明度，否则不执行透明度
+                .addTag("PicAndColor")
+                .init();
     }
 
     @Override
@@ -137,6 +147,7 @@ public class BookDetailActivity extends BaseMVPActivity<BookDetailContract.Prese
                 .load(Constant.IMG_BASE_URL + bean.getCover())
                 .placeholder(R.drawable.ic_book_loading)
                 .error(R.drawable.ic_load_error)
+                .transform(new GlideRoundTransform(this,4))
                 .centerCrop()
                 .into(mIvCover);
 

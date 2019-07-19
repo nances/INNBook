@@ -5,8 +5,7 @@
     android:id="@+id/read_dl_slide"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.ReadActivity"
-    >
+    tools:context=".ui.activity.ReadActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -26,43 +25,54 @@
 
             <RelativeLayout
                 android:id="@+id/money_vp_rl"
-                android:layout_width="@dimen/wh74.0dimens74.0dp"
+                android:layout_width="@dimen/wh86.0dimens86.0dp"
                 android:layout_height="@dimen/wh38.0dimens38.0dp"
                 android:layout_gravity="right">
+
+                <TextView
+                    android:id="@+id/net_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="9dp"
+                    android:paddingTop="@dimen/wh4.0dimens4.0dp"
+                    android:text="网络异常，暂停赚钱模式"
+                    android:textSize="7dp"
+                    android:visibility="gone" />
 
                 <info.abdolahi.CircularMusicProgressBar
                     android:id="@+id/money_vp"
                     android:layout_width="@dimen/wh24.0dimens24.0dp"
                     android:layout_height="@dimen/wh24.0dimens24.0dp"
-                    android:layout_marginTop="@dimen/wh8.0dimens8.0dp"
-                    android:layout_marginRight="@dimen/wh16.0dimens16.0dp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/wh12.0dimens12.0dp"
+                    android:layout_marginRight="@dimen/wh14.0dimens14.0dp"
                     android:src="@drawable/money_icon"
+                    android:visibility="gone"
                     app:border_color="#00796B"
                     app:border_overlay="true"
                     app:border_width="@dimen/wh3.0dimens3.0dp"
                     app:centercircle_diammterer="1"
                     app:draw_anticlockwise="true"
-                    app:progress_color="#FFD11B"
-                    android:visibility="gone"
                     app:enable_touch="false"
-                    tools:visibility="visible"
-                    app:progress_startAngle="-90" />
+                    app:progress_color="#FFD11B"
+                    app:progress_startAngle="-90"
+                    tools:visibility="visible" />
 
 
                 <TextView
                     android:id="@+id/is_money_vp_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="right"
-                    android:background="@drawable/shape_yellw30_shape4_bg"
                     android:layout_marginRight="@dimen/wh6.0dimens6.0dp"
-                    android:padding="@dimen/wh1.0dimens1.0dp"
+                    android:background="@drawable/shape_yellw30_shape4_bg"
+                    android:padding="@dimen/wh3.0dimens3.0dp"
                     android:text="开启赚钱模式"
                     android:textColor="@color/white"
-                    android:textSize="10sp"
-                    android:layout_centerVertical="true"
+                    android:textSize="8sp"
                     android:visibility="gone"
                     tools:visibility="visible" />
             </RelativeLayout>
@@ -92,19 +102,45 @@
             android:layout_height="wrap_content"
             android:background="@color/reader_menu_bg_color"
             android:visibility="gone"
-            tools:visibility="gone">
+            tools:visibility="visible">
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+            <RelativeLayout
+                android:id="@+id/toolbar_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="?attr/actionBarSize"
-                android:theme="@style/Theme.ToolBar.Menu">
+                android:background="@color/reader_menu_bg_color">
 
                 <RelativeLayout
-                    android:layout_width="120dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="right"
+                    android:id="@+id/back_rl"
+                    android:layout_width="@dimen/wh50.0dimens50.0dp"
+                    android:layout_height="@dimen/wh50.0dimens50.0dp"
+                    android:layout_alignParentLeft="true"
+                    android:background="@color/reader_menu_bg_color">
+
+                    <ImageView
+                        android:layout_width="@dimen/wh32.0dimens32.0dp"
+                        android:layout_height="@dimen/wh32.0dimens32.0dp"
+                        android:layout_centerVertical="true"
+                        android:padding="@dimen/wh8.0dimens8.0dp"
+                        android:layout_marginLeft="@dimen/wh14.0dimens14.0dp"
+                        android:src="@drawable/ic_search_back_normal" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/book_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/back_rl"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+
+                    tools:text="@string/app_name" />
+
+                <RelativeLayout
+                    android:layout_width="@dimen/wh120.0dimens120.0dp"
+                    android:layout_height="@dimen/wh50.0dimens50.0dp"
+                    android:layout_alignParentRight="true"
                     android:background="@color/reader_menu_bg_color">
 
                     <TextView
@@ -112,15 +148,8 @@
                         style="@style/NB.Theme.TextAppearance.Read.TopMenu"
                         android:layout_alignParentRight="true"
                         android:text="@string/nb.read.brief" />
-
-                    <TextView
-                        android:id="@+id/read_tv_community"
-                        style="@style/NB.Theme.TextAppearance.Read.TopMenu"
-                        android:layout_toLeftOf="@id/read_tv_brief"
-                        android:text="@string/nb.read.community"
-                        android:visibility="gone" />
                 </RelativeLayout>
-            </android.support.v7.widget.Toolbar>
+            </RelativeLayout>
         </android.support.design.widget.AppBarLayout>
 
         <!--底部页面-->
@@ -138,7 +167,7 @@
             <!--页面进度栏-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="@dimen/wh60.0dimens60.0dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 

@@ -66,7 +66,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="37dp"
-                        android:text=""
+                        android:text="NULL"
                         android:textColor="@color/black"
                         android:textSize="17sp" />
 
@@ -278,6 +278,5 @@
                 stv:sLeftIconRes="@drawable/about_mine_icon"
                 stv:sLeftTextString="关于" />
         </LinearLayout>
-
     </LinearLayout>
 </com.kaqi.niuniu.ireader.widget.ReboundScrollView>

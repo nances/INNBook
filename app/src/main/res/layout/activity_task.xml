@@ -9,37 +9,30 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
         android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wh48.0dimens48.0dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="福利中心"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/wh132.0dimens132.0dp"
-                android:background="@color/yellow_30"></RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/wh48.0dimens48.0dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:text="福利中心"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/wh182.0dimens182.0dp"
                 android:layout_marginLeft="@dimen/wh14.0dimens14.0dp"
-                android:layout_marginTop="@dimen/wh64.0dimens64.0dp"
                 android:layout_marginRight="@dimen/wh14.0dimens14.0dp"
                 android:layout_marginBottom="@dimen/wh20.0dimens20.0dp"
                 android:background="@drawable/shape_white_bg"

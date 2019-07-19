@@ -45,7 +45,7 @@ public class ActivityCenterRecyclerAdapter extends AbsRecyclerViewAdapter {
                 Glide.with(getContext())
                         .load(Uri.parse(activitys.get(position + 1).getCover()))
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .transform(new GlideRoundTransform(mContext, 6))
+                        .transform(new GlideRoundTransform(mContext, 4))
                         .dontAnimate()
                         .into(itemViewHolder.bookImg);
             }

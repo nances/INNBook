@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/ivRecommendCover"
-            android:layout_width="@dimen/wh82.0dimens82.0dp"
-            android:layout_height="@dimen/wh116.0dimens116.0dp"
+            android:layout_width="@dimen/wh72.0dimens72.0dp"
+            android:layout_height="@dimen/wh104.0dimens104.0dp"
             android:layout_alignParentLeft="true"
             android:contentDescription="@null"
             android:scaleType="fitXY"/>

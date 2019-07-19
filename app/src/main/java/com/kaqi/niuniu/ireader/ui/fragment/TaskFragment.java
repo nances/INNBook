@@ -2,11 +2,13 @@ package com.kaqi.niuniu.ireader.ui.fragment;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.gyf.barlibrary.ImmersionBar;
 import com.kaqi.niuniu.ireader.R;
 import com.kaqi.niuniu.ireader.RxBus;
 import com.kaqi.niuniu.ireader.event.TaskShareEvent;
@@ -64,6 +66,16 @@ public class TaskFragment extends BaseFragment {
                 signDaysAdapter.select(position);
             }
         });
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+//        ImmersionBar.with(this)
+//                .navigationBarColorTransform(R.color.yellow_30)
+//                .statusBarDarkFont(true, 0.2f) //原理：如果当前设备支持状态栏字体变色，会设置状态栏字体为黑色，如果当前设备不支持状态栏字体变色，会使当前状态栏加上透明度，否则不执行透明度
+//                .init();
+
     }
 
     /**

@@ -5,12 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import com.gyf.barlibrary.ImmersionBar;
 import com.kaqi.niuniu.ireader.R;
 import com.kaqi.niuniu.ireader.ui.base.BaseActivity;
 import com.kaqi.niuniu.ireader.utils.NetworkUtils;
@@ -42,10 +42,16 @@ public class WifiBookActivity extends BaseActivity {
     TextView tvRetry;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         commonToolbar.setTitleText("WiFi传书");
         commonToolbar.setBackVisibility(true);
+        ImmersionBar.with(this)
+                .fitsSystemWindows(true)
+                .fullScreen(true)
+                .statusBarDarkFont(true, 0.2f) //原理：如果当前设备支持状态栏字体变色，会设置状态栏字体为黑色，如果当前设备不支持状态栏字体变色，会使当前状态栏加上透明度，否则不执行透明度
+                .init();
+
     }
 
     @Override

@@ -8,7 +8,7 @@ import com.kaqi.niuniu.ireader.R;
 import com.kaqi.niuniu.ireader.ui.base.adapter.ViewHolderImpl;
 
 /**
- * Created by newbiechen on 17-5-19.
+ * Created by niqiao on 17-5-19.
  */
 
 public class PageStyleHolder extends ViewHolderImpl<Drawable> {

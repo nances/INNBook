@@ -10,7 +10,7 @@
     <solid android:color="@color/yellow_30" />
 
     <corners
-        android:bottomLeftRadius="@dimen/wh2.0dimens2.0dp"
+        android:radius="@dimen/wh2.0dimens2.0dp"
         ></corners>
 
 </shape>

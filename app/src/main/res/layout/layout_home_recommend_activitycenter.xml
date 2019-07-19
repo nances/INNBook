@@ -29,7 +29,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/wh10.0dimens10.0dp"
+        android:layout_marginLeft="@dimen/wh10.0dimens10.0dp"
+        android:layout_marginRight="@dimen/wh10.0dimens10.0dp"
         android:background="@drawable/shape_white_bg"
         android:orientation="vertical">
 
@@ -48,8 +49,8 @@
 
                 <ImageView
                     android:id="@+id/ivBookCover"
-                    android:layout_width="@dimen/wh82.0dimens82.0dp"
-                    android:layout_height="@dimen/wh116.0dimens116.0dp"
+                    android:layout_width="@dimen/wh72.0dimens72.0dp"
+                    android:layout_height="@dimen/wh104.0dimens104.0dp"
                     android:layout_alignParentLeft="true"
                     android:contentDescription="@null"
                     android:scaleType="fitXY"/>
@@ -57,7 +58,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/wh116.0dimens116.0dp"
+                android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/ivBookCoverCardView">
 
                 <TextView
@@ -71,7 +72,7 @@
                     android:singleLine="true"
                     android:text="武侠世界自由行"
                     android:textColor="@color/common_h1"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -84,8 +85,8 @@
                     android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
                     android:maxLines="3"
                     android:text="剑无止境！梦醒时分！情非得已！雄霸天下又如何？江山美人，鱼与熊掌？长生不老，老而不死是为贼？独孤无双，唯吾不败……"
-                    android:textColor="@color/common_h3"
-                    android:textSize="14sp" />
+                    android:textColor="@color/common_h2"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/AnchorTv"
@@ -100,25 +101,27 @@
                     android:paddingTop="@dimen/wh6.0dimens6.0dp"
                     android:singleLine="true"
                     android:text="  仙侠  "
-                    android:textColor="@color/common_h1"
-                    android:textSize="14sp" />
+                    android:textColor="@color/common_h2"
+                    android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/tvWordCount"
+                    android:id="@+id/tvBookCat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvBookListAuthor"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentBottom="true"
+                    android:layout_below="@id/tvBookListInfo"
+                    android:layout_marginTop="@dimen/wh14.0dimens14.0dp"
+                    android:paddingLeft="@dimen/wh4.0dimens4.0dp"
+                    android:paddingRight="@dimen/wh4.0dimens4.0dp"
+                    android:paddingTop="@dimen/wh2.0dimens2.0dp"
+                    android:paddingBottom="@dimen/wh2.0dimens2.0dp"
+                    android:layout_marginRight="@dimen/wh4.0dimens4.0dp"
+                    android:background="@drawable/shape_tag_recommend_yellow30_cat"
                     android:ellipsize="end"
-                    android:lineSpacingExtra="1dp"
-                    android:lineSpacingMultiplier="1.1"
-                    android:paddingTop="@dimen/wh6.0dimens6.0dp"
+                    android:layout_alignParentRight="true"
                     android:singleLine="true"
-                    android:text="594万字"
-                    android:visibility="gone"
+                    android:text="现代都市"
                     android:textColor="@color/common_h2"
-                    android:textSize="14sp" />
+                    android:textSize="8sp" />
 
 
                 <LinearLayout
