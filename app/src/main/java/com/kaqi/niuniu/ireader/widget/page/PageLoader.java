@@ -10,7 +10,6 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
 import android.text.TextPaint;
-import android.view.View;
 import android.widget.FrameLayout;
 
 import com.kaqi.niuniu.ireader.App;
@@ -154,9 +153,6 @@ public abstract class PageLoader {
     //上一章的记录
     private int mLastChapterPos = 0;
     public boolean is_money_vp = false;
-    //广告技术
-    List<View> adViewList = new ArrayList<>();
-
     /*****************************init params*******************************/
     public PageLoader(PageView pageView, CollBookBean collBook) {
         mPageView = pageView;
@@ -786,9 +782,6 @@ public abstract class PageLoader {
 
     private void drawBackground(Bitmap bitmap, boolean isUpdate) {
         Canvas canvas = new Canvas(bitmap);
-        if (mCurPage == null) {
-            return;
-        }
         int tipMarginHeight = ScreenUtils.dpToPx(3);
         if (!isUpdate) {
             /****绘制背景****/
@@ -931,7 +924,7 @@ public abstract class PageLoader {
                         }
                         break;
                     case TxtPage.VALUE_STRING_COVER_TYPE:
-                        mPageView.drawCoverPage(bitmap);
+//                        mPageView.drawCoverPage(bitmap);
                         break;
                 }
             }
@@ -1143,7 +1136,7 @@ public abstract class PageLoader {
 
         mCancelPage = mCurPage;
         // 解析下一章数据
-        if (parseNextChapter() && !mCurPageList.isEmpty()) {
+        if (parseNextChapter()) {
             mCurPage = mCurPageList.get(0);
         } else {
             mCurPage = new TxtPage();

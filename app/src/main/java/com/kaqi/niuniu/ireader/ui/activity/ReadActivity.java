@@ -249,7 +249,7 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
         setChangeListner();
         //夜间模式按钮的状态
         toggleNightMode();
-        /*** 抓取模式 ***/
+        /*** 赚钱模式 ***/
         mPageLoader.is_money_vp = SharedPreUtils.getInstance().getBoolean(Constant.MONEY_VP, false);
         if (mPageLoader.is_money_vp && NetworkUtils.isConnected()) {
             is_money_vp_tv.setVisibility(GONE);
@@ -259,7 +259,7 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
             is_money_vp_tv.setVisibility(VISIBLE);
             money_vp.setVisibility(GONE);
         }
-        /*** 抓取模式 ***/
+        /*** 赚钱模式 ***/
         //注册广播
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
@@ -719,7 +719,7 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
                     //设置为已收藏
                     isCollected = true;
                     //设置阅读时间
-                    mCollBook.setIsJoinAddBookSlef(false);
+                    mCollBook.setIsJoinAddBookSlef(true);
                     mCollBook.setLastRead(StringUtils.
                             dateConvert(System.currentTimeMillis(), Constant.FORMAT_BOOK_DATE));
 
@@ -1089,12 +1089,5 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
      */
     public void updateMoneyProgress() {
         money_vp.setValue(money_time_sum * 1f);
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }
