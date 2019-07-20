@@ -1,46 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
-	android:background="@drawable/selector_common_bg"
-	android:padding="10dp">
-	
-	<ImageView
-		android:id="@+id/search_book_iv_cover"
-		android:layout_width="45dp"
-		android:layout_height="60dp"
-		android:layout_alignParentLeft="true"
-		android:layout_centerVertical="true"
-		android:src="@drawable/ic_book_loading"
-		android:scaleType="centerCrop" />
-	
-	<RelativeLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_centerVertical="true"
-		android:layout_marginLeft="10dp"
-		android:layout_toRightOf="@+id/search_book_iv_cover">
-		
-		<TextView
-			style="@style/NB.Theme.TextAppearance.Common.SingleLine"
-			android:id="@+id/search_book_tv_name"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginBottom="10dp"
-			android:textColor="@color/black"
-			android:textSize="16sp"
-			tools:text="武侠世界自由行"/>
-		
-		<TextView
-			android:id="@+id/search_book_tv_brief"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_below="@id/search_book_tv_name"
-			android:ellipsize="end"
-			android:singleLine="true"
-			android:text="@string/nb.search.book.brief"
-			android:textColor="@color/common_h2"
-			android:textSize="13sp" />
-	</RelativeLayout>
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_common_bg"
+    android:padding="10dp">
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/ivRecommendCover"
+        android:layout_width="@dimen/wh64.0dimens64.0dp"
+        android:layout_height="@dimen/wh88.0dimens88.0dp"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="4dp">
+
+        <ImageView
+            android:id="@+id/search_book_iv_cover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_book_loading" />
+
+    </android.support.v7.widget.CardView>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/wh10.0dimens10.0dp"
+        android:layout_toRightOf="@+id/ivRecommendCover"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/search_book_tv_name"
+            style="@style/text_style_Spacing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxEms="15"
+            android:maxLines="1"
+            android:textColor="@color/common_h1"
+            android:textSize="16sp"
+            tools:text="逆鳞" />
+
+        <TextView
+            android:id="@+id/search_book_tv_brief"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/search_book_tv_name"
+            android:layout_marginTop="@dimen/wh14.0dimens14.0dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/nb.search.book.brief"
+            android:textColor="@color/common_h2"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvBookListAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/search_book_tv_brief"
+            android:layout_marginTop="@dimen/wh14.0dimens14.0dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="大江入海著"
+            android:textColor="@color/common_h2"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvBookCat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/search_book_tv_brief"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/wh14.0dimens14.0dp"
+            android:layout_marginRight="@dimen/wh4.0dimens4.0dp"
+            android:background="@drawable/shape_tag_recommend_yellow30_cat"
+            android:ellipsize="end"
+            android:paddingLeft="@dimen/wh4.0dimens4.0dp"
+            android:paddingTop="@dimen/wh2.0dimens2.0dp"
+            android:paddingRight="@dimen/wh4.0dimens4.0dp"
+            android:paddingBottom="@dimen/wh2.0dimens2.0dp"
+            android:singleLine="true"
+            android:text="现代都市"
+            android:textColor="@color/common_h2"
+            android:textSize="8sp" />
+    </RelativeLayout>
 </RelativeLayout>

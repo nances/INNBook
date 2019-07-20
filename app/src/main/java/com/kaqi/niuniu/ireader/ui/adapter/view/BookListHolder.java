@@ -8,10 +8,8 @@ import com.kaqi.niuniu.ireader.R;
 import com.kaqi.niuniu.ireader.model.bean.BookListBean;
 import com.kaqi.niuniu.ireader.ui.base.adapter.ViewHolderImpl;
 import com.kaqi.niuniu.ireader.utils.Constant;
+import com.yuyh.easyadapter.glide.GlideRoundTransform;
 
-/**
- * Created by newbiechen on 17-5-1.
- */
 
 public class BookListHolder extends ViewHolderImpl<BookListBean> {
 
@@ -46,6 +44,8 @@ public class BookListHolder extends ViewHolderImpl<BookListBean> {
                 .placeholder(R.drawable.ic_default_portrait)
                 .error(R.drawable.ic_load_error)
                 .fitCenter()
+                .dontAnimate()
+                .transform(new GlideRoundTransform(getContext(), 4))
                 .into(mIvPortrait);
         updateTime.setText("");
         //书单名

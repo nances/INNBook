@@ -7,10 +7,6 @@ import com.kaqi.niuniu.ireader.ui.adapter.view.BookListHolder;
 import com.kaqi.niuniu.ireader.ui.base.adapter.IViewHolder;
 import com.kaqi.niuniu.ireader.widget.adapter.WholeAdapter;
 
-/**
- * Created by newbiechen on 17-5-1.
- */
-
 public class BookListAdapter extends WholeAdapter<BookListBean> {
     public BookListAdapter() {
     }

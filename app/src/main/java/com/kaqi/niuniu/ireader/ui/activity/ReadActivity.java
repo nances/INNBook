@@ -71,7 +71,6 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import info.abdolahi.CircularMusicProgressBar;
 import info.abdolahi.OnCircularSeekBarChangeListener;
@@ -86,7 +85,7 @@ import static android.view.View.VISIBLE;
  */
 
 public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
-        implements ReadContract.View {
+        implements ReadContract.View, NativeExpressAD.NativeExpressADListener {
     private static final String TAG = "ReadActivity";
     public static final int REQUEST_MORE_SETTING = 1;
     public static final String EXTRA_COLL_BOOK = "extra_coll_book";
@@ -317,63 +316,8 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
      * 加载广告
      */
     private void requestAd() {
-        NativeExpressAD nativeAd = new NativeExpressAD(this,
-                new ADSize(ADSize.FULL_WIDTH, ADSize.AUTO_HEIGHT),
-                "1101152570", "7030020348049331", new NativeExpressAD.NativeExpressADListener() {
-            @Override
-            public void onNoAD(AdError adError) {
-                Log.i("niqiao", "noAd:" + adError.getErrorMsg());
-            }
 
-            @Override
-            public void onADLoaded(List<NativeExpressADView> list) {
-                Log.i("niqiao", "loaded ===== ");
-                NativeExpressADView nativeExpressADView = list.get(0);
-                nativeExpressADView.setId(R.id.nativeExpressAdId);
-                nativeExpressADView.render();
-                mAdView = nativeExpressADView;
-            }
-
-            @Override
-            public void onRenderFail(NativeExpressADView nativeExpressADView) {
-
-            }
-
-            @Override
-            public void onRenderSuccess(NativeExpressADView nativeExpressADView) {
-
-            }
-
-            @Override
-            public void onADExposure(NativeExpressADView nativeExpressADView) {
-
-            }
-
-            @Override
-            public void onADClicked(NativeExpressADView nativeExpressADView) {
-
-            }
-
-            @Override
-            public void onADClosed(NativeExpressADView nativeExpressADView) {
-
-            }
-
-            @Override
-            public void onADLeftApplication(NativeExpressADView nativeExpressADView) {
-
-            }
-
-            @Override
-            public void onADOpenOverlay(NativeExpressADView nativeExpressADView) {
-
-            }
-
-            @Override
-            public void onADCloseOverlay(NativeExpressADView nativeExpressADView) {
-
-            }
-        });
+        nativeAd = new NativeExpressAD(this, new ADSize(ADSize.FULL_WIDTH, ADSize.AUTO_HEIGHT), "1101152570", "7030020348049331", this); // 传入Activity
         nativeAd.setVideoOption(new VideoOption.Builder()
                 .setAutoPlayPolicy(VideoOption.AutoPlayPolicy.ALWAYS) // 设置什么网络环境下可以自动播放视频
                 .setAutoPlayMuted(true) // 设置自动播放视频时，是否静音
@@ -799,6 +743,9 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
         EventBus.getDefault().unregister(this);
         mPageLoader.closeBook();
         mPageLoader = null;
+        if (nativeExpressADView != null) {
+            nativeExpressADView.destroy();
+        }
         if (mAdView != null) {
             mAdView = null;
         }
@@ -1089,5 +1036,64 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
      */
     public void updateMoneyProgress() {
         money_vp.setValue(money_time_sum * 1f);
+    }
+
+    @Override
+    public void onADLoaded(List<NativeExpressADView> list) {
+
+
+        if (nativeExpressADView != null) {
+            nativeExpressADView.destroy();
+        }
+        nativeExpressADView = list.get(0);
+        nativeExpressADView.setId(R.id.nativeExpressAdId);
+        nativeExpressADView.render();
+        mAdView = nativeExpressADView;
+        Log.i("niqiao", "loaded ===== " + mAdView);
+    }
+
+    @Override
+    public void onRenderFail(NativeExpressADView nativeExpressADView) {
+        Log.i("niqiao", "onRenderFail ===== " + nativeExpressADView.toString());
+    }
+
+    @Override
+    public void onRenderSuccess(NativeExpressADView nativeExpressADView) {
+
+    }
+
+    @Override
+    public void onADExposure(NativeExpressADView nativeExpressADView) {
+
+    }
+
+    @Override
+    public void onADClicked(NativeExpressADView nativeExpressADView) {
+
+    }
+
+    @Override
+    public void onADClosed(NativeExpressADView nativeExpressADView) {
+
+    }
+
+    @Override
+    public void onADLeftApplication(NativeExpressADView nativeExpressADView) {
+
+    }
+
+    @Override
+    public void onADOpenOverlay(NativeExpressADView nativeExpressADView) {
+
+    }
+
+    @Override
+    public void onADCloseOverlay(NativeExpressADView nativeExpressADView) {
+
+    }
+
+    @Override
+    public void onNoAD(AdError adError) {
+        Log.i("niqiao", "adError ===== " + adError.getErrorMsg());
     }
 }

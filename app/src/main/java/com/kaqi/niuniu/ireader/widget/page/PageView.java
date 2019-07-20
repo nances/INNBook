@@ -450,7 +450,6 @@ public class PageView extends FrameLayout {
             return true;
         } else {
             mAdView = mReaderAdListener.getAdView();
-
             Log.v("NancysAdview", " ======" + mAdView);
             mReaderAdListener.onRequestAd();
         }

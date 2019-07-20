@@ -8,22 +8,21 @@ import com.kaqi.niuniu.ireader.R;
 import com.kaqi.niuniu.ireader.model.bean.packages.SearchBookPackage;
 import com.kaqi.niuniu.ireader.ui.base.adapter.ViewHolderImpl;
 import com.kaqi.niuniu.ireader.utils.Constant;
-
-/**
- * Created by newbiechen on 17-6-2.
- */
+import com.yuyh.easyadapter.glide.GlideRoundTransform;
 
 public class SearchBookHolder extends ViewHolderImpl<SearchBookPackage.BooksBean> {
 
     private ImageView mIvCover;
     private TextView mTvName;
     private TextView mTvBrief;
+    private TextView mAnchor;
 
     @Override
     public void initView() {
         mIvCover = findById(R.id.search_book_iv_cover);
         mTvName = findById(R.id.search_book_tv_name);
         mTvBrief = findById(R.id.search_book_tv_brief);
+        mAnchor = findById(R.id.tvBookListAuthor);
     }
 
     @Override
@@ -33,12 +32,13 @@ public class SearchBookHolder extends ViewHolderImpl<SearchBookPackage.BooksBean
                 .load(Constant.IMG_BASE_URL + data.getCover())
                 .placeholder(R.drawable.ic_book_loading)
                 .error(R.drawable.ic_load_error)
+                .transform(new GlideRoundTransform(getContext(), 4))
                 .into(mIvCover);
 
         mTvName.setText(data.getTitle());
-
+        mAnchor.setText(data.getAuthor());
         mTvBrief.setText(getContext().getString(R.string.nb_search_book_brief,
-                data.getLatelyFollower(),data.getRetentionRatio(),data.getAuthor()));
+                data.getLatelyFollower(), data.getRetentionRatio()));
     }
 
     @Override

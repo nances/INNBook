@@ -9,7 +9,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
 
         manifestPlaceholders = [
@@ -141,8 +141,6 @@ repositories {
 }
 
 dependencies {
-
-    api files('libs/GDTUnionSDK.4.19.574.min.jar')
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -151,36 +149,40 @@ dependencies {
     implementation "com.android.support:design:$rootProject.supportLibraryVersion"
     implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     implementation "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
+
     // View injection
     implementation "com.jakewharton:butterknife:$rootProject.butterknifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterknifeVersion"
+
     // RxJava
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjavaVersion"
+
     // NetWork
     implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
     implementation "com.squareup.okio:okio:$rootProject.okioVersion"
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
+
     // ImageLoader
     implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+
     // ORM Database
     implementation "org.greenrobot:greendao:$rootProject.greendaoVersion"
     testImplementation "junit:junit:$rootProject.junitVersion"
 
     // OpenCC to convert Simp. Chinese to Trad. Chinese
-    implementation "com.zqc.opencc.android.lib:lib-opencc-android:0.8.0@aar"
+    implementation 'com.zqc.opencc.android.lib:lib-opencc-android:0.8.0@aar'
 
     // AndroidTagGroup
     implementation 'me.gujun.android.taggroup:library:1.4@aar'
+
     // Android Leak Analysis
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
-
     implementation 'q.rorbin:VerticalTabLayout:1.2.5'
     implementation 'com.youth.banner:banner:1.4.10'
-
     implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
     implementation 'com.umeng.umsdk:analytics:8.0.0'
     implementation 'com.umeng.umsdk:common:2.0.0'
@@ -193,4 +195,5 @@ dependencies {
     implementation 'com.github.aliab:circular-music-progressbar:v1.4.0'
     compile project(path: ':library')
     implementation 'com.gyf.immersionbar:immersionbar:2.3.3'
+    implementation files('libs/gdt_mob_release.jar')
 }

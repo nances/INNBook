@@ -23,7 +23,7 @@ public class FindFragment extends BaseTabFragment {
     @BindView(R.id.tabs)
     SlidingTabLayout tabs;
     ArrayList<Fragment> fragments = new ArrayList<>();
-    private String[] titles = new String[]{"推荐", "男主", "女主"};
+    private String[] titles = new String[]{"精选", "男主", "女主"};
 
     public static FindFragment newInstance() {
         return new FindFragment();

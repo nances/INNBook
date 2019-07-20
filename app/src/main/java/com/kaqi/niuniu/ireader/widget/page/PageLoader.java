@@ -10,6 +10,7 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
 import android.text.TextPaint;
+import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.kaqi.niuniu.ireader.App;
@@ -980,11 +981,14 @@ public abstract class PageLoader {
 
     public void setAdCanvasView(Canvas canvas, float top) {
         //绘制广告
+        Log.v("niqiao", " === setAdCanvasView ===" + mPageView.mAdView);
         FrameLayout adContainer = AdProvider.getInstance().getAdContainer(mContext, mCurPage.adConfigBean, (int) (top - mTextPaint.getTextSize()), DisplayUtil.dp2px(mContext, 5), mPageView.mAdView);
         canvas.translate(adContainer.getLeft(), adContainer.getTop());
+        adContainer.buildDrawingCache();
         canvas.save();
         adContainer.draw(canvas);
         canvas.restore();
+        adContainer.requestLayout();
     }
 
     private float drawTexts(Canvas canvas, float top, int interval, int para, int startLine, int endLine) {

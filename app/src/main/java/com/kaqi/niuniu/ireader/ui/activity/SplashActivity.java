@@ -22,7 +22,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * Created by newbiechen on 17-4-14.
+ * Created by niqiao on .
  */
 
 public class SplashActivity extends BaseActivity {

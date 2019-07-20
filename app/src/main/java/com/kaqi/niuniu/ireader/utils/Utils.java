@@ -1,6 +1,8 @@
 package com.kaqi.niuniu.ireader.utils;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -52,6 +54,7 @@ public class Utils {
         }
         return true;
     }
+
     /**
      * 判断是否是纯数字的密码
      */
@@ -103,16 +106,41 @@ public class Utils {
 
     /**
      * 生成一个startNum 到 endNum之间的随机数(不包含endNum的随机数)
+     *
      * @param startNum
      * @param endNum
      * @return
      */
-    public static int getNum(int startNum,int endNum){
-        if(endNum > startNum){
+    public static int getNum(int startNum, int endNum) {
+        if (endNum > startNum) {
             Random random = new Random();
             return random.nextInt(endNum - startNum) + startNum;
         }
         return 0;
     }
 
+    public static int packageCode(Context context) {
+        PackageManager manager = context.getPackageManager();
+        int code = 0;
+        try {
+            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+            code = info.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return code;
+    }
+
+    public static String packageName(Context context) {
+        PackageManager manager = context.getPackageManager();
+        String name = null;
+        try {
+            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+            name = info.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return name;
+    }
 }
