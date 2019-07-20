@@ -31,8 +31,11 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="right"
 			android:background="@drawable/shape_yellw30_shape4_bg"
-			android:padding="@dimen/wh1.0dimens1.0dp"
-			android:text="已更新"
+			android:paddingTop="@dimen/wh1.0dimens1.0dp"
+			android:paddingBottom="@dimen/wh1.0dimens1.0dp"
+			android:paddingLeft="@dimen/wh2.0dimens2.0dp"
+			android:paddingRight="@dimen/wh2.0dimens2.0dp"
+			android:gravity="center_vertical"			android:text="已更新"
 			android:textColor="@color/white"
 			android:textSize="10sp"
 			android:visibility="gone"
@@ -113,6 +116,26 @@
 			android:layout_alignParentRight="true"
 			android:singleLine="true"
 			android:text="现代都市"
+			android:textColor="@color/common_h2"
+			android:textSize="8sp" />
+
+
+		<TextView
+			android:id="@+id/tvBookTxtSize"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/coll_book_tv_chapter"
+			android:layout_marginTop="@dimen/wh14.0dimens14.0dp"
+			android:layout_marginRight="@dimen/wh4.0dimens4.0dp"
+			android:layout_toLeftOf="@id/tvBookCat"
+			android:background="@drawable/shape_tag_recommend_red_total"
+			android:ellipsize="end"
+			android:paddingLeft="@dimen/wh4.0dimens4.0dp"
+			android:paddingTop="@dimen/wh2.0dimens2.0dp"
+			android:paddingRight="@dimen/wh4.0dimens4.0dp"
+			android:paddingBottom="@dimen/wh2.0dimens2.0dp"
+			android:singleLine="true"
+			android:text="12.3万"
 			android:textColor="@color/common_h2"
 			android:textSize="8sp" />
 	</RelativeLayout>

@@ -3,9 +3,11 @@
     android:id="@+id/home_recommended_banner"
     android:layout_width="match_parent"
     android:layout_height="@dimen/wh92.0dimens92.0dp"
+    android:layout_marginLeft="@dimen/wh10.0dimens10.0dp"
+    android:layout_marginTop="@dimen/wh10.0dimens10.0dp"
+    android:layout_marginRight="@dimen/wh10.0dimens10.0dp"
     android:background="@drawable/shape_white_bg"
     android:padding="@dimen/wh10.0dimens10.0dp"
-    android:layout_margin="@dimen/wh10.0dimens10.0dp"
     android:weightSum="4">
 
     <LinearLayout

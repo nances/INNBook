@@ -73,7 +73,7 @@
             android:background="@drawable/shape_btn_read_setting_normal"
             android:gravity="center"
             android:text="Aa-"
-            android:textSize="14dp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/read_setting_tv_font"
@@ -95,7 +95,7 @@
             android:gravity="center"
             android:padding="5dp"
             android:text="Aa+"
-            android:textSize="18dp" />
+            android:textSize="16sp" />
 
         <CheckBox
             android:id="@+id/read_setting_cb_font_default"

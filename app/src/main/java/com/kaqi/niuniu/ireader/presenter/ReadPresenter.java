@@ -26,7 +26,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by newbiechen on 17-5-16.
+ * Created by niqiao on 2019年07月20日19:54:53.
  */
 
 public class ReadPresenter extends RxPresenter<ReadContract.View>

@@ -28,7 +28,7 @@ import io.reactivex.Single;
 import retrofit2.Retrofit;
 
 /**
- * Created by newbiechen on 17-4-20.
+ * Created by niqiao on 17-4-20.
  */
 
 public class RemoteRepository {
@@ -57,14 +57,20 @@ public class RemoteRepository {
 
     public static RemoteRepository getInstance() {
         sInstance = null;
-        if (sInstance == null) {
-            synchronized (RemoteHelper.class) {
-                if (sInstance == null) {
-                    sInstance = new RemoteRepository();
+//        if (NetworkUtils.isWifiProxy(AppUtils.getAppContext())) {
+//            ToastUtils.show("请关闭代理... 谢谢");
+//        } else {
+
+            if (sInstance == null) {
+                synchronized (RemoteHelper.class) {
+                    if (sInstance == null) {
+                        sInstance = new RemoteRepository();
+                    }
                 }
             }
-        }
-        return sInstance;
+            return sInstance;
+//        }
+//        return null;
     }
 
     public static RemoteRepository getInstance(String url) {
@@ -98,6 +104,7 @@ public class RemoteRepository {
         return mBookApi.getRecommendBookSelf()
                 .map(bean -> bean);
     }
+
     /**
      * 书架推荐
      *
@@ -117,6 +124,7 @@ public class RemoteRepository {
         return mBookApi.getRanking()
                 .map(bean -> bean);
     }
+
     /**
      * 书架推荐
      *
@@ -126,8 +134,6 @@ public class RemoteRepository {
         return mBookApi.getRanking(id)
                 .map(bean -> bean);
     }
-
-
 
 
     public Single<List<BookChapterBean>> getBookChapters(String bookId) {

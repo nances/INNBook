@@ -4,6 +4,6 @@
     android:id="@+id/recyclerview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/common_bg"
+    android:background="@color/grey_050"
     android:foregroundGravity="center"
     android:layerType="software"/>

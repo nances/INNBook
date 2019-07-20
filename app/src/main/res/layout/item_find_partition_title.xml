@@ -2,20 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/common_bg"
-    android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
-    android:layout_marginBottom="@dimen/wh6.0dimens6.0dp"
-    android:orientation="vertical">
+    android:layout_marginTop="@dimen/wh10.0dimens10.0dp"
+    android:orientation="horizontal">
+
+    <View
+        android:layout_width="@dimen/wh4.0dimens4.0dp"
+        android:layout_height="@dimen/wh26.0dimens26.0dp"
+        android:background="@color/yellow_30" />
 
     <TextView
         android:id="@+id/title_tv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/wh26.0dimens26.0dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/wh14.0dimens14.0dp"
+
         android:gravity="center_vertical"
         android:text="每日推荐"
         android:textColor="@color/common_h1"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textSize="16sp" />
 </LinearLayout>

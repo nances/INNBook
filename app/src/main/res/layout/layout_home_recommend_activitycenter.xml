@@ -6,11 +6,17 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/wh48.0dimens48.0dp"
-        android:paddingStart="@dimen/wh14.0dimens14.0dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:paddingEnd="@dimen/wh14.0dimens14.0dp">
+
+        <View
+            android:layout_width="@dimen/wh4.0dimens4.0dp"
+            android:layout_height="@dimen/wh26.0dimens26.0dp"
+            android:background="@color/yellow_30" />
 
         <TextView
             android:id="@+id/activity_center_type_tv"
@@ -18,13 +24,13 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/wh14.0dimens14.0dp"
             android:gravity="center"
             android:text="每日推荐"
             android:textColor="@color/common_h1"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="16sp" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,7 +59,7 @@
                     android:layout_height="@dimen/wh104.0dimens104.0dp"
                     android:layout_alignParentLeft="true"
                     android:contentDescription="@null"
-                    android:scaleType="fitXY"/>
+                    android:scaleType="fitXY" />
             </android.support.v7.widget.CardView>
 
             <RelativeLayout
@@ -80,9 +86,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvBookListTitle"
+                    android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
                     android:lineSpacingExtra="1dp"
                     android:lineSpacingMultiplier="1.1"
-                    android:layout_marginTop="@dimen/wh6.0dimens6.0dp"
                     android:maxLines="3"
                     android:text="剑无止境！梦醒时分！情非得已！雄霸天下又如何？江山美人，鱼与熊掌？长生不老，老而不死是为贼？独孤无双，唯吾不败……"
                     android:textColor="@color/common_h2"
@@ -100,29 +106,48 @@
                     android:lineSpacingMultiplier="1.1"
                     android:paddingTop="@dimen/wh6.0dimens6.0dp"
                     android:singleLine="true"
-                    android:text="  仙侠  "
+                    android:text="  陆小凤  "
                     android:textColor="@color/common_h2"
-                    android:textSize="12sp" />
+                    android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/tvBookCat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvBookListInfo"
+                    android:layout_alignParentRight="true"
                     android:layout_marginTop="@dimen/wh14.0dimens14.0dp"
-                    android:paddingLeft="@dimen/wh4.0dimens4.0dp"
-                    android:paddingRight="@dimen/wh4.0dimens4.0dp"
-                    android:paddingTop="@dimen/wh2.0dimens2.0dp"
-                    android:paddingBottom="@dimen/wh2.0dimens2.0dp"
-                    android:layout_marginRight="@dimen/wh4.0dimens4.0dp"
+                    android:layout_marginRight="6dp"
                     android:background="@drawable/shape_tag_recommend_yellow30_cat"
                     android:ellipsize="end"
-                    android:layout_alignParentRight="true"
+                    android:paddingLeft="@dimen/wh4.0dimens4.0dp"
+                    android:paddingTop="@dimen/wh2.0dimens2.0dp"
+                    android:paddingRight="@dimen/wh4.0dimens4.0dp"
+                    android:paddingBottom="@dimen/wh2.0dimens2.0dp"
                     android:singleLine="true"
                     android:text="现代都市"
                     android:textColor="@color/common_h2"
                     android:textSize="8sp" />
 
+
+                <TextView
+                    android:id="@+id/tvBookTxtSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvBookListInfo"
+                    android:layout_marginTop="@dimen/wh14.0dimens14.0dp"
+                    android:layout_marginRight="@dimen/wh4.0dimens4.0dp"
+                    android:layout_toLeftOf="@id/tvBookCat"
+                    android:background="@drawable/shape_tag_recommend_red_total"
+                    android:ellipsize="end"
+                    android:paddingLeft="@dimen/wh4.0dimens4.0dp"
+                    android:paddingTop="@dimen/wh2.0dimens2.0dp"
+                    android:paddingRight="@dimen/wh4.0dimens4.0dp"
+                    android:paddingBottom="@dimen/wh2.0dimens2.0dp"
+                    android:singleLine="true"
+                    android:text="12.3万"
+                    android:textColor="@color/common_h2"
+                    android:textSize="8sp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -165,6 +190,11 @@
                 </LinearLayout>
             </RelativeLayout>
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wh0.5dimens0.5dp"
+            android:background="@color/grey_100" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycle"
