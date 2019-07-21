@@ -7,8 +7,6 @@
 	android:background="@color/white"
 	android:orientation="vertical">
 	
-	<include layout="@layout/layout_disc_detail"/>
-	
 	<RelativeLayout
 		android:id="@+id/review_detail_rl_book_info"
 		android:layout_width="match_parent"

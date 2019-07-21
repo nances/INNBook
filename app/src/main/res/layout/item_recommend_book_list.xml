@@ -76,7 +76,7 @@
             android:lineSpacingExtra="1dp"
             android:lineSpacingMultiplier="1.1"
             android:maxLines="2"
-            android:paddingRight="@dimen/wh6.0dimens6.0dp"
+            android:paddingRight="@dimen/wh2.0dimens2.0dp"
             android:text="剑无止境！梦醒时分！情非得已！雄霸天下又如何？江山美人，鱼与熊掌？长生不老，老而不死是为贼？独孤无双，唯吾不败……"
             android:textColor="@color/common_h2"
             android:textSize="12sp" />

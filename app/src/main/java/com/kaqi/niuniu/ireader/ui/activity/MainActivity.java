@@ -178,13 +178,24 @@ public class MainActivity extends BaseActivity {
         switch (position) {
             //首页
             case 0:
+                ImmersionBar.with(this)
+                        .fitsSystemWindows(true)
+                        .fullScreen(true)
+                        .statusBarDarkFont(true, 0.2f) //原理：如果当前设备支持状态栏字体变色，会设置状态栏字体为黑色，如果当前设备不支持状态栏字体变色，会使当前状态栏加上透明度，否则不执行透明度
+                        .init();
                 transaction.show(homeFragment);
                 transaction.hide(taskFragment);
                 transaction.hide(mineFragment);
                 transaction.hide(findFragment);
                 transaction.commitAllowingStateLoss();
+
                 break;
             case 1:
+                ImmersionBar.with(this)
+                        .fitsSystemWindows(true)
+                        .fullScreen(true)
+                        .statusBarDarkFont(true, 0.2f) //原理：如果当前设备支持状态栏字体变色，会设置状态栏字体为黑色，如果当前设备不支持状态栏字体变色，会使当前状态栏加上透明度，否则不执行透明度
+                        .init();
                 transaction.hide(homeFragment);
                 transaction.show(findFragment);
                 transaction.hide(taskFragment);
@@ -192,6 +203,11 @@ public class MainActivity extends BaseActivity {
                 transaction.commitAllowingStateLoss();
                 break;
             case 2:
+                ImmersionBar.with(this)
+                        .statusBarView(R.id.top_view)
+                        .navigationBarColor(R.color.yellow_30)
+                        .fullScreen(true)
+                        .init();
                 transaction.hide(homeFragment);
                 transaction.hide(findFragment);
                 transaction.show(taskFragment);
@@ -199,6 +215,11 @@ public class MainActivity extends BaseActivity {
                 transaction.commitAllowingStateLoss();
                 break;
             case 3:
+                ImmersionBar.with(this)
+                        .fitsSystemWindows(true)
+                        .fullScreen(true)
+                        .statusBarDarkFont(true, 0.2f) //原理：如果当前设备支持状态栏字体变色，会设置状态栏字体为黑色，如果当前设备不支持状态栏字体变色，会使当前状态栏加上透明度，否则不执行透明度
+                        .init();
                 transaction.hide(homeFragment);
                 transaction.hide(taskFragment);
                 transaction.hide(findFragment);

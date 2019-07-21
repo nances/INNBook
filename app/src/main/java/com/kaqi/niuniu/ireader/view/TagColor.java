@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author yuyh.
+ * @author niqiao.
  * @date 16/8/7.
  */
 public class TagColor {

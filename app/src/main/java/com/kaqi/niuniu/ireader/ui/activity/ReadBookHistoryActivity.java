@@ -27,6 +27,7 @@ public class ReadBookHistoryActivity extends BaseActivity {
     ScrollRefreshRecyclerView mRvContent;
 
     private CollBookAdapter mCollBookAdapter;
+    private boolean isCollected = false;
 
     public static void startActivity(Context context) {
         context.startActivity(new Intent(context, ReadBookHistoryActivity.class));
@@ -66,11 +67,11 @@ public class ReadBookHistoryActivity extends BaseActivity {
                         //判断这个本地文件是否存在
                         if (file.exists() && file.length() != 0) {
                             ReadActivity.startActivity(this,
-                                    mCollBookAdapter.getItem(pos), true);
+                                    mCollBookAdapter.getItem(pos), collBook.getIsJoinAddBookSlef());
                         }
                     } else {
                         ReadActivity.startActivity(this,
-                                mCollBookAdapter.getItem(pos), true);
+                                mCollBookAdapter.getItem(pos), collBook.getIsJoinAddBookSlef());
                     }
                 }
         );

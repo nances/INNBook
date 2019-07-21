@@ -67,70 +67,114 @@ public class TagGroup extends ViewGroup {
     private final float default_horizontal_padding;
     private final float default_vertical_padding;
 
-    /** Indicates whether this TagGroup is set up to APPEND mode or DISPLAY mode. Default is false. */
+    /**
+     * Indicates whether this TagGroup is set up to APPEND mode or DISPLAY mode. Default is false.
+     */
     private boolean isAppendMode;
 
-    /** The text to be displayed when the text of the INPUT tag is empty. */
+    /**
+     * The text to be displayed when the text of the INPUT tag is empty.
+     */
     private CharSequence inputHint;
 
-    /** The tag outline border color. */
+    /**
+     * The tag outline border color.
+     */
     private int borderColor;
 
-    /** The tag text color. */
+    /**
+     * The tag text color.
+     */
     private int textColor;
 
-    /** The tag background color. */
+    /**
+     * The tag background color.
+     */
     private int backgroundColor;
 
-    /** The dash outline border color. */
+    /**
+     * The dash outline border color.
+     */
     private int dashBorderColor;
 
-    /** The  input tag hint text color. */
+    /**
+     * The  input tag hint text color.
+     */
     private int inputHintColor;
 
-    /** The input tag type text color. */
+    /**
+     * The input tag type text color.
+     */
     private int inputTextColor;
 
-    /** The checked tag outline border color. */
+    /**
+     * The checked tag outline border color.
+     */
     private int checkedBorderColor;
 
-    /** The check text color */
+    /**
+     * The check text color
+     */
     private int checkedTextColor;
 
-    /** The checked marker color. */
+    /**
+     * The checked marker color.
+     */
     private int checkedMarkerColor;
 
-    /** The checked tag background color. */
+    /**
+     * The checked tag background color.
+     */
     private int checkedBackgroundColor;
 
-    /** The tag background color, when the tag is being pressed. */
+    /**
+     * The tag background color, when the tag is being pressed.
+     */
     private int pressedBackgroundColor;
 
-    /** The tag outline border stroke width, default is 0.5dp. */
+    /**
+     * The tag outline border stroke width, default is 0.5dp.
+     */
     private float borderStrokeWidth;
 
-    /** The tag text size, default is 13sp. */
+    /**
+     * The tag text size, default is 13sp.
+     */
     private float textSize;
 
-    /** The horizontal tag spacing, default is 8.0dp. */
+    /**
+     * The horizontal tag spacing, default is 8.0dp.
+     */
     private int horizontalSpacing;
 
-    /** The vertical tag spacing, default is 4.0dp. */
+    /**
+     * The vertical tag spacing, default is 4.0dp.
+     */
     private int verticalSpacing;
 
-    /** The horizontal tag padding, default is 12.0dp. */
+    /**
+     * The horizontal tag padding, default is 12.0dp.
+     */
     private int horizontalPadding;
 
-    /** The vertical tag padding, default is 3.0dp. */
+    /**
+     * The vertical tag padding, default is 3.0dp.
+     */
     private int verticalPadding;
 
-    /** Listener used to dispatch tag change event. */
+    /**
+     * Listener used to dispatch tag change event.
+     */
     private OnTagChangeListener mOnTagChangeListener;
 
-    /** Listener used to dispatch tag click event. */
+    /**
+     * Listener used to dispatch tag click event.
+     */
     private OnTagClickListener mOnTagClickListener;
 
-    /** Listener used to handle tag click event. */
+    /**
+     * Listener used to handle tag click event.
+     */
     private InternalTagClickListener mInternalTagClickListener = new InternalTagClickListener();
 
     public TagGroup(Context context) {
@@ -405,7 +449,7 @@ public class TagGroup extends ViewGroup {
         int i = 0;
         for (final String tag : tags) {
             TagColor color = null;
-            if(colors != null) {
+            if (colors != null) {
                 color = colors.get(i++);
             }
             appendTag(color, tag);
@@ -664,19 +708,29 @@ public class TagGroup extends ViewGroup {
         public static final int STATE_NORMAL = 1;
         public static final int STATE_INPUT = 2;
 
-        /** The offset to the text. */
+        /**
+         * The offset to the text.
+         */
         private static final int CHECKED_MARKER_OFFSET = 3;
 
-        /** The stroke width of the checked marker */
+        /**
+         * The stroke width of the checked marker
+         */
         private static final int CHECKED_MARKER_STROKE_WIDTH = 4;
 
-        /** The current state. */
+        /**
+         * The current state.
+         */
         private int mState;
 
-        /** Indicates the tag if checked. */
+        /**
+         * Indicates the tag if checked.
+         */
         private boolean isChecked = false;
 
-        /** Indicates the tag if pressed. */
+        /**
+         * Indicates the tag if pressed.
+         */
         private boolean isPressed = false;
 
         private Paint mBorderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -685,28 +739,44 @@ public class TagGroup extends ViewGroup {
 
         private Paint mCheckedMarkerPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-        /** The rect for the tag's left corner drawing. */
+        /**
+         * The rect for the tag's left corner drawing.
+         */
         private RectF mLeftCornerRectF = new RectF();
 
-        /** The rect for the tag's right corner drawing. */
+        /**
+         * The rect for the tag's right corner drawing.
+         */
         private RectF mRightCornerRectF = new RectF();
 
-        /** The rect for the tag's horizontal blank fill area. */
+        /**
+         * The rect for the tag's horizontal blank fill area.
+         */
         private RectF mHorizontalBlankFillRectF = new RectF();
 
-        /** The rect for the tag's vertical blank fill area. */
+        /**
+         * The rect for the tag's vertical blank fill area.
+         */
         private RectF mVerticalBlankFillRectF = new RectF();
 
-        /** The rect for the checked mark draw bound. */
+        /**
+         * The rect for the checked mark draw bound.
+         */
         private RectF mCheckedMarkerBound = new RectF();
 
-        /** Used to detect the touch event. */
+        /**
+         * Used to detect the touch event.
+         */
         private Rect mOutRect = new Rect();
 
-        /** The path for draw the tag's outline border. */
+        /**
+         * The path for draw the tag's outline border.
+         */
         private Path mBorderPath = new Path();
 
-        /** The path effect provide draw the dash border. */
+        /**
+         * The path effect provide draw the dash border.
+         */
         private PathEffect mPathEffect = new DashPathEffect(new float[]{10, 5}, 0);
 
         {
@@ -886,22 +956,22 @@ public class TagGroup extends ViewGroup {
                     mBorderPaint.setPathEffect(null);
                     if (isChecked) {
                         mBorderPaint.setColor(checkedBorderColor);
-                        mBackgroundPaint.setColor(checkedBackgroundColor);
+                        mBackgroundPaint.setColor(default_background_color);
                         setTextColor(checkedTextColor);
                     } else {
                         mBorderPaint.setColor(borderColor);
-                        mBackgroundPaint.setColor(backgroundColor);
+                        mBackgroundPaint.setColor(default_background_color);
                         setTextColor(textColor);
                     }
                 }
             } else {
-                if(color != null){
-                    mBorderPaint.setColor(color.borderColor);
-                    mBackgroundPaint.setColor(color.backgroundColor);
-                    setTextColor(color.textColor);
+                if (color != null) {
+                    mBorderPaint.setColor(default_background_color);
+                    mBackgroundPaint.setColor(default_background_color);
+                    setTextColor(color.backgroundColor);
                 } else {
-                    mBorderPaint.setColor(borderColor);
-                    mBackgroundPaint.setColor(backgroundColor);
+                    mBorderPaint.setColor(default_background_color);
+                    mBackgroundPaint.setColor(default_background_color);
                     setTextColor(textColor);
                 }
             }

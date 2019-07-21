@@ -75,7 +75,7 @@ public abstract class BaseTabFragment extends BaseFragment {
         for (int i = 0; i < mFragmentList.size(); i++) {
             final boolean isSelect = i == position;
             if (isSelect) {
-                tabs.getTitleView(i).setTextSize(26);
+                tabs.getTitleView(i).setTextSize(20);
             } else {
                 tabs.getTitleView(i).setTextSize(16);
             }

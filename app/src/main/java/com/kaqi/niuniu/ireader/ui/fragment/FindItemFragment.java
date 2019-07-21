@@ -14,6 +14,7 @@ import com.kaqi.niuniu.ireader.presenter.contract.RecommendBookContract;
 import com.kaqi.niuniu.ireader.ui.adapter.section.HomeRecommendActivityCenterSection;
 import com.kaqi.niuniu.ireader.ui.adapter.section.HomeRecommendBannerSection;
 import com.kaqi.niuniu.ireader.ui.adapter.section.HomeRecommendedChannelSection;
+import com.kaqi.niuniu.ireader.ui.adapter.section.HomeRecommendedHotSection;
 import com.kaqi.niuniu.ireader.ui.adapter.section.HomeRecommendedSection;
 import com.kaqi.niuniu.ireader.ui.base.BaseMVPFragment;
 import com.kaqi.niuniu.ireader.utils.Constant;
@@ -36,7 +37,9 @@ public class FindItemFragment extends BaseMVPFragment<RecommendBookContract.Pres
     private List<RecommendListBean.DataBean.ResultBean> results = new ArrayList<>();
 
     HomeRecommendBannerSection homeRecommendBannerSection;
+    HomeRecommendedHotSection homeRecommendedHotSection;
     private RecommendBookSelfType recommendBookSelfType;
+
     private static final String EXTRA_BOOK_SELF_TYPE = "extra_book_self_type";
 
     public static FindItemFragment newInstance(RecommendBookSelfType recommendBookSelfType) {
@@ -65,7 +68,10 @@ public class FindItemFragment extends BaseMVPFragment<RecommendBookContract.Pres
             @Override
             public void onRefresh() {
                 if (mSectionedAdapter.getItemCount() > 0) {
-                    processLogic();
+                    setModeBannerList();
+                    mRecyclerView.startRefresh();
+                    mPresenter.getRecommendList();
+
                 } else {
                     mRecyclerView.finishRefresh();
                 }
@@ -150,6 +156,7 @@ public class FindItemFragment extends BaseMVPFragment<RecommendBookContract.Pres
      */
     public void setDataTask(RecommendListBean rankingList) {
         homeRecommendBannerSection = new HomeRecommendBannerSection(banners);
+        homeRecommendedHotSection = new HomeRecommendedHotSection(getContext());
         mSectionedAdapter.addSection(homeRecommendBannerSection);
         if (recommendBookSelfType != null && recommendBookSelfType.getNetName().equals("recommend_hots")) {
             mSectionedAdapter.addSection(new HomeRecommendedChannelSection(getActivity()));
@@ -165,6 +172,10 @@ public class FindItemFragment extends BaseMVPFragment<RecommendBookContract.Pres
                         mSectionedAdapter.addSection(new HomeRecommendActivityCenterSection(
                                 getActivity(),
                                 results.get(i).getBody()));
+                        //推荐热词
+                        if (recommendBookSelfType != null && !recommendBookSelfType.getNetName().equals("recommend_hots")) {
+                            mSectionedAdapter.addSection(homeRecommendedHotSection);
+                        }
                         break;
                     default:
                         mSectionedAdapter.addSection(new HomeRecommendedSection(

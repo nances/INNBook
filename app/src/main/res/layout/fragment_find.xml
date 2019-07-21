@@ -19,7 +19,7 @@
         app:tl_indicator_height="@dimen/wh2.0dimens2.0dp"
         app:tl_indicator_width_equal_title="true"
         app:tl_tab_width="@dimen/wh56.0dimens56.0dp"
-        android:paddingLeft="@dimen/wh14.0dimens14.0dp"
+        android:paddingLeft="@dimen/wh10.0dimens10.0dp"
         app:tl_textBold="BOTH"
         app:tl_textSelectColor="@color/yellow_30"
         app:tl_textUnselectColor="@color/black"

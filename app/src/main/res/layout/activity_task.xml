@@ -11,6 +11,11 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <View
+            android:id="@+id/top_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/wh48.0dimens48.0dp">
@@ -265,7 +270,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:background="@drawable/selector_btn_task"
-                    android:enabled="true"                    android:gravity="center"
+                    android:enabled="true"
+                    android:gravity="center"
                     android:text="去分享"
                     android:textColor="@android:color/white" />
             </RelativeLayout>
@@ -314,7 +320,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:background="@drawable/selector_btn_task"
-                    android:enabled="true"                    android:gravity="center"
+                    android:enabled="true"
+                    android:gravity="center"
                     android:text="赚金币（0/10）"
                     android:textColor="@android:color/white" />
             </RelativeLayout>
@@ -382,7 +389,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:background="@drawable/selector_btn_task"
-                    android:enabled="true"                    android:gravity="center"
+                    android:enabled="true"
+                    android:gravity="center"
                     android:text="去领取"
                     android:textColor="@android:color/white" />
             </RelativeLayout>
@@ -429,7 +437,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:background="@drawable/selector_btn_task"
-                    android:enabled="true"                    android:gravity="center"
+                    android:enabled="true"
+                    android:gravity="center"
                     android:text="去阅读"
                     android:textColor="@android:color/white" />
             </RelativeLayout>
@@ -475,7 +484,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:background="@drawable/selector_btn_task"
-                    android:enabled="true"                    android:gravity="center"
+                    android:enabled="true"
+                    android:gravity="center"
                     android:text="去分享"
                     android:textColor="@android:color/white" />
             </RelativeLayout>
@@ -523,7 +533,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:background="@drawable/selector_btn_task"
-                    android:enabled="true"                    android:gravity="center"
+                    android:enabled="true"
+                    android:gravity="center"
                     android:text="赚金币（0/10）"
                     android:textColor="@android:color/white" />
             </RelativeLayout>

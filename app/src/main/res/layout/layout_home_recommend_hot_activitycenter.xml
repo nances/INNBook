@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/wh48.0dimens48.0dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingEnd="@dimen/wh14.0dimens14.0dp">
+
+        <View
+            android:layout_width="@dimen/wh4.0dimens4.0dp"
+            android:layout_height="@dimen/wh26.0dimens26.0dp"
+            android:background="@color/yellow_30" />
+
+        <TextView
+            android:id="@+id/activity_center_type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/wh14.0dimens14.0dp"
+            android:gravity="center"
+            android:text="大家都在搜的"
+            android:textColor="@color/common_h1"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/wh10.0dimens10.0dp"
+        android:layout_marginRight="@dimen/wh10.0dimens10.0dp"
+        android:background="@drawable/shape_white_bg"
+        android:orientation="vertical">
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/wh0.5dimens0.5dp"
+            android:background="@color/grey_100" />
+
+        <com.kaqi.niuniu.ireader.view.TagGroup
+            android:id="@+id/tag_group"
+            style="@style/TagGroup"
+            android:layout_margin="@dimen/wh10.0dimens10.0dp"
+            android:padding="@dimen/wh2.0dimens2.0dp" />
+
+    </LinearLayout>
+</LinearLayout>
+
+
