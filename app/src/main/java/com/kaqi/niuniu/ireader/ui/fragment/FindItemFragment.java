@@ -68,6 +68,7 @@ public class FindItemFragment extends BaseMVPFragment<RecommendBookContract.Pres
             @Override
             public void onRefresh() {
                 if (mSectionedAdapter.getItemCount() > 0) {
+                    clearData();
                     setModeBannerList();
                     mRecyclerView.startRefresh();
                     mPresenter.getRecommendList();
@@ -150,6 +151,17 @@ public class FindItemFragment extends BaseMVPFragment<RecommendBookContract.Pres
     }
 
     /**
+     * 清理状态
+     */
+    private void clearData() {
+        banners.clear();
+        banners.clear();
+        results.clear();
+        mSectionedAdapter.removeAllSections();
+    }
+
+
+    /**
      * 设置数据
      *
      * @param rankingList
@@ -208,8 +220,25 @@ public class FindItemFragment extends BaseMVPFragment<RecommendBookContract.Pres
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if (homeRecommendBannerSection != null) {
+            homeRecommendBannerSection.onMZbannerPause();
+        }
+    }
+
+
+    @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
+        if (homeRecommendBannerSection == null) {
+            return;
+        }
         if (hidden) {
             homeRecommendBannerSection.onMZbannerPause();
         } else {

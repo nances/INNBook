@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -90,7 +91,7 @@ public class SearchActivity extends BaseMVPActivity<SearchContract.Presenter>
 
 
     public static void startActivity(Context context, String query) {
-        if (!query.equals("")) {
+        if (!TextUtils.isEmpty(query)) {
             context.startActivity(new Intent(context, SearchActivity.class)
                     .putExtra(INTENT_QUERY, query));
         } else {
@@ -182,7 +183,7 @@ public class SearchActivity extends BaseMVPActivity<SearchContract.Presenter>
 
     private void searchBook() {
         String query = searchContent.getText().toString().trim();
-        if (!query.equals("")) {
+        if (!TextUtils.isEmpty(query)) {
             mRlRefresh.setVisibility(View.VISIBLE);
             mRlRefresh.showLoading();
             mPresenter.searchBook(query);
@@ -296,8 +297,8 @@ public class SearchActivity extends BaseMVPActivity<SearchContract.Presenter>
                 .statusBarDarkFont(true, 0.2f) //原理：如果当前设备支持状态栏字体变色，会设置状态栏字体为黑色，如果当前设备不支持状态栏字体变色，会使当前状态栏加上透明度，否则不执行透明度
                 .init();
         hotSearch = getIntent().getStringExtra(INTENT_QUERY);
-        Log.v("Nancys","searchContent is value : " + searchContent);
-        if (!hotSearch.equals("")) {
+        Log.v("Nancys", "searchContent is value : " + hotSearch);
+        if (!TextUtils.isEmpty(hotSearch)) {
             searchContent.setText(hotSearch);
             searchBook();
         }

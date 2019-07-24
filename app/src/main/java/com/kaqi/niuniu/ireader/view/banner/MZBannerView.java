@@ -256,6 +256,12 @@ public class MZBannerView<T> extends RelativeLayout {
         mHandler.removeCallbacksAndMessages(null);
     }
 
+    public void release(){
+        mIsAutoPlay = false;
+        mHandler.removeCallbacksAndMessages(null);
+
+    }
+
     /**
      * 设置BannerView 的切换时间间隔
      *

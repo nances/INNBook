@@ -21,7 +21,7 @@
             android:layout_height="@dimen/wh104.0dimens104.0dp"
             android:layout_alignParentLeft="true"
             android:contentDescription="@null"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitXY" />
 
 
         <TextView
@@ -42,15 +42,15 @@
     <TextView
         android:id="@+id/tvRecommendTitle"
         style="@style/text_style_Spacing"
-        android:paddingTop="@dimen/wh6.0dimens6.0dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivBookCoverCardView"
         android:layout_centerHorizontal="true"
         android:ellipsize="end"
-        android:maxEms="15"
+        android:maxEms="3"
         android:maxLines="1"
-        android:text="逆鳞"
+        android:paddingTop="@dimen/wh6.0dimens6.0dp"
+        android:text=""
         android:textColor="@color/common_h1"
         android:textSize="14sp" />
 

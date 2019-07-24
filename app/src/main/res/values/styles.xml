@@ -236,4 +236,12 @@
         <item name="android:backgroundDimEnabled">false</item><!--模糊-->
         <item name="android:windowContentOverlay">@null</item>
     </style>
+
+    <style name="user_info_label_style">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:textColor">@color/common_h2</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
 </resources>

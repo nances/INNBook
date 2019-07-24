@@ -335,6 +335,7 @@
             android:layout_marginTop="@dimen/wh20.0dimens20.0dp"
             android:layout_marginRight="@dimen/wh14.0dimens14.0dp"
             android:background="@drawable/shape_white_bg"
+            android:visibility="gone"
             android:orientation="vertical">
 
             <TextView

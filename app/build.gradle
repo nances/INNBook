@@ -18,7 +18,7 @@ android {
                 GETUI_APP_SECRET: "vmynHPXxba8yRgyzEuGZc2"
         ]
         ndk {
-            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips","arm"
         }
         multiDexEnabled true
     }
@@ -79,9 +79,6 @@ MobSDK {
     SMSSDK {
         //默认使用GUI，若不使用GUI，通过以下开关关闭
         gui false
-        //若使用GUI的自动填充验证码功能，需打开此设置
-        //autoSMS true   
-//          version "3.2.1"
     }
     ShareSDK {
         //平台配置信息
@@ -92,12 +89,8 @@ MobSDK {
                 callbackUri "http://www.sharesdk.cn"
             }
             Wechat {
-                appId "wx4868b35061f87885"
-                appSecret "64020361b8ec4c99936c0e3999a9f249"
-                userName "gh_afb25ac019c9"
-                path "pages/index/index.html?id=1"
-                withShareTicket true
-                miniprogramType 2
+                appId "wx073dc57f4ae5bcd8"
+                appSecret "c0be9cad3b9fe56793d49cb7c0c1ddbc"
             }
 
             QQ {
@@ -116,11 +109,9 @@ MobSDK {
                 enable true
             }
 
-
-
             WechatMoments {
-                appId "wx4868b35061f87885"
-                appSecret "64020361b8ec4c99936c0e3999a9f249"
+                appId "wx073dc57f4ae5bcd8"
+                appSecret "c0be9cad3b9fe56793d49cb7c0c1ddbc"
             }
         }
     }
@@ -173,7 +164,7 @@ dependencies {
     testImplementation "junit:junit:$rootProject.junitVersion"
 
     // OpenCC to convert Simp. Chinese to Trad. Chinese
-    implementation 'com.zqc.opencc.android.lib:lib-opencc-android:0.8.0@aar'
+//    implementation 'com.zqc.opencc.android.lib:lib-opencc-android:0.8.0@aar'
 
     // AndroidTagGroup
     implementation 'me.gujun.android.taggroup:library:1.4@aar'
@@ -196,4 +187,7 @@ dependencies {
     compile project(path: ':library')
     implementation 'com.gyf.immersionbar:immersionbar:2.3.3'
     implementation files('libs/gdt_mob_release.jar')
+    implementation 'me.yokeyword:fragmentationx:1.0.1'
+
+
 }

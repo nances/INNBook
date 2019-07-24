@@ -118,6 +118,7 @@ public class BookShelfPresenter extends RxPresenter<BookShelfContract.View>
                     } else {
                         newCollBook.setUpdate(false);
                     }
+                    newCollBook.setIsTop(oldCollBook.getIsTop() ? true : false);
                     newCollBook.setLastRead(oldCollBook.getLastRead());
                     newCollBooks.add(newCollBook);
                     //存储到数据库中

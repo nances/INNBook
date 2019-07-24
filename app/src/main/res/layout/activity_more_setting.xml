@@ -68,6 +68,7 @@
         android:background="@drawable/selector_common_bg"
         android:gravity="center"
         android:paddingLeft="20dp"
+        android:visibility="gone"
         android:paddingRight="20dp">
 
         <TextView

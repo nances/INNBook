@@ -117,6 +117,7 @@ public class CommomMannagerDialog extends Dialog implements View.OnClickListener
                     .into(collBookIvCover);
             collBookTvName.setText(collBookBean.getTitle());
             tvBookListAuthor.setText(collBookBean.getAuthor());
+            bookSetTop.setText(collBookBean.getIsTop() ? "取消置顶 " : "置顶");
             if (!collBookBean.isLocal()) {
                 //时间
                 collBookTvLatelyUpdate.setText(StringUtils.

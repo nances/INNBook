@@ -40,6 +40,8 @@
         android:resizeableActivity="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        tools:replace="android:name"
+
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
@@ -89,6 +91,9 @@
 
         <activity
             android:name=".ui.activity.BookCatalogActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.UserInfoActivity"
             android:screenOrientation="portrait" />
 
         <activity

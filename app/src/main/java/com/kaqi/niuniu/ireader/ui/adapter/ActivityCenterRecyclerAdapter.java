@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -42,6 +43,7 @@ public class ActivityCenterRecyclerAdapter extends AbsRecyclerViewAdapter {
         if (holder instanceof ItemViewHolder) {
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
             if (activitys.get(position).getCover() != null && position < activitys.size() - 1) {
+                itemViewHolder.tvRecommendTitle.setText(activitys.get(position + 1).getTitle());
                 Glide.with(getContext())
                         .load(Uri.parse(activitys.get(position + 1).getCover()))
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -63,10 +65,12 @@ public class ActivityCenterRecyclerAdapter extends AbsRecyclerViewAdapter {
     private class ItemViewHolder extends AbsRecyclerViewAdapter.ClickableViewHolder {
 
         ImageView bookImg;
+        TextView tvRecommendTitle;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
             bookImg = $(R.id.ivRecommendCover);
+            tvRecommendTitle = $(R.id.tvRecommendTitle);
         }
     }
 }

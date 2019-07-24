@@ -2,6 +2,7 @@ package com.kaqi.niuniu.ireader.ui.activity;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -11,11 +12,15 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
-import com.gyf.barlibrary.ImmersionBar;
 import com.kaqi.niuniu.ireader.R;
 import com.kaqi.niuniu.ireader.RxBus;
 import com.kaqi.niuniu.ireader.event.TaskShareEvent;
@@ -31,9 +36,15 @@ import com.kaqi.niuniu.ireader.utils.ShareUtils;
 import com.kaqi.niuniu.ireader.utils.ToastUtils;
 import com.kaqi.niuniu.ireader.widget.dialog.CommomAddShuJiaDialog;
 import com.kaqi.niuniu.ireader.widget.dialog.ShareDialog;
+import com.mylhyl.circledialog.CircleDialog;
+import com.mylhyl.circledialog.engine.ImageLoadEngine;
+import com.mylhyl.circledialog.params.CloseParams;
+import com.mylhyl.circledialog.view.listener.OnAdItemClickListener;
+import com.yuyh.easyadapter.glide.GlideRoundTransform;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import cn.sharesdk.framework.Platform;
@@ -100,17 +111,18 @@ public class MainActivity extends BaseActivity {
         initTab();
         initFragment(savedInstanceState);
         shareEvent();
+        getEveryDayRecomend();
         slidingTabLayout.measure(0, 0);
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ImmersionBar.with(this)
-                .fitsSystemWindows(true)
-                .fullScreen(true)
-                .statusBarDarkFont(true, 0.2f) //原理：如果当前设备支持状态栏字体变色，会设置状态栏字体为黑色，如果当前设备不支持状态栏字体变色，会使当前状态栏加上透明度，否则不执行透明度
-                .init();
+//        ImmersionBar.with(this)
+//                .fitsSystemWindows(true)
+//                .fullScreen(true)
+//                .statusBarDarkFont(true, 0.2f) //原理：如果当前设备支持状态栏字体变色，会设置状态栏字体为黑色，如果当前设备不支持状态栏字体变色，会使当前状态栏加上透明度，否则不执行透明度
+//                .init();
     }
 
     /**
@@ -178,11 +190,6 @@ public class MainActivity extends BaseActivity {
         switch (position) {
             //首页
             case 0:
-                ImmersionBar.with(this)
-                        .fitsSystemWindows(true)
-                        .fullScreen(true)
-                        .statusBarDarkFont(true, 0.2f) //原理：如果当前设备支持状态栏字体变色，会设置状态栏字体为黑色，如果当前设备不支持状态栏字体变色，会使当前状态栏加上透明度，否则不执行透明度
-                        .init();
                 transaction.show(homeFragment);
                 transaction.hide(taskFragment);
                 transaction.hide(mineFragment);
@@ -191,11 +198,7 @@ public class MainActivity extends BaseActivity {
 
                 break;
             case 1:
-                ImmersionBar.with(this)
-                        .fitsSystemWindows(true)
-                        .fullScreen(true)
-                        .statusBarDarkFont(true, 0.2f) //原理：如果当前设备支持状态栏字体变色，会设置状态栏字体为黑色，如果当前设备不支持状态栏字体变色，会使当前状态栏加上透明度，否则不执行透明度
-                        .init();
+
                 transaction.hide(homeFragment);
                 transaction.show(findFragment);
                 transaction.hide(taskFragment);
@@ -203,11 +206,6 @@ public class MainActivity extends BaseActivity {
                 transaction.commitAllowingStateLoss();
                 break;
             case 2:
-                ImmersionBar.with(this)
-                        .statusBarView(R.id.top_view)
-                        .navigationBarColor(R.color.yellow_30)
-                        .fullScreen(true)
-                        .init();
                 transaction.hide(homeFragment);
                 transaction.hide(findFragment);
                 transaction.show(taskFragment);
@@ -215,11 +213,6 @@ public class MainActivity extends BaseActivity {
                 transaction.commitAllowingStateLoss();
                 break;
             case 3:
-                ImmersionBar.with(this)
-                        .fitsSystemWindows(true)
-                        .fullScreen(true)
-                        .statusBarDarkFont(true, 0.2f) //原理：如果当前设备支持状态栏字体变色，会设置状态栏字体为黑色，如果当前设备不支持状态栏字体变色，会使当前状态栏加上透明度，否则不执行透明度
-                        .init();
                 transaction.hide(homeFragment);
                 transaction.hide(taskFragment);
                 transaction.hide(findFragment);
@@ -308,6 +301,41 @@ public class MainActivity extends BaseActivity {
         addDisposable(donwloadDisp);
     }
 
+    /**
+     * 每日推荐
+     */
+    List<String> listRecommend = new ArrayList<>();
+    public void getEveryDayRecomend(){
+        listRecommend.add("http://img.ivsky.com/img/tupian/pre/201707/30/xingganyoumeilidemeinvtupian-005.jpg");
+        new CircleDialog.Builder()
+                .setWidth(0.7f)
+                .setImageLoadEngine(new ImageLoadEngine() {
+                    @Override
+                    public void loadImage(Context context, ImageView imageView, String url) {
+                        Glide.with(context)
+                                .load("http://obzglivou.bkt.clouddn.com/tanchuang1.png")
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .transform(new GlideRoundTransform(context, 4))
+                                .dontAnimate()
+                                .into(imageView);
+                    }
+                })
+                .setAdUrl(listRecommend
+                        , new OnAdItemClickListener() {
+                            @Override
+                            public boolean onItemClick(View view, int position) {
+                                Toast.makeText(MainActivity.this, "每日推荐一本书", Toast.LENGTH_SHORT)
+                                        .show();
+                                return true;
+                            }
+                        })
+                .setAdIndicator(false)
+                .setCloseResId(R.mipmap.ic_close, 60)//暂时用px，项目中实际用的是dp，这里就不演示了
+                .setClosePadding(new int[]{20, 0, 0, 0})
+                .setCloseGravity(CloseParams.CLOSE_TOP_RIGHT)
+                .setCloseConnector(2, 50)
+                .show(getSupportFragmentManager());
+    }
 
     /**
      * 分享
@@ -317,24 +345,24 @@ public class MainActivity extends BaseActivity {
         ShareUtils.ShareContentBean shareContentBean = new ShareUtils.ShareContentBean(
                 "牛牛阅读",
                 "快来下载吧～～～～～～～～",
-                "",
-                ""
+                "http://i0.hdslb.com/bfs/archive/f2e14575271f3194daa26592ca76f68cc075d7f2.jpg",
+                "https://www.huomao.com/148926"
         );
 
         ShareDialog.showDialog(this, shareContentBean, new PlatformActionListener() {
             @Override
             public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
-
+                ToastUtils.show("分享成功");
             }
 
             @Override
             public void onError(Platform platform, int i, Throwable throwable) {
-
+                ToastUtils.show("分享失败");
             }
 
             @Override
             public void onCancel(Platform platform, int i) {
-
+                ToastUtils.show("取消分享");
             }
         });
     }

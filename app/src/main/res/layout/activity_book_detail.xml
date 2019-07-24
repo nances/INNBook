@@ -198,7 +198,7 @@
                             android:ellipsize="end"
                             android:lineSpacingExtra="@dimen/wh3.0dimens3.0dp"
                             android:lineSpacingMultiplier="1.2"
-                            android:maxLines="5"
+                            android:maxLines="6"
                             android:paddingTop="@dimen/wh14.0dimens14.0dp"
                             android:paddingRight="@dimen/wh14.0dimens14.0dp"
                             android:textColor="@color/common_h2"
@@ -239,8 +239,8 @@
                             android:layout_marginLeft="@dimen/wh12.0dimens12.0dp"
                             android:layout_toRightOf="@+id/mulu"
                             android:text="完结 288 章节"
-                            android:textColor="@color/common_h2"
-                            android:textSize="10sp" />
+                            android:textColor="@color/yellow_50"
+                            android:textSize="12sp" />
 
                         <ImageView
                             android:layout_width="wrap_content"

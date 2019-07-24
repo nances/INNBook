@@ -1,5 +1,6 @@
 package com.kaqi.niuniu.ireader.ui.adapter.view;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.kaqi.niuniu.ireader.R;
 import com.kaqi.niuniu.ireader.model.bean.CollBookBean;
+import com.kaqi.niuniu.ireader.model.local.BookRepository;
 import com.kaqi.niuniu.ireader.ui.base.adapter.ViewHolderImpl;
 import com.kaqi.niuniu.ireader.utils.Constant;
 import com.kaqi.niuniu.ireader.utils.StringUtils;
@@ -32,6 +34,7 @@ public class CollBookHolder extends ViewHolderImpl<CollBookBean> {
     private TextView mIvRedDot;
     private ImageView mIvTop;
     private TextView tvBookListAuthor;
+
     @Override
     public void initView() {
         mIvCover = findById(R.id.coll_book_iv_cover);
@@ -60,7 +63,7 @@ public class CollBookHolder extends ViewHolderImpl<CollBookBean> {
                     .skipMemoryCache(true)
                     .placeholder(R.drawable.ic_book_loading)
                     .error(R.drawable.ic_load_error)
-                    .transform(new GlideRoundTransform(getContext(),4))
+                    .transform(new GlideRoundTransform(getContext(), 4))
                     .into(mIvCover);
         }
         mCbSelected.setVisibility(value.getIsCheckShow() ? View.VISIBLE : GONE);
@@ -75,7 +78,7 @@ public class CollBookHolder extends ViewHolderImpl<CollBookBean> {
         } else {
             mTvTime.setText("阅读进度:");
         }
-        mIvTop.setVisibility(value.getIsTop() ? View.VISIBLE : GONE);
+        mIvTop.setVisibility(BookRepository.getInstance().isTop(value.get_id()) ? View.VISIBLE : GONE);
         //章节
         mTvChapter.setText(value.getLastChapter());
         //我的想法是，在Collection中加一个字段，当追更的时候设置为true。当点击的时候设置为false。

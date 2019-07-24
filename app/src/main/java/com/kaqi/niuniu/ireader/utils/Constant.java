@@ -23,6 +23,8 @@ public class Constant {
     public static final String SEX_BOY = "boy";
     public static final String SEX_GIRL = "girl";
     public static final String UID = "uid";
+    public static final String NICK_NAME = "nick_name";
+    public static final String USER_ICON = "user_icon";
     //是否开启赚钱模式
     public static final String MONEY_VP = "money_vp";
 

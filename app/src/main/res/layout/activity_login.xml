@@ -25,6 +25,14 @@
         android:paddingRight="@dimen/wh10.0dimens10.0dp">
 
 
+        <ImageView
+            android:layout_width="@dimen/wh48.0dimens48.0dp"
+            android:layout_height="@dimen/wh48.0dimens48.0dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/wh68.0dimens68.0dp"
+            android:layout_marginBottom="@dimen/wh32.0dimens32.0dp"
+            android:src="@drawable/app_icon" />
+
         <com.kaqi.niuniu.ireader.widget.CleanableEditText
             android:id="@+id/user_txt"
             style="@style/login_edit_style"
@@ -108,6 +116,69 @@
             android:text="登录"
             android:textColor="@color/white"
             android:textSize="16.0sp" />
+
+
+        <RelativeLayout
+            android:id="@+id/third_rl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/wh24.0dimens24.0dp"
+            android:paddingRight="@dimen/wh24.0dimens24.0dp">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_centerInParent="true"
+                android:background="@color/line" />
+
+            <TextView
+                android:id="@+id/other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/activity_vertical_margin"
+                android:paddingRight="@dimen/activity_vertical_margin"
+                android:text="其他登录方式"
+                android:textColor="@color/common_h2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/other"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_horizontal"
+                android:weightSum="3">
+
+                <ImageView
+                    android:id="@+id/qq_login"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:layout_weight="1"
+                    android:src="@drawable/qq_share_icon"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/wechat_login"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:layout_weight="1"
+                    android:src="@drawable/wechat_share_icon" />
+
+
+                <ImageView
+                    android:id="@+id/weibo_login"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:layout_weight="1"
+                    android:src="@drawable/weibo_share_icon"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
 
 </LinearLayout>

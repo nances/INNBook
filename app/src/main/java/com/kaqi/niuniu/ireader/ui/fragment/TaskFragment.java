@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.gyf.barlibrary.ImmersionBar;
 import com.kaqi.niuniu.ireader.R;
 import com.kaqi.niuniu.ireader.RxBus;
 import com.kaqi.niuniu.ireader.event.TaskShareEvent;
@@ -70,6 +71,7 @@ public class TaskFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ImmersionBar.with(this).statusBarColor(R.color.yellow_30).init();
 
     }
 

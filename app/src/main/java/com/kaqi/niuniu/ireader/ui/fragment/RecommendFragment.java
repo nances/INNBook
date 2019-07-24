@@ -10,6 +10,7 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
@@ -18,16 +19,15 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.gyf.barlibrary.ImmersionBar;
 import com.kaqi.niuniu.ireader.R;
 import com.kaqi.niuniu.ireader.RxBus;
 import com.kaqi.niuniu.ireader.event.DeleteResponseEvent;
-import com.kaqi.niuniu.ireader.event.DeleteTaskEvent;
 import com.kaqi.niuniu.ireader.event.DownloadMessage;
 import com.kaqi.niuniu.ireader.event.RecommendBookEvent;
 import com.kaqi.niuniu.ireader.event.RefresRecommendBookEvent;
@@ -54,6 +54,7 @@ import com.kaqi.niuniu.ireader.widget.adapter.WholeAdapter;
 import com.kaqi.niuniu.ireader.widget.dialog.CommomMannagerDialog;
 import com.kaqi.niuniu.ireader.widget.recyclerview.adapter.RecyclerArrayAdapter;
 import com.kaqi.niuniu.ireader.widget.refresh.ScrollRefreshRecyclerView;
+import com.mylhyl.circledialog.BaseCircleDialog;
 import com.mylhyl.circledialog.CircleDialog;
 import com.mylhyl.circledialog.params.PopupParams;
 
@@ -124,6 +125,16 @@ public class RecommendFragment extends BaseMVPFragment<BookShelfContract.Present
     @Override
     protected int getContentId() {
         return R.layout.fragment_recommend;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ImmersionBar.with(this)
+                .fitsSystemWindows(true)
+                .fullScreen(true)
+                .statusBarDarkFont(true, 0.2f) //原理：如果当前设备支持状态栏字体变色，会设置状态栏字体为黑色，如果当前设备不支持状态栏字体变色，会使当前状态栏加上透明度，否则不执行透明度
+                .init();
     }
 
     @Override
@@ -418,43 +429,23 @@ public class RecommendFragment extends BaseMVPFragment<BookShelfContract.Present
      * @param collBook
      */
     private void deleteBook(CollBookBean collBook) {
-        if (collBook.isLocal()) {
-            View view = LayoutInflater.from(getContext())
-                    .inflate(R.layout.dialog_delete, null);
-            CheckBox cb = (CheckBox) view.findViewById(R.id.delete_cb_select);
-            new AlertDialog.Builder(getContext())
-                    .setTitle("删除文件")
-                    .setView(view)
-                    .setPositiveButton(getResources().getString(R.string.nb_common_sure), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            boolean isSelected = cb.isSelected();
-                            if (isSelected) {
-                                ProgressDialog progressDialog = new ProgressDialog(getContext());
-                                progressDialog.setMessage("正在删除中");
-                                progressDialog.show();
-                                //删除
-                                File file = new File(collBook.getCover());
-                                if (file.exists()) file.delete();
-                                BookRepository.getInstance().deleteCollBook(collBook);
-                                BookRepository.getInstance().deleteBookRecord(collBook.get_id());
-
-                                //从Adapter中删除
-                                mCollBookAdapter.removeItem(collBook);
-                                progressDialog.dismiss();
-                            } else {
-                                BookRepository.getInstance().deleteCollBook(collBook);
-                                BookRepository.getInstance().deleteBookRecord(collBook.get_id());
-                                //从Adapter中删除
-                                mCollBookAdapter.removeItem(collBook);
-                            }
-                        }
-                    })
-                    .setNegativeButton(getResources().getString(R.string.nb_common_cancel), null)
-                    .show();
-        } else {
-            RxBus.getInstance().post(new DeleteTaskEvent(collBook));
-        }
+        new AlertDialog.Builder(getActivity()).setTitle("删除文件")
+                .setMessage("您确定要从书架删除吗？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //ToDo: 你想做的事情
+                BookRepository.getInstance().deleteCollBook(collBook);
+                BookRepository.getInstance().deleteBookRecord(collBook.get_id());
+                //从Adapter中删除
+                mCollBookAdapter.removeItem(collBook);
+            }
+        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //ToDo: 你想做的事情
+                dialogInterface.dismiss();
+            }
+        }).show();
     }
 
 
@@ -553,7 +544,7 @@ public class RecommendFragment extends BaseMVPFragment<BookShelfContract.Present
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.search_rl:
-                SearchActivity.startActivity(getActivity(), "'");
+                SearchActivity.startActivity(getActivity(), "");
                 break;
             case R.id.book_admin:
                 //批量管理提示
@@ -587,7 +578,7 @@ public class RecommendFragment extends BaseMVPFragment<BookShelfContract.Present
 
     public void ShowBatchBookManagement() {
         builder.setPopupItems(adapter, new LinearLayoutManager(getActivity()));
-        builder.setPopup(bookAdmin, PopupParams.TRIANGLE_TOP_RIGHT)
+        BaseCircleDialog show = builder.setPopup(bookAdmin, PopupParams.TRIANGLE_TOP_RIGHT)
                 .show(getChildFragmentManager());
     }
 

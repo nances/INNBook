@@ -12,12 +12,20 @@ import android.widget.TextView;
 import com.gyf.barlibrary.ImmersionBar;
 import com.kaqi.niuniu.ireader.R;
 import com.kaqi.niuniu.ireader.ui.base.BaseActivity;
+import com.kaqi.niuniu.ireader.utils.Constant;
+import com.kaqi.niuniu.ireader.utils.SharedPreUtils;
 import com.kaqi.niuniu.ireader.utils.ToastUtils;
 import com.kaqi.niuniu.ireader.view.NormalTitleBar;
 import com.kaqi.niuniu.ireader.widget.CleanableEditText;
 
+import java.util.HashMap;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.wechat.friends.Wechat;
 
 /**
  * Created by niqiao on 2019年03月25日21:48:39
@@ -60,12 +68,20 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         commonToolbar.setTitleText("登陆");
+        commonToolbar.setRightTitle("注册");
+        commonToolbar.setRightTitleVisibility(true);
         commonToolbar.setBackVisibility(true);
         ImmersionBar.with(this)
                 .fitsSystemWindows(true)
                 .fullScreen(true)
                 .statusBarDarkFont(true, 0.2f) //原理：如果当前设备支持状态栏字体变色，会设置状态栏字体为黑色，如果当前设备不支持状态栏字体变色，会使当前状态栏加上透明度，否则不执行透明度
                 .init();
+        commonToolbar.setOnRightTextListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RegisterActivity.startAction(LoginActivity.this);
+            }
+        });
     }
 
     @Override
@@ -91,7 +107,7 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.sms_login_tx, R.id.login_tx, R.id.find_password_tx})
+    @OnClick({R.id.sms_login_tx, R.id.login_tx, R.id.find_password_tx, R.id.wechat_login})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.sms_login_tx:
@@ -103,8 +119,63 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.find_password_tx:
                 break;
+            case R.id.wechat_login:
+                weChatLogin();
+                break;
         }
     }
 
+    /**
+     * 第三方登陆
+     */
+    public void weChatLogin() {
 
+
+        Platform wechat = ShareSDK.getPlatform(Wechat.NAME);
+        ShareSDK.setActivity(this);//抖音登录适配安卓9.0
+        //回调信息，可以在这里获取基本的授权返回的信息，但是注意如果做提示和UI操作要传到主线程handler里去执行
+        wechat.setPlatformActionListener(new PlatformActionListener() {
+
+            @Override
+            public void onError(Platform arg0, int arg1, Throwable arg2) {
+                // TODO Auto-generated method stub
+                arg2.printStackTrace();
+                wechat.removeAccount(true);
+            }
+
+            @Override
+            public void onComplete(Platform arg0, int arg1, HashMap<String, Object> arg2) {
+                // TODO Auto-generated method stub
+                //输出所有授权信息
+                if (arg0 != null) {
+                    setLoginUserinfo(arg0);
+                }
+            }
+
+            @Override
+            public void onCancel(Platform arg0, int arg1) {
+                // TODO Auto-generated method stub
+                wechat.removeAccount(true);
+
+            }
+        });
+        //authorize
+        wechat.authorize();//要功能不要数据，在监听oncomplete中不会返回用户数据
+    }
+
+    /**
+     * 微信登陆
+     */
+    public void setLoginUserinfo(Platform platform) {
+        SharedPreUtils.getInstance().putString(Constant.UID, platform.getDb().getUserId());
+        SharedPreUtils.getInstance().putString(Constant.NICK_NAME, platform.getDb().getUserName());
+        SharedPreUtils.getInstance().putString(Constant.SHARED_SEX, platform.getDb().getUserGender().equals(0) ? Constant.SEX_BOY : Constant.SEX_GIRL);
+        SharedPreUtils.getInstance().putString(Constant.USER_ICON, platform.getDb().getUserIcon());
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }
